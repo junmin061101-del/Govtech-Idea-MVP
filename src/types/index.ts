@@ -50,10 +50,14 @@ export interface Facility {
   currentEnrollment: number;
   /** 전체 배치 교사 수 (주간 기준) */
   totalStaff: number;
-  /** 접근성 가중치 (0~1). 생활권 중심으로부터의 도보/교통 접근성 */
-  accessibilityWeight: number;
   operatingWindows: OperatingWindow[];
   dataSource: string;
+  /** 전화번호 (실데이터 보유 시) */
+  phone?: string;
+  /** 인가일자 (실데이터 보유 시) */
+  approvalDate?: string;
+  /** 시설 홈페이지 또는 어린이집정보공개포털 상세 페이지 링크 */
+  homepageUrl?: string;
 }
 
 /** 생활권 단위 (행정동 기준) */
@@ -78,7 +82,7 @@ export interface FacilityECCResult {
   facilityId: string;
   spaceCapacity: number;
   staffCapacity: number;
-  timeCapacity: number;
+  isOpen: boolean;
   ecc: number;
 }
 

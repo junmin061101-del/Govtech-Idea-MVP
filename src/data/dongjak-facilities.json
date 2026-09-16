@@ -10,7 +10,9 @@
     "capacity": 20,
     "currentEnrollment": 15,
     "totalStaff": 6,
-    "accessibilityWeight": 0.8,
+    "phone": "02-813-2602",
+    "approvalDate": "2026-03-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000475",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -50,7 +52,9 @@
     "capacity": 64,
     "currentEnrollment": 47,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3280-0996",
+    "approvalDate": "2024-08-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000471",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -90,7 +94,9 @@
     "capacity": 46,
     "currentEnrollment": 45,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-5535",
+    "approvalDate": "2024-02-28",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000469",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -130,7 +136,9 @@
     "capacity": 20,
     "currentEnrollment": 6,
     "totalStaff": 4,
-    "accessibilityWeight": 0.8,
+    "phone": "02-817-1007",
+    "approvalDate": "2023-03-30",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000467",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -170,7 +178,9 @@
     "capacity": 88,
     "currentEnrollment": 43,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-812-1263",
+    "approvalDate": "2023-01-16",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000465",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -210,7 +220,9 @@
     "capacity": 57,
     "currentEnrollment": 37,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-823-7772",
+    "approvalDate": "2023-01-16",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000464",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -250,7 +262,9 @@
     "capacity": 45,
     "currentEnrollment": 38,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-833-5252",
+    "approvalDate": "2022-07-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000462",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -290,7 +304,9 @@
     "capacity": 36,
     "currentEnrollment": 27,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-537-2001",
+    "approvalDate": "2022-04-22",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000461",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -330,7 +346,9 @@
     "capacity": 51,
     "currentEnrollment": 42,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-815-1516",
+    "approvalDate": "2022-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000447",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -370,7 +388,9 @@
     "capacity": 65,
     "currentEnrollment": 65,
     "totalStaff": 17,
-    "accessibilityWeight": 0.9,
+    "phone": "02-823-9447",
+    "approvalDate": "2022-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000445",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -410,7 +430,9 @@
     "capacity": 30,
     "currentEnrollment": 27,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-824-3351",
+    "approvalDate": "2022-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000446",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -450,7 +472,9 @@
     "capacity": 33,
     "currentEnrollment": 33,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-535-2133",
+    "approvalDate": "2021-08-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000444",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -490,7 +514,9 @@
     "capacity": 19,
     "currentEnrollment": 17,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-888-8646",
+    "approvalDate": "2021-03-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000443",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -530,7 +556,9 @@
     "capacity": 48,
     "currentEnrollment": 47,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-2021",
+    "approvalDate": "2021-03-01",
+    "homepageUrl": "http://구립아름어린이집.com",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -570,7 +598,9 @@
     "capacity": 49,
     "currentEnrollment": 42,
     "totalStaff": 18,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3280-2320",
+    "approvalDate": "2021-03-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000441",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -610,7 +640,9 @@
     "capacity": 19,
     "currentEnrollment": 17,
     "totalStaff": 8,
-    "accessibilityWeight": 0.9,
+    "phone": "02-824-2021",
+    "approvalDate": "2021-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000439",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -650,7 +682,9 @@
     "capacity": 57,
     "currentEnrollment": 22,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-532-3330",
+    "approvalDate": "2021-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000440",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -690,7 +724,9 @@
     "capacity": 33,
     "currentEnrollment": 33,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-582-2990",
+    "approvalDate": "2020-05-29",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000438",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -730,7 +766,9 @@
     "capacity": 49,
     "currentEnrollment": 22,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-828-2506",
+    "approvalDate": "2020-02-20",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000437",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -770,7 +808,9 @@
     "capacity": 59,
     "currentEnrollment": 31,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3280-0217",
+    "approvalDate": "2020-02-17",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000436",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -810,7 +850,9 @@
     "capacity": 39,
     "currentEnrollment": 30,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-813-4246",
+    "approvalDate": "2020-02-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000435",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -850,7 +892,9 @@
     "capacity": 55,
     "currentEnrollment": 27,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-813-2031",
+    "approvalDate": "2020-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000434",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -890,7 +934,9 @@
     "capacity": 30,
     "currentEnrollment": 29,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-847-5333",
+    "approvalDate": "2019-03-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000432",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -930,7 +976,9 @@
     "capacity": 69,
     "currentEnrollment": 31,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-814-3200",
+    "approvalDate": "2019-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000428",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -970,7 +1018,9 @@
     "capacity": 30,
     "currentEnrollment": 20,
     "totalStaff": 10,
-    "accessibilityWeight": 0.9,
+    "phone": "02-6277-6990",
+    "approvalDate": "2019-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000431",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1010,7 +1060,9 @@
     "capacity": 43,
     "currentEnrollment": 33,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-815-0492",
+    "approvalDate": "2019-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000430",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1050,7 +1102,9 @@
     "capacity": 95,
     "currentEnrollment": 76,
     "totalStaff": 24,
-    "accessibilityWeight": 0.9,
+    "phone": "02-812-0668",
+    "approvalDate": "2019-01-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000429",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1090,7 +1144,9 @@
     "capacity": 20,
     "currentEnrollment": 20,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-536-1292",
+    "approvalDate": "2018-07-16",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000426",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1130,7 +1186,9 @@
     "capacity": 33,
     "currentEnrollment": 30,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-836-9300",
+    "approvalDate": "2018-07-16",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000424",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1170,7 +1228,9 @@
     "capacity": 30,
     "currentEnrollment": 29,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-535-5277",
+    "approvalDate": "2018-07-16",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000425",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1210,7 +1270,9 @@
     "capacity": 21,
     "currentEnrollment": 21,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-594-8153",
+    "approvalDate": "2018-07-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000423",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1250,7 +1312,9 @@
     "capacity": 27,
     "currentEnrollment": 25,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3280-0377",
+    "approvalDate": "2018-03-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000422",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1290,7 +1354,9 @@
     "capacity": 20,
     "currentEnrollment": 19,
     "totalStaff": 7,
-    "accessibilityWeight": 0.9,
+    "phone": "02-596-9117",
+    "approvalDate": "2017-10-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000420",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1330,7 +1396,9 @@
     "capacity": 19,
     "currentEnrollment": 17,
     "totalStaff": 8,
-    "accessibilityWeight": 0.9,
+    "phone": "02-596-1116",
+    "approvalDate": "2017-10-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000421",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1370,7 +1438,9 @@
     "capacity": 20,
     "currentEnrollment": 20,
     "totalStaff": 10,
-    "accessibilityWeight": 0.9,
+    "phone": "02-817-4972",
+    "approvalDate": "2017-09-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000419",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1410,7 +1480,9 @@
     "capacity": 30,
     "currentEnrollment": 30,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-827-0791",
+    "approvalDate": "2017-07-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000417",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1450,7 +1522,9 @@
     "capacity": 74,
     "currentEnrollment": 26,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-814-7615",
+    "approvalDate": "2017-07-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000418",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1490,7 +1564,9 @@
     "capacity": 19,
     "currentEnrollment": 16,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-887-7796",
+    "approvalDate": "2017-03-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/sisulInfo/intro.do?stCode=11590000416",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1530,7 +1606,9 @@
     "capacity": 20,
     "currentEnrollment": 19,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-2135-6663",
+    "approvalDate": "2017-02-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000415",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1570,7 +1648,9 @@
     "capacity": 19,
     "currentEnrollment": 18,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-8620",
+    "approvalDate": "2017-01-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000413",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1610,7 +1690,9 @@
     "capacity": 79,
     "currentEnrollment": 47,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-845-6545",
+    "approvalDate": "2017-01-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000414",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1650,7 +1732,9 @@
     "capacity": 24,
     "currentEnrollment": 7,
     "totalStaff": 7,
-    "accessibilityWeight": 0.9,
+    "phone": "02-881-7395",
+    "approvalDate": "2016-09-12",
+    "homepageUrl": "http://child.cau.ac.kr/",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1690,7 +1774,9 @@
     "capacity": 39,
     "currentEnrollment": 28,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-826-8080",
+    "approvalDate": "2016-01-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000408",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1730,7 +1816,9 @@
     "capacity": 19,
     "currentEnrollment": 19,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-831-5041",
+    "approvalDate": "2015-10-12",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000407",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1770,7 +1858,9 @@
     "capacity": 84,
     "currentEnrollment": 43,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-1257",
+    "approvalDate": "2015-07-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000405",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1810,7 +1900,9 @@
     "capacity": 69,
     "currentEnrollment": 60,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-832-7799",
+    "approvalDate": "2015-06-08",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000404",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1850,7 +1942,9 @@
     "capacity": 69,
     "currentEnrollment": 29,
     "totalStaff": 10,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3280-1145",
+    "approvalDate": "2015-03-02",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000403",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1890,7 +1984,9 @@
     "capacity": 75,
     "currentEnrollment": 51,
     "totalStaff": 20,
-    "accessibilityWeight": 0.9,
+    "phone": "02-825-9153",
+    "approvalDate": "2015-01-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000402",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1930,7 +2026,9 @@
     "capacity": 78,
     "currentEnrollment": 51,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-581-0010",
+    "approvalDate": "2015-01-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000401",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -1970,7 +2068,9 @@
     "capacity": 49,
     "currentEnrollment": 47,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-6140-9114",
+    "approvalDate": "2014-05-23",
+    "homepageUrl": "seoul.seoul.go.kr",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2010,7 +2110,9 @@
     "capacity": 20,
     "currentEnrollment": 17,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-816-4040",
+    "approvalDate": "2014-02-18",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000398",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2050,7 +2152,9 @@
     "capacity": 45,
     "currentEnrollment": 40,
     "totalStaff": 17,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3280-1628",
+    "approvalDate": "2013-12-26",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000395",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2090,7 +2194,9 @@
     "capacity": 49,
     "currentEnrollment": 31,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-849-4533",
+    "approvalDate": "2013-12-17",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000397",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2130,7 +2236,9 @@
     "capacity": 74,
     "currentEnrollment": 65,
     "totalStaff": 19,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3280-3535",
+    "approvalDate": "2013-12-17",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000396",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2170,7 +2278,9 @@
     "capacity": 65,
     "currentEnrollment": 43,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-6800",
+    "approvalDate": "2013-08-29",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000394",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2210,7 +2320,9 @@
     "capacity": 62,
     "currentEnrollment": 29,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-2038-2822",
+    "approvalDate": "2013-04-04",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000389",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2250,7 +2362,9 @@
     "capacity": 50,
     "currentEnrollment": 48,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-591-5466",
+    "approvalDate": "2013-02-26",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000388",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2290,7 +2404,9 @@
     "capacity": 18,
     "currentEnrollment": 16,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-812-5009",
+    "approvalDate": "2013-01-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000387",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2330,7 +2446,9 @@
     "capacity": 32,
     "currentEnrollment": 31,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-3383",
+    "approvalDate": "2013-01-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000386",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2370,7 +2488,9 @@
     "capacity": 20,
     "currentEnrollment": 12,
     "totalStaff": 7,
-    "accessibilityWeight": 0.8,
+    "phone": "02-6014-6243",
+    "approvalDate": "2012-09-24",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000380",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2410,7 +2530,9 @@
     "capacity": 38,
     "currentEnrollment": 38,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-834-7307",
+    "approvalDate": "2012-09-03",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000377",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2450,7 +2572,9 @@
     "capacity": 68,
     "currentEnrollment": 61,
     "totalStaff": 18,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-4645",
+    "approvalDate": "2012-09-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000376",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2490,7 +2614,9 @@
     "capacity": 20,
     "currentEnrollment": 19,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-533-3005",
+    "approvalDate": "2012-07-27",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000374",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2530,7 +2656,9 @@
     "capacity": 53,
     "currentEnrollment": 41,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-815-5004",
+    "approvalDate": "2012-07-06",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000372",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2570,7 +2698,9 @@
     "capacity": 20,
     "currentEnrollment": 19,
     "totalStaff": 12,
-    "accessibilityWeight": 0.8,
+    "phone": "02-826-9366",
+    "approvalDate": "2012-06-25",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000371",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2610,7 +2740,9 @@
     "capacity": 18,
     "currentEnrollment": 8,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-523-7830",
+    "approvalDate": "2012-06-14",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000369",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2650,7 +2782,9 @@
     "capacity": 17,
     "currentEnrollment": 15,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-6264-5948",
+    "approvalDate": "2012-05-30",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000366",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2690,7 +2824,9 @@
     "capacity": 19,
     "currentEnrollment": 14,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-532-6681",
+    "approvalDate": "2012-01-17",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000360",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2730,7 +2866,9 @@
     "capacity": 19,
     "currentEnrollment": 19,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-823-5335",
+    "approvalDate": "2011-12-29",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000356",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2770,7 +2908,9 @@
     "capacity": 19,
     "currentEnrollment": 18,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-822-0023",
+    "approvalDate": "2011-12-19",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000354",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2810,7 +2950,9 @@
     "capacity": 46,
     "currentEnrollment": 37,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-816-1486",
+    "approvalDate": "2011-11-30",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000351",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2850,7 +2992,9 @@
     "capacity": 20,
     "currentEnrollment": 14,
     "totalStaff": 7,
-    "accessibilityWeight": 0.8,
+    "phone": "02-536-0066",
+    "approvalDate": "2011-11-30",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000350",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2890,7 +3034,9 @@
     "capacity": 19,
     "currentEnrollment": 18,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-815-6101",
+    "approvalDate": "2011-11-09",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000349",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2930,7 +3076,9 @@
     "capacity": 19,
     "currentEnrollment": 18,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-6747-7803",
+    "approvalDate": "2011-10-11",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000346",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -2970,7 +3118,9 @@
     "capacity": 20,
     "currentEnrollment": 4,
     "totalStaff": 4,
-    "accessibilityWeight": 0.9,
+    "phone": "02-6332-0998",
+    "approvalDate": "2011-09-16",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000342",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3010,7 +3160,9 @@
     "capacity": 49,
     "currentEnrollment": 38,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-812-9464",
+    "approvalDate": "2011-09-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000341",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3050,7 +3202,9 @@
     "capacity": 19,
     "currentEnrollment": 15,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-873-3387",
+    "approvalDate": "2011-09-01",
+    "homepageUrl": "http://www.childcare.go.kr",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3090,7 +3244,9 @@
     "capacity": 20,
     "currentEnrollment": 20,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-6414-2334",
+    "approvalDate": "2011-08-29",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000339",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3130,7 +3286,9 @@
     "capacity": 19,
     "currentEnrollment": 14,
     "totalStaff": 7,
-    "accessibilityWeight": 0.8,
+    "phone": "02-525-9151",
+    "approvalDate": "2011-08-04",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000337",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3170,7 +3328,9 @@
     "capacity": 20,
     "currentEnrollment": 19,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-816-5005",
+    "approvalDate": "2011-03-09",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000332",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3210,7 +3370,9 @@
     "capacity": 16,
     "currentEnrollment": 9,
     "totalStaff": 5,
-    "accessibilityWeight": 0.8,
+    "phone": "02-826-4416",
+    "approvalDate": "2011-03-08",
+    "homepageUrl": "다음",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3250,7 +3412,9 @@
     "capacity": 57,
     "currentEnrollment": 55,
     "totalStaff": 19,
-    "accessibilityWeight": 0.9,
+    "phone": "02-522-5298",
+    "approvalDate": "2009-05-11",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000255",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3290,7 +3454,9 @@
     "capacity": 70,
     "currentEnrollment": 29,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-817-1567",
+    "approvalDate": "2009-02-17",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000254",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3330,7 +3496,9 @@
     "capacity": 31,
     "currentEnrollment": 22,
     "totalStaff": 10,
-    "accessibilityWeight": 0.9,
+    "phone": "02-817-6270",
+    "approvalDate": "2009-02-10",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000253",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3370,7 +3538,9 @@
     "capacity": 16,
     "currentEnrollment": 6,
     "totalStaff": 5,
-    "accessibilityWeight": 0.8,
+    "phone": "02-598-0907",
+    "approvalDate": "2009-01-01",
+    "homepageUrl": "http://club.cyworld.com/humansia0907",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3410,7 +3580,9 @@
     "capacity": 19,
     "currentEnrollment": 19,
     "totalStaff": 10,
-    "accessibilityWeight": 0.8,
+    "phone": "02-3280-0127",
+    "approvalDate": "2007-11-30",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000226",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3450,7 +3622,9 @@
     "capacity": 76,
     "currentEnrollment": 69,
     "totalStaff": 19,
-    "accessibilityWeight": 0.9,
+    "phone": "02-3289-1246",
+    "approvalDate": "2007-04-02",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000223",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3490,7 +3664,9 @@
     "capacity": 35,
     "currentEnrollment": 28,
     "totalStaff": 8,
-    "accessibilityWeight": 0.9,
+    "phone": "02-823-0733",
+    "approvalDate": "2007-03-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000221",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3530,7 +3706,9 @@
     "capacity": 49,
     "currentEnrollment": 42,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-824-3753",
+    "approvalDate": "2007-01-23",
+    "homepageUrl": "www.e-haedal.org",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3570,7 +3748,9 @@
     "capacity": 45,
     "currentEnrollment": 32,
     "totalStaff": 10,
-    "accessibilityWeight": 0.9,
+    "phone": "02-815-2535",
+    "approvalDate": "2006-12-22",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000211",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3610,7 +3790,9 @@
     "capacity": 19,
     "currentEnrollment": 19,
     "totalStaff": 7,
-    "accessibilityWeight": 0.8,
+    "phone": "02-847-4410",
+    "approvalDate": "2006-06-23",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000137",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3650,7 +3832,9 @@
     "capacity": 96,
     "currentEnrollment": 50,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-1009",
+    "approvalDate": "2006-04-21",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000040",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3690,7 +3874,9 @@
     "capacity": 17,
     "currentEnrollment": 15,
     "totalStaff": 7,
-    "accessibilityWeight": 0.8,
+    "phone": "02-3486-1418",
+    "approvalDate": "2006-04-05",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000065",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3730,7 +3916,9 @@
     "capacity": 29,
     "currentEnrollment": 25,
     "totalStaff": 18,
-    "accessibilityWeight": 0.9,
+    "phone": "02-835-6046",
+    "approvalDate": "2006-03-07",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000167",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3770,7 +3958,9 @@
     "capacity": 20,
     "currentEnrollment": 13,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-823-1187",
+    "approvalDate": "2005-08-08",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000198",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3810,7 +4000,9 @@
     "capacity": 20,
     "currentEnrollment": 20,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-594-2505",
+    "approvalDate": "2005-06-16",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000146",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3850,7 +4042,9 @@
     "capacity": 19,
     "currentEnrollment": 19,
     "totalStaff": 7,
-    "accessibilityWeight": 0.8,
+    "phone": "02-537-9547",
+    "approvalDate": "2005-03-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000158",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3890,7 +4084,9 @@
     "capacity": 39,
     "currentEnrollment": 0,
     "totalStaff": 3,
-    "accessibilityWeight": 0.9,
+    "phone": "02-812-6775",
+    "approvalDate": "2005-03-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000189",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3930,7 +4126,9 @@
     "capacity": 56,
     "currentEnrollment": 49,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-813-3332",
+    "approvalDate": "2005-02-28",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000030",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -3970,7 +4168,9 @@
     "capacity": 47,
     "currentEnrollment": 14,
     "totalStaff": 7,
-    "accessibilityWeight": 0.9,
+    "phone": "02-816-3334",
+    "approvalDate": "2005-01-29",
+    "homepageUrl": "sunny kidsor.kr",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4010,7 +4210,9 @@
     "capacity": 16,
     "currentEnrollment": 16,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-821-2280",
+    "approvalDate": "2004-12-30",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000168",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4050,7 +4252,9 @@
     "capacity": 19,
     "currentEnrollment": 18,
     "totalStaff": 8,
-    "accessibilityWeight": 0.8,
+    "phone": "02-3280-0033",
+    "approvalDate": "2004-11-25",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000130",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4090,7 +4294,9 @@
     "capacity": 26,
     "currentEnrollment": 23,
     "totalStaff": 8,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-5288",
+    "approvalDate": "2004-11-17",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000084",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4130,7 +4336,9 @@
     "capacity": 19,
     "currentEnrollment": 19,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-812-7880",
+    "approvalDate": "2004-11-15",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000152",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4170,7 +4378,9 @@
     "capacity": 19,
     "currentEnrollment": 19,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-595-5791",
+    "approvalDate": "2004-10-24",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000169",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4210,7 +4420,9 @@
     "capacity": 60,
     "currentEnrollment": 25,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-8379",
+    "approvalDate": "2004-07-16",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000117",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4250,7 +4462,9 @@
     "capacity": 20,
     "currentEnrollment": 20,
     "totalStaff": 10,
-    "accessibilityWeight": 0.8,
+    "phone": "02-847-3657",
+    "approvalDate": "2004-05-04",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000148",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4290,7 +4504,9 @@
     "capacity": 30,
     "currentEnrollment": 18,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-2292",
+    "approvalDate": "2004-04-07",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000106",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4330,7 +4546,9 @@
     "capacity": 14,
     "currentEnrollment": 5,
     "totalStaff": 5,
-    "accessibilityWeight": 0.8,
+    "phone": "02-843-9888",
+    "approvalDate": "2004-03-19",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000046",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4370,7 +4588,9 @@
     "capacity": 19,
     "currentEnrollment": 16,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-3280-5373",
+    "approvalDate": "2004-02-23",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000086",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4410,7 +4630,9 @@
     "capacity": 86,
     "currentEnrollment": 30,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-525-6450",
+    "approvalDate": "2003-11-06",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000101",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4450,7 +4672,9 @@
     "capacity": 45,
     "currentEnrollment": 40,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-870-2935",
+    "approvalDate": "2003-09-20",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000077",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4490,7 +4714,9 @@
     "capacity": 27,
     "currentEnrollment": 23,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-587-1139",
+    "approvalDate": "2002-02-18",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000017",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4530,7 +4756,9 @@
     "capacity": 88,
     "currentEnrollment": 81,
     "totalStaff": 20,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-2246",
+    "approvalDate": "2000-07-21",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000010",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4570,7 +4798,9 @@
     "capacity": 20,
     "currentEnrollment": 19,
     "totalStaff": 10,
-    "accessibilityWeight": 0.8,
+    "phone": "02-847-4447",
+    "approvalDate": "1999-12-10",
+    "homepageUrl": "http://band.us/@dasomkid",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4610,7 +4840,9 @@
     "capacity": 156,
     "currentEnrollment": 111,
     "totalStaff": 29,
-    "accessibilityWeight": 0.9,
+    "phone": "02-582-2072",
+    "approvalDate": "1999-07-05",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000022",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4650,7 +4882,9 @@
     "capacity": 51,
     "currentEnrollment": 33,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-817-2903",
+    "approvalDate": "1999-07-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000041",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4690,7 +4924,9 @@
     "capacity": 79,
     "currentEnrollment": 24,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-834-1097",
+    "approvalDate": "1999-01-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000006",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4730,7 +4966,9 @@
     "capacity": 24,
     "currentEnrollment": 3,
     "totalStaff": 2,
-    "accessibilityWeight": 0.9,
+    "phone": "02-597-3383",
+    "approvalDate": "1998-10-08",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000119",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4770,7 +5008,9 @@
     "capacity": 39,
     "currentEnrollment": 22,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-826-1076",
+    "approvalDate": "1998-06-28",
+    "homepageUrl": "www.cafe.naver.com/cheong2012",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4810,7 +5050,9 @@
     "capacity": 79,
     "currentEnrollment": 61,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-585-0700",
+    "approvalDate": "1998-05-07",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000024",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4850,7 +5092,9 @@
     "capacity": 82,
     "currentEnrollment": 47,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-0421",
+    "approvalDate": "1998-03-02",
+    "homepageUrl": "iseoul.seoul.go.kr/homepage/main.do?stCode=11590000055",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4890,7 +5134,9 @@
     "capacity": 51,
     "currentEnrollment": 25,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-521-2662",
+    "approvalDate": "1997-09-24",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000100",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4930,7 +5176,9 @@
     "capacity": 181,
     "currentEnrollment": 131,
     "totalStaff": 36,
-    "accessibilityWeight": 0.9,
+    "phone": "02-815-6893",
+    "approvalDate": "1997-05-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000007",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -4970,7 +5218,9 @@
     "capacity": 79,
     "currentEnrollment": 46,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-826-4503",
+    "approvalDate": "1997-04-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000058",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5010,7 +5260,9 @@
     "capacity": 94,
     "currentEnrollment": 61,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-827-0082",
+    "approvalDate": "1997-04-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000009",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5050,7 +5302,9 @@
     "capacity": 74,
     "currentEnrollment": 0,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-826-9003",
+    "approvalDate": "1997-03-05",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000003",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5090,7 +5344,9 @@
     "capacity": 17,
     "currentEnrollment": 14,
     "totalStaff": 7,
-    "accessibilityWeight": 0.8,
+    "phone": "02-535-0095",
+    "approvalDate": "1996-10-14",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000070",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5130,7 +5386,9 @@
     "capacity": 74,
     "currentEnrollment": 36,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-825-0152",
+    "approvalDate": "1996-09-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000033",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5170,7 +5428,9 @@
     "capacity": 68,
     "currentEnrollment": 41,
     "totalStaff": 9,
-    "accessibilityWeight": 0.9,
+    "phone": "02-845-9874",
+    "approvalDate": "1996-06-21",
+    "homepageUrl": "jys8380@hanmail.net",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5210,7 +5470,9 @@
     "capacity": 20,
     "currentEnrollment": 18,
     "totalStaff": 10,
-    "accessibilityWeight": 0.8,
+    "phone": "02-824-7818",
+    "approvalDate": "1996-04-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000126",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5250,7 +5512,9 @@
     "capacity": 67,
     "currentEnrollment": 51,
     "totalStaff": 14,
-    "accessibilityWeight": 0.9,
+    "phone": "02-591-7634",
+    "approvalDate": "1996-04-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000005",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5290,7 +5554,9 @@
     "capacity": 47,
     "currentEnrollment": 26,
     "totalStaff": 8,
-    "accessibilityWeight": 0.9,
+    "phone": "02-597-0912",
+    "approvalDate": "1996-03-02",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000021",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5330,7 +5596,9 @@
     "capacity": 66,
     "currentEnrollment": 38,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-823-2482",
+    "approvalDate": "1995-12-01",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000035",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5370,7 +5638,9 @@
     "capacity": 87,
     "currentEnrollment": 59,
     "totalStaff": 19,
-    "accessibilityWeight": 0.9,
+    "phone": "02-588-8777",
+    "approvalDate": "1995-02-24",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000001",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5410,7 +5680,9 @@
     "capacity": 187,
     "currentEnrollment": 135,
     "totalStaff": 35,
-    "accessibilityWeight": 0.9,
+    "phone": "02-825-0505",
+    "approvalDate": "1994-04-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000028",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5450,7 +5722,9 @@
     "capacity": 38,
     "currentEnrollment": 25,
     "totalStaff": 13,
-    "accessibilityWeight": 0.9,
+    "phone": "02-822-7373",
+    "approvalDate": "1992-07-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000060",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5490,7 +5764,9 @@
     "capacity": 20,
     "currentEnrollment": 17,
     "totalStaff": 9,
-    "accessibilityWeight": 0.8,
+    "phone": "02-583-0384",
+    "approvalDate": "1991-11-23",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000202",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5530,7 +5806,9 @@
     "capacity": 82,
     "currentEnrollment": 30,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-823-3412",
+    "approvalDate": "1991-03-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000047",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5570,7 +5848,9 @@
     "capacity": 69,
     "currentEnrollment": 56,
     "totalStaff": 20,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-0210",
+    "approvalDate": "1991-02-21",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000079",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5610,7 +5890,9 @@
     "capacity": 118,
     "currentEnrollment": 117,
     "totalStaff": 24,
-    "accessibilityWeight": 0.9,
+    "phone": "02-813-9598",
+    "approvalDate": "1987-03-02",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000036",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5650,7 +5932,9 @@
     "capacity": 85,
     "currentEnrollment": 47,
     "totalStaff": 17,
-    "accessibilityWeight": 0.9,
+    "phone": "02-823-3203",
+    "approvalDate": "1986-03-07",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000050",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5690,7 +5974,9 @@
     "capacity": 99,
     "currentEnrollment": 55,
     "totalStaff": 17,
-    "accessibilityWeight": 0.9,
+    "phone": "02-821-5615",
+    "approvalDate": "1986-03-01",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000061",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5730,7 +6016,9 @@
     "capacity": 99,
     "currentEnrollment": 75,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-533-9250",
+    "approvalDate": "1985-07-06",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/sisulInfo/hrConerList.do?stCode=11590000029",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5770,7 +6058,9 @@
     "capacity": 91,
     "currentEnrollment": 44,
     "totalStaff": 11,
-    "accessibilityWeight": 0.9,
+    "phone": "02-537-4216",
+    "approvalDate": "1983-12-26",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000063",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5810,7 +6100,9 @@
     "capacity": 78,
     "currentEnrollment": 76,
     "totalStaff": 16,
-    "accessibilityWeight": 0.9,
+    "phone": "02-533-7155",
+    "approvalDate": "1982-10-26",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000039",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5850,7 +6142,9 @@
     "capacity": 84,
     "currentEnrollment": 24,
     "totalStaff": 12,
-    "accessibilityWeight": 0.9,
+    "phone": "02-815-0274",
+    "approvalDate": "1982-03-02",
+    "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000034",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5890,7 +6184,9 @@
     "capacity": 79,
     "currentEnrollment": 50,
     "totalStaff": 15,
-    "accessibilityWeight": 0.9,
+    "phone": "02-534-0175",
+    "approvalDate": "1981-03-02",
+    "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000004",
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5930,7 +6226,6 @@
     "capacity": 29,
     "currentEnrollment": 24,
     "totalStaff": 2,
-    "accessibilityWeight": 0.82,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -5964,13 +6259,12 @@
     "name": "상도3동 다함께돌봄센터",
     "type": "다함께돌봄센터",
     "dongId": "sangdo3",
-    "address": "서울특별시 동작구 상도3동 71길 18",
-    "lat": 37.501115,
-    "lng": 126.953843,
-    "capacity": 27,
-    "currentEnrollment": 25,
+    "address": "서울특별시 동작구 상도3동 130길 13",
+    "lat": 37.500707,
+    "lng": 126.954657,
+    "capacity": 21,
+    "currentEnrollment": 17,
     "totalStaff": 2,
-    "accessibilityWeight": 0.9,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6004,13 +6298,12 @@
     "name": "상도4동 다함께돌봄센터",
     "type": "다함께돌봄센터",
     "dongId": "sangdo4",
-    "address": "서울특별시 동작구 상도4동 33길 38",
-    "lat": 37.505274,
-    "lng": 126.953641,
-    "capacity": 20,
-    "currentEnrollment": 18,
+    "address": "서울특별시 동작구 상도4동 89길 34",
+    "lat": 37.506488,
+    "lng": 126.94877,
+    "capacity": 29,
+    "currentEnrollment": 21,
     "totalStaff": 2,
-    "accessibilityWeight": 0.93,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6044,13 +6337,12 @@
     "name": "흑석동 다함께돌봄센터",
     "type": "다함께돌봄센터",
     "dongId": "heukseok",
-    "address": "서울특별시 동작구 흑석동 34길 18",
-    "lat": 37.505294,
-    "lng": 126.962518,
-    "capacity": 21,
-    "currentEnrollment": 18,
+    "address": "서울특별시 동작구 흑석동 30길 11",
+    "lat": 37.508166,
+    "lng": 126.963722,
+    "capacity": 30,
+    "currentEnrollment": 26,
     "totalStaff": 2,
-    "accessibilityWeight": 0.88,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6084,13 +6376,12 @@
     "name": "사당4동 다함께돌봄센터",
     "type": "다함께돌봄센터",
     "dongId": "sadang4",
-    "address": "서울특별시 동작구 사당4동 152길 29",
-    "lat": 37.481782,
-    "lng": 126.97473,
-    "capacity": 20,
-    "currentEnrollment": 15,
+    "address": "서울특별시 동작구 사당4동 118길 4",
+    "lat": 37.479154,
+    "lng": 126.978305,
+    "capacity": 21,
+    "currentEnrollment": 20,
     "totalStaff": 2,
-    "accessibilityWeight": 0.81,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6124,13 +6415,12 @@
     "name": "신대방2동 다함께돌봄센터",
     "type": "다함께돌봄센터",
     "dongId": "sindaebang2",
-    "address": "서울특별시 동작구 신대방2동 68길 30",
-    "lat": 37.495977,
-    "lng": 126.913587,
-    "capacity": 29,
-    "currentEnrollment": 22,
+    "address": "서울특별시 동작구 신대방2동 62길 3",
+    "lat": 37.498743,
+    "lng": 126.911781,
+    "capacity": 20,
+    "currentEnrollment": 18,
     "totalStaff": 2,
-    "accessibilityWeight": 0.84,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6165,12 +6455,11 @@
     "type": "우리동네키움센터",
     "dongId": "noryangjin2",
     "address": "서울특별시 동작구 노량진2동 일대",
-    "lat": 37.50839,
-    "lng": 126.938564,
-    "capacity": 29,
-    "currentEnrollment": 23,
+    "lat": 37.512424,
+    "lng": 126.93639,
+    "capacity": 27,
+    "currentEnrollment": 24,
     "totalStaff": 3,
-    "accessibilityWeight": 1,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6205,12 +6494,11 @@
     "type": "우리동네키움센터",
     "dongId": "sindaebang1",
     "address": "서울특별시 동작구 신대방1동 일대",
-    "lat": 37.496823,
-    "lng": 126.916672,
-    "capacity": 30,
-    "currentEnrollment": 28,
+    "lat": 37.493093,
+    "lng": 126.915728,
+    "capacity": 27,
+    "currentEnrollment": 22,
     "totalStaff": 3,
-    "accessibilityWeight": 0.93,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6245,12 +6533,11 @@
     "type": "우리동네키움센터",
     "dongId": "sadang5",
     "address": "서울특별시 동작구 사당5동 일대",
-    "lat": 37.488632,
-    "lng": 126.971691,
-    "capacity": 35,
-    "currentEnrollment": 31,
+    "lat": 37.486977,
+    "lng": 126.97379,
+    "capacity": 31,
+    "currentEnrollment": 26,
     "totalStaff": 3,
-    "accessibilityWeight": 0.99,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6285,12 +6572,11 @@
     "type": "우리동네키움센터",
     "dongId": "noryangjin1",
     "address": "서울특별시 동작구 노량진1동 일대",
-    "lat": 37.516959,
-    "lng": 126.941503,
+    "lat": 37.516823,
+    "lng": 126.943672,
     "capacity": 40,
-    "currentEnrollment": 35,
+    "currentEnrollment": 37,
     "totalStaff": 5,
-    "accessibilityWeight": 0.89,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6325,12 +6611,11 @@
     "type": "우리동네키움센터",
     "dongId": "sangdo1",
     "address": "서울특별시 동작구 상도1동 일대",
-    "lat": 37.501212,
-    "lng": 126.942074,
-    "capacity": 33,
+    "lat": 37.504938,
+    "lng": 126.944667,
+    "capacity": 30,
     "currentEnrollment": 27,
     "totalStaff": 3,
-    "accessibilityWeight": 0.97,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6365,12 +6650,11 @@
     "type": "우리동네키움센터",
     "dongId": "sangdo2",
     "address": "서울특별시 동작구 상도2동 일대",
-    "lat": 37.495484,
-    "lng": 126.947153,
-    "capacity": 28,
-    "currentEnrollment": 21,
+    "lat": 37.499501,
+    "lng": 126.9529,
+    "capacity": 32,
+    "currentEnrollment": 25,
     "totalStaff": 3,
-    "accessibilityWeight": 0.86,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6405,12 +6689,11 @@
     "type": "우리동네키움센터",
     "dongId": "heukseok",
     "address": "서울특별시 동작구 흑석동 일대",
-    "lat": 37.508872,
-    "lng": 126.959396,
-    "capacity": 27,
-    "currentEnrollment": 24,
+    "lat": 37.505205,
+    "lng": 126.963144,
+    "capacity": 32,
+    "currentEnrollment": 25,
     "totalStaff": 3,
-    "accessibilityWeight": 0.91,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6445,12 +6728,11 @@
     "type": "우리동네키움센터",
     "dongId": "sadang2",
     "address": "서울특별시 동작구 사당2동 일대",
-    "lat": 37.483436,
-    "lng": 126.983314,
-    "capacity": 32,
-    "currentEnrollment": 29,
+    "lat": 37.48388,
+    "lng": 126.984132,
+    "capacity": 26,
+    "currentEnrollment": 21,
     "totalStaff": 3,
-    "accessibilityWeight": 0.94,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6485,12 +6767,11 @@
     "type": "우리동네키움센터",
     "dongId": "daebang",
     "address": "서울특별시 동작구 대방동 일대",
-    "lat": 37.504347,
-    "lng": 126.926683,
-    "capacity": 35,
-    "currentEnrollment": 30,
+    "lat": 37.5012,
+    "lng": 126.923498,
+    "capacity": 27,
+    "currentEnrollment": 21,
     "totalStaff": 3,
-    "accessibilityWeight": 0.94,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6525,12 +6806,11 @@
     "type": "우리동네키움센터",
     "dongId": "sindaebang2",
     "address": "서울특별시 동작구 신대방2동 일대",
-    "lat": 37.496752,
-    "lng": 126.908493,
-    "capacity": 33,
-    "currentEnrollment": 30,
+    "lat": 37.499872,
+    "lng": 126.908397,
+    "capacity": 27,
+    "currentEnrollment": 24,
     "totalStaff": 3,
-    "accessibilityWeight": 0.95,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",
@@ -6565,12 +6845,11 @@
     "type": "우리동네키움센터",
     "dongId": "sadang1",
     "address": "서울특별시 동작구 사당1동 일대",
-    "lat": 37.486198,
-    "lng": 126.979038,
-    "capacity": 35,
-    "currentEnrollment": 30,
+    "lat": 37.488599,
+    "lng": 126.976159,
+    "capacity": 29,
+    "currentEnrollment": 26,
     "totalStaff": 3,
-    "accessibilityWeight": 0.87,
     "operatingWindows": [
       {
         "timeSlot": "weekday_day",

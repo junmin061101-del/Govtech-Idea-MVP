@@ -121,35 +121,15 @@ export default function KakaoMap({
             title={facility.name}
             onClick={() => onSelectFacility(facility)}
             image={{
-              src: markerIconFor(facility.type, selectedFacility?.id === facility.id),
-              size: { width: 26, height: 26 },
+              src: markerIcon(selectedFacility?.id === facility.id),
+              size: { width: 22, height: 22 },
             }}
           />
         ))}
 
         {selectedFacility && (
-          <CustomOverlayMap
-            position={{ lat: selectedFacility.lat, lng: selectedFacility.lng }}
-            yAnchor={1.4}
-          >
-            <div className="w-56 rounded-lg border border-neutral-200 bg-white p-3 text-xs shadow-lg">
-              <div className="mb-1 flex items-start justify-between gap-2">
-                <p className="font-semibold text-neutral-800">{selectedFacility.name}</p>
-                <button
-                  onClick={() => onSelectFacility(null)}
-                  className="text-neutral-400 hover:text-neutral-600"
-                  aria-label="닫기"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="text-neutral-500">{selectedFacility.type}</p>
-              <p className="mt-1 text-neutral-600">
-                정원 {selectedFacility.capacity}명 · 현원 {selectedFacility.currentEnrollment}명
-              </p>
-              <p className="text-neutral-600">교사 {selectedFacility.totalStaff}명</p>
-              <p className="mt-1 text-[10px] leading-snug text-neutral-400">{selectedFacility.dataSource}</p>
-            </div>
+          <CustomOverlayMap position={{ lat: selectedFacility.lat, lng: selectedFacility.lng }} yAnchor={1.15}>
+            <FacilityDetailCard facility={selectedFacility} onClose={() => onSelectFacility(null)} />
           </CustomOverlayMap>
         )}
       </KakaoMapView>
@@ -180,24 +160,62 @@ function MapLegend() {
   );
 }
 
-const FACILITY_COLORS: Record<string, string> = {
-  국공립어린이집: "#2563eb",
-  민간어린이집: "#7c3aed",
-  가정어린이집: "#0891b2",
-  직장어린이집: "#4338ca",
-  협동어린이집: "#0d9488",
-  법인단체등어린이집: "#65a30d",
-  다함께돌봄센터: "#ea580c",
-  우리동네키움센터: "#db2777",
-};
+// 생활권 원(빨강/주황/초록)이 이미 위험도를 표현하므로, 개별 시설 마커는 유형별 색상 대신
+// 단일 색상으로 통일해 시각적 잡음을 줄인다.
+const FACILITY_MARKER_COLOR = "#1e293b"; // slate-800
 
-function markerIconFor(type: string, selected: boolean): string {
-  const color = FACILITY_COLORS[type] ?? "#525252";
-  const stroke = selected ? "#111827" : "white";
+function markerIcon(selected: boolean): string {
+  const size = selected ? 24 : 18;
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
-      <circle cx="13" cy="13" r="9" fill="${color}" stroke="${stroke}" stroke-width="${selected ? 3 : 2}" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 22 22">
+      <circle cx="11" cy="11" r="7" fill="${FACILITY_MARKER_COLOR}" stroke="white" stroke-width="${selected ? 3 : 2}" />
     </svg>
   `.trim();
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function FacilityDetailCard({ facility, onClose }: { facility: Facility; onClose: () => void }) {
+  const eveningWindow = facility.operatingWindows.find((w) => w.timeSlot === "evening");
+  const weekendWindow = facility.operatingWindows.find((w) => w.timeSlot === "weekend");
+
+  const rows: { label: string; value: string }[] = [
+    { label: "유형", value: facility.type },
+    { label: "주소", value: facility.address },
+    ...(facility.phone ? [{ label: "전화번호", value: facility.phone }] : []),
+    { label: "정원 / 현원", value: `${facility.capacity}명 / ${facility.currentEnrollment}명` },
+    { label: "배치 교직원수", value: `${facility.totalStaff}명` },
+    ...(facility.approvalDate ? [{ label: "인가일자", value: facility.approvalDate }] : []),
+    { label: "야간연장 가능", value: eveningWindow?.isOpen ? "예" : "아니오" },
+    { label: "휴일보육 가능", value: weekendWindow?.isOpen ? "예" : "아니오" },
+  ];
+
+  return (
+    <div className="w-72 rounded-lg border border-neutral-200 bg-white p-3 text-xs shadow-lg">
+      <div className="mb-2 flex items-start justify-between gap-2">
+        <p className="text-sm font-semibold text-neutral-800">{facility.name}</p>
+        <button onClick={onClose} className="text-neutral-400 hover:text-neutral-600" aria-label="닫기">
+          ×
+        </button>
+      </div>
+      <dl className="space-y-1">
+        {rows.map((row) => (
+          <div key={row.label} className="flex gap-2">
+            <dt className="w-20 shrink-0 text-neutral-400">{row.label}</dt>
+            <dd className="text-neutral-700">{row.value}</dd>
+          </div>
+        ))}
+      </dl>
+      {facility.homepageUrl && (
+        <a
+          href={facility.homepageUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-block rounded-md bg-neutral-900 px-2.5 py-1 text-[11px] font-medium text-white hover:bg-neutral-700"
+        >
+          홈페이지 방문 →
+        </a>
+      )}
+      <p className="mt-2 text-[10px] leading-snug text-neutral-400">{facility.dataSource}</p>
+    </div>
+  );
 }

@@ -17,27 +17,26 @@ export const TIME_SLOTS: { id: TimeSlotId; label: string; shortLabel: string; st
 
 /**
  * 유효 돌봄 수용력(ECC) 계산
- * ECC = min(공간 수용력, 인력 수용력, 시간 수용력) * 접근성 가중치
+ * ECC(f,t) = min[공간 수용력(f,t), 인력 수용력(f,t)] × 운영여부(f,t)
  *
  * - 공간 수용력: 시설 인가 정원 (물리적 상한)
  * - 인력 수용력: 해당 시간대 배치 인력 * 인력 1인당 표준 돌봄 인원
- * - 시간 수용력: 해당 시간대 운영 여부 (닫혀 있으면 0)
+ * - 운영여부: 해당 시간대에 문을 여는지 (0 또는 1) — 닫혀 있으면 정원·인력이 있어도 ECC는 0
  */
 export function calculateECC(facility: Facility, timeSlot: TimeSlotId): FacilityECCResult {
   const window = facility.operatingWindows.find((w) => w.timeSlot === timeSlot);
 
   const spaceCapacity = facility.capacity;
   const staffCapacity = window ? window.staffOnDuty * window.staffToChildRatio : 0;
-  const timeCapacity = window && window.isOpen ? facility.capacity : 0;
+  const isOpen = window?.isOpen ?? false;
 
-  const rawEcc = Math.min(spaceCapacity, staffCapacity, timeCapacity);
-  const ecc = Math.max(0, rawEcc) * facility.accessibilityWeight;
+  const ecc = isOpen ? Math.min(spaceCapacity, staffCapacity) : 0;
 
   return {
     facilityId: facility.id,
     spaceCapacity,
     staffCapacity,
-    timeCapacity,
+    isOpen,
     ecc,
   };
 }
@@ -85,13 +84,13 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
     facilityResults.push(result);
     totalECC += result.ecc;
 
-    const potential = facility.capacity * facility.accessibilityWeight;
+    const potential = facility.capacity;
     idealECC += potential;
     const loss = Math.max(0, potential - result.ecc);
     if (loss <= 0) continue;
 
     // 손실을 유발한 병목 축 판정: 시간(운영 여부)이 우선 원인이고, 그 다음이 인력이다.
-    if (!result.timeCapacity) {
+    if (!result.isOpen) {
       timeLoss += loss;
     } else {
       staffLoss += loss;
@@ -167,7 +166,7 @@ export function simulatePolicy(
 
   const bottleneckedFacilities = dongFacilities.filter((f) => {
     const r = calculateECC(f, timeSlot);
-    return r.ecc < f.capacity * f.accessibilityWeight;
+    return r.ecc < f.capacity;
   });
   const targetCount = Math.max(1, bottleneckedFacilities.length);
 

@@ -222,6 +222,10 @@ for (const row of activeChildcare) {
   const dayStaff = rawStaff > 0 ? rawStaff : Math.max(1, Math.round(capacity / typicalRatio));
   const ratio = Math.min(15, Math.max(3, capacity / dayStaff)); // 정원과 실제 배치인력으로부터 역산한 1인당 돌봄 비율
 
+  // 홈페이지가 별도 등록되어 있지 않으면 서울시 공식 보육포털(iSeoul) 시설 페이지로 연결한다.
+  // (모든 어린이집이 STCODE 기준으로 iSeoul 페이지를 갖고 있음을 확인함)
+  const homepageUrl = (row.CRHOME || "").trim() || `https://iseoul.seoul.go.kr/homepage/main.do?stCode=${row.STCODE}`;
+
   facilities.push({
     id: nextId(),
     name: row.CRNAME,
@@ -233,8 +237,9 @@ for (const row of activeChildcare) {
     capacity,
     currentEnrollment: Math.max(0, Number(row.CRCHCNT) || 0),
     totalStaff: dayStaff,
-    // 실제 접근성(도보/교통) 데이터는 없어 유형별 통상적 수준으로 근사한 값
-    accessibilityWeight: type === "가정어린이집" ? 0.8 : 0.9,
+    phone: row.CRTELNO || undefined,
+    approvalDate: row.CRCNFMDT || undefined,
+    homepageUrl,
     operatingWindows: [
       { timeSlot: "weekday_day", isOpen: true, staffOnDuty: dayStaff, staffToChildRatio: ratio },
       // 2020년 보육정책 개편 이후 전체 어린이집은 오후 4~7시30분 기본연장보육을 제공해야 하므로
@@ -273,7 +278,6 @@ for (const dong of dongRecords) {
       capacity,
       currentEnrollment: Math.round(capacity * (0.7 + rand() * 0.25)),
       totalStaff: dayStaff,
-      accessibilityWeight: +(0.8 + rand() * 0.15).toFixed(2),
       operatingWindows: makeOperatingWindows({
         dayStaff: 1,
         afterStaff: dayStaff,
@@ -307,7 +311,6 @@ for (const kiwoom of KIWOOM_ASSIGNMENT) {
     capacity,
     currentEnrollment: Math.round(capacity * (0.75 + rand() * 0.2)),
     totalStaff: kiwoom.branch === 10 ? 5 : 3,
-    accessibilityWeight: +(0.85 + rand() * 0.15).toFixed(2),
     operatingWindows: makeOperatingWindows({
       dayStaff: 2,
       afterStaff: kiwoom.branch === 10 ? 4 : 3,
