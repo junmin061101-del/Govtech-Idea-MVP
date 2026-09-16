@@ -1,0 +1,6602 @@
+[
+  {
+    "id": "DJ-0001",
+    "name": "스마일어린이집",
+    "type": "가정어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 성대로11길 42",
+    "lat": 37.499253169096164,
+    "lng": 126.9345048017989,
+    "capacity": 20,
+    "currentEnrollment": 15,
+    "totalStaff": 6,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3.3333333333333335
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3.3333333333333335
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.3333333333333335
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.3333333333333335
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0002",
+    "name": "구립아이누리어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 양녕로22길 27",
+    "lat": 37.49430271201181,
+    "lng": 126.94441502184259,
+    "capacity": 64,
+    "currentEnrollment": 47,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 5.333333333333333
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 5.333333333333333
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.333333333333333
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.333333333333333
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0003",
+    "name": "구립상도클라베뉴어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 성대로 164 상도푸르지오클라베뉴 관리동",
+    "lat": 37.49684789338522,
+    "lng": 126.93949959859161,
+    "capacity": 46,
+    "currentEnrollment": 45,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0004",
+    "name": "사랑어린이집",
+    "type": "가정어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 보라매로 83 신대방아파트 101동 1층",
+    "lat": 37.49668557520404,
+    "lng": 126.92727245682426,
+    "capacity": 20,
+    "currentEnrollment": 6,
+    "totalStaff": 4,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0005",
+    "name": "구립곰돌이어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 서달로 90",
+    "lat": 37.50227267387472,
+    "lng": 126.96311470270066,
+    "capacity": 88,
+    "currentEnrollment": 43,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 5.866666666666666
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 5.866666666666666
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.866666666666666
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.866666666666666
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0006",
+    "name": "구립꿈빛하나어린이집",
+    "type": "국공립어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 등용로9길 5",
+    "lat": 37.509446476571554,
+    "lng": 126.93173616265739,
+    "capacity": 57,
+    "currentEnrollment": 37,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 4.071428571428571
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 4.071428571428571
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.071428571428571
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.071428571428571
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0007",
+    "name": "구립신대방누리어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 신대방1다길 19 1층",
+    "lat": 37.4861231,
+    "lng": 126.9061764,
+    "capacity": 45,
+    "currentEnrollment": 38,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3.4615384615384617
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3.4615384615384617
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.4615384615384617
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.4615384615384617
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0008",
+    "name": "포레힐즈어린이집",
+    "type": "민간어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로45길 10 이수스위첸포레힐즈아파트 단지 내",
+    "lat": 37.497871139007,
+    "lng": 126.98198533481478,
+    "capacity": 36,
+    "currentEnrollment": 27,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0009",
+    "name": "구립까망돌어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 서달로 129",
+    "lat": 37.5051212964399,
+    "lng": 126.96061385005933,
+    "capacity": 51,
+    "currentEnrollment": 42,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 3.4
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3.4
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.4
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.4
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0010",
+    "name": "구립숲속자이어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 여의대방로22길 121",
+    "lat": 37.498840545701114,
+    "lng": 126.9261649331774,
+    "capacity": 65,
+    "currentEnrollment": 65,
+    "totalStaff": 17,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 17,
+        "staffToChildRatio": 3.823529411764706
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3.823529411764706
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.823529411764706
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.823529411764706
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0011",
+    "name": "구립한결어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 여의대방로24길 113",
+    "lat": 37.499273088391455,
+    "lng": 126.92626063251257,
+    "capacity": 30,
+    "currentEnrollment": 27,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0012",
+    "name": "구립푸른어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로39길 39 이수푸르지오더프레티움 관리동",
+    "lat": 37.4934391,
+    "lng": 126.9809065,
+    "capacity": 33,
+    "currentEnrollment": 33,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0013",
+    "name": "해오름어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 상도로 421 현대아파트 108-103",
+    "lat": 37.49276103375512,
+    "lng": 126.95853969340467,
+    "capacity": 19,
+    "currentEnrollment": 17,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0014",
+    "name": "구립아름어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 양녕로 220 상도역롯데캐슬아파트 관리동",
+    "lat": 37.50069589777709,
+    "lng": 126.9455864258222,
+    "capacity": 48,
+    "currentEnrollment": 47,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0015",
+    "name": "구립트윈파크어린이집",
+    "type": "국공립어린이집",
+    "dongId": "noryangjin1",
+    "address": "서울특별시 동작구 노량진로23가길 23 래미안트윈파크아파트 관리동",
+    "lat": 37.514321303565296,
+    "lng": 126.95062129517468,
+    "capacity": 49,
+    "currentEnrollment": 42,
+    "totalStaff": 18,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 18,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0016",
+    "name": "구립은솔어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 상도로 346-1 힐스테이트상도 111동 101호",
+    "lat": 37.4954127,
+    "lng": 126.9510182,
+    "capacity": 19,
+    "currentEnrollment": 17,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0017",
+    "name": "구립새봄어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로9길 11-13",
+    "lat": 37.48661974494564,
+    "lng": 126.97046626032558,
+    "capacity": 57,
+    "currentEnrollment": 22,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 5.181818181818182
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 5.181818181818182
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.181818181818182
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.181818181818182
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0018",
+    "name": "구립다움어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로 90 사당롯데캐슬골든포레 관리동 1층",
+    "lat": 37.49150538665857,
+    "lng": 126.96229453741421,
+    "capacity": 33,
+    "currentEnrollment": 33,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0019",
+    "name": "유한버들새싹어린이집",
+    "type": "직장어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 노량진로 74 유한양행",
+    "lat": 37.51270278676103,
+    "lng": 126.93426117790129,
+    "capacity": 49,
+    "currentEnrollment": 22,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3.769230769230769
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3.769230769230769
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.769230769230769
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.769230769230769
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0020",
+    "name": "구립가온어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 상도로15가길 16",
+    "lat": 37.50193920691273,
+    "lng": 126.93235369763713,
+    "capacity": 59,
+    "currentEnrollment": 31,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 4.214285714285714
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 4.214285714285714
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.214285714285714
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.214285714285714
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0021",
+    "name": "구립꿈담어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 상도로47아길 44-1 2층",
+    "lat": 37.50401952076813,
+    "lng": 126.95359401478522,
+    "capacity": 39,
+    "currentEnrollment": 30,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0022",
+    "name": "구립도레미어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 흑석로13길 25",
+    "lat": 37.509884867504226,
+    "lng": 126.95916360932294,
+    "capacity": 55,
+    "currentEnrollment": 27,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0023",
+    "name": "구립롯데키즈어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로10길 38 보라매롯데낙천대아파트 관리동 1층",
+    "lat": 37.49354682098126,
+    "lng": 126.91404657006154,
+    "capacity": 30,
+    "currentEnrollment": 29,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0024",
+    "name": "구립강마루어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 현충로 52 흑석아크로리버하임 아파트",
+    "lat": 37.5102189012405,
+    "lng": 126.96112579961141,
+    "capacity": 69,
+    "currentEnrollment": 31,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 5.75
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 5.75
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.75
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.75
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0025",
+    "name": "구립꿈마루어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 현충로 52 흑석아크로리버하임 아파트 관리동",
+    "lat": 37.5108177277938,
+    "lng": 126.96010188035075,
+    "capacity": 30,
+    "currentEnrollment": 20,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0026",
+    "name": "구립이솔어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 서달로 123",
+    "lat": 37.504286433804666,
+    "lng": 126.95970527890138,
+    "capacity": 43,
+    "currentEnrollment": 33,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 3.5833333333333335
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3.5833333333333335
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.5833333333333335
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.5833333333333335
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0027",
+    "name": "구립노블어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 만양로 6 e편한세상상도노빌리티 관리동",
+    "lat": 37.50497881302003,
+    "lng": 126.94754555251973,
+    "capacity": 95,
+    "currentEnrollment": 76,
+    "totalStaff": 24,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 24,
+        "staffToChildRatio": 3.9583333333333335
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 3.9583333333333335
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.9583333333333335
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.9583333333333335
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0028",
+    "name": "구립리가어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로27길 130 105동 키즈클럽(사당동,이수역 리가아파트)",
+    "lat": 37.4898288129,
+    "lng": 126.9728802636,
+    "capacity": 20,
+    "currentEnrollment": 20,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0029",
+    "name": "구립아리아어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 보라매로5길 51 102호",
+    "lat": 37.490797151466765,
+    "lng": 126.92317069084328,
+    "capacity": 33,
+    "currentEnrollment": 30,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0030",
+    "name": "구립로이어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로23길 112",
+    "lat": 37.4877494012,
+    "lng": 126.9733830512,
+    "capacity": 30,
+    "currentEnrollment": 29,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0031",
+    "name": "구립열린어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 91",
+    "lat": 37.487049264956255,
+    "lng": 126.9774594764912,
+    "capacity": 21,
+    "currentEnrollment": 21,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0032",
+    "name": "구립키즈사랑어린이집",
+    "type": "국공립어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 알마타길 37 관리동 1층",
+    "lat": 37.51291640947408,
+    "lng": 126.92971400525352,
+    "capacity": 27,
+    "currentEnrollment": 25,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0033",
+    "name": "구립백합어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 119 110동 105호 (사당동, 극동아파트)",
+    "lat": 37.49006703749307,
+    "lng": 126.97449036036143,
+    "capacity": 20,
+    "currentEnrollment": 19,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0034",
+    "name": "구립장미어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 115 306동 108호",
+    "lat": 37.48915291190167,
+    "lng": 126.97640160938418,
+    "capacity": 19,
+    "currentEnrollment": 17,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0035",
+    "name": "구립해와별어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 만양로8길 50",
+    "lat": 37.50991203321506,
+    "lng": 126.94803976064499,
+    "capacity": 20,
+    "currentEnrollment": 20,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0036",
+    "name": "구립새빛어린이집",
+    "type": "국공립어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 장승배기로11가길 11",
+    "lat": 37.5055657216,
+    "lng": 126.9389089785,
+    "capacity": 30,
+    "currentEnrollment": 30,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0037",
+    "name": "구립강남어린이집",
+    "type": "국공립어린이집",
+    "dongId": "noryangjin1",
+    "address": "서울특별시 동작구 만양로12길 5-12",
+    "lat": 37.5102325501,
+    "lng": 126.9455059855,
+    "capacity": 74,
+    "currentEnrollment": 26,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 6.7272727272727275
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 6.7272727272727275
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.7272727272727275
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.7272727272727275
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0038",
+    "name": "구립아기둥지어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 상도로 421 108동 108호 (관악현대아파트)",
+    "lat": 37.492790340273274,
+    "lng": 126.9586075244506,
+    "capacity": 19,
+    "currentEnrollment": 16,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0039",
+    "name": "구립키움어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 매봉로 123 104동 101호",
+    "lat": 37.51021008669179,
+    "lng": 126.94970785296235,
+    "capacity": 20,
+    "currentEnrollment": 19,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0040",
+    "name": "구립아람어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로30길 40 두산위브트레지움아파트 203동 204호",
+    "lat": 37.5042467,
+    "lng": 126.9432057,
+    "capacity": 19,
+    "currentEnrollment": 18,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0041",
+    "name": "구립사당빛나어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 118",
+    "lat": 37.49126580499157,
+    "lng": 126.97655359788205,
+    "capacity": 79,
+    "currentEnrollment": 47,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.583333333333333
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0042",
+    "name": "중앙대학교어린이집",
+    "type": "직장어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 흑석로 84 중앙대학교 307관 1층",
+    "lat": 37.50583991716357,
+    "lng": 126.9545344323481,
+    "capacity": 24,
+    "currentEnrollment": 7,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3.4285714285714284
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3.4285714285714284
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.4285714285714284
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.4285714285714284
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0043",
+    "name": "구립한빛어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로30길 40 두산위브트레지움아파트 202동 1층",
+    "lat": 37.50429167747665,
+    "lng": 126.9424521857809,
+    "capacity": 39,
+    "currentEnrollment": 28,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 4.333333333333333
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 4.333333333333333
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.333333333333333
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.333333333333333
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0044",
+    "name": "구립도담어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로10길 59 보라매파크빌아파트 104동 102호",
+    "lat": 37.495113743122566,
+    "lng": 126.91507975933273,
+    "capacity": 19,
+    "currentEnrollment": 19,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0045",
+    "name": "구립대방보듬이나눔이어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 대방동15길 10",
+    "lat": 37.502909715490716,
+    "lng": 126.92438817801634,
+    "capacity": 84,
+    "currentEnrollment": 43,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 5.6
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 5.6
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.6
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.6
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0046",
+    "name": "구립태성어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로16길 1",
+    "lat": 37.4962288224335,
+    "lng": 126.9171004368958,
+    "capacity": 69,
+    "currentEnrollment": 60,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 4.3125
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 4.3125
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.3125
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.3125
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0047",
+    "name": "구립상도4동어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로22길 45 구립상도4동어린이집",
+    "lat": 37.501250875106365,
+    "lng": 126.9373201659014,
+    "capacity": 69,
+    "currentEnrollment": 29,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 6.9
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 6.9
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.9
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.9
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0048",
+    "name": "구립상도3동어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 성대로6가길 5",
+    "lat": 37.498642757442134,
+    "lng": 126.93293454879391,
+    "capacity": 75,
+    "currentEnrollment": 51,
+    "totalStaff": 20,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 20,
+        "staffToChildRatio": 3.75
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3.75
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.75
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.75
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0049",
+    "name": "구립사당4동어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로22나길 70",
+    "lat": 37.48063136477001,
+    "lng": 126.97307805191458,
+    "capacity": 78,
+    "currentEnrollment": 51,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 4.875
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 4.875
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.875
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.875
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0050",
+    "name": "프레스티지어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 상도로 346-2 힐스테이트 상도프레스티지 202동 관리동",
+    "lat": 37.49475091263945,
+    "lng": 126.94827190622017,
+    "capacity": 49,
+    "currentEnrollment": 47,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 3.5
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3.5
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.5
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.5
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0051",
+    "name": "숭실대학교어린이집",
+    "type": "직장어린이집",
+    "dongId": "sangdo3",
+    "address": "서울특별시 동작구 상도로67길 20",
+    "lat": 37.49448763866879,
+    "lng": 126.95679389448748,
+    "capacity": 20,
+    "currentEnrollment": 17,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0052",
+    "name": "한강어린이집",
+    "type": "민간어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 서달로 91 (흑석동, 동부센트레빌2차 관리동)",
+    "lat": 37.50316687966685,
+    "lng": 126.95889244918203,
+    "capacity": 45,
+    "currentEnrollment": 40,
+    "totalStaff": 17,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 17,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0053",
+    "name": "구립신대방1동어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 신대방1길 44",
+    "lat": 37.48653534786146,
+    "lng": 126.90915107148047,
+    "capacity": 49,
+    "currentEnrollment": 31,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 4.083333333333333
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 4.083333333333333
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.083333333333333
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.083333333333333
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0054",
+    "name": "구립로미어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 만양로 19",
+    "lat": 37.50707192454599,
+    "lng": 126.94572091155226,
+    "capacity": 74,
+    "currentEnrollment": 65,
+    "totalStaff": 19,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 19,
+        "staffToChildRatio": 3.8947368421052633
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3.8947368421052633
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.8947368421052633
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.8947368421052633
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0055",
+    "name": "농심어린이집",
+    "type": "직장어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로 112",
+    "lat": 37.49683499240763,
+    "lng": 126.91809491323339,
+    "capacity": 65,
+    "currentEnrollment": 43,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 4.0625
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 4.0625
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.0625
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.0625
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0056",
+    "name": "삼광어린이집",
+    "type": "법인단체등어린이집",
+    "dongId": "sadang4",
+    "address": "서울특별시 동작구 동작대로17길 33-8",
+    "lat": 37.48256902621682,
+    "lng": 126.97788251046077,
+    "capacity": 62,
+    "currentEnrollment": 29,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 4.428571428571429
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 4.428571428571429
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.428571428571429
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.428571428571429
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0057",
+    "name": "현대힐스어린이집",
+    "type": "민간어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로39길 22 이수힐스테이트 아 관리동1층 의무어린이집 109동 앞",
+    "lat": 37.49463597281812,
+    "lng": 126.98196770403736,
+    "capacity": 50,
+    "currentEnrollment": 48,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 4.166666666666667
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 4.166666666666667
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.166666666666667
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.166666666666667
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0058",
+    "name": "별초롱어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 만양로1길 14 102호(상도2동 상명하이츠빌)",
+    "lat": 37.50627299097361,
+    "lng": 126.9467142336525,
+    "capacity": 18,
+    "currentEnrollment": 16,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0059",
+    "name": "구립푸른솔어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 상도로52길 23 청송경로당 1층",
+    "lat": 37.49723609799717,
+    "lng": 126.95103162006244,
+    "capacity": 32,
+    "currentEnrollment": 31,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0060",
+    "name": "자연어린이집",
+    "type": "가정어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 장승배기로22길 15",
+    "lat": 37.50940565834138,
+    "lng": 126.94097084126378,
+    "capacity": 20,
+    "currentEnrollment": 12,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0061",
+    "name": "우정어린이집",
+    "type": "민간어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 여의대방로62길 23 102동 102호, 103호",
+    "lat": 37.51428256836593,
+    "lng": 126.9294070356838,
+    "capacity": 38,
+    "currentEnrollment": 38,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0062",
+    "name": "구립한울어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 보라매로9다길 15",
+    "lat": 37.494256840306626,
+    "lng": 126.92628266772121,
+    "capacity": 68,
+    "currentEnrollment": 61,
+    "totalStaff": 18,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 18,
+        "staffToChildRatio": 3.7777777777777777
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3.7777777777777777
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.7777777777777777
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.7777777777777777
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0063",
+    "name": "하람어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 81 대아아파트 601동 108호",
+    "lat": 37.48911024777653,
+    "lng": 126.97765430534157,
+    "capacity": 20,
+    "currentEnrollment": 19,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0064",
+    "name": "푸르미어린이집",
+    "type": "민간어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 흑석한강로 27 단지 내 푸르미어린이집 (흑석동 336,흑석한강푸르지오아파트)",
+    "lat": 37.502445148017216,
+    "lng": 126.96416040150507,
+    "capacity": 53,
+    "currentEnrollment": 41,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 3.7857142857142856
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3.7857142857142856
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.7857142857142856
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.7857142857142856
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0065",
+    "name": "다솔어린이집",
+    "type": "가정어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 국사봉길 98 신건드림원빌 1층 101호",
+    "lat": 37.4956439484061,
+    "lng": 126.93144234424548,
+    "capacity": 20,
+    "currentEnrollment": 19,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0066",
+    "name": "이레어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로10길 1 108호 (사당동)",
+    "lat": 37.48444366455498,
+    "lng": 126.9698904794842,
+    "capacity": 18,
+    "currentEnrollment": 8,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0067",
+    "name": "은혜어린이집",
+    "type": "가정어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 현충로 151 101동 110호 (흑석동 28,한강현대아파트)",
+    "lat": 37.50627812149282,
+    "lng": 126.97086295162136,
+    "capacity": 17,
+    "currentEnrollment": 15,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0068",
+    "name": "지혜샘어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로17길 52 2동102호(사당동,대림아파트)",
+    "lat": 37.485930077034325,
+    "lng": 126.97135519578808,
+    "capacity": 19,
+    "currentEnrollment": 14,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0069",
+    "name": "하랑어린이집",
+    "type": "가정어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 여의대방로44길 9 성원아파트 101동 105호",
+    "lat": 37.50724786921631,
+    "lng": 126.92416145623275,
+    "capacity": 19,
+    "currentEnrollment": 19,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0070",
+    "name": "두산어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로30길 39 102-101",
+    "lat": 37.50465363422023,
+    "lng": 126.94425897834316,
+    "capacity": 19,
+    "currentEnrollment": 18,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0071",
+    "name": "리틀스텝어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로34길 36-13",
+    "lat": 37.50357968212035,
+    "lng": 126.94433670244041,
+    "capacity": 46,
+    "currentEnrollment": 37,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 3.8333333333333335
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3.8333333333333335
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.8333333333333335
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.8333333333333335
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0072",
+    "name": "두산위브어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로13길 31 관리동 1층",
+    "lat": 37.485930077034325,
+    "lng": 126.97135519578808,
+    "capacity": 20,
+    "currentEnrollment": 14,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0073",
+    "name": "상도아이파크어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 장승배기로 26 아이파크상도아파트 101-101",
+    "lat": 37.50052604110252,
+    "lng": 126.94219033065733,
+    "capacity": 19,
+    "currentEnrollment": 18,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0074",
+    "name": "로뎀나무어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 91 201동 108호(사당동, 사당우성아파트)",
+    "lat": 37.48881467465094,
+    "lng": 126.97743277853624,
+    "capacity": 19,
+    "currentEnrollment": 18,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0075",
+    "name": "중앙대학교의료원 어린이집",
+    "type": "직장어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 흑석한강로 27 (흑석동 336) 흑석한강푸르지오 상가D동 B102",
+    "lat": 37.50330947331375,
+    "lng": 126.96523471653322,
+    "capacity": 20,
+    "currentEnrollment": 4,
+    "totalStaff": 4,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0076",
+    "name": "해사랑어린이집",
+    "type": "민간어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 흑석한강로 12 흑석동, 한강센트레빌 관리동",
+    "lat": 37.50652852,
+    "lng": 126.9655118,
+    "capacity": 49,
+    "currentEnrollment": 38,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 3.2666666666666666
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3.2666666666666666
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.2666666666666666
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.2666666666666666
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0077",
+    "name": "꿈이룸어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로34길 42 동원 베네스트 102-101",
+    "lat": 37.5029136,
+    "lng": 126.9444371,
+    "capacity": 19,
+    "currentEnrollment": 15,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0078",
+    "name": "초록어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 119 102동 110호(사당동, 극동)",
+    "lat": 37.49088908387632,
+    "lng": 126.97605505099858,
+    "capacity": 20,
+    "currentEnrollment": 20,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0079",
+    "name": "자람어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로16길 96 102동 101호(사당동, 사당휴먼시아)",
+    "lat": 37.47940773,
+    "lng": 126.9697153,
+    "capacity": 19,
+    "currentEnrollment": 14,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0080",
+    "name": "이편한세상어린이집",
+    "type": "가정어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 보라매로 70 보라매 E-편한세상아파트 101동 보육시설 (신대방동)",
+    "lat": 37.49549142,
+    "lng": 126.9285918,
+    "capacity": 20,
+    "currentEnrollment": 19,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0081",
+    "name": "라엘어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 성대로10길 44 (상도동)",
+    "lat": 37.49628194,
+    "lng": 126.9359018,
+    "capacity": 16,
+    "currentEnrollment": 9,
+    "totalStaff": 5,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3.2
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 3.2
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.2
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.2
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0082",
+    "name": "구립라온어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang2",
+    "address": "서울특별시 동작구 동작대로17길 28 (사당동)",
+    "lat": 37.483127852298466,
+    "lng": 126.97867892117073,
+    "capacity": 57,
+    "currentEnrollment": 55,
+    "totalStaff": 19,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 19,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0083",
+    "name": "동작구청어린이집",
+    "type": "직장어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 장승배기로 70 1,2층 (동작구청)",
+    "lat": 37.51234662,
+    "lng": 126.9394088,
+    "capacity": 70,
+    "currentEnrollment": 29,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 4.666666666666667
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 4.666666666666667
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.666666666666667
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.666666666666667
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0084",
+    "name": "해솔어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 장승배기로4길 9 105동 1층(상도동, 포스코더샵)",
+    "lat": 37.50540804,
+    "lng": 126.9422599,
+    "capacity": 31,
+    "currentEnrollment": 22,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 3.1
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3.1
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.1
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.1
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0085",
+    "name": "휴먼시아어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로16길 96 108동 101호(사당동, 사당휴먼시아아파트)",
+    "lat": 37.47895794,
+    "lng": 126.9700064,
+    "capacity": 16,
+    "currentEnrollment": 6,
+    "totalStaff": 5,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3.2
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 3.2
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.2
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.2
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0086",
+    "name": "아띠어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 양녕로 170 101동 103호(상도동, 롯데캐슬비엔)",
+    "lat": 37.49695802,
+    "lng": 126.9435654,
+    "capacity": 19,
+    "currentEnrollment": 19,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0087",
+    "name": "상떼빌키즈어린이집",
+    "type": "민간어린이집",
+    "dongId": "sindaebang2",
+    "address": "서울특별시 동작구 신대방1가길 38 동작 상떼빌아파트 101동 상떼빌어린이집 (신대방동)",
+    "lat": 37.48755133,
+    "lng": 126.9067471,
+    "capacity": 76,
+    "currentEnrollment": 69,
+    "totalStaff": 19,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 19,
+        "staffToChildRatio": 4
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 4
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0088",
+    "name": "더크는킨더앤어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 성대로31길 2 서울시 동작구 성대로 31길 2 (상도동)",
+    "lat": 37.49986259,
+    "lng": 126.9406032,
+    "capacity": 35,
+    "currentEnrollment": 28,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 4.375
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 4.375
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.375
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.375
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0089",
+    "name": "해와달어린이집",
+    "type": "협동어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 성대로16길 67-6",
+    "lat": 37.49594827,
+    "lng": 126.9391771,
+    "capacity": 49,
+    "currentEnrollment": 42,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 3.5
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3.5
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.5
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.5
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0090",
+    "name": "린아어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo3",
+    "address": "서울특별시 동작구 상도로53길 70 상도SH빌 관리동1층 (상도동)",
+    "lat": 37.50197689,
+    "lng": 126.9508505,
+    "capacity": 45,
+    "currentEnrollment": 32,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 4.5
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 4.5
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.5
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.5
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0091",
+    "name": "예영어린이집",
+    "type": "가정어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로 22 2동 102호(신대방동, 우성아파트)",
+    "lat": 37.49234389,
+    "lng": 126.9116167,
+    "capacity": 19,
+    "currentEnrollment": 19,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0092",
+    "name": "동광어린이집",
+    "type": "민간어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 성대로1가길 14 (상도동)",
+    "lat": 37.50150748,
+    "lng": 126.9351457,
+    "capacity": 96,
+    "currentEnrollment": 50,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 8.727272727272727
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 8.727272727272727
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 8.727272727272727
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 8.727272727272727
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0093",
+    "name": "예동영재어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로2길 64 (사당동)",
+    "lat": 37.49026925,
+    "lng": 126.9644934,
+    "capacity": 17,
+    "currentEnrollment": 15,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0094",
+    "name": "아이엠어린이집",
+    "type": "민간어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로10길 13 한성아파트단지내 (신대방동)",
+    "lat": 37.49555996,
+    "lng": 126.9151707,
+    "capacity": 29,
+    "currentEnrollment": 25,
+    "totalStaff": 18,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 18,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0095",
+    "name": "로뎀어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 양녕로26길 11 A동 102호(상도동, 약수맨션아파트)",
+    "lat": 37.4985692,
+    "lng": 126.9441828,
+    "capacity": 20,
+    "currentEnrollment": 13,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0096",
+    "name": "엘프어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 110 403동 102호(사당동, 신동아4차아파트)",
+    "lat": 37.49029748980083,
+    "lng": 126.97794472292341,
+    "capacity": 20,
+    "currentEnrollment": 20,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0097",
+    "name": "샤론어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 115 305동 108호(사당우성아파트)",
+    "lat": 37.4886937,
+    "lng": 126.979239,
+    "capacity": 19,
+    "currentEnrollment": 19,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0098",
+    "name": "아이세상어린이집",
+    "type": "민간어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 상도로 107 쌍용스위트닷홈아파트상가아이세상어린이집 (상도동)",
+    "lat": 37.50129774,
+    "lng": 126.9326719,
+    "capacity": 39,
+    "currentEnrollment": 0,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 13
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 13
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 13
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 13
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0099",
+    "name": "삼성짐키드어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo3",
+    "address": "서울특별시 동작구 상도로53길 8 삼성래미안3차아파트 단지내 삼성짐키드어린이집 (상도동)",
+    "lat": 37.4995101,
+    "lng": 126.9547426,
+    "capacity": 56,
+    "currentEnrollment": 49,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 4
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 4
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0100",
+    "name": "초록햇살어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 만양로13길 44 노량진1동",
+    "lat": 37.50383968,
+    "lng": 126.9496719,
+    "capacity": 47,
+    "currentEnrollment": 14,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 6.714285714285714
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 6.714285714285714
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.714285714285714
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.714285714285714
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0101",
+    "name": "우리또래어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로22나길 29 101호",
+    "lat": 37.49954776,
+    "lng": 126.9383548,
+    "capacity": 16,
+    "currentEnrollment": 16,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0102",
+    "name": "늘푸른어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 만양로 19 701동 103호(노량진동, 신동아리버파크)",
+    "lat": 37.50751592,
+    "lng": 126.9450193,
+    "capacity": 19,
+    "currentEnrollment": 18,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0103",
+    "name": "삼성숲어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 매봉로 123 삼성래미안단지내 (본동)",
+    "lat": 37.51001796,
+    "lng": 126.9502606,
+    "capacity": 26,
+    "currentEnrollment": 23,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 3.25
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3.25
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.25
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.25
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0104",
+    "name": "건영어린이집",
+    "type": "가정어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 만양로 26 103동 102호(노량진동, 건영)",
+    "lat": 37.50774469,
+    "lng": 126.9492542,
+    "capacity": 19,
+    "currentEnrollment": 19,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0105",
+    "name": "피노키오어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로17길 8 8동 105호(사당동, 대림)",
+    "lat": 37.48610546,
+    "lng": 126.9731591,
+    "capacity": 19,
+    "currentEnrollment": 19,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0106",
+    "name": "제일성민어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 성대로12길 71 (상도동)",
+    "lat": 37.49526157,
+    "lng": 126.9380616,
+    "capacity": 60,
+    "currentEnrollment": 25,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 5.454545454545454
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 5.454545454545454
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.454545454545454
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.454545454545454
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0107",
+    "name": "수산나어린이집",
+    "type": "가정어린이집",
+    "dongId": "sindaebang2",
+    "address": "서울특별시 동작구 여의대방로 28 106동 101호(신대방동, 현대아파트)",
+    "lat": 37.49466419,
+    "lng": 126.912119,
+    "capacity": 20,
+    "currentEnrollment": 20,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0108",
+    "name": "모든삐아제어린이집",
+    "type": "민간어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 상도로13길 17 (상도동)",
+    "lat": 37.500392197784734,
+    "lng": 126.93121429595668,
+    "capacity": 30,
+    "currentEnrollment": 18,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0109",
+    "name": "무림어린이집",
+    "type": "가정어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 신대방13길 1 (신대방동)",
+    "lat": 37.48919435,
+    "lng": 126.9097174,
+    "capacity": 14,
+    "currentEnrollment": 5,
+    "totalStaff": 5,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0110",
+    "name": "푸른숲어린이집",
+    "type": "가정어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 보라매로13길 12 (신대방동)",
+    "lat": 37.49607942187819,
+    "lng": 126.92690552266467,
+    "capacity": 19,
+    "currentEnrollment": 16,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0111",
+    "name": "성진어린이집",
+    "type": "민간어린이집",
+    "dongId": "sadang4",
+    "address": "서울특별시 동작구 동작대로9길 76 (사당동)",
+    "lat": 37.48092168,
+    "lng": 126.9772044,
+    "capacity": 86,
+    "currentEnrollment": 30,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 6.615384615384615
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 6.615384615384615
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.615384615384615
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.615384615384615
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0112",
+    "name": "서울특별시보라매병원어린이집",
+    "type": "직장어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 보라매로5길 20 시립보라매병원 본관3층 (신대방동)",
+    "lat": 37.49324541,
+    "lng": 126.924459,
+    "capacity": 45,
+    "currentEnrollment": 40,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0113",
+    "name": "자이어린이집",
+    "type": "민간어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로2가길 102",
+    "lat": 37.48872158,
+    "lng": 126.9624771,
+    "capacity": 27,
+    "currentEnrollment": 23,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0114",
+    "name": "구립로야어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 상도로62길 87 (상도동)",
+    "lat": 37.49719825,
+    "lng": 126.9510078,
+    "capacity": 88,
+    "currentEnrollment": 81,
+    "totalStaff": 20,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 20,
+        "staffToChildRatio": 4.4
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 4.4
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.4
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.4
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0115",
+    "name": "다솜어린이집",
+    "type": "가정어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로 8 102동 105호(신대방동, 우성아파트)",
+    "lat": 37.49234389,
+    "lng": 126.9116167,
+    "capacity": 20,
+    "currentEnrollment": 19,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0116",
+    "name": "구립참사랑어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 동작대로17길 37 (사당동)",
+    "lat": 37.48279028,
+    "lng": 126.9774966,
+    "capacity": 156,
+    "currentEnrollment": 111,
+    "totalStaff": 29,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 29,
+        "staffToChildRatio": 5.379310344827586
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 5.379310344827586
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.379310344827586
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.379310344827586
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0117",
+    "name": "구립비둘기어린이집",
+    "type": "국공립어린이집",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 여의대방로44길 47 (대방동)",
+    "lat": 37.50960065,
+    "lng": 126.9298628,
+    "capacity": 51,
+    "currentEnrollment": 33,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 4.636363636363637
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 4.636363636363637
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.636363636363637
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.636363636363637
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0118",
+    "name": "구립고은어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 신대방2길 42-10",
+    "lat": 37.48943548,
+    "lng": 126.9126121,
+    "capacity": 79,
+    "currentEnrollment": 24,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.583333333333333
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0119",
+    "name": "숲속천사발도르프킨더가르텐어린이집",
+    "type": "민간어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로16자길 15-7 사당4동 300-84",
+    "lat": 37.47988924,
+    "lng": 126.9711005,
+    "capacity": 24,
+    "currentEnrollment": 3,
+    "totalStaff": 2,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 12
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 12
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 12
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 12
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0120",
+    "name": "청호숲어린이집",
+    "type": "민간어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 서달로2길 29 103동(흑석동, 청호아파트)",
+    "lat": 37.501416730853315,
+    "lng": 126.96315470587416,
+    "capacity": 39,
+    "currentEnrollment": 22,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0121",
+    "name": "구립큰나무어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로2가길 219 (사당동)",
+    "lat": 37.48563781,
+    "lng": 126.9669567,
+    "capacity": 79,
+    "currentEnrollment": 61,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 5.266666666666667
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 5.266666666666667
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.266666666666667
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.266666666666667
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0122",
+    "name": "구립은하어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로22아길 77",
+    "lat": 37.495829390118885,
+    "lng": 126.92510350113989,
+    "capacity": 82,
+    "currentEnrollment": 47,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 5.466666666666667
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 5.466666666666667
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.466666666666667
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.466666666666667
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0123",
+    "name": "미래연 어린이집",
+    "type": "민간어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로16길 82 (사당동)",
+    "lat": 37.48024183,
+    "lng": 126.9714428,
+    "capacity": 51,
+    "currentEnrollment": 25,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 4.636363636363637
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 4.636363636363637
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.636363636363637
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.636363636363637
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0124",
+    "name": "구립예담어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 매봉로 43 예담어린이집 (상도1동 511)",
+    "lat": 37.50696762,
+    "lng": 126.9512399,
+    "capacity": 181,
+    "currentEnrollment": 131,
+    "totalStaff": 36,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 36,
+        "staffToChildRatio": 5.027777777777778
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 5.027777777777778
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.027777777777778
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.027777777777778
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0125",
+    "name": "구립보라매어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 여의대방로22길 44 (신대방동)",
+    "lat": 37.49751525,
+    "lng": 126.9223598,
+    "capacity": 79,
+    "currentEnrollment": 46,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.583333333333333
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.583333333333333
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0126",
+    "name": "구립큰별어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 흑석한강로 28 구립큰별어린이집 (흑석동 336-1번지)",
+    "lat": 37.50454380060629,
+    "lng": 126.96506449947994,
+    "capacity": 94,
+    "currentEnrollment": 61,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 5.875
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 5.875
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.875
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.875
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0127",
+    "name": "구립성대어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 성대로10길 27 성대어린이집 (상도동)",
+    "lat": 37.49679995,
+    "lng": 126.9352917,
+    "capacity": 74,
+    "currentEnrollment": 0,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 6.166666666666667
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 6.166666666666667
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.166666666666667
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.166666666666667
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-07-03)"
+  },
+  {
+    "id": "DJ-0128",
+    "name": "색동원어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로2자길 38 (사당동) 102",
+    "lat": 37.48855081105686,
+    "lng": 126.96465358107208,
+    "capacity": 17,
+    "currentEnrollment": 14,
+    "totalStaff": 7,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0129",
+    "name": "예일어린이집",
+    "type": "민간어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도로34가길 23 (상도동)",
+    "lat": 37.50426124585087,
+    "lng": 126.9447638920807,
+    "capacity": 74,
+    "currentEnrollment": 36,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 4.933333333333334
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 4.933333333333334
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.933333333333334
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.933333333333334
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0130",
+    "name": "신영어린이집",
+    "type": "민간어린이집",
+    "dongId": "sindaebang2",
+    "address": "서울특별시 동작구 여의대방로 28 현대아파트 104동 앞",
+    "lat": 37.49466419,
+    "lng": 126.912119,
+    "capacity": 68,
+    "currentEnrollment": 41,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 7.555555555555555
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 7.555555555555555
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 7.555555555555555
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 7.555555555555555
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0131",
+    "name": "대림삐아제어린이집",
+    "type": "가정어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 여의대방로44길 10 102동 102호(대방동, 대림아파트)",
+    "lat": 37.50720868,
+    "lng": 126.9246376,
+    "capacity": 20,
+    "currentEnrollment": 18,
+    "totalStaff": 10,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 10,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0132",
+    "name": "구립이수어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로35길 36 이수어린이집 (사당동)",
+    "lat": 37.4920575874,
+    "lng": 126.9803832902,
+    "capacity": 67,
+    "currentEnrollment": 51,
+    "totalStaff": 14,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 14,
+        "staffToChildRatio": 4.785714285714286
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 4.785714285714286
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.785714285714286
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.785714285714286
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0133",
+    "name": "구립둥지어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로14길 20 둥지어린이집 (사당동)",
+    "lat": 37.48325134,
+    "lng": 126.9714434,
+    "capacity": 47,
+    "currentEnrollment": 26,
+    "totalStaff": 8,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 5.875
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 5.875
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.875
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.875
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0134",
+    "name": "구립샛별어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 장승배기로3길 1 (상도동)",
+    "lat": 37.49920226,
+    "lng": 126.9391118,
+    "capacity": 66,
+    "currentEnrollment": 38,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 5.076923076923077
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 5.076923076923077
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.076923076923077
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.076923076923077
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0135",
+    "name": "예슬어린이집",
+    "type": "민간어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로16아길 46 (사당4동 291-5)",
+    "lat": 37.48064744,
+    "lng": 126.9693907,
+    "capacity": 87,
+    "currentEnrollment": 59,
+    "totalStaff": 19,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 19,
+        "staffToChildRatio": 4.578947368421052
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 4.578947368421052
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.578947368421052
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.578947368421052
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0136",
+    "name": "구립상도어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 양녕로36길 15 (상도동)",
+    "lat": 37.50255,
+    "lng": 126.946806,
+    "capacity": 187,
+    "currentEnrollment": 135,
+    "totalStaff": 35,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 35,
+        "staffToChildRatio": 5.3428571428571425
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 5.3428571428571425
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.3428571428571425
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.3428571428571425
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0137",
+    "name": "구립노량진어린이집",
+    "type": "국공립어린이집",
+    "dongId": "noryangjin1",
+    "address": "서울특별시 동작구 노량진로14길 44 노량진동 84-33",
+    "lat": 37.51168903208115,
+    "lng": 126.94266876250468,
+    "capacity": 38,
+    "currentEnrollment": 25,
+    "totalStaff": 13,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 13,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 6,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0138",
+    "name": "다애어린이집",
+    "type": "가정어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로20가길 36-4",
+    "lat": 37.48308558,
+    "lng": 126.9754924,
+    "capacity": 20,
+    "currentEnrollment": 17,
+    "totalStaff": 9,
+    "accessibilityWeight": 0.8,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0139",
+    "name": "구립나래어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 상도로15라길 24 나래어린이집",
+    "lat": 37.50346951325304,
+    "lng": 126.93385365089365,
+    "capacity": 82,
+    "currentEnrollment": 30,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 7.454545454545454
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 7.454545454545454
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 7.454545454545454
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 7.454545454545454
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0140",
+    "name": "YWCA또래또어린이집",
+    "type": "민간어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 국사봉1길 100 (상도동)",
+    "lat": 37.4970868,
+    "lng": 126.9314358,
+    "capacity": 69,
+    "currentEnrollment": 56,
+    "totalStaff": 20,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 20,
+        "staffToChildRatio": 3.45
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 9,
+        "staffToChildRatio": 3.45
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 3.45
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 3.45
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0141",
+    "name": "구립흑석어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 서달로 61",
+    "lat": 37.49999038,
+    "lng": 126.9616935,
+    "capacity": 118,
+    "currentEnrollment": 117,
+    "totalStaff": 24,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 24,
+        "staffToChildRatio": 4.916666666666667
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 4.916666666666667
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.916666666666667
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.916666666666667
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0142",
+    "name": "구립연꽃어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 성대로16길 21",
+    "lat": 37.497542805134444,
+    "lng": 126.93735888734199,
+    "capacity": 85,
+    "currentEnrollment": 47,
+    "totalStaff": 17,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 17,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0143",
+    "name": "구립꿈나무어린이집",
+    "type": "국공립어린이집",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 여의대방로36길 11 (대방동)",
+    "lat": 37.50459382,
+    "lng": 126.9229514,
+    "capacity": 99,
+    "currentEnrollment": 55,
+    "totalStaff": 17,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 17,
+        "staffToChildRatio": 5.823529411764706
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 8,
+        "staffToChildRatio": 5.823529411764706
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.823529411764706
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.823529411764706
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0144",
+    "name": "구립양지어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로23바길 9 삼성래미안내 구립양지어린이집 (사당동)",
+    "lat": 37.48920433,
+    "lng": 126.9704865,
+    "capacity": 99,
+    "currentEnrollment": 75,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 6.6
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 6.6
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 6.6
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 6.6
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0145",
+    "name": "구립새싹어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 동작대로29길 119 극동아파트111동 뒤 새싹어린이집",
+    "lat": 37.48981738,
+    "lng": 126.9760201,
+    "capacity": 91,
+    "currentEnrollment": 44,
+    "totalStaff": 11,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 11,
+        "staffToChildRatio": 8.272727272727273
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 8.272727272727273
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 8.272727272727273
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 8.272727272727273
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0146",
+    "name": "구립사당어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당로27길 190 (사당동)",
+    "lat": 37.49066859,
+    "lng": 126.972252,
+    "capacity": 78,
+    "currentEnrollment": 76,
+    "totalStaff": 16,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 16,
+        "staffToChildRatio": 4.875
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 4.875
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 4.875
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 4.875
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0147",
+    "name": "구립선재어린이집",
+    "type": "국공립어린이집",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 노량진로32길 62 (본동)",
+    "lat": 37.51144289,
+    "lng": 126.9569143,
+    "capacity": 84,
+    "currentEnrollment": 24,
+    "totalStaff": 12,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 12,
+        "staffToChildRatio": 7
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 5,
+        "staffToChildRatio": 7
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 7
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 7
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0148",
+    "name": "구립문화어린이집",
+    "type": "국공립어린이집",
+    "dongId": "sadang3",
+    "address": "서울특별시 동작구 사당로13길 24 (사당동)",
+    "lat": 37.48516531,
+    "lng": 126.9723918,
+    "capacity": 79,
+    "currentEnrollment": 50,
+    "totalStaff": 15,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 15,
+        "staffToChildRatio": 5.266666666666667
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 7,
+        "staffToChildRatio": 5.266666666666667
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 5.266666666666667
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 5.266666666666667
+      }
+    ],
+    "dataSource": "서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 2026-09-16)"
+  },
+  {
+    "id": "DJ-0149",
+    "name": "노량진1동 다함께돌봄센터",
+    "type": "다함께돌봄센터",
+    "dongId": "noryangjin1",
+    "address": "서울특별시 동작구 노량진1동 148길 10",
+    "lat": 37.514687,
+    "lng": 126.943922,
+    "capacity": 29,
+    "currentEnrollment": 24,
+    "totalStaff": 2,
+    "accessibilityWeight": 0.82,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "구조 예시(다함께돌봄사업 운영기준 준용) - 실 시설명·주소는 다함께돌봄포털 연동 필요"
+  },
+  {
+    "id": "DJ-0150",
+    "name": "상도3동 다함께돌봄센터",
+    "type": "다함께돌봄센터",
+    "dongId": "sangdo3",
+    "address": "서울특별시 동작구 상도3동 71길 18",
+    "lat": 37.501115,
+    "lng": 126.953843,
+    "capacity": 27,
+    "currentEnrollment": 25,
+    "totalStaff": 2,
+    "accessibilityWeight": 0.9,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "구조 예시(다함께돌봄사업 운영기준 준용) - 실 시설명·주소는 다함께돌봄포털 연동 필요"
+  },
+  {
+    "id": "DJ-0151",
+    "name": "상도4동 다함께돌봄센터",
+    "type": "다함께돌봄센터",
+    "dongId": "sangdo4",
+    "address": "서울특별시 동작구 상도4동 33길 38",
+    "lat": 37.505274,
+    "lng": 126.953641,
+    "capacity": 20,
+    "currentEnrollment": 18,
+    "totalStaff": 2,
+    "accessibilityWeight": 0.93,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "구조 예시(다함께돌봄사업 운영기준 준용) - 실 시설명·주소는 다함께돌봄포털 연동 필요"
+  },
+  {
+    "id": "DJ-0152",
+    "name": "흑석동 다함께돌봄센터",
+    "type": "다함께돌봄센터",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 흑석동 34길 18",
+    "lat": 37.505294,
+    "lng": 126.962518,
+    "capacity": 21,
+    "currentEnrollment": 18,
+    "totalStaff": 2,
+    "accessibilityWeight": 0.88,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "구조 예시(다함께돌봄사업 운영기준 준용) - 실 시설명·주소는 다함께돌봄포털 연동 필요"
+  },
+  {
+    "id": "DJ-0153",
+    "name": "사당4동 다함께돌봄센터",
+    "type": "다함께돌봄센터",
+    "dongId": "sadang4",
+    "address": "서울특별시 동작구 사당4동 152길 29",
+    "lat": 37.481782,
+    "lng": 126.97473,
+    "capacity": 20,
+    "currentEnrollment": 15,
+    "totalStaff": 2,
+    "accessibilityWeight": 0.81,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "구조 예시(다함께돌봄사업 운영기준 준용) - 실 시설명·주소는 다함께돌봄포털 연동 필요"
+  },
+  {
+    "id": "DJ-0154",
+    "name": "신대방2동 다함께돌봄센터",
+    "type": "다함께돌봄센터",
+    "dongId": "sindaebang2",
+    "address": "서울특별시 동작구 신대방2동 68길 30",
+    "lat": 37.495977,
+    "lng": 126.913587,
+    "capacity": 29,
+    "currentEnrollment": 22,
+    "totalStaff": 2,
+    "accessibilityWeight": 0.84,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "구조 예시(다함께돌봄사업 운영기준 준용) - 실 시설명·주소는 다함께돌봄포털 연동 필요"
+  },
+  {
+    "id": "DJ-0155",
+    "name": "동작 우리동네키움센터 1호",
+    "type": "우리동네키움센터",
+    "dongId": "noryangjin2",
+    "address": "서울특별시 동작구 노량진2동 일대",
+    "lat": 37.50839,
+    "lng": 126.938564,
+    "capacity": 29,
+    "currentEnrollment": 23,
+    "totalStaff": 3,
+    "accessibilityWeight": 1,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "실제 배치 확인(공개 보도자료) - 2019.06 동작구 1호점 개소 (공개 보도자료 확인)"
+  },
+  {
+    "id": "DJ-0156",
+    "name": "동작 우리동네키움센터 2호",
+    "type": "우리동네키움센터",
+    "dongId": "sindaebang1",
+    "address": "서울특별시 동작구 신대방1동 일대",
+    "lat": 37.496823,
+    "lng": 126.916672,
+    "capacity": 30,
+    "currentEnrollment": 28,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.93,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "실제 배치 확인(공개 보도자료) - 2020년 동작2호점 개소 (공개 보도자료 확인)"
+  },
+  {
+    "id": "DJ-0157",
+    "name": "동작 우리동네키움센터 3호",
+    "type": "우리동네키움센터",
+    "dongId": "sadang5",
+    "address": "서울특별시 동작구 사당5동 일대",
+    "lat": 37.488632,
+    "lng": 126.971691,
+    "capacity": 35,
+    "currentEnrollment": 31,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.99,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "실제 배치 확인(공개 보도자료) - 2020년 동작3호점 개소 (공개 보도자료 확인)"
+  },
+  {
+    "id": "DJ-0158",
+    "name": "동작 우리동네키움센터 10호",
+    "type": "우리동네키움센터",
+    "dongId": "noryangjin1",
+    "address": "서울특별시 동작구 노량진1동 일대",
+    "lat": 37.516959,
+    "lng": 126.941503,
+    "capacity": 40,
+    "currentEnrollment": 35,
+    "totalStaff": 5,
+    "accessibilityWeight": 0.89,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 4,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 거점형(동작10호점) - 관내 배치 확인, 정확한 동은 우리동네키움포털 연동 필요. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  },
+  {
+    "id": "DJ-0159",
+    "name": "동작 우리동네키움센터 4호",
+    "type": "우리동네키움센터",
+    "dongId": "sangdo1",
+    "address": "서울특별시 동작구 상도1동 일대",
+    "lat": 37.501212,
+    "lng": 126.942074,
+    "capacity": 33,
+    "currentEnrollment": 27,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.97,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 일반형 - 배치 동 추정치. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  },
+  {
+    "id": "DJ-0160",
+    "name": "동작 우리동네키움센터 5호",
+    "type": "우리동네키움센터",
+    "dongId": "sangdo2",
+    "address": "서울특별시 동작구 상도2동 일대",
+    "lat": 37.495484,
+    "lng": 126.947153,
+    "capacity": 28,
+    "currentEnrollment": 21,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.86,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 일반형 - 배치 동 추정치. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  },
+  {
+    "id": "DJ-0161",
+    "name": "동작 우리동네키움센터 6호",
+    "type": "우리동네키움센터",
+    "dongId": "heukseok",
+    "address": "서울특별시 동작구 흑석동 일대",
+    "lat": 37.508872,
+    "lng": 126.959396,
+    "capacity": 27,
+    "currentEnrollment": 24,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.91,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 일반형 - 배치 동 추정치. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  },
+  {
+    "id": "DJ-0162",
+    "name": "동작 우리동네키움센터 7호",
+    "type": "우리동네키움센터",
+    "dongId": "sadang2",
+    "address": "서울특별시 동작구 사당2동 일대",
+    "lat": 37.483436,
+    "lng": 126.983314,
+    "capacity": 32,
+    "currentEnrollment": 29,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.94,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 일반형 - 배치 동 추정치. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  },
+  {
+    "id": "DJ-0163",
+    "name": "동작 우리동네키움센터 8호",
+    "type": "우리동네키움센터",
+    "dongId": "daebang",
+    "address": "서울특별시 동작구 대방동 일대",
+    "lat": 37.504347,
+    "lng": 126.926683,
+    "capacity": 35,
+    "currentEnrollment": 30,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.94,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 일반형 - 배치 동 추정치. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  },
+  {
+    "id": "DJ-0164",
+    "name": "동작 우리동네키움센터 9호",
+    "type": "우리동네키움센터",
+    "dongId": "sindaebang2",
+    "address": "서울특별시 동작구 신대방2동 일대",
+    "lat": 37.496752,
+    "lng": 126.908493,
+    "capacity": 33,
+    "currentEnrollment": 30,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.95,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 일반형 - 배치 동 추정치. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  },
+  {
+    "id": "DJ-0165",
+    "name": "동작 우리동네키움센터 11호",
+    "type": "우리동네키움센터",
+    "dongId": "sadang1",
+    "address": "서울특별시 동작구 사당1동 일대",
+    "lat": 37.486198,
+    "lng": 126.979038,
+    "capacity": 35,
+    "currentEnrollment": 30,
+    "totalStaff": 3,
+    "accessibilityWeight": 0.87,
+    "operatingWindows": [
+      {
+        "timeSlot": "weekday_day",
+        "isOpen": true,
+        "staffOnDuty": 2,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "afterschool",
+        "isOpen": true,
+        "staffOnDuty": 3,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "evening",
+        "isOpen": true,
+        "staffOnDuty": 1,
+        "staffToChildRatio": 10
+      },
+      {
+        "timeSlot": "weekend",
+        "isOpen": false,
+        "staffOnDuty": 0,
+        "staffToChildRatio": 10
+      }
+    ],
+    "dataSource": "배치 동 추정 - 일반형 - 배치 동 추정치. 우리동네키움포털(icare.seoul.go.kr) 연동 시 교체 필요"
+  }
+]
