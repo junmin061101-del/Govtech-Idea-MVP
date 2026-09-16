@@ -1,9 +1,9 @@
 "use client";
 
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { AlertTriangle, Building2, Clock3, Sparkles, Users } from "lucide-react";
+import { AlertTriangle, Building2, ClipboardList, Clock3, Info, Users } from "lucide-react";
 import type { Dong, DongDiagnosis } from "@/types";
-import { TIME_SLOTS } from "@/lib/calculator";
+import { DEMAND_METHODOLOGY_NOTE, TIME_SLOTS } from "@/lib/calculator";
 
 interface SidePanelProps {
   dong: Dong | null;
@@ -67,6 +67,11 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
         </div>
       </div>
 
+      <div className="flex items-start gap-1.5 text-[11px] leading-relaxed text-neutral-400">
+        <Info className="mt-0.5 h-3 w-3 shrink-0" />
+        {DEMAND_METHODOLOGY_NOTE}
+      </div>
+
       {/* 3축 병목 다이어그램 */}
       <div>
         <p className="mb-2 text-sm font-semibold text-neutral-800">3축 병목 분해 (손실 수용력 기준)</p>
@@ -94,11 +99,11 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
         </div>
       </div>
 
-      {/* AI 정책 처방 제언 */}
+      {/* 정책 처방 제언 (규칙 기반: 3축 중 손실 비중이 가장 큰 축을 판정해 문장으로 표현) */}
       <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 p-4">
         <div className="mb-1.5 flex items-center gap-1.5 text-indigo-700">
-          <Sparkles className="h-4 w-4" />
-          <span className="text-sm font-semibold">AI 정책 처방 제언</span>
+          <ClipboardList className="h-4 w-4" />
+          <span className="text-sm font-semibold">정책 처방 제언</span>
         </div>
         <p className="text-sm leading-relaxed text-indigo-900">{diagnosis.recommendation}</p>
         {diagnosis.careGap > 0 && (

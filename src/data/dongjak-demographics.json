@@ -6,13 +6,14 @@
     "lat": 37.5145,
     "lng": 126.9435,
     "approxRadiusM": 650,
-    "population0to9": 1560,
+    "totalPopulation": 33409,
+    "population0to9": 1457,
     "dualIncomeHouseholdRate": 0.47,
     "estimatedDemand": {
-      "weekday_day": 593,
-      "afterschool": 440,
-      "evening": 117,
-      "weekend": 187
+      "weekday_day": 554,
+      "afterschool": 411,
+      "evening": 110,
+      "weekend": 175
     }
   },
   {
@@ -22,13 +23,14 @@
     "lat": 37.5098,
     "lng": 126.9377,
     "approxRadiusM": 650,
-    "population0to9": 543,
+    "totalPopulation": 7391,
+    "population0to9": 93,
     "dualIncomeHouseholdRate": 0.4,
     "estimatedDemand": {
-      "weekday_day": 206,
-      "afterschool": 130,
-      "evening": 35,
-      "weekend": 65
+      "weekday_day": 35,
+      "afterschool": 22,
+      "evening": 6,
+      "weekend": 11
     }
   },
   {
@@ -38,13 +40,14 @@
     "lat": 37.5027,
     "lng": 126.9445,
     "approxRadiusM": 650,
-    "population0to9": 3624,
+    "totalPopulation": 43946,
+    "population0to9": 1722,
     "dualIncomeHouseholdRate": 0.52,
     "estimatedDemand": {
-      "weekday_day": 1377,
-      "afterschool": 1131,
-      "evening": 302,
-      "weekend": 435
+      "weekday_day": 654,
+      "afterschool": 537,
+      "evening": 143,
+      "weekend": 207
     }
   },
   {
@@ -54,13 +57,14 @@
     "lat": 37.4972,
     "lng": 126.9498,
     "approxRadiusM": 650,
-    "population0to9": 2310,
+    "totalPopulation": 26674,
+    "population0to9": 1738,
     "dualIncomeHouseholdRate": 0.55,
     "estimatedDemand": {
-      "weekday_day": 878,
-      "afterschool": 762,
-      "evening": 203,
-      "weekend": 277
+      "weekday_day": 660,
+      "afterschool": 574,
+      "evening": 153,
+      "weekend": 209
     }
   },
   {
@@ -70,13 +74,14 @@
     "lat": 37.4998,
     "lng": 126.953,
     "approxRadiusM": 650,
-    "population0to9": 1430,
+    "totalPopulation": 23306,
+    "population0to9": 650,
     "dualIncomeHouseholdRate": 0.5,
     "estimatedDemand": {
-      "weekday_day": 543,
-      "afterschool": 429,
-      "evening": 114,
-      "weekend": 172
+      "weekday_day": 247,
+      "afterschool": 195,
+      "evening": 52,
+      "weekend": 78
     }
   },
   {
@@ -86,13 +91,14 @@
     "lat": 37.5057,
     "lng": 126.9515,
     "approxRadiusM": 650,
-    "population0to9": 1890,
+    "totalPopulation": 28593,
+    "population0to9": 1193,
     "dualIncomeHouseholdRate": 0.51,
     "estimatedDemand": {
-      "weekday_day": 718,
-      "afterschool": 578,
-      "evening": 154,
-      "weekend": 227
+      "weekday_day": 453,
+      "afterschool": 365,
+      "evening": 97,
+      "weekend": 143
     }
   },
   {
@@ -102,13 +108,14 @@
     "lat": 37.5065,
     "lng": 126.9615,
     "approxRadiusM": 650,
-    "population0to9": 1800,
+    "totalPopulation": 29799,
+    "population0to9": 2090,
     "dualIncomeHouseholdRate": 0.46,
     "estimatedDemand": {
-      "weekday_day": 684,
-      "afterschool": 497,
-      "evening": 132,
-      "weekend": 216
+      "weekday_day": 794,
+      "afterschool": 577,
+      "evening": 154,
+      "weekend": 251
     }
   },
   {
@@ -118,13 +125,14 @@
     "lat": 37.4875,
     "lng": 126.9775,
     "approxRadiusM": 650,
-    "population0to9": 1560,
+    "totalPopulation": 22111,
+    "population0to9": 483,
     "dualIncomeHouseholdRate": 0.53,
     "estimatedDemand": {
-      "weekday_day": 593,
-      "afterschool": 496,
-      "evening": 132,
-      "weekend": 187
+      "weekday_day": 184,
+      "afterschool": 154,
+      "evening": 41,
+      "weekend": 58
     }
   },
   {
@@ -134,13 +142,14 @@
     "lat": 37.4845,
     "lng": 126.982,
     "approxRadiusM": 650,
-    "population0to9": 1740,
+    "totalPopulation": 27574,
+    "population0to9": 1481,
     "dualIncomeHouseholdRate": 0.58,
     "estimatedDemand": {
-      "weekday_day": 661,
-      "afterschool": 606,
-      "evening": 161,
-      "weekend": 209
+      "weekday_day": 563,
+      "afterschool": 515,
+      "evening": 137,
+      "weekend": 178
     }
   },
   {
@@ -150,13 +159,14 @@
     "lat": 37.4825,
     "lng": 126.9735,
     "approxRadiusM": 650,
-    "population0to9": 1330,
+    "totalPopulation": 23124,
+    "population0to9": 1482,
     "dualIncomeHouseholdRate": 0.54,
     "estimatedDemand": {
-      "weekday_day": 505,
-      "afterschool": 431,
-      "evening": 115,
-      "weekend": 160
+      "weekday_day": 563,
+      "afterschool": 480,
+      "evening": 128,
+      "weekend": 178
     }
   },
   {
@@ -166,13 +176,14 @@
     "lat": 37.4795,
     "lng": 126.9775,
     "approxRadiusM": 650,
-    "population0to9": 1470,
+    "totalPopulation": 13488,
+    "population0to9": 436,
     "dualIncomeHouseholdRate": 0.56,
     "estimatedDemand": {
-      "weekday_day": 559,
-      "afterschool": 494,
-      "evening": 132,
-      "weekend": 176
+      "weekday_day": 166,
+      "afterschool": 146,
+      "evening": 39,
+      "weekend": 52
     }
   },
   {
@@ -182,13 +193,14 @@
     "lat": 37.4885,
     "lng": 126.9705,
     "approxRadiusM": 650,
-    "population0to9": 991,
+    "totalPopulation": 13673,
+    "population0to9": 744,
     "dualIncomeHouseholdRate": 0.49,
     "estimatedDemand": {
-      "weekday_day": 377,
-      "afterschool": 291,
-      "evening": 78,
-      "weekend": 119
+      "weekday_day": 283,
+      "afterschool": 219,
+      "evening": 58,
+      "weekend": 89
     }
   },
   {
@@ -198,13 +210,14 @@
     "lat": 37.5033,
     "lng": 126.9268,
     "approxRadiusM": 650,
-    "population0to9": 1440,
+    "totalPopulation": 33405,
+    "population0to9": 1306,
     "dualIncomeHouseholdRate": 0.48,
     "estimatedDemand": {
-      "weekday_day": 547,
-      "afterschool": 415,
-      "evening": 111,
-      "weekend": 173
+      "weekday_day": 496,
+      "afterschool": 376,
+      "evening": 100,
+      "weekend": 157
     }
   },
   {
@@ -214,13 +227,14 @@
     "lat": 37.4945,
     "lng": 126.9165,
     "approxRadiusM": 650,
-    "population0to9": 1950,
+    "totalPopulation": 22734,
+    "population0to9": 1118,
     "dualIncomeHouseholdRate": 0.5,
     "estimatedDemand": {
-      "weekday_day": 741,
-      "afterschool": 585,
-      "evening": 156,
-      "weekend": 234
+      "weekday_day": 425,
+      "afterschool": 335,
+      "evening": 89,
+      "weekend": 134
     }
   },
   {
@@ -230,13 +244,14 @@
     "lat": 37.4975,
     "lng": 126.9105,
     "approxRadiusM": 650,
-    "population0to9": 1600,
+    "totalPopulation": 22097,
+    "population0to9": 1162,
     "dualIncomeHouseholdRate": 0.53,
     "estimatedDemand": {
-      "weekday_day": 608,
-      "afterschool": 509,
-      "evening": 136,
-      "weekend": 192
+      "weekday_day": 442,
+      "afterschool": 370,
+      "evening": 99,
+      "weekend": 139
     }
   }
 ]

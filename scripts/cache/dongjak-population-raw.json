@@ -1,0 +1,81 @@
+{
+  "fetchedAt": "2026-09-16T07:50:32.260Z",
+  "source": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세)",
+  "rows": [
+    {
+      "name": "노량진1동",
+      "totalPopulation": 33409,
+      "population0to9": 1457
+    },
+    {
+      "name": "노량진2동",
+      "totalPopulation": 7391,
+      "population0to9": 93
+    },
+    {
+      "name": "상도1동",
+      "totalPopulation": 43946,
+      "population0to9": 1722
+    },
+    {
+      "name": "상도2동",
+      "totalPopulation": 26674,
+      "population0to9": 1738
+    },
+    {
+      "name": "상도3동",
+      "totalPopulation": 23306,
+      "population0to9": 650
+    },
+    {
+      "name": "상도4동",
+      "totalPopulation": 28593,
+      "population0to9": 1193
+    },
+    {
+      "name": "흑석동",
+      "totalPopulation": 29799,
+      "population0to9": 2090
+    },
+    {
+      "name": "사당1동",
+      "totalPopulation": 22111,
+      "population0to9": 483
+    },
+    {
+      "name": "사당2동",
+      "totalPopulation": 27574,
+      "population0to9": 1481
+    },
+    {
+      "name": "사당3동",
+      "totalPopulation": 23124,
+      "population0to9": 1482
+    },
+    {
+      "name": "사당4동",
+      "totalPopulation": 13488,
+      "population0to9": 436
+    },
+    {
+      "name": "사당5동",
+      "totalPopulation": 13673,
+      "population0to9": 744
+    },
+    {
+      "name": "대방동",
+      "totalPopulation": 33405,
+      "population0to9": 1306
+    },
+    {
+      "name": "신대방1동",
+      "totalPopulation": 22734,
+      "population0to9": 1118
+    },
+    {
+      "name": "신대방2동",
+      "totalPopulation": 22097,
+      "population0to9": 1162
+    }
+  ]
+}

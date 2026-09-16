@@ -127,35 +127,16 @@ export default function KakaoMap({
           />
         ))}
 
-        {selectedFacility && (
-          <CustomOverlayMap position={{ lat: selectedFacility.lat, lng: selectedFacility.lng }} yAnchor={1.15}>
-            <FacilityDetailCard facility={selectedFacility} onClose={() => onSelectFacility(null)} />
-          </CustomOverlayMap>
-        )}
       </KakaoMapView>
 
-      <MapLegend />
-    </div>
-  );
-}
+      {/* 지도 중앙을 가리지 않도록 시설 상세 카드는 지도 좌표가 아니라 컨테이너 우측 상단에 고정 배치한다. */}
+      {selectedFacility && (
+        <div className="absolute right-3 top-3 z-20">
+          <FacilityDetailCard facility={selectedFacility} onClose={() => onSelectFacility(null)} />
+        </div>
+      )}
 
-function MapLegend() {
-  const items: { color: string; label: string }[] = [
-    { color: "#ef4444", label: "심각 (공백 30% 초과)" },
-    { color: "#f97316", label: "보통 (공백 발생)" },
-    { color: "#22c55e", label: "정상 (수요 충족)" },
-  ];
-  return (
-    <div className="absolute bottom-3 left-3 rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
-      <p className="mb-1 font-semibold text-neutral-700">돌봄 공백 위험도</p>
-      <div className="flex flex-col gap-1">
-        {items.map((item) => (
-          <div key={item.label} className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-            <span className="text-neutral-600">{item.label}</span>
-          </div>
-        ))}
-      </div>
+      <MapLegend />
     </div>
   );
 }
@@ -163,6 +144,31 @@ function MapLegend() {
 // 생활권 원(빨강/주황/초록)이 이미 위험도를 표현하므로, 개별 시설 마커는 유형별 색상 대신
 // 단일 색상으로 통일해 시각적 잡음을 줄인다.
 const FACILITY_MARKER_COLOR = "#1e293b"; // slate-800
+
+function MapLegend() {
+  const severityItems: { color: string; label: string }[] = [
+    { color: "#ef4444", label: "심각 (공백 30% 초과)" },
+    { color: "#f97316", label: "보통 (공백 발생)" },
+    { color: "#22c55e", label: "정상 (수요 충족)" },
+  ];
+  return (
+    <div className="absolute bottom-3 left-3 z-20 rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
+      <p className="mb-1 font-semibold text-neutral-700">생활권 돌봄 공백 위험도 (원)</p>
+      <div className="flex flex-col gap-1">
+        {severityItems.map((item) => (
+          <div key={item.label} className="flex items-center gap-1.5">
+            <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+            <span className="text-neutral-600">{item.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-1.5 flex items-center gap-1.5 border-t border-neutral-100 pt-1.5">
+        <span className="inline-block h-2 w-2 rounded-full border border-white" style={{ backgroundColor: FACILITY_MARKER_COLOR }} />
+        <span className="text-neutral-600">개별 돌봄시설 (점, 클릭 시 상세정보)</span>
+      </div>
+    </div>
+  );
+}
 
 function markerIcon(selected: boolean): string {
   const size = selected ? 24 : 18;

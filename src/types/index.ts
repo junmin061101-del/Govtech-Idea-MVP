@@ -70,7 +70,11 @@ export interface Dong {
   lng: number;
   /** 폴리곤 근사를 위한 반경(m). 실제 행정경계 폴리곤 데이터 확보 전 임시 근사치 */
   approxRadiusM: number;
+  /** 행정안전부 주민등록인구 통계 실측치 */
+  totalPopulation: number;
+  /** 행정안전부 주민등록인구 통계 실측치 (0~9세) */
   population0to9: number;
+  /** 동별 실측 통계 없음 - 주택 유형 기반 상대적 추정치 */
   dualIncomeHouseholdRate: number;
   /** 시간대별 추정 돌봄 수요 인원 */
   estimatedDemand: Record<TimeSlotId, number>;
@@ -107,4 +111,5 @@ export interface DongDiagnosis {
 export interface SimulatorAdjustment {
   extendHours: number; // 운영시간 연장 (시간)
   additionalStaff: number; // 시간제 돌봄인력 추가 배치 인원
+  addedCapacity: number; // 신규 확충/인접 생활권 연계 정원 (명)
 }

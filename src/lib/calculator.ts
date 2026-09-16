@@ -15,6 +15,10 @@ export const TIME_SLOTS: { id: TimeSlotId; label: string; shortLabel: string; st
   { id: "weekend", label: "주말/방학", shortLabel: "주말", startHour: 9, endHour: 18 },
 ];
 
+/** 화면에 항상 노출하는 수요 산정 기준 한 줄 설명 (진단 신뢰성 검증용) */
+export const DEMAND_METHODOLOGY_NOTE =
+  "수요 산정 기준: 행정안전부 주민등록인구 0~9세 실측치 × 시간대별 이용률 계수(전국 평균 근사치, 동작구 자체 실측 아님)";
+
 /**
  * 유효 돌봄 수용력(ECC) 계산
  * ECC(f,t) = min[공간 수용력(f,t), 인력 수용력(f,t)] × 운영여부(f,t)
@@ -47,16 +51,18 @@ function severityOf(gapRatio: number): DongDiagnosis["severity"] {
   return "normal";
 }
 
-const AXIS_POLICY: Record<BottleneckAxis, string> = {
-  space: "신규 시설 확충 또는 인근 생활권 거점 시설과의 연계 배치",
-  time: "운영시간 연장 지원 및 저녁 돌봄(야간반) 개설",
-  staff: "돌봄교사(시간제 포함) 추가 배치",
-};
-
 const AXIS_LABEL: Record<BottleneckAxis, string> = {
   space: "공간(정원)",
   time: "시간(운영시간)",
   staff: "인력(교사 배치)",
+};
+
+// 축별 정책 제언 문구. staff는 "인력을 투입하면 해소된다"는 단정 대신, 실제 인력 확보가
+// 전제조건임을 명시해 "사람만 넣으면 해결"이라는 인상을 주지 않도록 조건부로 표현한다.
+const AXIS_POLICY: Record<BottleneckAxis, string> = {
+  space: "신규 시설 확충 또는 인근 생활권 거점 시설과의 연계 배치가 필요합니다",
+  time: "운영시간 연장 지원 및 저녁 돌봄(야간반) 개설 시 공백의 상당 부분이 해소될 것으로 추정됩니다",
+  staff: "돌봄교사(시간제 포함) 인력 ○명이 실제로 확보된다면 공백 해소가 가능합니다 (확보 가능성은 현장 확인 필요)",
 };
 
 /**
@@ -77,6 +83,8 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
   let idealECC = 0; // 완전 개방 + 완전 인력배치 가정 시의 총 수용력
   let timeLoss = 0;
   let staffLoss = 0;
+  let openRatioWeightSum = 0; // 인력 필요 인원 환산을 위한 가중 평균 1인당 돌봄 비율 계산용
+  let openRatioStaffSum = 0;
   const facilityResults: FacilityECCResult[] = [];
 
   for (const facility of dongFacilities) {
@@ -86,6 +94,15 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
 
     const potential = facility.capacity;
     idealECC += potential;
+
+    if (result.isOpen) {
+      const window = facility.operatingWindows.find((w) => w.timeSlot === timeSlot);
+      if (window) {
+        openRatioWeightSum += window.staffToChildRatio * window.staffOnDuty;
+        openRatioStaffSum += window.staffOnDuty;
+      }
+    }
+
     const loss = Math.max(0, potential - result.ecc);
     if (loss <= 0) continue;
 
@@ -96,6 +113,8 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
       staffLoss += loss;
     }
   }
+  // 병목 해소에 필요한 "교사 수"로 환산하기 위한 가중 평균 1인당 돌봄 비율 (기본값 7)
+  const avgStaffRatio = openRatioStaffSum > 0 ? openRatioWeightSum / openRatioStaffSum : 7;
 
   const careGap = Math.max(0, demand - totalECC);
   const gapRatio = demand > 0 ? careGap / demand : 0;
@@ -120,8 +139,13 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
 
   const timeSlotLabel = TIME_SLOTS.find((t) => t.id === timeSlot)?.label ?? timeSlot;
 
+  const policyText =
+    dominant === "staff"
+      ? AXIS_POLICY.staff.replace("○명", `약 ${Math.max(1, Math.ceil(axisValue.staff / avgStaffRatio))}명`)
+      : AXIS_POLICY[dominant];
+
   const recommendation = careGap > 0
-    ? `${dong.name}은(는) ${timeSlotLabel} 기준 ${AXIS_LABEL[dominant]} 병목이 공백의 ${dominantShare}%를 차지하는 주원인입니다. [${AXIS_POLICY[dominant]}] 시행 시 공백의 상당 부분(약 ${dominantShare}%)이 해소될 것으로 추정됩니다.`
+    ? `${dong.name}은(는) ${timeSlotLabel} 기준 ${AXIS_LABEL[dominant]} 병목이 공백의 ${dominantShare}%를 차지하는 주원인입니다. ${policyText}.`
     : `${dong.name}은(는) ${timeSlotLabel} 기준 추정 수요 대비 유효 수용력이 충분합니다.`;
 
   return {
@@ -146,14 +170,16 @@ export function diagnoseAllDongs(dongs: Dong[], facilities: Facility[], timeSlot
 // 정책 시뮬레이터
 // ---------------------------------------------------------------------------
 
-// 개략 단가 (정책 비교용 추정치 — 실제 예산 편성 시 지자체 단가 기준으로 교체 필요)
-const COST_PER_EXTRA_STAFF_YEAR = 32_000_000; // 시간제 돌봄인력 1인 연간 인건비 추정
-const COST_PER_EXTENDED_HOUR_YEAR = 6_000_000; // 시설 1개소 운영시간 1시간 연장 시 연간 소요 비용 추정
-const COST_PER_NEW_CAPACITY_SLOT = 22_000_000; // 신규 시설 확충 시 정원 1인당 환산 비용 추정
+// 가상 확충 시설의 1인당 돌봄 비율 (신규/연계 정원 레버 계산용 기본값)
+const NEW_CAPACITY_STAFF_RATIO = 7;
 
 /**
- * 정책 시뮬레이터: 운영시간 연장 / 시간제 인력 추가 배치를 적용했을 때
- * 생활권의 공백 해소율과 절감 예산 효과(신규 시설 확충 대비)를 계산한다.
+ * 정책 시뮬레이터: 운영시간 연장 / 인력 재배치 / 정원 확충(신규 또는 인접 생활권 연계)
+ * 세 레버를 적용했을 때 생활권의 공백 해소율을 계산한다.
+ *
+ * 3축 진단(diagnoseDong)의 축과 레버가 1:1로 대응한다 — 시간 병목엔 운영시간 연장,
+ * 인력 병목엔 인력 재배치, 공간 병목엔 정원 확충 레버가 대응해야 진단과 처방이 이어진다.
+ * 금전적 절감액은 신뢰할 수 있는 단가 출처가 없어 산출하지 않는다 (README 참고).
  */
 export function simulatePolicy(
   dong: Dong,
@@ -191,25 +217,40 @@ export function simulatePolicy(
     };
   });
 
+  // 공간 병목 레버: 신규 시설 확충 또는 인접 생활권 여유 정원 연계를 "가상 시설"로 모델링한다.
+  // 완전 개방·완전 인력배치 상태로 추가해, 진단에서 나온 공간 병목을 직접 겨냥한다.
+  if (adjustment.addedCapacity > 0) {
+    adjustedFacilities.push({
+      id: `SIM-${dong.id}`,
+      name: "(시뮬레이션) 신규/연계 확충 정원",
+      type: "다함께돌봄센터",
+      dongId: dong.id,
+      address: "",
+      lat: dong.lat,
+      lng: dong.lng,
+      capacity: adjustment.addedCapacity,
+      currentEnrollment: 0,
+      totalStaff: Math.ceil(adjustment.addedCapacity / NEW_CAPACITY_STAFF_RATIO),
+      operatingWindows: TIME_SLOTS.map((slot) => ({
+        timeSlot: slot.id,
+        isOpen: slot.id === timeSlot,
+        staffOnDuty: slot.id === timeSlot ? Math.ceil(adjustment.addedCapacity / NEW_CAPACITY_STAFF_RATIO) : 0,
+        staffToChildRatio: NEW_CAPACITY_STAFF_RATIO,
+      })),
+      dataSource: "시뮬레이터 가상 시설 (실제 부지·인허가 확보 전 가정치)",
+    });
+  }
+
   const after = diagnoseDong(dong, adjustedFacilities, timeSlot);
 
   const gapResolved = Math.max(0, before.careGap - after.careGap);
   const resolutionRate = before.careGap > 0 ? Math.min(100, Math.round((gapResolved / before.careGap) * 100)) : 100;
-
-  const interventionCost =
-    adjustment.additionalStaff * COST_PER_EXTRA_STAFF_YEAR +
-    (adjustment.extendHours > 0 ? targetCount * COST_PER_EXTENDED_HOUR_YEAR : 0);
-  const equivalentNewCapacityCost = gapResolved * COST_PER_NEW_CAPACITY_SLOT;
-  const budgetSaved = Math.max(0, equivalentNewCapacityCost - interventionCost);
 
   return {
     before,
     after,
     gapResolved,
     resolutionRate,
-    interventionCost,
-    equivalentNewCapacityCost,
-    budgetSaved,
   };
 }
 

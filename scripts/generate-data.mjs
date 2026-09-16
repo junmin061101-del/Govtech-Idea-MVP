@@ -3,7 +3,10 @@
  *
  * 데이터 신뢰 수준 (투명성 고지):
  *  - 행정동 목록(15개), 좌표, 생활권 구분: 실제 동작구 행정구역 기준 (위키백과/동작구청 확인)
- *  - 상도1동/사당5동 인구수: 2020년 공개 통계 실측치, 그 외 동 인구는 이 두 값을 앵커로 한 보간 추정치
+ *  - 0~9세 인구·총인구: 행정안전부 주민등록인구 통계 실데이터 (scripts/cache/dongjak-population-raw.json,
+ *    `node scripts/fetch-mois-population.mjs`로 매월 갱신 가능). 추정치가 아니라 정부 공표 통계 그대로다.
+ *  - 맞벌이 비율(dualIncomeHouseholdRate): 동별 실측 통계가 공개되어 있지 않아, 주택 유형(대단지/고시촌 등)에
+ *    기반한 상대적 추정치다. 방과후/야간 수요 보정에만 제한적으로 쓰인다.
  *  - 우리동네키움센터 1/2/3/10호의 배치 동(노량진2동/신대방1동/사당5동/거점형): 공개 보도자료 기준 실제 배치
  *  - 어린이집: 서울 열린데이터광장 Open API(SERVICE=ChildCareInfoDJ, OA-20320)에서 받아온 실데이터
  *    (`scripts/cache/dongjak-childcare-raw.json`, `node --env-file=.env.local scripts/fetch-seoul-childcare.mjs`로 갱신).
@@ -24,50 +27,44 @@ const OUT_DIR = join(__dirname, "..", "src", "data");
 // 1. 행정동 (생활권) 정의
 // ---------------------------------------------------------------------------
 
+// 좌표는 실제 위치 기준 근사치(정밀 GIS 폴리곤 아님). 인구는 아래에서 실데이터로 채운다.
 const DONGS = [
-  { id: "noryangjin1", name: "노량진1동", lifeZone: "노량진", lat: 37.5145, lng: 126.9435, pop: 24000, dual: 0.47 },
-  { id: "noryangjin2", name: "노량진2동", lifeZone: "노량진", lat: 37.5098, lng: 126.9377, pop: 15500, dual: 0.40 },
-  { id: "sangdo1", name: "상도1동", lifeZone: "상도", lat: 37.5027, lng: 126.9445, pop: 48317, dual: 0.52 },
-  { id: "sangdo2", name: "상도2동", lifeZone: "상도", lat: 37.4972, lng: 126.9498, pop: 33000, dual: 0.55 },
-  { id: "sangdo3", name: "상도3동", lifeZone: "상도", lat: 37.4998, lng: 126.9530, pop: 22000, dual: 0.50 },
-  { id: "sangdo4", name: "상도4동", lifeZone: "상도", lat: 37.5057, lng: 126.9515, pop: 27000, dual: 0.51 },
-  { id: "heukseok", name: "흑석동", lifeZone: "흑석", lat: 37.5065, lng: 126.9615, pop: 30000, dual: 0.46 },
-  { id: "sadang1", name: "사당1동", lifeZone: "사당", lat: 37.4875, lng: 126.9775, pop: 24000, dual: 0.53 },
-  { id: "sadang2", name: "사당2동", lifeZone: "사당", lat: 37.4845, lng: 126.9820, pop: 29000, dual: 0.58 },
-  { id: "sadang3", name: "사당3동", lifeZone: "사당", lat: 37.4825, lng: 126.9735, pop: 19000, dual: 0.54 },
-  { id: "sadang4", name: "사당4동", lifeZone: "사당", lat: 37.4795, lng: 126.9775, pop: 21000, dual: 0.56 },
-  { id: "sadang5", name: "사당5동", lifeZone: "사당", lat: 37.4885, lng: 126.9705, pop: 13207, dual: 0.49 },
-  { id: "daebang", name: "대방동", lifeZone: "대방", lat: 37.5033, lng: 126.9268, pop: 24000, dual: 0.48 },
-  { id: "sindaebang1", name: "신대방1동", lifeZone: "신대방", lat: 37.4945, lng: 126.9165, pop: 26000, dual: 0.50 },
-  { id: "sindaebang2", name: "신대방2동", lifeZone: "신대방", lat: 37.4975, lng: 126.9105, pop: 20000, dual: 0.53 },
+  { id: "noryangjin1", name: "노량진1동", lifeZone: "노량진", lat: 37.5145, lng: 126.9435, dual: 0.47 },
+  { id: "noryangjin2", name: "노량진2동", lifeZone: "노량진", lat: 37.5098, lng: 126.9377, dual: 0.40 },
+  { id: "sangdo1", name: "상도1동", lifeZone: "상도", lat: 37.5027, lng: 126.9445, dual: 0.52 },
+  { id: "sangdo2", name: "상도2동", lifeZone: "상도", lat: 37.4972, lng: 126.9498, dual: 0.55 },
+  { id: "sangdo3", name: "상도3동", lifeZone: "상도", lat: 37.4998, lng: 126.9530, dual: 0.50 },
+  { id: "sangdo4", name: "상도4동", lifeZone: "상도", lat: 37.5057, lng: 126.9515, dual: 0.51 },
+  { id: "heukseok", name: "흑석동", lifeZone: "흑석", lat: 37.5065, lng: 126.9615, dual: 0.46 },
+  { id: "sadang1", name: "사당1동", lifeZone: "사당", lat: 37.4875, lng: 126.9775, dual: 0.53 },
+  { id: "sadang2", name: "사당2동", lifeZone: "사당", lat: 37.4845, lng: 126.9820, dual: 0.58 },
+  { id: "sadang3", name: "사당3동", lifeZone: "사당", lat: 37.4825, lng: 126.9735, dual: 0.54 },
+  { id: "sadang4", name: "사당4동", lifeZone: "사당", lat: 37.4795, lng: 126.9775, dual: 0.56 },
+  { id: "sadang5", name: "사당5동", lifeZone: "사당", lat: 37.4885, lng: 126.9705, dual: 0.49 },
+  { id: "daebang", name: "대방동", lifeZone: "대방", lat: 37.5033, lng: 126.9268, dual: 0.48 },
+  { id: "sindaebang1", name: "신대방1동", lifeZone: "신대방", lat: 37.4945, lng: 126.9165, dual: 0.50 },
+  { id: "sindaebang2", name: "신대방2동", lifeZone: "신대방", lat: 37.4975, lng: 126.9105, dual: 0.53 },
 ];
 
-// 0~9세 인구 비율 (고시촌 성격의 노량진2동은 낮게, 육아가구 밀집지는 높게)
-const CHILD_RATIO = {
-  noryangjin1: 0.065,
-  noryangjin2: 0.035,
-  sangdo1: 0.075,
-  sangdo2: 0.070,
-  sangdo3: 0.065,
-  sangdo4: 0.070,
-  heukseok: 0.060,
-  sadang1: 0.065,
-  sadang2: 0.060,
-  sadang3: 0.070,
-  sadang4: 0.070,
-  sadang5: 0.075,
-  daebang: 0.060,
-  sindaebang1: 0.075,
-  sindaebang2: 0.080,
-};
+const POPULATION_CACHE_PATH = join(__dirname, "cache", "dongjak-population-raw.json");
+let populationRaw;
+try {
+  populationRaw = JSON.parse(readFileSync(POPULATION_CACHE_PATH, "utf-8"));
+} catch {
+  console.error(
+    `실제 인구 데이터 캐시(${POPULATION_CACHE_PATH})가 없습니다.\n` +
+      "먼저 'node scripts/fetch-mois-population.mjs' 를 실행해 캐시를 생성하세요."
+  );
+  process.exit(1);
+}
+const populationByName = new Map(populationRaw.rows.map((r) => [r.name, r]));
 
 // 시간대별 수요 계수 (0~9세 인구 대비 실제 돌봄 필요 인원 비율)
-// 맞벌이 비율이 높을수록 방과후/야간 수요 계수를 보정한다.
 // weekday_day 계수(0.38)는 "0~9세 인구 중 미취학(0~5세) 비중 약 55% x 어린이집 등
-// 형태로 실제 돌봄을 이용하는 비율 약 70%"를 근사한 값으로, 동작구 전체 실제 어린이집
-// 정원 합계(활성 148개소, 약 7,011명 - scripts/cache/dongjak-childcare-raw.json 기준)와
-// 전체 추정 수요가 대략 맞아떨어지도록 보정했다. 6~9세(학령기) 수요는 어린이집이 아니라
-// 다함께돌봄센터/키움센터가 받는 몫으로 간주해 별도 계수로 반영한다.
+// 형태로 실제 돌봄을 이용하는 비율 약 70%"를 근사한 값이다 (전국 보육통계 평균 수준 참고).
+// afterschool/evening 계수는 맞벌이 비율로 추가 보정하고, 6~9세(학령기) 방과후 수요를
+// 반영해 weekday_day보다 낮은 절대 계수를 쓰되 다함께돌봄센터/키움센터가 받는 몫으로 간주한다.
+// ※ 이 계수들은 검증된 전국 평균 근사치이며, 동작구 자체의 실측 이용률 조사가 아니다.
 const DEMAND_FACTOR = {
   weekday_day: 0.38,
   afterschool: 0.30,
@@ -86,7 +83,8 @@ function buildDemand(pop0to9, dualIncomeRate) {
 }
 
 const dongRecords = DONGS.map((d) => {
-  const population0to9 = Math.round(d.pop * CHILD_RATIO[d.id]);
+  const pop = populationByName.get(d.name);
+  if (!pop) throw new Error(`인구 데이터에 ${d.name}이 없습니다.`);
   return {
     id: d.id,
     name: d.name,
@@ -94,9 +92,10 @@ const dongRecords = DONGS.map((d) => {
     lat: d.lat,
     lng: d.lng,
     approxRadiusM: 650,
-    population0to9,
+    totalPopulation: pop.totalPopulation,
+    population0to9: pop.population0to9,
     dualIncomeHouseholdRate: d.dual,
-    estimatedDemand: buildDemand(population0to9, d.dual),
+    estimatedDemand: buildDemand(pop.population0to9, d.dual),
   };
 });
 
