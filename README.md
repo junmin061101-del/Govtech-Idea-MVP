@@ -24,55 +24,61 @@ http://localhost:3000 에서 확인합니다.
 키가 없거나 예시값(`your_kakao_javascript_key_here`)일 경우, 지도 영역에 안내 문구가 표시되고
 나머지 화면(진단 패널/시뮬레이터)은 정상 동작합니다.
 
-## 3. 데이터 신뢰 수준 (투명성 고지)
+## 3. 데이터 출처와 신뢰 수준 (투명성 고지)
 
-`scripts/generate-data.mjs`가 `src/data/dongjak-*.json`을 생성합니다. Faker류의 완전 무작위
-데이터가 아니라, 아래와 같이 실제 공개 정보를 앵커로 삼아 통계적으로 합리적인 범위 내에서
-구조화한 시드 데이터입니다.
+서울 25개 구 · 427개 행정동 · 운영 중 어린이집 3,919곳을 다룬다. 원자료는 `scripts/cache/`에 스냅샷으로
+보관하고, `scripts/build-data.mjs`가 정규화해 `src/data/seoul/`과 `public/data/`에 쓴다.
+기준일·건수·위치 오류 목록은 빌드 결과 `src/data/seoul/meta.json`에 함께 기록된다.
 
-| 항목 | 신뢰 수준 |
+### 원자료
+
+| 데이터 | 출처 | 기준 | 비고 |
+|---|---|---|---|
+| 행정동 경계·코드 | [vuski/admdongkor](https://github.com/vuski/admdongkor) `ver20261001` | 2026-10-01 | 원자료: 통계청 SGIS 행정동 경계 |
+| 행정동별 0~9세 1세 단위 인구 | [행정안전부 주민등록인구 통계](https://jumin.mois.go.kr/ageStatMonth.do) | 2026-10 | 인증키 불필요 |
+| 어린이집 | [서울 열린데이터광장](https://data.seoul.go.kr) `SERVICE=ChildCareInfo` (서울시 어린이집 정보, 25개 구 전체) | 원자료 `DATASTDRDT` | 일반 인증키 필요 |
+
+행정동은 10자리 행정기관코드(`adm_cd2` = 주민등록인구 CSV의 괄호 안 코드)로 경계·인구를 연결한다.
+두 출처의 서울 행정동 427개 코드가 1:1로 일치한다(테스트로 확인).
+
+**경계 데이터 출처 표기(필수)**: 본 데이터는 통계청 통계지리정보서비스(SGIS, https://sgis.kostat.go.kr)에서
+공공누리 제1유형으로 개방한 행정동 경계를 가공한 것이며(가공: vuski/admdongkor,
+https://github.com/vuski/admdongkor), CC BY 4.0으로 배포됩니다.
+
+### 실측과 추정의 구분
+
+| 항목 | 상태 |
 |---|---|
-| 행정동 15개 목록·생활권 구분 | 실제 동작구 행정구역 (2008년 본동→노량진1동 통합 반영) |
-| 행정동 좌표 | 실제 위치 기준 근사치 (정밀 GIS 폴리곤 아님) |
-| **행정동별 총인구·0~9세 인구** | **행정안전부 주민등록인구 통계 실측치 (매월 갱신, `scripts/cache/dongjak-population-raw.json`)**. 이전 버전에서 쓰던 "인구×추정 아동비율" 방식을 제거하고 정부 공표 수치로 교체했다 |
-| 맞벌이 비율(dualIncomeHouseholdRate) | 동별 실측 통계 없음 - 주택 유형(대단지/고시촌 등) 기반 상대적 추정치. 방과후/야간 수요 보정에만 제한적으로 사용 |
-| 시간대별 수요 계수(0.38/0.30/0.08/0.12) | 전국 보육통계 평균 근사치. 동작구 자체 실측 이용률 조사가 아니며, 화면에도 이 산정 기준을 항상 표시한다 |
-| **어린이집 148개소 전체(시설명·주소·좌표·정원·현원·교직원수·야간연장/휴일보육 여부·전화번호·인가일자·홈페이지)** | **서울 열린데이터광장 Open API 실시간 연동 (`SERVICE=ChildCareInfoDJ`, OA-20320). `scripts/cache/dongjak-childcare-raw.json`에 스냅샷 보관** |
-| 어린이집의 행정동 소속 | 실주소 대신 좌표-생활권 중심점 최근접 매칭으로 배정한 근사치. 동 경계부 시설은 실제와 다르게 배정될 수 있음 (정밀 GIS 폴리곤 확보 시 개선 필요) |
-| 어린이집의 시간대별 배치 인력 수 | 주간은 실제 교직원수(CHCRTESCNT) 그대로 사용. 방과후/야간/주말 배치 인력은 "등록은 되어 있으나 실제 전담 인력은 소수"라는 정책 현실을 반영한 추정치 |
-| 우리동네키움센터 1/2/3호, 거점형(10호) 배치 | 공개 보도자료 기준 실제 배치 |
-| 우리동네키움센터 4~9,11호 배치 동 | 관내 배치는 사실이나 정확한 동은 추정치 |
-| 다함께돌봄센터 시설명·정원·현원·교사수 | 사업 운영기준을 준용한 구조적 예시. 실 서비스 전환 시 다함께돌봄포털 연동으로 교체 필요 |
-| 정책 시뮬레이터의 금전적 절감액 | **제공하지 않음.** 신뢰할 수 있는 시설 설치비/운영비 단가 출처가 없어 의도적으로 뺐다 (숫자를 지어내지 않기 위함) |
+| 행정동 경계, 인구, 시설명·주소·좌표·정원·현원·교사 수·시설 특성(야간연장형·휴일보육·24시간) | 실측(공표 자료 그대로) |
+| 시설의 행정동 소속 | 좌표가 행정동 경계 안에 있는지로 판정. 좌표가 소속 구 밖이면 배정하지 않고 `meta.json`의 `locationIssues`에 남긴다(현재 24곳, 대부분 시청 좌표로 찍힌 지오코딩 오류) |
+| 교사 1인당 아동 수 | 영유아보육법 시행규칙 배치기준(0세 1:3, 1세 1:5, 2세 1:7, 3세 1:15, 4세 이상 1:20, 장애아 1:3)을 재원 아동 연령 구성으로 가중. 혼합반은 **확인 필요(TODO)** |
+| 시간대별 이용률 계수 | **추정** — 전국 보육통계 평균 근사치(영유아 주간 0.70, 방과후 0.30, 야간 0.08, 주말 0.12) |
+| 방과후·야간·주말의 근무 교사 수 | **추정** — 시간대별 근무 인원 공개 데이터 없음(방과후 = 주간의 45%, 야간·주말 1명) |
 
-### 알려진 한계
+모든 기준값과 근거는 [src/lib/config/assumptions.ts](src/lib/config/assumptions.ts) 한 곳에 있다.
 
-- **행정동 배정 근사치**: 어린이집의 행정동 소속은 정밀 경계 폴리곤이 아니라 좌표-중심점 최근접
-  매칭이라, 동 경계 근처 시설은 실제와 다른 동으로 집계될 수 있다. 특정 동의 수치가 직관과 다르면
-  이 근사 오차를 먼저 의심할 것.
-- **인력 재배치 레버의 전제**: 정책 시뮬레이터의 "시간제 돌봄인력 재배치" 슬라이더는 해당 인력이
-  실제로 채용 가능하다는 가정 위에서 작동한다. 확보 가능성은 시뮬레이터가 아니라 현장에서 확인해야
-  한다 (화면에도 캐비어트를 표시한다).
+### 아직 없는 데이터 (TODO)
 
-### 실데이터 갱신 방법
+- **초등 저학년(6~9세) 돌봄 시설**: 우리동네키움센터·다함께돌봄센터·지역아동센터의 서울 전역 Open API를
+  확인하지 못했다(키움센터는 OA-20965 목록만 있고 파일 없음). 확보 전까지 초등 저학년 대상은 비활성.
+  기존 MVP의 동작구 키움·다함께 예시 시설(구조 예시 데이터)은 실제 시설이 아니라서 제거했다.
+- **이른 아침(07~09)·방학**: 시설별 개원 시각·방학 운영 데이터가 없어 비활성.
+- 휴지 시설(69곳)은 공급에서 제외한다.
+
+### 데이터 갱신
 
 ```bash
-node scripts/fetch-mois-population.mjs                          # 최신 행정동별 인구 재수집 (매월)
-node --env-file=.env.local scripts/fetch-seoul-childcare.mjs   # 최신 어린이집 데이터 재수집
-node scripts/generate-data.mjs                                  # 시드 데이터 재생성
+npm run data:fetch   # 원자료 3종 재수집 (.env.local의 SEOUL_OPEN_DATA_API_KEY 필요)
+npm run data:build   # 정규화 데이터 재생성
+npm test             # 15개 동·경계·배정 검증 포함
 ```
 
 `SEOUL_OPEN_DATA_API_KEY`는 [data.seoul.go.kr](https://data.seoul.go.kr) 회원가입 후
-이용안내 > Open API 소개 > 일반 인증키 신청으로 즉시 발급받을 수 있습니다.
-인구 통계(`fetch-mois-population.mjs`)는 [jumin.mois.go.kr](https://jumin.mois.go.kr)의 공개
-통계라 별도 인증키가 필요 없습니다.
-
-다함께돌봄센터/우리동네키움센터(4~9,11호)도 각각 다함께돌봄포털, 우리동네키움포털
-(icare.seoul.go.kr) Open API 연동으로 교체 가능합니다.
+이용안내 > Open API 소개 > 인증키 신청(일반 인증키)으로 즉시 발급된다.
 
 ## 4. 핵심 로직
 
-- `src/lib/calculator.ts`
+- `src/lib/calculator.ts` (테스트: `npm test`)
   - `calculateECC()`: `ECC(f,t) = min[공간 수용력(f,t), 인력 수용력(f,t)] × 운영여부(f,t)`
   - `diagnoseDong()`: 생활권 단위 돌봄 공백(Care Gap) 및 3축(공간/시간/인력) 원인 분해(RCA).
     공간 병목은 "완전 가동해도 못 채우는 수요분", 시간/인력 병목은 그 나머지 공백 중 실제
@@ -99,18 +105,20 @@ node scripts/generate-data.mjs                                  # 시드 데이�
 
 ```
 src/
-  app/                 # Next.js App Router 엔트리
-  components/
-    map/KakaoMap.tsx   # 카카오맵 + 위험도 레이어 + 시설 마커
-    panel/SidePanel.tsx        # 생활권 진단 패널 (공백 스코어, 3축 병목, AI 정책 처방)
-    simulator/PolicySimulator.tsx  # 정책 시뮬레이터 (슬라이더, Before/After)
-    TopController.tsx  # 시간대 필터
-  data/                # 시드 데이터 (dongjak-demographics.json, dongjak-facilities.json)
-  lib/calculator.ts    # ECC/Care Gap/RCA/시뮬레이터 순수 함수
-  types/               # 도메인 타입 정의
+  app/                    # Next.js App Router 엔트리
+  components/             # 지도, 진단 패널, 시뮬레이터
+  data/seoul/             # 빌드 결과: emds.json, facilities/{sigungu_code}.json, meta.json
+  lib/
+    constants/            # 지역 코드(regions), 시간대(timeSlots, 시민 돌봄지도와 공유), 대상(targets)
+    config/assumptions.ts # 산정 기준값과 근거
+    calculator.ts         # 이용 가능한 자리 / 부족 인원 / 부족한 이유 / 시뮬레이터 순수 함수
+    geo.ts                # 경계 안 판정, 라벨 위치, 단순화 (화면·빌드 공용)
+  types/
+public/data/              # 지도용 단순화 경계 (seoul-boundaries.geojson)
 scripts/
-  fetch-mois-population.mjs   # 행정동별 실인구(0~9세) 수집
-  fetch-seoul-childcare.mjs   # 어린이집 실데이터 수집 (Open API 키 필요)
-  generate-data.mjs           # 위 캐시들을 조합해 시드 데이터 생성
-  cache/                       # 수집한 원본 데이터 스냅샷 (재현성/오프라인 빌드용)
+  fetch-boundaries.mjs        # 행정동 경계
+  fetch-mois-population.mjs   # 행정동별 0~9세 인구
+  fetch-seoul-childcare.mjs   # 서울 어린이집
+  build-data.mjs              # 정규화
+  cache/                      # 원자료 스냅샷 (재현성/오프라인 빌드용)
 ```

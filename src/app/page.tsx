@@ -6,9 +6,11 @@ import TopController from "@/components/TopController";
 import SidePanel from "@/components/panel/SidePanel";
 import PolicySimulator from "@/components/simulator/PolicySimulator";
 import { diagnoseAllDongs } from "@/lib/calculator";
-import type { Facility, TimeSlotId } from "@/types";
-import dongsData from "@/data/dongjak-demographics.json";
-import facilitiesData from "@/data/dongjak-facilities.json";
+import type { Dong, Facility, TimeSlotId } from "@/types";
+import { DEFAULT_SIGUNGU_CODE } from "@/lib/constants/regions";
+import emdsData from "@/data/seoul/emds.json";
+// TODO(S3): 구 선택 토글과 함께 구별 시설 파일을 동적으로 불러오도록 변경
+import facilitiesData from "@/data/seoul/facilities/11590.json";
 
 const KakaoMap = dynamic(() => import("@/components/map/KakaoMap"), {
   ssr: false,
@@ -19,8 +21,9 @@ const KakaoMap = dynamic(() => import("@/components/map/KakaoMap"), {
   ),
 });
 
-const dongs = dongsData as import("@/types").Dong[];
-const facilities = facilitiesData as Facility[];
+const dongs = (emdsData as Dong[]).filter((d) => d.sigunguCode === DEFAULT_SIGUNGU_CODE);
+// 좌표 오류로 행정동에 배정하지 못한 시설은 지도·동별 집계에서 뺀다 (meta.json의 locationIssues 참고)
+const facilities = (facilitiesData as Facility[]).filter((f) => f.emdCode !== null);
 
 export default function Home() {
   const [timeSlot, setTimeSlot] = useState<TimeSlotId>("daytime");

@@ -1,5 +1,6 @@
 import type {
   BottleneckAxis,
+  CareTargetId,
   Dong,
   DongDiagnosis,
   Facility,
@@ -77,9 +78,14 @@ export function axisPolicyText(axis: BottleneckAxis, timeSlot: TimeSlotId, staff
  *     실제 ECC가 idealECC보다 낮아져 발생한 손실 중 "실제로 공백을 유발한 부분"만 계산한다.
  *     (총 정원이 수요보다 넉넉하면 개별 시설의 손실이 있어도 생활권 전체 공백에는 영향이 없을 수 있다.)
  */
-export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeSlotId): DongDiagnosis {
-  const dongFacilities = facilities.filter((f) => f.dongId === dong.id);
-  const demand = dong.estimatedDemand[timeSlot] ?? 0;
+export function diagnoseDong(
+  dong: Dong,
+  facilities: Facility[],
+  timeSlot: TimeSlotId,
+  target: CareTargetId = "infant",
+): DongDiagnosis {
+  const dongFacilities = facilities.filter((f) => f.dongId === dong.id && f.targets.includes(target));
+  const demand = dong.estimatedDemand[target]?.[timeSlot] ?? 0;
 
   let totalECC = 0;
   let idealECC = 0; // 완전 개방 + 완전 인력배치 가정 시의 총 수용력
@@ -150,6 +156,7 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
   return {
     dongId: dong.id,
     timeSlot,
+    target,
     demand,
     totalECC,
     careGap,
@@ -161,8 +168,13 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
   };
 }
 
-export function diagnoseAllDongs(dongs: Dong[], facilities: Facility[], timeSlot: TimeSlotId): DongDiagnosis[] {
-  return dongs.map((dong) => diagnoseDong(dong, facilities, timeSlot));
+export function diagnoseAllDongs(
+  dongs: Dong[],
+  facilities: Facility[],
+  timeSlot: TimeSlotId,
+  target: CareTargetId = "infant",
+): DongDiagnosis[] {
+  return dongs.map((dong) => diagnoseDong(dong, facilities, timeSlot, target));
 }
 
 // ---------------------------------------------------------------------------
@@ -184,9 +196,10 @@ export function simulatePolicy(
   dong: Dong,
   facilities: Facility[],
   timeSlot: TimeSlotId,
-  adjustment: SimulatorAdjustment
+  adjustment: SimulatorAdjustment,
+  target: CareTargetId = "infant",
 ) {
-  const before = diagnoseDong(dong, facilities, timeSlot);
+  const before = diagnoseDong(dong, facilities, timeSlot, target);
   const dongFacilities = facilities.filter((f) => f.dongId === dong.id);
 
   const bottleneckedFacilities = dongFacilities.filter((f) => {
@@ -223,6 +236,9 @@ export function simulatePolicy(
       id: `SIM-${dong.id}`,
       name: "(시뮬레이션) 신규/연계 확충 정원",
       type: "다함께돌봄센터",
+      targets: [target],
+      sigunguCode: dong.sigunguCode,
+      emdCode: dong.emdCode,
       dongId: dong.id,
       address: "",
       lat: dong.lat,
@@ -240,7 +256,7 @@ export function simulatePolicy(
     });
   }
 
-  const after = diagnoseDong(dong, adjustedFacilities, timeSlot);
+  const after = diagnoseDong(dong, adjustedFacilities, timeSlot, target);
 
   const gapResolved = Math.max(0, before.careGap - after.careGap);
   const resolutionRate = before.careGap > 0 ? Math.min(100, Math.round((gapResolved / before.careGap) * 100)) : 100;

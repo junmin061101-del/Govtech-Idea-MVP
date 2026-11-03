@@ -1,0 +1,243 @@
+{
+ "builtAt": "2026-11-03T00:36:51.433Z",
+ "sources": {
+  "boundaries": {
+   "version": "ver20261001",
+   "url": "https://raw.githubusercontent.com/vuski/admdongkor/master/ver20261001/HangJeongDong_ver20261001.geojson",
+   "attribution": "통계청 SGIS 행정동 경계(공공누리 제1유형)를 vuski/admdongkor가 가공(CC BY 4.0)"
+  },
+  "population": {
+   "baseMonth": "2026-10",
+   "url": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)"
+  },
+  "childcare": {
+   "dataDate": "2026-11-02",
+   "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
+   "fetchedAt": "2026-11-03T00:33:11.564Z"
+  }
+ },
+ "counts": {
+  "emds": 427,
+  "facilities": 3919,
+  "pausedExcluded": 69,
+  "locationIssues": 24
+ },
+ "locationIssues": [
+  {
+   "id": "11260000501",
+   "name": "유진어린이집",
+   "sigunguCode": "11260",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 중랑구 중랑천로 332 한국아파트 102동 106호"
+  },
+  {
+   "id": "11530000658",
+   "name": "신나라어린이집",
+   "sigunguCode": "11530",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 구로구 경인로 382 102동 101호(개봉동, 한마을아파트)"
+  },
+  {
+   "id": "11215000372",
+   "name": "광진경찰서어린이집",
+   "sigunguCode": "11215",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 광진구 광나루로 353"
+  },
+  {
+   "id": "11170000217",
+   "name": "꿈누리어린이집",
+   "sigunguCode": "11170",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 용산구 이촌로 358 1층"
+  },
+  {
+   "id": "11470000643",
+   "name": "서울양천경찰서 어린이집",
+   "sigunguCode": "11470",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 양천구 신정로13길 20 ."
+  },
+  {
+   "id": "11560000508",
+   "name": "꼬꼬마어린이집",
+   "sigunguCode": "11560",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 영등포구 여의대방로 25 104동101호(신길동, 보라매경남아너스빌)"
+  },
+  {
+   "id": "11320000563",
+   "name": "새샘어린이집",
+   "sigunguCode": "11320",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 도봉구 도봉로106길 36 (창동)"
+  },
+  {
+   "id": "11380000698",
+   "name": "대영어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 은평구 응암로 376"
+  },
+  {
+   "id": "11380000699",
+   "name": "꿈동산어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 은평구 서오릉로22길 16-1 101호"
+  },
+  {
+   "id": "11200000412",
+   "name": "구립 청계에스케이뷰어린이집",
+   "sigunguCode": "11200",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 성동구 천호대로 244 청계에스케이뷰 공동주택 내"
+  },
+  {
+   "id": "11650000480",
+   "name": "서초구립 원페를라 바다어린이집",
+   "sigunguCode": "11650",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 서초구 서초대로19길 77 104동"
+  },
+  {
+   "id": "11470000638",
+   "name": "새싹어린이집",
+   "sigunguCode": "11470",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 양천구 목동동로 130 1423동 101호"
+  },
+  {
+   "id": "11545000351",
+   "name": "구립별하어린이집",
+   "sigunguCode": "11545",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 금천구 시흥대로149가길 24 가산동"
+  },
+  {
+   "id": "11680000529",
+   "name": "현대강남어린이집",
+   "sigunguCode": "11680",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 강남구 강남대로 350 4층"
+  },
+  {
+   "id": "11110000186",
+   "name": "강북삼성병원 효석어린이집",
+   "sigunguCode": "11110",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 종로구 경교장길 8 1층"
+  },
+  {
+   "id": "11500000757",
+   "name": "구립 어울림어린이집",
+   "sigunguCode": "11500",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 강서구 화곡로54길 43"
+  },
+  {
+   "id": "11380000689",
+   "name": "구립 물빛숲어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 은평구 은평터널로 27"
+  },
+  {
+   "id": "11110000180",
+   "name": "로카키즈어린이집",
+   "sigunguCode": "11110",
+   "issue": "outside_sigungu",
+   "lat": 37.56870363599733,
+   "lng": 126.97197897091388,
+   "address": "서울특별시 종로구 새문안로2길 10 1층"
+  },
+  {
+   "id": "11590000443",
+   "name": "해오름어린이집",
+   "sigunguCode": "11590",
+   "issue": "outside_sigungu",
+   "lat": 37.49276103375512,
+   "lng": 126.95853969340467,
+   "address": "서울특별시 동작구 상도로 421 현대아파트 108-103"
+  },
+  {
+   "id": "11710000804",
+   "name": "위례푸른숲어린이집",
+   "sigunguCode": "11710",
+   "issue": "outside_sigungu",
+   "lat": 37.5630971,
+   "lng": 126.9835453,
+   "address": "서울특별시 송파구 위례북로4길 12"
+  },
+  {
+   "id": "11380000668",
+   "name": "구립 내일어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_seoul",
+   "lat": 38.27356621610019,
+   "lng": 126.12349990154604,
+   "address": "서울특별시 은평구 응암로16길 20-9 구립 내일어린이집"
+  },
+  {
+   "id": "11590000416",
+   "name": "구립아기둥지어린이집",
+   "sigunguCode": "11590",
+   "issue": "outside_sigungu",
+   "lat": 37.492790340273274,
+   "lng": 126.9586075244506,
+   "address": "서울특별시 동작구 상도로 421 108동 108호 (관악현대아파트)"
+  },
+  {
+   "id": "11410000298",
+   "name": "은현어린이집",
+   "sigunguCode": "11410",
+   "issue": "outside_sigungu",
+   "lat": 37.58581546,
+   "lng": 126.9151405,
+   "address": "서울특별시 서대문구 응암로 151 (북가좌동)"
+  },
+  {
+   "id": "11200000012",
+   "name": "구립 금옥어린이집",
+   "sigunguCode": "11200",
+   "issue": "outside_sigungu",
+   "lat": 37.54955905,
+   "lng": 127.0127112,
+   "address": "서울특별시 성동구 매봉18길 1 (옥수동)"
+  }
+ ]
+}

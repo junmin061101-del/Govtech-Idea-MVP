@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "data:fetch": "node scripts/fetch-boundaries.mjs && node scripts/fetch-mois-population.mjs && node --env-file=.env.local scripts/fetch-seoul-childcare.mjs",
+    "data:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-data.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",

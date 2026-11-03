@@ -93,7 +93,7 @@ export default function KakaoMap({
             <div key={dong.id}>
               <Circle
                 center={{ lat: dong.lat, lng: dong.lng }}
-                radius={dong.approxRadiusM}
+                radius={500} // TODO(S3): 원 대신 행정동 경계 폴리곤으로 교체
                 fillColor={color}
                 fillOpacity={intensity}
                 strokeColor={color}

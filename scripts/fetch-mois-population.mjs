@@ -1,125 +1,82 @@
 /**
- * 행정안전부 주민등록인구 통계(jumin.mois.go.kr)에서 동작구 15개 행정동의
- * 실제 최신 0~9세/총 인구를 받아와 로컬 캐시 파일로 저장한다.
+ * 행정안전부 주민등록인구 통계(jumin.mois.go.kr)에서 서울 전 행정동의 0~9세 1세 단위 인구와 총인구를 받아
+ * 캐시에 저장한다. 행마다 10자리 행정기관코드가 붙어 있어 경계 데이터(adm_cd2)와 코드로 연결한다.
  *
- * 이 사이트는 별도 인증키가 필요 없는 공개 통계이지만, 폼 기반(JS 동적 select) UI라
- * 브라우저 없이 재현하려면 1) 세션 쿠키 획득 2) 다운로드 엔드포인트(downloadCsvAge.do)에
- * 동일 쿠키로 POST 요청하는 2단계가 필요하다.
+ * 인증키가 필요 없는 공개 통계이지만 폼 기반 UI라 1) 세션 쿠키 획득 2) downloadCsvAge.do에 같은 쿠키로
+ * POST 하는 2단계가 필요하다. 이번 달 통계가 아직 없으면 지난 달로 재시도한다.
  *
  * 실행: node scripts/fetch-mois-population.mjs
  */
-
 import { writeFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT_PATH = join(__dirname, "cache", "dongjak-population-raw.json");
-
+const OUT_PATH = join(dirname(fileURLToPath(import.meta.url)), "cache", "seoul-population-raw.json");
 const BASE = "https://jumin.mois.go.kr";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36";
+const SIDO_ORG = "1100000000"; // 서울특별시
 
-// 1) 세션 쿠키 획득
 const pageRes = await fetch(`${BASE}/ageStatMonth.do`, { headers: { "User-Agent": UA } });
-const setCookie = pageRes.headers.get("set-cookie") ?? "";
-const cookie = setCookie.split(";")[0];
-
-// 2) 조회 시점(가장 최근 공표월 = 이번 달 또는 지난 달) 결정
-const now = new Date();
-const year = String(now.getFullYear());
-const month = String(now.getMonth() + 1).padStart(2, "0"); // 이번 달 데이터가 없으면 지난 달로 재시도
+const cookie = (pageRes.headers.get("set-cookie") ?? "").split(";")[0];
 
 async function download(y, m) {
   const params = new URLSearchParams({
-    sltOrgType: "2",
-    sltOrgLvl1: "1100000000", // 서울특별시
-    sltOrgLvl2: "1159000000", // 동작구
-    gender: "gender",
-    sum: "sum",
-    sltUndefType: "",
-    searchYearStart: y,
-    searchMonthStart: m,
-    searchYearEnd: y,
-    searchMonthEnd: m,
-    sltOrderType: "1",
-    sltOrderValue: "ASC",
-    sltArgTypes: "10",
-    sltArgTypeA: "0",
-    sltArgTypeB: "9",
-    category: "month",
-    state: "3", // 전체읍면동현황
+    sltOrgType: "2", sltOrgLvl1: SIDO_ORG, sltOrgLvl2: "A", // A = 시도 내 전체 시군구
+    gender: "gender", sum: "sum", sltUndefType: "",
+    searchYearStart: y, searchMonthStart: m, searchYearEnd: y, searchMonthEnd: m,
+    sltOrderType: "1", sltOrderValue: "ASC",
+    sltArgTypes: "1", sltArgTypeA: "0", sltArgTypeB: "9", // 1세 단위, 0~9세
+    category: "month", state: "3", // 전체 읍면동 현황
   });
-
   const res = await fetch(`${BASE}/downloadCsvAge.do?searchYearMonth=month&xlsStats=3`, {
     method: "POST",
-    headers: {
-      "User-Agent": UA,
-      Cookie: cookie,
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-    },
+    headers: { "User-Agent": UA, Cookie: cookie, "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
     body: params.toString(),
   });
-  const buf = Buffer.from(await res.arrayBuffer());
-  // CSV는 EUC-KR(CP949) 인코딩으로 내려온다.
-  const text = new TextDecoder("euc-kr").decode(buf);
-  return text;
+  return new TextDecoder("euc-kr").decode(Buffer.from(await res.arrayBuffer())); // CSV는 CP949
 }
 
-let csvText = await download(year, month);
-if (!csvText.includes("동작구")) {
-  // 이번 달 통계가 아직 공표되지 않았으면 지난 달로 재시도
-  const prevDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-  csvText = await download(String(prevDate.getFullYear()), String(prevDate.getMonth() + 1).padStart(2, "0"));
+const now = new Date();
+let ym = [now.getFullYear(), now.getMonth() + 1];
+let csv = await download(String(ym[0]), String(ym[1]).padStart(2, "0"));
+if (!csv.includes("(11")) {
+  const prev = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  ym = [prev.getFullYear(), prev.getMonth() + 1];
+  csv = await download(String(ym[0]), String(ym[1]).padStart(2, "0"));
 }
+const baseMonth = `${ym[0]}-${String(ym[1]).padStart(2, "0")}`;
+if (!csv.includes(`${ym[0]}년${String(ym[1]).padStart(2, "0")}월_계_0세`)) throw new Error("CSV 헤더가 예상과 다릅니다(1세 단위 0~9세).");
 
-const lines = csvText.split("\n").filter((l) => l.includes("동작구") && l.includes("("));
-const DONG_NAME_MAP = {
-  "노량진제1동": "노량진1동",
-  "노량진제2동": "노량진2동",
-  "상도제1동": "상도1동",
-  "상도제2동": "상도2동",
-  "상도제3동": "상도3동",
-  "상도제4동": "상도4동",
-  "흑석동": "흑석동",
-  "사당제1동": "사당1동",
-  "사당제2동": "사당2동",
-  "사당제3동": "사당3동",
-  "사당제4동": "사당4동",
-  "사당제5동": "사당5동",
-  "대방동": "대방동",
-  "신대방제1동": "신대방1동",
-  "신대방제2동": "신대방2동",
-};
-
+const num = (s) => Number(s.replace(/,/g, ""));
 const rows = [];
-for (const line of lines) {
-  // CSV 필드가 전부 큰따옴표로 감싸져 있고 숫자 내부에 천단위 구분 콤마가 있어
-  // 단순 split(",")로는 깨지므로 "..." 단위로 추출한다.
+for (const line of csv.split("\n")) {
+  // 모든 필드가 큰따옴표로 감싸져 있고 숫자에 천단위 콤마가 있어 "..." 단위로 추출한다.
   const cols = [...line.matchAll(/"([^"]*)"/g)].map((m) => m[1].trim());
-  const rawName = cols[0].replace(/서울특별시 동작구 /, "").replace(/\(\d+\)/, "").trim();
-  const name = DONG_NAME_MAP[rawName];
-  if (!name) continue; // 동작구 합계 행 등은 건너뜀
-  const totalPopulation = Number(cols[1].replace(/,/g, ""));
-  const population0to9 = Number(cols[3].replace(/,/g, ""));
-  rows.push({ name, totalPopulation, population0to9 });
+  const m = cols[0]?.match(/^(.*)\((\d{10})\)$/);
+  if (!m) continue;
+  const code = m[2];
+  if (!code.startsWith(SIDO_ORG.slice(0, 2))) continue; // sltOrgLvl2=A는 전국을 돌려준다
+  if (code.endsWith("00000")) continue; // 시도·시군구 합계 행
+  rows.push({
+    code,
+    name: m[1].trim().split(/\s+/).pop(),
+    totalPopulation: num(cols[1]),
+    ages: cols.slice(3, 13).map(num), // 0세 ~ 9세
+  });
 }
-
-if (rows.length !== 15) {
-  console.error(`예상과 다른 행 수(${rows.length}/15)가 파싱되었습니다. 사이트 구조가 바뀌었을 수 있습니다.`);
-  process.exit(1);
-}
+if (rows.length < 400) throw new Error(`행정동 행 수가 너무 적습니다(${rows.length}). 사이트 구조가 바뀌었을 수 있습니다.`);
 
 writeFileSync(
   OUT_PATH,
   JSON.stringify(
     {
       fetchedAt: new Date().toISOString(),
-      source: "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세)",
+      baseMonth,
+      source: "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)",
       rows,
     },
     null,
-    2
+    1
   )
 );
-
-console.log(`Fetched ${rows.length} dong population rows -> ${OUT_PATH}`);
+console.log(`Fetched ${rows.length} 행정동 인구 (${baseMonth}) -> ${OUT_PATH}`);
