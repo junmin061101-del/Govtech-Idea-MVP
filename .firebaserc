@@ -3,5 +3,15 @@
     "default": "demo-careos",
     "dev": "careos-dev-1103174",
     "prod": "TODO-careos-prod"
-  }
+  },
+  "targets": {
+    "careos-dev-1103174": {
+      "hosting": {
+        "dashboard": [
+          "careos-dashboard-dev"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
