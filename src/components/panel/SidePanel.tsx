@@ -11,9 +11,9 @@ interface SidePanelProps {
 }
 
 const SEVERITY_STYLE: Record<DongDiagnosis["severity"], { label: string; className: string }> = {
-  critical: { label: "심각", className: "bg-red-50 text-red-600 border-red-200" },
-  moderate: { label: "보통", className: "bg-orange-50 text-orange-600 border-orange-200" },
-  normal: { label: "정상", className: "bg-green-50 text-green-600 border-green-200" },
+  critical: { label: "30% 초과 부족", className: "bg-red-50 text-red-600 border-red-200" },
+  moderate: { label: "부족", className: "bg-orange-50 text-orange-600 border-orange-200" },
+  normal: { label: "부족 없음", className: "bg-green-50 text-green-600 border-green-200" },
 };
 
 export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
@@ -21,9 +21,9 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 p-8 text-center text-sm text-neutral-400">
         <Building2 className="h-8 w-8 text-neutral-300" />
-        지도에서 생활권(행정동)을 선택하면
+        지도나 순위 목록에서 행정동을 선택하면
         <br />
-        돌봄 공백 진단 결과가 표시됩니다.
+        부족 현황가 표시됩니다.
       </div>
     );
   }
@@ -45,10 +45,10 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
         <p className="mt-0.5 text-xs text-neutral-500">{timeSlotLabel} 기준</p>
       </div>
 
-      {/* 돌봄 공백 스코어 카드 */}
+      {/* 부족 현황 카드 */}
       <div className={`rounded-xl border p-4 ${severity.className}`}>
         <div className="mb-3 flex items-center justify-between">
-          <span className="text-sm font-semibold">돌봄 공백 스코어</span>
+          <span className="text-sm font-semibold">부족 현황</span>
           <span className="rounded-full border bg-white/60 px-2 py-0.5 text-xs font-bold">{severity.label}</span>
         </div>
         <div className="grid grid-cols-3 gap-2 text-center">
@@ -57,11 +57,11 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
             <p className="text-lg font-bold">{Math.round(diagnosis.demand).toLocaleString()}명</p>
           </div>
           <div>
-            <p className="text-[11px] opacity-70">유효 수용력(ECC)</p>
+            <p className="text-[11px] opacity-70">이용 가능한 자리</p>
             <p className="text-lg font-bold">{Math.round(diagnosis.totalECC).toLocaleString()}명</p>
           </div>
           <div>
-            <p className="text-[11px] opacity-70">결손 인원</p>
+            <p className="text-[11px] opacity-70">부족 인원</p>
             <p className="text-lg font-bold">{Math.round(diagnosis.careGap).toLocaleString()}명</p>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
 
       {/* 3축 병목 다이어그램 */}
       <div>
-        <p className="mb-2 text-sm font-semibold text-neutral-800">3축 병목 분해 (손실 수용력 기준)</p>
+        <p className="mb-2 text-sm font-semibold text-neutral-800">부족한 이유</p>
         <div className="h-40 rounded-lg border border-neutral-200 bg-white p-2">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={bottleneckData} layout="vertical" margin={{ left: 8, right: 16, top: 8, bottom: 8 }}>
@@ -82,7 +82,7 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
               <XAxis type="number" tick={{ fontSize: 11 }} stroke="#a3a3a3" />
               <YAxis type="category" dataKey="axis" tick={{ fontSize: 12 }} width={36} stroke="#a3a3a3" />
               <Tooltip
-                formatter={(value) => [`${Number(value).toLocaleString()}명`, "손실 수용력"]}
+                formatter={(value) => [`${Number(value).toLocaleString()}명`, "부족 인원"]}
                 contentStyle={{ fontSize: 12, borderRadius: 8 }}
               />
               <Bar dataKey="value" radius={[0, 4, 4, 0]} fill="#f97316" />
@@ -99,11 +99,11 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
         </div>
       </div>
 
-      {/* 정책 처방 제언 (규칙 기반: 3축 중 손실 비중이 가장 큰 축을 판정해 문장으로 표현) */}
+      {/* 처방 제안 (규칙 기반: 3축 중 손실 비중이 가장 큰 축을 판정해 문장으로 표현) */}
       <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 p-4">
         <div className="mb-1.5 flex items-center gap-1.5 text-indigo-700">
           <ClipboardList className="h-4 w-4" />
-          <span className="text-sm font-semibold">정책 처방 제언</span>
+          <span className="text-sm font-semibold">처방 제안</span>
         </div>
         <p className="text-sm leading-relaxed text-indigo-900">{diagnosis.recommendation}</p>
         {diagnosis.careGap > 0 && (

@@ -1,40 +1,104 @@
 "use client";
 
-import { Clock } from "lucide-react";
+import { Clock, MapPin, Users } from "lucide-react";
+import { SIGUNGU, sigunguByCode } from "@/lib/constants/regions";
 import { TIME_SLOTS } from "@/lib/constants/timeSlots";
-import type { TimeSlotId } from "@/types";
+import { CARE_TARGETS } from "@/lib/constants/targets";
+import type { CareTargetId, TimeSlotId } from "@/types";
 
 interface TopControllerProps {
-  value: TimeSlotId;
-  onChange: (value: TimeSlotId) => void;
+  sigunguCode: string;
+  onSigunguChange: (code: string) => void;
+  target: CareTargetId;
+  onTargetChange: (target: CareTargetId) => void;
+  timeSlot: TimeSlotId;
+  onTimeSlotChange: (slot: TimeSlotId) => void;
 }
 
-export default function TopController({ value, onChange }: TopControllerProps) {
+function Segmented<T extends string>({
+  icon,
+  items,
+  value,
+  onChange,
+}: {
+  icon: React.ReactNode;
+  items: { id: T; label: string; disabled?: boolean; title?: string }[];
+  value: T;
+  onChange: (v: T) => void;
+}) {
   return (
-    <div className="flex flex-col gap-3 border-b border-neutral-200 bg-white px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h1 className="text-lg font-bold text-neutral-900">CareOS · 동작구 돌봄 공백 대시보드</h1>
-        <p className="text-xs text-neutral-500">B2G 공공 돌봄 의사결정 지원 시스템 · 서울특별시 동작구</p>
-      </div>
-      <div className="flex items-center gap-2 rounded-lg bg-neutral-100 p-1">
-        <Clock className="ml-2 h-4 w-4 text-neutral-400" />
-        {TIME_SLOTS.map((slot) => (
-          <button
-            key={slot.id}
-            onClick={() => onChange(slot.id)}
-            disabled={!slot.dataAvailable}
-            title={slot.dataAvailable ? slot.label : `${slot.label} · 데이터 준비 중`}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
-              value === slot.id
-                ? "bg-neutral-900 text-white shadow-sm"
-                : slot.dataAvailable
-                  ? "text-neutral-600 hover:bg-neutral-200"
-                  : "cursor-not-allowed text-neutral-300"
-            }`}
+    <div className="flex flex-wrap items-center gap-1 rounded-lg bg-neutral-100 p-1">
+      <span className="ml-1.5 mr-0.5 text-neutral-400">{icon}</span>
+      {items.map((item) => (
+        <button
+          key={item.id}
+          onClick={() => onChange(item.id)}
+          disabled={item.disabled}
+          title={item.title}
+          aria-pressed={value === item.id}
+          className={`rounded-md px-2.5 py-1 text-sm font-medium transition-colors ${
+            value === item.id
+              ? "bg-neutral-900 text-white shadow-sm"
+              : item.disabled
+                ? "cursor-not-allowed text-neutral-300"
+                : "text-neutral-600 hover:bg-neutral-200"
+          }`}
+        >
+          {item.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function TopController(props: TopControllerProps) {
+  const sigungu = sigunguByCode(props.sigunguCode);
+  return (
+    <div className="flex flex-col gap-3 border-b border-neutral-200 bg-white px-6 py-3 xl:flex-row xl:items-center xl:justify-between">
+      <div className="flex items-center gap-3">
+        <div>
+          <h1 className="text-lg font-bold text-neutral-900">우리 구 돌봄 공백 지도</h1>
+          <p className="text-xs text-neutral-500">서울특별시 {sigungu?.name}</p>
+        </div>
+        <label className="flex items-center gap-1.5 rounded-lg border border-neutral-200 px-2 py-1 text-sm">
+          <MapPin className="h-4 w-4 text-neutral-400" />
+          <span className="sr-only">자치구 선택</span>
+          <select
+            value={props.sigunguCode}
+            onChange={(e) => props.onSigunguChange(e.target.value)}
+            className="bg-transparent font-medium text-neutral-800 outline-none"
           >
-            {slot.shortLabel}
-          </button>
-        ))}
+            {SIGUNGU.map((s) => (
+              <option key={s.code} value={s.code}>
+                {s.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <Segmented
+          icon={<Users className="h-4 w-4" />}
+          value={props.target}
+          onChange={props.onTargetChange}
+          items={CARE_TARGETS.map((t) => ({
+            id: t.id,
+            label: t.label,
+            disabled: !t.dataAvailable,
+            title: t.dataAvailable ? t.label : t.unavailableReason,
+          }))}
+        />
+        <Segmented
+          icon={<Clock className="h-4 w-4" />}
+          value={props.timeSlot}
+          onChange={props.onTimeSlotChange}
+          items={TIME_SLOTS.map((t) => ({
+            id: t.id,
+            label: t.hours ? `${t.shortLabel} ${String(t.hours.start).padStart(2, "0")}~${t.hours.end}` : t.shortLabel,
+            disabled: !t.dataAvailable,
+            title: t.dataAvailable ? t.label : `${t.label} · 데이터 준비 중`,
+          }))}
+        />
       </div>
     </div>
   );

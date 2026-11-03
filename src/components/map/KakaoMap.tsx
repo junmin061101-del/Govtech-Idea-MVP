@@ -1,68 +1,131 @@
 "use client";
 
-import { useMemo } from "react";
-import { Map as KakaoMapView, MapMarker, Circle, CustomOverlayMap, useKakaoLoader } from "react-kakao-maps-sdk";
-import type { Dong, DongDiagnosis, Facility } from "@/types";
-import { severityColor } from "@/lib/calculator";
-
-// 동작구청 기준 기본 뷰
-export const DONGJAK_CENTER = { lat: 37.5124, lng: 126.9393 };
-export const DEFAULT_LEVEL = 6;
+import { useEffect, useMemo, useState } from "react";
+import {
+  CustomOverlayMap,
+  Map as KakaoMapView,
+  MapMarker,
+  MarkerClusterer,
+  Polygon,
+  useKakaoLoader,
+} from "react-kakao-maps-sdk";
+import type { Dong, DongDiagnosis, Facility, TimeSlotId } from "@/types";
+import { GAP_CLASSES, gapClassOf, people } from "@/lib/mapScale";
+import { timeSlotDef } from "@/lib/constants/timeSlots";
+import { REASONS } from "@/lib/reasons";
+import { rankDiagnoses } from "@/lib/ranking";
+import { useBoundaries } from "@/components/map/useBoundaries";
 
 interface KakaoMapProps {
+  sigunguCode: string;
   dongs: Dong[];
   diagnoses: DongDiagnosis[];
   facilities: Facility[];
+  timeSlot: TimeSlotId;
   selectedDongId: string | null;
   onSelectDong: (dongId: string) => void;
   selectedFacility: Facility | null;
   onSelectFacility: (facility: Facility | null) => void;
+  /** 범례에 표시할 데이터 기준 */
+  dataNote: string;
 }
 
-/**
- * PolicyMap(policymap.com/newmaps/e/childcaremap) 참고 포인트:
- *  - 생활권 단위 "히트 서클/코로플레스" 레이어로 공백 위험도를 먼저 보여주고,
- *    그 위에 개별 시설 포인트 마커를 얹어 "지역 리스크 + 개별 시설"을 한 화면에서 함께 읽게 한다.
- *  - 필터(시간대) 변경 시 동일한 지도 위에서 색상만 재계산되어, 지도를 다시 그리지 않고도
- *    비교가 가능하도록 한다.
- *  - 범례는 항상 지도와 함께 고정 노출한다 (심각/보통/정상 3단계 신호등 색상).
- * 아래 구현은 이 구조를 카카오맵 Circle + MapMarker 조합으로 재현한다.
- */
-export default function KakaoMap({
-  dongs,
-  diagnoses,
-  facilities,
-  selectedDongId,
-  onSelectDong,
-  selectedFacility,
-  onSelectFacility,
-}: KakaoMapProps) {
+/** 카카오맵 레벨: 숫자가 클수록 넓게 보인다. 이 레벨 이하에서 모든 동 라벨을 표시 */
+const ALL_LABELS_MAX_LEVEL = 6;
+/** 이 레벨까지는 부족 상위 동과 선택 동의 라벨만 표시. 그보다 넓으면 선택 동만 */
+const TOP_LABELS_MAX_LEVEL = 8;
+const TOP_LABEL_COUNT = 5;
+/** 이 레벨 이상에서 시설 점을 묶어(클러스터) 표시 */
+const CLUSTER_MIN_LEVEL = 6;
+
+const OPEN_COLOR = "#1f2937";
+const CLOSED_COLOR = "#9ca3af";
+
+function dotIcon(open: boolean, selected: boolean): string {
+  const r = selected ? 6 : 4;
+  const size = r * 2 + 4;
+  const svg = open
+    ? `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="${OPEN_COLOR}" stroke="white" stroke-width="2"/></svg>`
+    : `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="white" stroke="${CLOSED_COLOR}" stroke-width="2"/></svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+const CLUSTER_STYLE = {
+  background: "rgba(31, 41, 55, 0.78)",
+  color: "#fff",
+  borderRadius: "999px",
+  border: "2px solid #fff",
+  textAlign: "center",
+  fontSize: "11px",
+  fontWeight: "600",
+};
+const CLUSTER_STYLES = [24, 30, 36, 42].map((s) => ({ ...CLUSTER_STYLE, width: `${s}px`, height: `${s}px`, lineHeight: `${s - 4}px` }));
+
+export default function KakaoMap(props: KakaoMapProps) {
   const apiKey = process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY ?? "";
   const isKeyConfigured = apiKey.length > 0 && !apiKey.includes("your_") && !apiKey.includes("_here");
-
-  // SDK 기본값은 프로토콜 상대경로("//dapi.kakao.com/...")라서 페이지가 http로 열리면
-  // 스크립트도 http로 요청되어 크로미움의 ORB(Opaque Response Blocking)에 막힌다.
-  // 항상 https로 고정해 로컬(http://localhost)에서도 정상 로드되게 한다.
-  const [loading, error] = useKakaoLoader({
-    appkey: apiKey,
-    libraries: ["services"],
-    url: "https://dapi.kakao.com/v2/maps/sdk.js",
-  });
-
-  const diagnosisByDong = useMemo(() => {
-    const map = new Map<string, DongDiagnosis>();
-    diagnoses.forEach((d) => map.set(d.dongId, d));
-    return map;
-  }, [diagnoses]);
-
   if (!isKeyConfigured) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-8 text-center text-sm text-neutral-500">
         <p className="font-medium text-neutral-700">Kakao Maps API 키가 설정되지 않았습니다.</p>
         <p>.env.local 파일에 NEXT_PUBLIC_KAKAO_MAP_API_KEY 값을 설정한 뒤 다시 시작해주세요.</p>
+        <p className="text-xs">지도 없이도 오른쪽 순위 목록에서 모든 행정동을 볼 수 있습니다.</p>
       </div>
     );
   }
+  return <LoadedMap {...props} apiKey={apiKey} />;
+}
+
+function LoadedMap({
+  apiKey,
+  sigunguCode,
+  dongs,
+  diagnoses,
+  facilities,
+  timeSlot,
+  selectedDongId,
+  onSelectDong,
+  selectedFacility,
+  onSelectFacility,
+  dataNote,
+}: KakaoMapProps & { apiKey: string }) {
+  // SDK 기본 URL은 프로토콜 상대경로라 http 페이지에서 ORB에 막힌다. https로 고정한다.
+  const [loading, error] = useKakaoLoader({
+    appkey: apiKey,
+    libraries: ["services", "clusterer"],
+    url: "https://dapi.kakao.com/v2/maps/sdk.js",
+  });
+  const boundaries = useBoundaries();
+  const [map, setMap] = useState<kakao.maps.Map | null>(null);
+  const [level, setLevel] = useState(7);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const diagnosisByDong = useMemo(() => new Map(diagnoses.map((d) => [d.dongId, d])), [diagnoses]);
+  const topIds = useMemo(
+    () => new Set(rankDiagnoses(diagnoses).filter((d) => d.careGap > 0).slice(0, TOP_LABEL_COUNT).map((d) => d.dongId)),
+    [diagnoses],
+  );
+
+  // 구를 바꾸면 그 구의 모든 행정동이 보이도록 범위를 맞춘다 (화면 밖으로 잘리는 동이 없게)
+  useEffect(() => {
+    if (!map || dongs.length === 0) return;
+    const bounds = new kakao.maps.LatLngBounds();
+    for (const d of dongs) {
+      bounds.extend(new kakao.maps.LatLng(d.bbox[1], d.bbox[0]));
+      bounds.extend(new kakao.maps.LatLng(d.bbox[3], d.bbox[2]));
+    }
+    map.setBounds(bounds, 24, 24, 24, 24);
+    setLevel(map.getLevel());
+  }, [map, sigunguCode, dongs]);
+
+  // 목록에서 고른 동이 화면 밖이면 그쪽으로 이동
+  useEffect(() => {
+    if (!map || !selectedDongId) return;
+    const d = dongs.find((x) => x.id === selectedDongId);
+    if (!d) return;
+    const pos = new kakao.maps.LatLng(d.lat, d.lng);
+    if (!map.getBounds().contain(pos)) map.panTo(pos);
+  }, [map, selectedDongId, dongs]);
 
   if (error) {
     return (
@@ -71,7 +134,6 @@ export default function KakaoMap({
       </div>
     );
   }
-
   if (loading) {
     return (
       <div className="flex h-full w-full items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-sm text-neutral-400">
@@ -80,121 +142,156 @@ export default function KakaoMap({
     );
   }
 
+  const hovered = hoveredId ? diagnosisByDong.get(hoveredId) : null;
+  const hoveredDong = hoveredId ? dongs.find((d) => d.id === hoveredId) : null;
+
   return (
     <div className="relative h-full w-full overflow-hidden rounded-xl border border-neutral-200">
-      <KakaoMapView center={DONGJAK_CENTER} level={DEFAULT_LEVEL} className="h-full w-full">
+      <KakaoMapView
+        center={{ lat: 37.5665, lng: 126.978 }}
+        level={7}
+        className="h-full w-full"
+        onCreate={setMap}
+        onZoomChanged={(m) => setLevel(m.getLevel())}
+      >
+        {dongs.map((dong) => {
+          const parts = boundaries?.get(dong.id);
+          if (!parts) return null;
+          const diagnosis = diagnosisByDong.get(dong.id);
+          const cls = diagnosis ? gapClassOf(diagnosis.demand, diagnosis.totalECC) : GAP_CLASSES.at(-1)!;
+          const emphasized = selectedDongId === dong.id || hoveredId === dong.id;
+          return parts.map((path, i) => (
+            <Polygon
+              key={`${dong.id}-${i}`}
+              path={path}
+              fillColor={cls.color}
+              fillOpacity={0.62}
+              strokeColor={emphasized ? "#111827" : "#ffffff"}
+              strokeOpacity={1}
+              strokeWeight={emphasized ? 3 : 1.5}
+              zIndex={emphasized ? 5 : 1}
+              onClick={() => onSelectDong(dong.id)}
+              onMouseover={() => setHoveredId(dong.id)}
+              onMouseout={() => setHoveredId((h) => (h === dong.id ? null : h))}
+            />
+          ));
+        })}
+
         {dongs.map((dong) => {
           const diagnosis = diagnosisByDong.get(dong.id);
-          const color = diagnosis ? severityColor(diagnosis.severity) : "#9ca3af";
-          const isSelected = selectedDongId === dong.id;
-          const intensity = diagnosis ? Math.min(0.55, 0.18 + diagnosis.gapRatio * 0.6) : 0.15;
-
+          if (!diagnosis) return null;
+          const selected = selectedDongId === dong.id;
+          const visible =
+            selected ||
+            level <= ALL_LABELS_MAX_LEVEL ||
+            (level <= TOP_LABELS_MAX_LEVEL && topIds.has(dong.id));
+          if (!visible) return null;
+          const value =
+            diagnosis.careGap > 0
+              ? `${people(diagnosis.careGap)} 부족`
+              : diagnosis.demand > 0 && diagnosis.totalECC > diagnosis.demand
+                ? "여유"
+                : null;
           return (
-            <div key={dong.id}>
-              <Circle
-                center={{ lat: dong.lat, lng: dong.lng }}
-                radius={500} // TODO(S3): 원 대신 행정동 경계 폴리곤으로 교체
-                fillColor={color}
-                fillOpacity={intensity}
-                strokeColor={color}
-                strokeOpacity={isSelected ? 0.95 : 0.55}
-                strokeWeight={isSelected ? 3 : 1.5}
+            <CustomOverlayMap key={`label-${dong.id}`} position={{ lat: dong.lat, lng: dong.lng }} zIndex={selected ? 6 : 3}>
+              <button
                 onClick={() => onSelectDong(dong.id)}
-                zIndex={isSelected ? 10 : 1}
-              />
-              <CustomOverlayMap position={{ lat: dong.lat, lng: dong.lng }} yAnchor={1.9}>
-                <button
-                  onClick={() => onSelectDong(dong.id)}
-                  className="pointer-events-auto rounded-md bg-white/90 px-1.5 py-0.5 text-[11px] font-medium text-neutral-700 shadow-sm ring-1 ring-black/5"
-                >
-                  {dong.name}
-                </button>
-              </CustomOverlayMap>
-            </div>
+                className={`pointer-events-auto whitespace-nowrap rounded-md px-1.5 py-0.5 text-center text-[11px] leading-tight shadow-sm ring-1 ${
+                  selected ? "bg-neutral-900 text-white ring-neutral-900" : "bg-white/95 text-neutral-800 ring-black/10"
+                }`}
+              >
+                <span className="font-semibold">{dong.name}</span>
+                {value && <span className="block tabular-nums">{value}</span>}
+              </button>
+            </CustomOverlayMap>
           );
         })}
 
-        {facilities.map((facility) => (
-          <MapMarker
-            key={facility.id}
-            position={{ lat: facility.lat, lng: facility.lng }}
-            title={facility.name}
-            onClick={() => onSelectFacility(facility)}
-            image={{
-              src: markerIcon(selectedFacility?.id === facility.id),
-              size: { width: 22, height: 22 },
-            }}
-          />
-        ))}
-
+        <MarkerClusterer averageCenter minLevel={CLUSTER_MIN_LEVEL} styles={CLUSTER_STYLES} calculator={[10, 30, 60]}>
+          {facilities.map((f) => {
+            const open = f.operatingWindows.find((w) => w.timeSlot === timeSlot)?.isOpen ?? false;
+            const selected = selectedFacility?.id === f.id;
+            return (
+              <MapMarker
+                key={f.id}
+                position={{ lat: f.lat, lng: f.lng }}
+                title={`${f.name} · ${open ? "운영 중" : "운영 안 함"}`}
+                onClick={() => onSelectFacility(f)}
+                image={{ src: dotIcon(open, selected), size: { width: selected ? 16 : 12, height: selected ? 16 : 12 } }}
+              />
+            );
+          })}
+        </MarkerClusterer>
       </KakaoMapView>
 
-      {/* 지도 중앙을 가리지 않도록 시설 상세 카드는 지도 좌표가 아니라 컨테이너 우측 상단에 고정 배치한다. */}
-      {selectedFacility && (
-        <div className="absolute right-3 top-3 z-20">
-          <FacilityDetailCard facility={selectedFacility} onClose={() => onSelectFacility(null)} />
+      {hovered && hoveredDong && (
+        <div className="pointer-events-none absolute left-3 top-3 z-20 rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-xs shadow-md">
+          <p className="font-semibold text-neutral-800">{hoveredDong.name}</p>
+          <p className="text-neutral-600">
+            수요 {people(hovered.demand)} · 이용 가능한 자리 {people(hovered.totalECC)}
+          </p>
+          <p className="font-medium text-neutral-900">
+            {hovered.careGap > 0
+              ? `${people(hovered.careGap)} 부족 · 주된 이유: ${REASONS[hovered.bottleneck.dominant].label}`
+              : hovered.totalECC > hovered.demand
+                ? `여유 ${people(hovered.totalECC - hovered.demand)}`
+                : "충족"}
+          </p>
         </div>
       )}
 
-      <MapLegend />
+      {selectedFacility && (
+        <div className="absolute right-3 top-3 z-20">
+          <FacilityDetailCard facility={selectedFacility} timeSlot={timeSlot} onClose={() => onSelectFacility(null)} />
+        </div>
+      )}
+
+      <MapLegend timeSlot={timeSlot} dataNote={dataNote} />
     </div>
   );
 }
 
-// 생활권 원(빨강/주황/초록)이 이미 위험도를 표현하므로, 개별 시설 마커는 유형별 색상 대신
-// 단일 색상으로 통일해 시각적 잡음을 줄인다.
-const FACILITY_MARKER_COLOR = "#1e293b"; // slate-800
-
-function MapLegend() {
-  const severityItems: { color: string; label: string }[] = [
-    { color: "#ef4444", label: "심각 (공백 30% 초과)" },
-    { color: "#f97316", label: "보통 (공백 발생)" },
-    { color: "#22c55e", label: "정상 (수요 충족)" },
-  ];
+function MapLegend({ timeSlot, dataNote }: { timeSlot: TimeSlotId; dataNote: string }) {
   return (
-    <div className="absolute bottom-3 left-3 z-20 rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
-      <p className="mb-1 font-semibold text-neutral-700">생활권 돌봄 공백 위험도 (원)</p>
-      <div className="flex flex-col gap-1">
-        {severityItems.map((item) => (
-          <div key={item.label} className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-            <span className="text-neutral-600">{item.label}</span>
-          </div>
+    <div className="absolute bottom-3 left-3 z-20 max-w-[240px] rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
+      <p className="mb-1 font-semibold text-neutral-700">부족 비율 (부족 인원 ÷ 추정 수요)</p>
+      <ul className="space-y-0.5">
+        {GAP_CLASSES.filter((c) => c.id !== "no_demand").map((c) => (
+          <li key={c.id} className="flex items-center gap-1.5">
+            <span className="inline-block h-2.5 w-3.5 rounded-sm ring-1 ring-black/10" style={{ backgroundColor: c.color }} />
+            <span className="text-neutral-600">{c.label}</span>
+          </li>
         ))}
+      </ul>
+      <div className="mt-1.5 space-y-0.5 border-t border-neutral-100 pt-1.5">
+        <p className="flex items-center gap-1.5 text-neutral-600">
+          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: OPEN_COLOR }} />
+          {timeSlotDef(timeSlot).shortLabel}에 운영 중인 시설
+        </p>
+        <p className="flex items-center gap-1.5 text-neutral-600">
+          <span className="inline-block h-2.5 w-2.5 rounded-full border-2 bg-white" style={{ borderColor: CLOSED_COLOR }} />
+          운영 안 함
+        </p>
       </div>
-      <div className="mt-1.5 flex items-center gap-1.5 border-t border-neutral-100 pt-1.5">
-        <span className="inline-block h-2 w-2 rounded-full border border-white" style={{ backgroundColor: FACILITY_MARKER_COLOR }} />
-        <span className="text-neutral-600">개별 돌봄시설 (점, 클릭 시 상세정보)</span>
-      </div>
+      <p className="mt-1.5 border-t border-neutral-100 pt-1.5 text-[10px] leading-snug text-neutral-400">{dataNote}</p>
     </div>
   );
 }
 
-function markerIcon(selected: boolean): string {
-  const size = selected ? 24 : 18;
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 22 22">
-      <circle cx="11" cy="11" r="7" fill="${FACILITY_MARKER_COLOR}" stroke="white" stroke-width="${selected ? 3 : 2}" />
-    </svg>
-  `.trim();
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
-function FacilityDetailCard({ facility, onClose }: { facility: Facility; onClose: () => void }) {
-  const eveningWindow = facility.operatingWindows.find((w) => w.timeSlot === "night");
-  const weekendWindow = facility.operatingWindows.find((w) => w.timeSlot === "weekend");
-
+function FacilityDetailCard({ facility, timeSlot, onClose }: { facility: Facility; timeSlot: TimeSlotId; onClose: () => void }) {
+  const window = facility.operatingWindows.find((w) => w.timeSlot === timeSlot);
   const rows: { label: string; value: string }[] = [
     { label: "유형", value: facility.type },
     { label: "주소", value: facility.address },
     ...(facility.phone ? [{ label: "전화번호", value: facility.phone }] : []),
     { label: "정원 / 현원", value: `${facility.capacity}명 / ${facility.currentEnrollment}명` },
-    { label: "배치 교직원수", value: `${facility.totalStaff}명` },
-    ...(facility.approvalDate ? [{ label: "인가일자", value: facility.approvalDate }] : []),
-    { label: "야간연장 가능", value: eveningWindow?.isOpen ? "예" : "아니오" },
-    { label: "휴일보육 가능", value: weekendWindow?.isOpen ? "예" : "아니오" },
+    { label: "교사 수", value: `${facility.totalStaff}명${facility.teachersEstimated ? " (추정)" : ""}` },
+    {
+      label: `${timeSlotDef(timeSlot).shortLabel} 운영`,
+      value: `${window?.isOpen ? "운영" : "운영 안 함"}${window?.estimated ? " (추정)" : ""}`,
+    },
+    ...(facility.spec?.length ? [{ label: "시설 특성", value: facility.spec.join(", ") }] : []),
   ];
-
   return (
     <div className="w-72 rounded-lg border border-neutral-200 bg-white p-3 text-xs shadow-lg">
       <div className="mb-2 flex items-start justify-between gap-2">

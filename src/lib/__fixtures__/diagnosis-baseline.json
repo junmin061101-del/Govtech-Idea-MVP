@@ -12,7 +12,7 @@
   {
    "dongId": "1159053000",
    "demand": 708,
-   "totalECC": 732.8,
+   "totalECC": 732,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -21,16 +21,16 @@
   {
    "dongId": "1159054000",
    "demand": 696,
-   "totalECC": 414.212,
-   "careGap": 281.788,
+   "totalECC": 413,
+   "careGap": 283,
    "space": 269,
    "time": 0,
-   "staff": 12.788000000000011
+   "staff": 14
   },
   {
    "dongId": "1159055000",
    "demand": 244,
-   "totalECC": 326.914,
+   "totalECC": 326,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -39,7 +39,7 @@
   {
    "dongId": "1159056000",
    "demand": 489,
-   "totalECC": 606.934,
+   "totalECC": 604,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -48,7 +48,7 @@
   {
    "dongId": "1159062000",
    "demand": 204,
-   "totalECC": 326.12100000000004,
+   "totalECC": 325,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -57,16 +57,16 @@
   {
    "dongId": "1159064000",
    "demand": 561,
-   "totalECC": 394.012,
-   "careGap": 166.988,
+   "totalECC": 393,
+   "careGap": 168,
    "space": 140,
    "time": 0,
-   "staff": 26.988
+   "staff": 28
   },
   {
    "dongId": "1159065000",
    "demand": 186,
-   "totalECC": 317.85699999999997,
+   "totalECC": 317,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -84,25 +84,25 @@
   {
    "dongId": "1159066000",
    "demand": 474,
-   "totalECC": 451.28,
-   "careGap": 22.720000000000027,
+   "totalECC": 449,
+   "careGap": 25,
    "space": 0,
    "time": 0,
-   "staff": 22.720000000000027
+   "staff": 25
   },
   {
    "dongId": "1159067000",
    "demand": 432,
-   "totalECC": 376.948,
-   "careGap": 55.05200000000002,
+   "totalECC": 376,
+   "careGap": 56,
    "space": 12,
    "time": 0,
-   "staff": 43.05200000000002
+   "staff": 44
   },
   {
    "dongId": "1159068000",
    "demand": 500,
-   "totalECC": 597.577,
+   "totalECC": 597,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -111,20 +111,20 @@
   {
    "dongId": "1159060500",
    "demand": 783,
-   "totalECC": 714.965,
-   "careGap": 68.03499999999997,
+   "totalECC": 712,
+   "careGap": 71,
    "space": 0,
    "time": 0,
-   "staff": 68.03499999999997
+   "staff": 71
   },
   {
    "dongId": "1159051000",
    "demand": 673,
-   "totalECC": 357.185,
-   "careGap": 315.815,
+   "totalECC": 357,
+   "careGap": 316,
    "space": 250,
    "time": 0,
-   "staff": 65.815
+   "staff": 66
   },
   {
    "dongId": "1159063000",
@@ -140,7 +140,7 @@
   {
    "dongId": "1159052000",
    "demand": 11,
-   "totalECC": 69.822,
+   "totalECC": 68,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -149,7 +149,7 @@
   {
    "dongId": "1159053000",
    "demand": 304,
-   "totalECC": 424.32599999999996,
+   "totalECC": 419,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -158,16 +158,16 @@
   {
    "dongId": "1159054000",
    "demand": 298,
-   "totalECC": 221.06900000000002,
-   "careGap": 76.93099999999998,
+   "totalECC": 215,
+   "careGap": 83,
    "space": 0,
    "time": 0,
-   "staff": 76.93099999999998
+   "staff": 83
   },
   {
    "dongId": "1159055000",
    "demand": 105,
-   "totalECC": 213.322,
+   "totalECC": 210,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -176,7 +176,7 @@
   {
    "dongId": "1159056000",
    "demand": 209,
-   "totalECC": 353.717,
+   "totalECC": 348,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -185,7 +185,7 @@
   {
    "dongId": "1159062000",
    "demand": 88,
-   "totalECC": 165.13600000000002,
+   "totalECC": 163,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -194,16 +194,16 @@
   {
    "dongId": "1159064000",
    "demand": 240,
-   "totalECC": 242.72699999999995,
-   "careGap": 0,
+   "totalECC": 237,
+   "careGap": 3,
    "space": 0,
    "time": 0,
-   "staff": 0
+   "staff": 3
   },
   {
    "dongId": "1159065000",
    "demand": 80,
-   "totalECC": 198.647,
+   "totalECC": 196,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -212,16 +212,16 @@
   {
    "dongId": "1159065100",
    "demand": 152,
-   "totalECC": 134.431,
-   "careGap": 17.56899999999999,
+   "totalECC": 133,
+   "careGap": 19,
    "space": 0,
    "time": 0,
-   "staff": 17.56899999999999
+   "staff": 19
   },
   {
    "dongId": "1159066000",
    "demand": 203,
-   "totalECC": 232.44500000000002,
+   "totalECC": 227,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -230,7 +230,7 @@
   {
    "dongId": "1159067000",
    "demand": 185,
-   "totalECC": 230.39000000000004,
+   "totalECC": 228,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -239,7 +239,7 @@
   {
    "dongId": "1159068000",
    "demand": 214,
-   "totalECC": 415.643,
+   "totalECC": 409,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -248,7 +248,7 @@
   {
    "dongId": "1159060500",
    "demand": 335,
-   "totalECC": 386.94800000000004,
+   "totalECC": 381,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -257,16 +257,16 @@
   {
    "dongId": "1159051000",
    "demand": 288,
-   "totalECC": 217.709,
-   "careGap": 70.291,
+   "totalECC": 212,
+   "careGap": 76,
    "space": 0,
    "time": 0,
-   "staff": 70.291
+   "staff": 76
   },
   {
    "dongId": "1159063000",
    "demand": 268,
-   "totalECC": 344.5919999999999,
+   "totalECC": 339,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -277,7 +277,7 @@
   {
    "dongId": "1159052000",
    "demand": 3,
-   "totalECC": 16.245,
+   "totalECC": 15,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -286,25 +286,25 @@
   {
    "dongId": "1159053000",
    "demand": 81,
-   "totalECC": 37.623000000000005,
-   "careGap": 43.376999999999995,
+   "totalECC": 33,
+   "careGap": 48,
    "space": 0,
-   "time": 12.976437080304448,
-   "staff": 30.40056291969555
+   "time": 14.268493150684932,
+   "staff": 33.73150684931507
   },
   {
    "dongId": "1159054000",
    "demand": 80,
-   "totalECC": 37.183,
-   "careGap": 42.817,
+   "totalECC": 33,
+   "careGap": 47,
    "space": 0,
-   "time": 15.926614283112333,
-   "staff": 26.89038571688767
+   "time": 17.29695431472081,
+   "staff": 29.703045685279186
   },
   {
    "dongId": "1159055000",
    "demand": 28,
-   "totalECC": 43.733000000000004,
+   "totalECC": 41,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -313,34 +313,34 @@
   {
    "dongId": "1159056000",
    "demand": 56,
-   "totalECC": 36.849999999999994,
-   "careGap": 19.150000000000006,
+   "totalECC": 35,
+   "careGap": 21,
    "space": 0,
-   "time": 10.863684946148158,
-   "staff": 8.286315053851848
+   "time": 11.877049180327868,
+   "staff": 9.12295081967213
   },
   {
    "dongId": "1159062000",
    "demand": 23,
-   "totalECC": 12.555,
-   "careGap": 10.445,
+   "totalECC": 11,
+   "careGap": 12,
    "space": 0,
-   "time": 4.436453385756718,
-   "staff": 6.008546614243281
+   "time": 5.074285714285715,
+   "staff": 6.925714285714286
   },
   {
    "dongId": "1159064000",
    "demand": 64,
-   "totalECC": 50.49600000000001,
-   "careGap": 13.50399999999999,
+   "totalECC": 44,
+   "careGap": 20,
    "space": 0,
-   "time": 2.0775160322155752,
-   "staff": 11.426483967784415
+   "time": 3.0238726790450925,
+   "staff": 16.97612732095491
   },
   {
    "dongId": "1159065000",
    "demand": 21,
-   "totalECC": 47.391999999999996,
+   "totalECC": 46,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -349,72 +349,72 @@
   {
    "dongId": "1159065100",
    "demand": 40,
-   "totalECC": 18.283,
-   "careGap": 21.717,
+   "totalECC": 17,
+   "careGap": 23,
    "space": 0,
-   "time": 9.681785811471945,
-   "staff": 12.035214188528055
+   "time": 10.17816091954023,
+   "staff": 12.821839080459771
   },
   {
    "dongId": "1159066000",
    "demand": 54,
-   "totalECC": 30.159999999999997,
-   "careGap": 23.840000000000003,
+   "totalECC": 27,
+   "careGap": 27,
    "space": 0,
-   "time": 10.205479452054796,
-   "staff": 13.63452054794521
+   "time": 11.476510067114093,
+   "staff": 15.523489932885907
   },
   {
    "dongId": "1159067000",
    "demand": 49,
-   "totalECC": 38.224000000000004,
-   "careGap": 10.775999999999996,
+   "totalECC": 35,
+   "careGap": 14,
    "space": 0,
-   "time": 4.036314488076776,
-   "staff": 6.739685511923219
+   "time": 5.2,
+   "staff": 8.8
   },
   {
    "dongId": "1159068000",
    "demand": 57,
-   "totalECC": 56.867,
-   "careGap": 0.13300000000000267,
+   "totalECC": 54,
+   "careGap": 3,
    "space": 0,
-   "time": 0.04256895382939059,
-   "staff": 0.09043104617061207
+   "time": 0.9552772808586761,
+   "staff": 2.044722719141324
   },
   {
    "dongId": "1159060500",
    "demand": 89,
-   "totalECC": 64.83800000000001,
-   "careGap": 24.161999999999992,
+   "totalECC": 59,
+   "careGap": 30,
    "space": 0,
-   "time": 3.276037372528287,
-   "staff": 20.885962627471706
+   "time": 4.0353260869565215,
+   "staff": 25.964673913043477
   },
   {
    "dongId": "1159051000",
    "demand": 77,
-   "totalECC": 38.739,
-   "careGap": 38.261,
+   "totalECC": 35,
+   "careGap": 42,
    "space": 0,
-   "time": 9.957034411506763,
-   "staff": 28.30396558849324
+   "time": 10.824742268041236,
+   "staff": 31.175257731958766
   },
   {
    "dongId": "1159063000",
    "demand": 72,
-   "totalECC": 69.456,
-   "careGap": 2.543999999999997,
+   "totalECC": 64,
+   "careGap": 8,
    "space": 0,
-   "time": 0.7153397638928871,
-   "staff": 1.8286602361071098
+   "time": 2.2222222222222223,
+   "staff": 5.777777777777778
   }
  ],
  "weekend": [
   {
    "dongId": "1159052000",
    "demand": 4,
-   "totalECC": 11.833,
+   "totalECC": 11,
    "careGap": 0,
    "space": 0,
    "time": 0,
@@ -423,11 +423,11 @@
   {
    "dongId": "1159053000",
    "demand": 121,
-   "totalECC": 15.549,
-   "careGap": 105.451,
+   "totalECC": 14,
+   "careGap": 107,
    "space": 0,
-   "time": 55.72692390537974,
-   "staff": 49.72407609462025
+   "time": 56.42857142857143,
+   "staff": 50.57142857142857
   },
   {
    "dongId": "1159054000",
@@ -441,110 +441,110 @@
   {
    "dongId": "1159055000",
    "demand": 42,
-   "totalECC": 6.533,
-   "careGap": 35.467,
+   "totalECC": 6,
+   "careGap": 36,
    "space": 0,
-   "time": 29.616112200442874,
-   "staff": 5.8508877995571265
+   "time": 30.026200873362445,
+   "staff": 5.973799126637554
   },
   {
    "dongId": "1159056000",
    "demand": 84,
-   "totalECC": 18.372,
-   "careGap": 65.628,
+   "totalECC": 17,
+   "careGap": 67,
    "space": 0,
-   "time": 51.42340910396599,
-   "staff": 14.204590896034011
+   "time": 52.38375796178344,
+   "staff": 14.61624203821656
   },
   {
    "dongId": "1159062000",
    "demand": 35,
-   "totalECC": 4.873,
-   "careGap": 30.127,
+   "totalECC": 4,
+   "careGap": 31,
    "space": 0,
-   "time": 25.71725255316221,
-   "staff": 4.409747446837786
+   "time": 26.397759103641455,
+   "staff": 4.602240896358543
   },
   {
    "dongId": "1159064000",
    "demand": 96,
-   "totalECC": 4.278,
-   "careGap": 91.722,
+   "totalECC": 4,
+   "careGap": 92,
    "space": 0,
-   "time": 80.11769956949716,
-   "staff": 11.604300430502828
+   "time": 80.30695443645084,
+   "staff": 11.693045563549159
   },
   {
    "dongId": "1159065000",
    "demand": 32,
-   "totalECC": 7.222,
-   "careGap": 24.778,
+   "totalECC": 7,
+   "careGap": 25,
    "space": 0,
-   "time": 21.833901869298458,
-   "staff": 2.9440981307015393
+   "time": 22.01492537313433,
+   "staff": 2.9850746268656714
   },
   {
    "dongId": "1159065100",
    "demand": 61,
-   "totalECC": 15.281,
-   "careGap": 45.719,
+   "totalECC": 15,
+   "careGap": 46,
    "space": 0,
-   "time": 20.55441358077385,
-   "staff": 25.164586419226147
+   "time": 20.647727272727273,
+   "staff": 25.352272727272727
   },
   {
    "dongId": "1159066000",
    "demand": 81,
-   "totalECC": 5.241,
-   "careGap": 75.759,
+   "totalECC": 5,
+   "careGap": 76,
    "space": 0,
-   "time": 68.36360901870684,
-   "staff": 7.395390981293159
+   "time": 68.54584221748401,
+   "staff": 7.454157782515992
   },
   {
    "dongId": "1159067000",
    "demand": 74,
-   "totalECC": 8.927,
-   "careGap": 65.07300000000001,
+   "totalECC": 8,
+   "careGap": 66,
    "space": 0,
-   "time": 46.22370235943495,
-   "staff": 18.84929764056506
+   "time": 46.77669902912621,
+   "staff": 19.223300970873787
   },
   {
    "dongId": "1159068000",
    "demand": 86,
-   "totalECC": 13.453,
-   "careGap": 72.547,
+   "totalECC": 13,
+   "careGap": 73,
    "space": 0,
-   "time": 60.62251499882411,
-   "staff": 11.924485001175887
+   "time": 60.955,
+   "staff": 12.045
   },
   {
    "dongId": "1159060500",
    "demand": 134,
-   "totalECC": 9.831,
-   "careGap": 124.169,
+   "totalECC": 9,
+   "careGap": 125,
    "space": 0,
-   "time": 107.06282723846712,
-   "staff": 17.106172761532868
+   "time": 107.66539440203563,
+   "staff": 17.334605597964376
   },
   {
    "dongId": "1159051000",
    "demand": 115,
-   "totalECC": 5.3,
-   "careGap": 109.7,
+   "totalECC": 5,
+   "careGap": 110,
    "space": 0,
-   "time": 98.22312664591813,
-   "staff": 11.47687335408188
+   "time": 98.42105263157895,
+   "staff": 11.578947368421051
   },
   {
    "dongId": "1159063000",
    "demand": 107,
-   "totalECC": 10.23,
-   "careGap": 96.77,
+   "totalECC": 10,
+   "careGap": 97,
    "space": 0,
-   "time": 85.86495821505846,
-   "staff": 10.90504178494154
+   "time": 86.0297619047619,
+   "staff": 10.970238095238095
   }
  ]
 }

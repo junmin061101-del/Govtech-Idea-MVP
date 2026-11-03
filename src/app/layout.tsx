@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CareOS · 동작구 돌봄 공백 대시보드",
-  description: "B2G 공공 돌봄 의사결정 지원 시스템 - 서울특별시 동작구",
+  title: "우리 구 돌봄 공백 지도",
+  description: "서울 자치구 보육 담당자를 위한 행정동별 돌봄 공백 지도",
 };
 
 export default function RootLayout({

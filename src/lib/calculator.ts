@@ -23,6 +23,7 @@ export const DEMAND_METHODOLOGY_NOTE =
  * - 공간 수용력: 시설 인가 정원 (물리적 상한)
  * - 인력 수용력: 해당 시간대 배치 인력 * 인력 1인당 표준 돌봄 인원
  * - 운영여부: 해당 시간대에 문을 여는지 (0 또는 1) — 닫혀 있으면 정원·인력이 있어도 ECC는 0
+ * - 결과는 정수(명)로 내림
  */
 export function calculateECC(facility: Facility, timeSlot: TimeSlotId): FacilityECCResult {
   const window = facility.operatingWindows.find((w) => w.timeSlot === timeSlot);
@@ -31,7 +32,8 @@ export function calculateECC(facility: Facility, timeSlot: TimeSlotId): Facility
   const staffCapacity = window ? window.staffOnDuty * window.staffToChildRatio : 0;
   const isOpen = window?.isOpen ?? false;
 
-  const ecc = isOpen ? Math.min(spaceCapacity, staffCapacity) : 0;
+  // 아동 수는 정수이므로 시설별 자리는 내림한다 (교사 1인당 3.33명 → 3명). 소수 부족 인원이 생기지 않게 한다
+  const ecc = isOpen ? Math.floor(Math.min(spaceCapacity, staffCapacity)) : 0;
 
   return {
     facilityId: facility.id,
@@ -49,9 +51,9 @@ function severityOf(gapRatio: number): DongDiagnosis["severity"] {
 }
 
 const AXIS_LABEL: Record<BottleneckAxis, string> = {
-  space: "공간(정원)",
-  time: "시간(운영시간)",
-  staff: "인력(교사 배치)",
+  space: "\"자리가 없어서\" 부족한",
+  time: "\"문을 닫아서\" 부족한",
+  staff: "\"선생님이 없어서\" 부족한",
 };
 
 // 축별 정책 제언 문구. 시간 축은 시간대마다 처방이 달라야 하므로(주말→주말 운영, 야간→야간 연장)
@@ -150,8 +152,8 @@ export function diagnoseDong(
   const policyText = axisPolicyText(dominant, timeSlot, Math.max(1, Math.ceil(axisValue.staff / avgStaffRatio)));
 
   const recommendation = careGap > 0
-    ? `${dong.name}은(는) ${timeSlotLabel} 기준 ${AXIS_LABEL[dominant]} 병목이 공백의 ${dominantShare}%를 차지하는 주원인입니다. ${policyText}.`
-    : `${dong.name}은(는) ${timeSlotLabel} 기준 추정 수요 대비 유효 수용력이 충분합니다.`;
+    ? `${dong.name}은(는) ${timeSlotLabel} 기준 ${AXIS_LABEL[dominant]} 몫이 부족 인원의 ${dominantShare}%로 가장 큽니다. ${policyText}.`
+    : `${dong.name}은(는) ${timeSlotLabel} 기준 추정 수요를 이용 가능한 자리로 충족합니다.`;
 
   return {
     dongId: dong.id,

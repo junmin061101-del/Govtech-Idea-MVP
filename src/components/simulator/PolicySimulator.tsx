@@ -4,35 +4,36 @@ import { useMemo, useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { AlertTriangle, TrendingDown } from "lucide-react";
-import type { Dong, Facility, TimeSlotId } from "@/types";
+import type { CareTargetId, Dong, Facility, TimeSlotId } from "@/types";
 import { simulatePolicy } from "@/lib/calculator";
 
 interface PolicySimulatorProps {
   dong: Dong | null;
   facilities: Facility[];
   timeSlot: TimeSlotId;
+  target: CareTargetId;
 }
 
 const AXIS_LEVER_HINT: Record<string, string> = {
-  space: "이 생활권은 공간(정원) 병목이 주원인입니다 → 아래 \"정원 확충/연계\" 레버를 사용하세요.",
-  time: "이 생활권은 시간(운영시간) 병목이 주원인입니다 → 아래 \"운영시간 연장\" 레버를 사용하세요.",
-  staff: "이 생활권은 인력 병목이 주원인입니다 → 아래 \"인력 재배치\" 레버를 사용하세요.",
+  space: "이 동은 ‘자리가 없어서’ 부족한 몫이 가장 큽니다 → 아래 \"정원 확충/연계\" 레버를 사용하세요.",
+  time: "이 동은 ‘문을 닫아서’ 부족한 몫이 가장 큽니다 → 아래 \"운영시간 연장\" 레버를 사용하세요.",
+  staff: "이 동은 ‘선생님이 없어서’ 부족한 몫이 가장 큽니다 → 아래 \"인력 재배치\" 레버를 사용하세요.",
 };
 
-export default function PolicySimulator({ dong, facilities, timeSlot }: PolicySimulatorProps) {
+export default function PolicySimulator({ dong, facilities, timeSlot, target }: PolicySimulatorProps) {
   const [extendHours, setExtendHours] = useState(0);
   const [additionalStaff, setAdditionalStaff] = useState(0);
   const [addedCapacity, setAddedCapacity] = useState(0);
 
   const result = useMemo(() => {
     if (!dong) return null;
-    return simulatePolicy(dong, facilities, timeSlot, { extendHours, additionalStaff, addedCapacity });
-  }, [dong, facilities, timeSlot, extendHours, additionalStaff, addedCapacity]);
+    return simulatePolicy(dong, facilities, timeSlot, { extendHours, additionalStaff, addedCapacity }, target);
+  }, [dong, facilities, timeSlot, target, extendHours, additionalStaff, addedCapacity]);
 
   if (!dong || !result) {
     return (
       <div className="flex h-full items-center justify-center p-6 text-center text-sm text-neutral-400">
-        생활권을 선택하면 정책 개입 시뮬레이션을 실행할 수 있습니다.
+        행정동을 선택하면 정책 개입 시뮬레이션을 실행할 수 있습니다.
       </div>
     );
   }
@@ -56,13 +57,13 @@ export default function PolicySimulator({ dong, facilities, timeSlot }: PolicySi
 
       <div className="space-y-5">
         <SliderControl
-          label="정원 확충 / 인접 생활권 연계"
+          label="정원 확충 / 인근 행정동 연계"
           unit="명"
           value={addedCapacity}
           max={200}
           step={10}
           onChange={setAddedCapacity}
-          hint="신규 시설 확충 또는 인접 생활권 여유 정원 연계로 확보되는 정원(명)을 가정합니다. 공간 병목 해소용 레버입니다."
+          hint="신규 시설 확충 또는 인근 행정동 여유 정원 연계로 확보되는 정원(명)을 가정합니다. 공간 병목 해소용 레버입니다."
         />
         <SliderControl
           label="운영시간 연장 적용"
@@ -71,7 +72,7 @@ export default function PolicySimulator({ dong, facilities, timeSlot }: PolicySi
           max={4}
           step={1}
           onChange={setExtendHours}
-          hint="+2시간 연장 시 방과후/야간 시간대 병목 시설의 문을 연다고 가정합니다."
+          hint="+2시간 연장 시 방과후/야간 시간대 부족 원인 시설의 문을 연다고 가정합니다."
         />
         <SliderControl
           label="시간제 돌봄인력 재배치"
@@ -103,8 +104,8 @@ export default function PolicySimulator({ dong, facilities, timeSlot }: PolicySi
               <YAxis tick={{ fontSize: 11 }} stroke="#a3a3a3" />
               <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="유효수용력" name="유효 수용력(ECC)" fill="#22c55e" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="결손" name="결손 인원" fill="#ef4444" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="유효수용력" name="이용 가능한 자리" fill="#22c55e" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="결손" name="부족 인원" fill="#ef4444" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

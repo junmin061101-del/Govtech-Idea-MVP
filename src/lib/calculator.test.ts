@@ -33,6 +33,9 @@ describe("calculateECC (이용 가능한 자리)", () => {
     expect(calculateECC(facility("f", 30, { staffOnDuty: 2, staffToChildRatio: 5 }), "night").ecc).toBe(10);
     expect(calculateECC(facility("f", 8, { staffOnDuty: 2, staffToChildRatio: 5 }), "night").ecc).toBe(8);
   });
+  it("자리는 정수로 내림한다 (교사 1명 × 1인당 3.33명 = 3명)", () => {
+    expect(calculateECC(facility("f", 30, { staffOnDuty: 1, staffToChildRatio: 10 / 3 }), "night").ecc).toBe(3);
+  });
   it("해당 시간대 운영 정보가 없으면 운영 안 함으로 본다", () => {
     expect(calculateECC(facility("f", 30, { staffOnDuty: 6 }), "weekend").ecc).toBe(0);
   });
@@ -78,6 +81,7 @@ describe("diagnoseDong (부족 인원과 이유 분해)", () => {
       for (const d of diagnoseAllDongs(dongs, facilities, slot)) {
         const sum = d.bottleneck.space + d.bottleneck.time + d.bottleneck.staff;
         expect(sum).toBeCloseTo(d.careGap, 6);
+        expect(Number.isInteger(d.careGap)).toBe(true);
       }
     },
   );
