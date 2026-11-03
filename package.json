@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "vitest run",
     "data:fetch": "node scripts/fetch-boundaries.mjs && node scripts/fetch-mois-population.mjs && node --env-file=.env.local scripts/fetch-seoul-childcare.mjs",
-    "data:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-data.mjs"
+    "data:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-data.mjs",
+    "data:mock-unmet": "node scripts/build-mock-unmet.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

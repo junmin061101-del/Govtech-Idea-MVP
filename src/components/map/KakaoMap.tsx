@@ -15,6 +15,16 @@ import { timeSlotDef } from "@/lib/constants/timeSlots";
 import { REASONS } from "@/lib/reasons";
 import { rankDiagnoses } from "@/lib/ranking";
 import { useBoundaries } from "@/components/map/useBoundaries";
+import { INSUFFICIENT_COLOR, NO_RESULT_CLASSES, noResultColor, type UnmetSignal } from "@/lib/unmet";
+import { percent } from "@/lib/mapScale";
+
+/** 지도 층: 추정 수요(인구 기반) | 부모 검색 신호(시민 돌봄지도) | 둘 다 */
+export type MapLayer = "estimate" | "signal" | "both";
+export const MAP_LAYERS: { id: MapLayer; label: string }[] = [
+  { id: "estimate", label: "추정 수요" },
+  { id: "signal", label: "부모 검색 신호" },
+  { id: "both", label: "둘 다" },
+];
 
 interface KakaoMapProps {
   sigunguCode: string;
@@ -28,6 +38,11 @@ interface KakaoMapProps {
   onSelectFacility: (facility: Facility | null) => void;
   /** 범례에 표시할 데이터 기준 */
   dataNote: string;
+  layer: MapLayer;
+  onLayerChange: (layer: MapLayer) => void;
+  /** 행정동별 부모 검색 신호 (집계가 없는 구면 null) */
+  signals: Map<string, UnmetSignal> | null;
+  signalSynthetic: boolean;
 }
 
 /** 카카오맵 레벨: 숫자가 클수록 넓게 보인다. 이 레벨 이하에서 모든 동 라벨을 표시 */
@@ -88,6 +103,10 @@ function LoadedMap({
   selectedFacility,
   onSelectFacility,
   dataNote,
+  layer,
+  onLayerChange,
+  signals,
+  signalSynthetic,
 }: KakaoMapProps & { apiKey: string }) {
   // SDK 기본 URL은 프로토콜 상대경로라 http 페이지에서 ORB에 막힌다. https로 고정한다.
   const [loading, error] = useKakaoLoader({
@@ -177,12 +196,13 @@ function LoadedMap({
           if (!parts) return null;
           const diagnosis = diagnosisByDong.get(dong.id);
           const cls = diagnosis ? gapClassOf(diagnosis.demand, diagnosis.totalECC) : GAP_CLASSES.at(-1)!;
+          const fill = layer === "signal" ? noResultColor(signals?.get(dong.id)?.noResultRate ?? null) : cls.color;
           const emphasized = selectedDongId === dong.id || hoveredId === dong.id;
           return parts.map((path, i) => (
             <Polygon
               key={`${dong.id}-${i}`}
               path={path}
-              fillColor={cls.color}
+              fillColor={fill}
               // 가까이 볼수록 배경 지도(도로·건물)가 보이도록 옅게
               fillOpacity={level <= 4 ? 0.35 : level <= 5 ? 0.48 : 0.62}
               strokeColor={emphasized ? "#111827" : "#ffffff"}
@@ -205,12 +225,20 @@ function LoadedMap({
             level <= ALL_LABELS_MAX_LEVEL ||
             (level <= TOP_LABELS_MAX_LEVEL && topIds.has(dong.id));
           if (!visible) return null;
-          const value =
+          const sig = signals?.get(dong.id);
+          const estimateText =
             diagnosis.careGap > 0
               ? `${people(diagnosis.careGap)} 부족`
               : diagnosis.demand > 0 && diagnosis.totalECC > diagnosis.demand
                 ? "여유"
                 : null;
+          const signalText = signals
+            ? sig && sig.noResultRate != null
+              ? `결과 없음 ${percent(sig.noResultRate)}${sig.reliability === "reference" ? "*" : ""}`
+              : "표본 부족"
+            : null;
+          const lines = layer === "estimate" ? [estimateText] : layer === "signal" ? [signalText] : [estimateText, signalText];
+          const flag = layer !== "estimate" && sig?.gapSignal;
           return (
             <CustomOverlayMap key={`label-${dong.id}`} position={{ lat: dong.lat, lng: dong.lng }} zIndex={selected ? 6 : 3}>
               <button
@@ -219,8 +247,15 @@ function LoadedMap({
                   selected ? "bg-neutral-900 text-white ring-neutral-900" : "bg-white/95 text-neutral-800 ring-black/10"
                 }`}
               >
-                <span className="font-semibold">{dong.name}</span>
-                {value && <span className="block tabular-nums">{value}</span>}
+                <span className="font-semibold">
+                  {flag && <span aria-label="공백 신호">⚠ </span>}
+                  {dong.name}
+                </span>
+                {lines.filter(Boolean).map((l) => (
+                  <span key={l} className="block tabular-nums">
+                    {l}
+                  </span>
+                ))}
               </button>
             </CustomOverlayMap>
           );
@@ -244,7 +279,7 @@ function LoadedMap({
       </KakaoMapView>
 
       {hovered && hoveredDong && (
-        <div className="pointer-events-none absolute left-3 top-3 z-20 rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-xs shadow-md">
+        <div className="pointer-events-none absolute left-3 top-14 z-20 rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-xs shadow-md">
           <p className="font-semibold text-neutral-800">{hoveredDong.name}</p>
           <p className="text-neutral-600">
             수요 {people(hovered.demand)} · 이용 가능한 자리 {people(hovered.totalECC)}
@@ -256,8 +291,41 @@ function LoadedMap({
                 ? `여유 ${people(hovered.totalECC - hovered.demand)}`
                 : "충족"}
           </p>
+          {signals && (
+            <p className="text-neutral-600">
+              부모 검색: {(() => {
+                const s = signals.get(hoveredDong.id);
+                return s && s.noResultRate != null ? `결과 없음 ${percent(s.noResultRate)} (${s.searches}건)` : "표본 부족";
+              })()}
+            </p>
+          )}
         </div>
       )}
+
+      <div className="absolute left-3 top-3 z-20 flex items-center gap-1 rounded-lg bg-white/95 p-1 text-xs shadow-md ring-1 ring-black/5" role="group" aria-label="지도 층">
+        {MAP_LAYERS.map((l) => {
+          const disabled = l.id !== "estimate" && !signals;
+          return (
+            <button
+              key={l.id}
+              onClick={() => onLayerChange(l.id)}
+              disabled={disabled}
+              aria-pressed={layer === l.id}
+              title={disabled ? "이 구에는 시민 돌봄지도 집계가 없습니다" : undefined}
+              className={`rounded-md px-2 py-1 font-medium ${
+                layer === l.id ? "bg-neutral-900 text-white" : disabled ? "cursor-not-allowed text-neutral-300" : "text-neutral-600 hover:bg-neutral-100"
+              }`}
+            >
+              {l.label}
+            </button>
+          );
+        })}
+        {signals && signalSynthetic && layer !== "estimate" && (
+          <span className="ml-1 rounded bg-fuchsia-50 px-1.5 py-0.5 text-[10px] font-semibold text-fuchsia-700 ring-1 ring-fuchsia-200">
+            시연용 가상 데이터
+          </span>
+        )}
+      </div>
 
       {selectedFacility && (
         <div className="absolute right-3 top-3 z-20">
@@ -265,23 +333,42 @@ function LoadedMap({
         </div>
       )}
 
-      <MapLegend timeSlot={timeSlot} dataNote={dataNote} />
+      <MapLegend timeSlot={timeSlot} dataNote={dataNote} layer={layer} />
     </div>
   );
 }
 
-function MapLegend({ timeSlot, dataNote }: { timeSlot: TimeSlotId; dataNote: string }) {
+function MapLegend({ timeSlot, dataNote, layer }: { timeSlot: TimeSlotId; dataNote: string; layer: MapLayer }) {
+  const signalItems = [...NO_RESULT_CLASSES.map((c) => ({ color: c.color, label: c.label })).reverse(), { color: INSUFFICIENT_COLOR, label: "표본 부족" }];
   return (
     <div className="absolute bottom-3 right-3 z-20 max-w-[240px] rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
-      <p className="mb-1 font-semibold text-neutral-700">부족 비율 (부족 인원 ÷ 추정 수요)</p>
-      <ul className="space-y-0.5">
-        {GAP_CLASSES.filter((c) => c.id !== "no_demand").map((c) => (
-          <li key={c.id} className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-3.5 rounded-sm ring-1 ring-black/10" style={{ backgroundColor: c.color }} />
-            <span className="text-neutral-600">{c.label}</span>
-          </li>
-        ))}
-      </ul>
+      {layer === "signal" ? (
+        <>
+          <p className="mb-1 font-semibold text-neutral-700">결과 없음 검색 비율 (부모 검색 신호)</p>
+          <ul className="space-y-0.5">
+            {signalItems.map((c) => (
+              <li key={c.label} className="flex items-center gap-1.5">
+                <span className="inline-block h-2.5 w-3.5 rounded-sm ring-1 ring-black/10" style={{ backgroundColor: c.color }} />
+                <span className="text-neutral-600">{c.label}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-1 text-[10px] text-neutral-500">* 참고 수치(표본 35~74건) · ⚠ 공백 신호</p>
+        </>
+      ) : (
+        <>
+          <p className="mb-1 font-semibold text-neutral-700">부족 비율 (부족 인원 ÷ 추정 수요)</p>
+          <ul className="space-y-0.5">
+            {GAP_CLASSES.filter((c) => c.id !== "no_demand").map((c) => (
+              <li key={c.id} className="flex items-center gap-1.5">
+                <span className="inline-block h-2.5 w-3.5 rounded-sm ring-1 ring-black/10" style={{ backgroundColor: c.color }} />
+                <span className="text-neutral-600">{c.label}</span>
+              </li>
+            ))}
+          </ul>
+          {layer === "both" && <p className="mt-1 text-[10px] text-neutral-500">라벨 둘째 줄: 부모 검색 결과 없음 비율 · ⚠ 공백 신호</p>}
+        </>
+      )}
       <div className="mt-1.5 space-y-0.5 border-t border-neutral-100 pt-1.5">
         <p className="flex items-center gap-1.5 text-neutral-600">
           <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: OPEN_COLOR }} />

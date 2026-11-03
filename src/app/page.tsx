@@ -7,6 +7,10 @@ import RankingList from "@/components/RankingList";
 import { rankDiagnoses } from "@/lib/ranking";
 import GapReasonPanel from "@/components/panel/GapReasonPanel";
 import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
+import UnmetDemandPanel from "@/components/panel/UnmetDemandPanel";
+import type { MapLayer } from "@/components/map/KakaoMap";
+import type { UnmetDemandFile } from "@/lib/constants/events";
+import { signalOf, type UnmetSignal } from "@/lib/unmet";
 import { diagnoseAllDongs } from "@/lib/calculator";
 import { DEFAULT_SIGUNGU_CODE } from "@/lib/constants/regions";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
@@ -48,12 +52,28 @@ function useFacilities(sigunguCode: string): Facility[] | null {
   return state?.code === sigunguCode ? state.list : null;
 }
 
+/** 시민 돌봄지도 집계(부모 검색 신호). 파일이 없는 구는 null */
+function useUnmetDemand(sigunguCode: string): UnmetDemandFile | null {
+  const [state, setState] = useState<{ code: string; file: UnmetDemandFile | null } | null>(null);
+  useEffect(() => {
+    let alive = true;
+    import(`@/data/seoul/unmet-demand/${sigunguCode}.json`)
+      .then((m) => alive && setState({ code: sigunguCode, file: m.default as UnmetDemandFile }))
+      .catch(() => alive && setState({ code: sigunguCode, file: null }));
+    return () => {
+      alive = false;
+    };
+  }, [sigunguCode]);
+  return state?.code === sigunguCode ? state.file : null;
+}
+
 export default function Home() {
   const [sigunguCode, setSigunguCode] = useState(DEFAULT_SIGUNGU_CODE);
   const [target, setTarget] = useState<CareTargetId>("infant");
   const [timeSlot, setTimeSlot] = useState<TimeSlotId>("daytime");
   const [selectedDongId, setSelectedDongId] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
+  const [layer, setLayer] = useState<MapLayer>("estimate");
 
   const dongs = useMemo(() => allDongs.filter((d) => d.sigunguCode === sigunguCode), [sigunguCode]);
   const rawFacilities = useFacilities(sigunguCode);
@@ -65,6 +85,19 @@ export default function Home() {
     () => meta.locationIssues.filter((x) => x.sigunguCode === sigunguCode),
     [sigunguCode],
   );
+
+  const unmetFile = useUnmetDemand(sigunguCode);
+  const signals = useMemo(() => {
+    if (!unmetFile) return null;
+    const m = new Map<string, UnmetSignal>();
+    for (const d of dongs) {
+      const cell = unmetFile.cells.find((c) => c.emdCode === d.id && c.timeSlot === timeSlot && c.target === target);
+      m.set(d.id, signalOf(cell));
+    }
+    return m;
+  }, [unmetFile, dongs, timeSlot, target]);
+  // 집계가 없는 구로 바꾸면 추정 수요 층으로 돌아간다
+  const effectiveLayer: MapLayer = signals ? layer : "estimate";
 
   const diagnoses = useMemo(
     () => (rawFacilities ? diagnoseAllDongs(dongs, facilities, timeSlot, target) : []),
@@ -109,6 +142,10 @@ export default function Home() {
             selectedFacility={selectedFacility}
             onSelectFacility={setSelectedFacility}
             dataNote={DATA_NOTE}
+            layer={effectiveLayer}
+            onLayerChange={setLayer}
+            signals={signals}
+            signalSynthetic={Boolean(unmetFile?.synthetic)}
           />
         </div>
 
@@ -121,6 +158,8 @@ export default function Home() {
               onSelect={setSelectedDongId}
               contextLabel={contextLabel}
               unassigned={unassigned}
+              layer={effectiveLayer}
+              signals={signals}
             />
           ) : (
             <div className="flex h-full items-center justify-center text-sm text-neutral-400">시설 데이터를 불러오는 중...</div>
@@ -136,6 +175,15 @@ export default function Home() {
               timeSlot={timeSlot}
               dataNote={DATA_NOTE}
               dongName={dongName}
+            />
+          </div>
+          <div className="rounded-xl border border-neutral-200 bg-white">
+            <UnmetDemandPanel
+              dong={selectedDong}
+              diagnosis={selectedDiagnosis}
+              signal={effectiveDongId ? (signals?.get(effectiveDongId) ?? null) : null}
+              file={unmetFile}
+              timeSlot={timeSlot}
             />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">

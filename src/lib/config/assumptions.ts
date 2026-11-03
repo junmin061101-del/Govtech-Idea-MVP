@@ -75,3 +75,27 @@ export const CATCHMENT = {
   status: "assumption" as AssumptionStatus,
   basis: "직선 1km(도보 약 15분). 설정값 — 바꾸면 npm run data:build로 다시 계산",
 };
+
+/**
+ * 미충족 수요(부모 검색 신호) 표시 기준. 분석 칸 = 행정동 × 시간대 × 대상 × 분기.
+ * 칸별 "결과 없음 비율"을 오차 ±e(신뢰수준 90%)로 추정하는 최소 표본 n = z²·p(1−p)/e² (p = 0.5, z = 1.645)
+ *  - ±10%p → 68건 → 여유분 포함 75건 (사업계획서 기준)
+ *  - ±15%p → 31건 → 여유분 포함 35건 (행정동 단위로 칸이 늘어 추가한 "참고" 구간)
+ * 공백 신호는 표본이 충분한 칸에서만 띄운다 (적은 표본에서 잘못된 경보 방지).
+ */
+export const UNMET_THRESHOLDS = {
+  reliableMinSearches: 75,
+  referenceMinSearches: 35,
+  reliableMargin: 0.1,
+  referenceMargin: 0.15,
+  confidenceZ: 1.645,
+  gapSignalRatio: 0.3,
+  gapSignalMonths: 2,
+  status: "assumption" as AssumptionStatus,
+  basis: "사업계획서 ⑦-3 표본 기준(±10%p, 90%) + 행정동 단위 참고 구간(±15%p)",
+};
+
+/** 결과 없음 비율을 오차 e로 추정하는 최소 표본 (p = 0.5 최악 가정) */
+export function minSampleForMargin(margin: number, z = UNMET_THRESHOLDS.confidenceZ): number {
+  return Math.ceil((z * z * 0.25) / (margin * margin));
+}

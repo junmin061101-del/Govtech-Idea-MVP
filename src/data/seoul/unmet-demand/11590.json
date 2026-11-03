@@ -1,0 +1,4329 @@
+{
+ "sigunguCode": "11590",
+ "quarter": "2026-Q3",
+ "synthetic": true,
+ "generatedAt": "2026-11-03T01:27:10.651Z",
+ "source": "시연용 가상 데이터 (scripts/build-mock-unmet.mjs) — 시민 돌봄지도 출시 전, 실제 이용 데이터 아님",
+ "cells": [
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 4,
+   "noResult": 0,
+   "widened": 0,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 2,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 2,
+   "noResult": 0,
+   "widened": 0,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 0,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 3,
+   "noResult": 0,
+   "widened": 0,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 1,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 2,
+   "noResult": 0,
+   "widened": 0,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 0,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 2,
+   "noResult": 0,
+   "widened": 0,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 1,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 0,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 1,
+   "noResult": 0,
+   "widened": 0,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 0,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 0,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 1,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 1,
+   "noResult": 1,
+   "widened": 1,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 0,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 0,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 1,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159052000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 0,
+   "noResult": 0,
+   "widened": 0,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 0,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 0,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 0,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 130,
+   "noResult": 23,
+   "widened": 12,
+   "vacancyWaiting": 11,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 3,
+    "eligibility": 1,
+    "documents": 2,
+    "submit": 1,
+    "waitlist": 3
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 45,
+     "noResult": 6
+    },
+    {
+     "month": "2026-08",
+     "searches": 41,
+     "noResult": 8
+    },
+    {
+     "month": "2026-09",
+     "searches": 44,
+     "noResult": 9
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 42,
+   "noResult": 10,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 17,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 13,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 94,
+   "noResult": 4,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 3,
+    "documents": 2,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 31,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 32,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 31,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 42,
+   "noResult": 8,
+   "widened": 5,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 10,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 18,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 14,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 69,
+   "noResult": 23,
+   "widened": 20,
+   "vacancyWaiting": 6,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 25,
+     "noResult": 7
+    },
+    {
+     "month": "2026-08",
+     "searches": 21,
+     "noResult": 8
+    },
+    {
+     "month": "2026-09",
+     "searches": 23,
+     "noResult": 8
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 24,
+   "noResult": 5,
+   "widened": 3,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 8,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 7,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 47,
+   "noResult": 30,
+   "widened": 23,
+   "vacancyWaiting": 10,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 16,
+     "noResult": 10
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 8
+    },
+    {
+     "month": "2026-09",
+     "searches": 19,
+     "noResult": 12
+    }
+   ]
+  },
+  {
+   "emdCode": "1159053000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 20,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 6,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 7,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 7,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 219,
+   "noResult": 25,
+   "widened": 15,
+   "vacancyWaiting": 7,
+   "applyExits": {
+    "conditions": 4,
+    "compare": 9,
+    "eligibility": 5,
+    "documents": 5,
+    "submit": 2,
+    "waitlist": 5
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 71,
+     "noResult": 8
+    },
+    {
+     "month": "2026-08",
+     "searches": 68,
+     "noResult": 10
+    },
+    {
+     "month": "2026-09",
+     "searches": 80,
+     "noResult": 7
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 72,
+   "noResult": 14,
+   "widened": 9,
+   "vacancyWaiting": 5,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 2,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 22,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 23,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 27,
+     "noResult": 6
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 122,
+   "noResult": 14,
+   "widened": 9,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 2,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 40,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 40,
+     "noResult": 5
+    },
+    {
+     "month": "2026-09",
+     "searches": 42,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 80,
+   "noResult": 25,
+   "widened": 15,
+   "vacancyWaiting": 4,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 27,
+     "noResult": 8
+    },
+    {
+     "month": "2026-08",
+     "searches": 26,
+     "noResult": 8
+    },
+    {
+     "month": "2026-09",
+     "searches": 27,
+     "noResult": 9
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 84,
+   "noResult": 10,
+   "widened": 6,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 2,
+    "documents": 2,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 22,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 33,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 29,
+     "noResult": 4
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 51,
+   "noResult": 12,
+   "widened": 8,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 18,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 13,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 20,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 64,
+   "noResult": 33,
+   "widened": 25,
+   "vacancyWaiting": 11,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 24,
+     "noResult": 12
+    },
+    {
+     "month": "2026-08",
+     "searches": 17,
+     "noResult": 9
+    },
+    {
+     "month": "2026-09",
+     "searches": 23,
+     "noResult": 12
+    }
+   ]
+  },
+  {
+   "emdCode": "1159054000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 39,
+   "noResult": 12,
+   "widened": 8,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 12,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 11,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 16,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 45,
+   "noResult": 1,
+   "widened": 1,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 17,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 13,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 15,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 19,
+   "noResult": 6,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 7,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 6,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 32,
+   "noResult": 1,
+   "widened": 1,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 11,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 11,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 10,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 13,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 3,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 29,
+   "noResult": 4,
+   "widened": 3,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 8,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 13,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 4,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 4,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 18,
+   "noResult": 10,
+   "widened": 7,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 7,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 5,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 6,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159055000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 13,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 4,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 4,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 5,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 67,
+   "noResult": 7,
+   "widened": 5,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 24,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 24,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 19,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 20,
+   "noResult": 6,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 7,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 7,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 52,
+   "noResult": 1,
+   "widened": 1,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 16,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 16,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 20,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 24,
+   "noResult": 8,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 9,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 6,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 38,
+   "noResult": 7,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 12,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 14,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 12,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 16,
+   "noResult": 5,
+   "widened": 2,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 4,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 31,
+   "noResult": 17,
+   "widened": 11,
+   "vacancyWaiting": 9,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 10,
+     "noResult": 5
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 7
+    },
+    {
+     "month": "2026-09",
+     "searches": 9,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159056000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 8,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 2,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 3,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 3,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 58,
+   "noResult": 4,
+   "widened": 2,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 19,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 19,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 20,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 19,
+   "noResult": 6,
+   "widened": 3,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 7,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 6,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 52,
+   "noResult": 9,
+   "widened": 6,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 17,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 21,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 14,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 14,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 4,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 23,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 7,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 8,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 8,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 11,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 3,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 4,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 4,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 27,
+   "noResult": 15,
+   "widened": 8,
+   "vacancyWaiting": 4,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 5
+    },
+    {
+     "month": "2026-08",
+     "searches": 9,
+     "noResult": 5
+    },
+    {
+     "month": "2026-09",
+     "searches": 9,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159062000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 11,
+   "noResult": 2,
+   "widened": 2,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 3,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 4,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 4,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 111,
+   "noResult": 7,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 4,
+    "eligibility": 3,
+    "documents": 2,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 32,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 51,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 28,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 48,
+   "noResult": 9,
+   "widened": 5,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 20,
+     "noResult": 5
+    },
+    {
+     "month": "2026-08",
+     "searches": 14,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 14,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 82,
+   "noResult": 4,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 4,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 29,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 27,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 26,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 35,
+   "noResult": 10,
+   "widened": 6,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 14,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 10,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 11,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 45,
+   "noResult": 4,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 0,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 17,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 15,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 13,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 25,
+   "noResult": 9,
+   "widened": 6,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 7,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 9,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 48,
+   "noResult": 23,
+   "widened": 17,
+   "vacancyWaiting": 10,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 17,
+     "noResult": 8
+    },
+    {
+     "month": "2026-08",
+     "searches": 18,
+     "noResult": 8
+    },
+    {
+     "month": "2026-09",
+     "searches": 13,
+     "noResult": 7
+    }
+   ]
+  },
+  {
+   "emdCode": "1159064000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 18,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 6,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 6,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 6,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 69,
+   "noResult": 7,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 24,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 23,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 22,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 29,
+   "noResult": 8,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 8,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 12,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 61,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 20,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 22,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 19,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 22,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 8,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 7,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 7,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 29,
+   "noResult": 3,
+   "widened": 1,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 12,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 8,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 9,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 16,
+   "noResult": 5,
+   "widened": 3,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 5,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 24,
+   "noResult": 13,
+   "widened": 7,
+   "vacancyWaiting": 4,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 7,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 8,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 9,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 7,
+   "noResult": 1,
+   "widened": 1,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 2,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 2,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 3,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 132,
+   "noResult": 6,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 5,
+    "eligibility": 3,
+    "documents": 2,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 44,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 37,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 51,
+     "noResult": 4
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 34,
+   "noResult": 10,
+   "widened": 6,
+   "vacancyWaiting": 4,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 11,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 13,
+     "noResult": 5
+    },
+    {
+     "month": "2026-09",
+     "searches": 10,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 58,
+   "noResult": 2,
+   "widened": 1,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 15,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 21,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 22,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 36,
+   "noResult": 6,
+   "widened": 4,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 11,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 13,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 12,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 59,
+   "noResult": 7,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 19,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 19,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 21,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 24,
+   "noResult": 6,
+   "widened": 3,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 8,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 7,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 41,
+   "noResult": 18,
+   "widened": 9,
+   "vacancyWaiting": 5,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 16,
+     "noResult": 7
+    },
+    {
+     "month": "2026-08",
+     "searches": 13,
+     "noResult": 6
+    },
+    {
+     "month": "2026-09",
+     "searches": 12,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159065100",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 22,
+   "noResult": 2,
+   "widened": 1,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 7,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 7,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 8,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 117,
+   "noResult": 1,
+   "widened": 1,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 4,
+    "eligibility": 1,
+    "documents": 3,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 34,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 43,
+     "noResult": 0
+    },
+    {
+     "month": "2026-09",
+     "searches": 40,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 83,
+   "noResult": 18,
+   "widened": 11,
+   "vacancyWaiting": 5,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 3,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 26,
+     "noResult": 5
+    },
+    {
+     "month": "2026-08",
+     "searches": 28,
+     "noResult": 6
+    },
+    {
+     "month": "2026-09",
+     "searches": 29,
+     "noResult": 7
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 98,
+   "noResult": 7,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 3,
+    "eligibility": 3,
+    "documents": 2,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 34,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 34,
+     "noResult": 5
+    },
+    {
+     "month": "2026-09",
+     "searches": 30,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 73,
+   "noResult": 20,
+   "widened": 11,
+   "vacancyWaiting": 6,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 2,
+    "documents": 2,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 24,
+     "noResult": 6
+    },
+    {
+     "month": "2026-08",
+     "searches": 27,
+     "noResult": 8
+    },
+    {
+     "month": "2026-09",
+     "searches": 22,
+     "noResult": 6
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 76,
+   "noResult": 23,
+   "widened": 15,
+   "vacancyWaiting": 6,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 31,
+     "noResult": 9
+    },
+    {
+     "month": "2026-08",
+     "searches": 26,
+     "noResult": 8
+    },
+    {
+     "month": "2026-09",
+     "searches": 19,
+     "noResult": 6
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 35,
+   "noResult": 8,
+   "widened": 5,
+   "vacancyWaiting": 4,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 12,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 10,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 13,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 64,
+   "noResult": 35,
+   "widened": 22,
+   "vacancyWaiting": 12,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 21,
+     "noResult": 12
+    },
+    {
+     "month": "2026-08",
+     "searches": 24,
+     "noResult": 12
+    },
+    {
+     "month": "2026-09",
+     "searches": 19,
+     "noResult": 11
+    }
+   ]
+  },
+  {
+   "emdCode": "1159066000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 33,
+   "noResult": 9,
+   "widened": 5,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 11,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 10,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 79,
+   "noResult": 6,
+   "widened": 3,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 31,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 22,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 26,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 30,
+   "noResult": 7,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 10,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 11,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 53,
+   "noResult": 4,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 17,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 17,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 19,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 30,
+   "noResult": 7,
+   "widened": 3,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 11,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 11,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 8,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 43,
+   "noResult": 5,
+   "widened": 2,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 14,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 16,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 13,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 20,
+   "noResult": 4,
+   "widened": 2,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 8,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 7,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 40,
+   "noResult": 22,
+   "widened": 17,
+   "vacancyWaiting": 10,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 14,
+     "noResult": 8
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 7
+    },
+    {
+     "month": "2026-09",
+     "searches": 14,
+     "noResult": 7
+    }
+   ]
+  },
+  {
+   "emdCode": "1159067000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 14,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 4,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 5,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 128,
+   "noResult": 6,
+   "widened": 4,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 3,
+    "eligibility": 2,
+    "documents": 3,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 38,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 46,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 44,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 40,
+   "noResult": 11,
+   "widened": 5,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 17,
+     "noResult": 5
+    },
+    {
+     "month": "2026-08",
+     "searches": 13,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 10,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 116,
+   "noResult": 1,
+   "widened": 1,
+   "vacancyWaiting": 0,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 7,
+    "eligibility": 3,
+    "documents": 2,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 32,
+     "noResult": 0
+    },
+    {
+     "month": "2026-08",
+     "searches": 40,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 44,
+     "noResult": 0
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 47,
+   "noResult": 11,
+   "widened": 8,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 15,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 15,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 17,
+     "noResult": 4
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 51,
+   "noResult": 13,
+   "widened": 9,
+   "vacancyWaiting": 4,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 18,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 18,
+     "noResult": 5
+    },
+    {
+     "month": "2026-09",
+     "searches": 15,
+     "noResult": 4
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 31,
+   "noResult": 7,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 10,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 9,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 67,
+   "noResult": 31,
+   "widened": 13,
+   "vacancyWaiting": 8,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 19,
+     "noResult": 9
+    },
+    {
+     "month": "2026-08",
+     "searches": 22,
+     "noResult": 10
+    },
+    {
+     "month": "2026-09",
+     "searches": 26,
+     "noResult": 12
+    }
+   ]
+  },
+  {
+   "emdCode": "1159068000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 17,
+   "noResult": 4,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 7,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 5,
+     "noResult": 1
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 275,
+   "noResult": 53,
+   "widened": 32,
+   "vacancyWaiting": 17,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 6,
+    "eligibility": 6,
+    "documents": 3,
+    "submit": 2,
+    "waitlist": 5
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 90,
+     "noResult": 14
+    },
+    {
+     "month": "2026-08",
+     "searches": 102,
+     "noResult": 21
+    },
+    {
+     "month": "2026-09",
+     "searches": 83,
+     "noResult": 18
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 83,
+   "noResult": 24,
+   "widened": 15,
+   "vacancyWaiting": 7,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 3,
+    "eligibility": 2,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 27,
+     "noResult": 9
+    },
+    {
+     "month": "2026-08",
+     "searches": 29,
+     "noResult": 7
+    },
+    {
+     "month": "2026-09",
+     "searches": 27,
+     "noResult": 8
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 267,
+   "noResult": 34,
+   "widened": 24,
+   "vacancyWaiting": 8,
+   "applyExits": {
+    "conditions": 3,
+    "compare": 9,
+    "eligibility": 9,
+    "documents": 6,
+    "submit": 2,
+    "waitlist": 5
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 106,
+     "noResult": 11
+    },
+    {
+     "month": "2026-08",
+     "searches": 76,
+     "noResult": 10
+    },
+    {
+     "month": "2026-09",
+     "searches": 85,
+     "noResult": 13
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 70,
+   "noResult": 16,
+   "widened": 7,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 27,
+     "noResult": 6
+    },
+    {
+     "month": "2026-08",
+     "searches": 16,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 27,
+     "noResult": 6
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 129,
+   "noResult": 51,
+   "widened": 40,
+   "vacancyWaiting": 11,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 3,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 38,
+     "noResult": 17
+    },
+    {
+     "month": "2026-08",
+     "searches": 50,
+     "noResult": 19
+    },
+    {
+     "month": "2026-09",
+     "searches": 41,
+     "noResult": 15
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 46,
+   "noResult": 6,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 16,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 15,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 15,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 102,
+   "noResult": 64,
+   "widened": 42,
+   "vacancyWaiting": 32,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 43,
+     "noResult": 27
+    },
+    {
+     "month": "2026-08",
+     "searches": 25,
+     "noResult": 15
+    },
+    {
+     "month": "2026-09",
+     "searches": 34,
+     "noResult": 22
+    }
+   ]
+  },
+  {
+   "emdCode": "1159060500",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 56,
+   "noResult": 12,
+   "widened": 7,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 16,
+     "noResult": 3
+    },
+    {
+     "month": "2026-08",
+     "searches": 21,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 19,
+     "noResult": 6
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 113,
+   "noResult": 21,
+   "widened": 15,
+   "vacancyWaiting": 6,
+   "applyExits": {
+    "conditions": 2,
+    "compare": 2,
+    "eligibility": 3,
+    "documents": 3,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 38,
+     "noResult": 6
+    },
+    {
+     "month": "2026-08",
+     "searches": 34,
+     "noResult": 6
+    },
+    {
+     "month": "2026-09",
+     "searches": 41,
+     "noResult": 9
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 62,
+   "noResult": 19,
+   "widened": 10,
+   "vacancyWaiting": 5,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 23,
+     "noResult": 8
+    },
+    {
+     "month": "2026-08",
+     "searches": 23,
+     "noResult": 6
+    },
+    {
+     "month": "2026-09",
+     "searches": 16,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 113,
+   "noResult": 7,
+   "widened": 4,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 4,
+    "documents": 2,
+    "submit": 1,
+    "waitlist": 2
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 30,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 44,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 39,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 64,
+   "noResult": 15,
+   "widened": 9,
+   "vacancyWaiting": 6,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 19,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 23,
+     "noResult": 7
+    },
+    {
+     "month": "2026-09",
+     "searches": 22,
+     "noResult": 4
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 86,
+   "noResult": 34,
+   "widened": 22,
+   "vacancyWaiting": 9,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 2,
+    "eligibility": 2,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 23,
+     "noResult": 8
+    },
+    {
+     "month": "2026-08",
+     "searches": 24,
+     "noResult": 10
+    },
+    {
+     "month": "2026-09",
+     "searches": 39,
+     "noResult": 16
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 42,
+   "noResult": 11,
+   "widened": 8,
+   "vacancyWaiting": 5,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 14,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 14,
+     "noResult": 4
+    },
+    {
+     "month": "2026-09",
+     "searches": 14,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 62,
+   "noResult": 32,
+   "widened": 22,
+   "vacancyWaiting": 14,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 24,
+     "noResult": 12
+    },
+    {
+     "month": "2026-08",
+     "searches": 24,
+     "noResult": 13
+    },
+    {
+     "month": "2026-09",
+     "searches": 14,
+     "noResult": 7
+    }
+   ]
+  },
+  {
+   "emdCode": "1159051000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 29,
+   "noResult": 5,
+   "widened": 3,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 9,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 9,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 11,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 70,
+   "noResult": 25,
+   "widened": 21,
+   "vacancyWaiting": 9,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 1,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 23,
+     "noResult": 8
+    },
+    {
+     "month": "2026-08",
+     "searches": 25,
+     "noResult": 11
+    },
+    {
+     "month": "2026-09",
+     "searches": 22,
+     "noResult": 6
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "daytime",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 46,
+   "noResult": 12,
+   "widened": 5,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 15,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 15,
+     "noResult": 5
+    },
+    {
+     "month": "2026-09",
+     "searches": 16,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 69,
+   "noResult": 10,
+   "widened": 7,
+   "vacancyWaiting": 4,
+   "applyExits": {
+    "conditions": 1,
+    "compare": 3,
+    "eligibility": 0,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 24,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 22,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 23,
+     "noResult": 3
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "after_school",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 34,
+   "noResult": 11,
+   "widened": 6,
+   "vacancyWaiting": 2,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 11,
+     "noResult": 4
+    },
+    {
+     "month": "2026-08",
+     "searches": 12,
+     "noResult": 3
+    },
+    {
+     "month": "2026-09",
+     "searches": 11,
+     "noResult": 4
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 56,
+   "noResult": 16,
+   "widened": 11,
+   "vacancyWaiting": 3,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 1,
+    "documents": 1,
+    "submit": 0,
+    "waitlist": 1
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 20,
+     "noResult": 5
+    },
+    {
+     "month": "2026-08",
+     "searches": 20,
+     "noResult": 6
+    },
+    {
+     "month": "2026-09",
+     "searches": 16,
+     "noResult": 5
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "night",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 19,
+   "noResult": 6,
+   "widened": 4,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-08",
+     "searches": 6,
+     "noResult": 2
+    },
+    {
+     "month": "2026-09",
+     "searches": 7,
+     "noResult": 2
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "infant",
+   "quarter": "2026-Q3",
+   "searches": 46,
+   "noResult": 25,
+   "widened": 16,
+   "vacancyWaiting": 6,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 1,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 16,
+     "noResult": 9
+    },
+    {
+     "month": "2026-08",
+     "searches": 14,
+     "noResult": 7
+    },
+    {
+     "month": "2026-09",
+     "searches": 16,
+     "noResult": 9
+    }
+   ]
+  },
+  {
+   "emdCode": "1159063000",
+   "sigunguCode": "11590",
+   "timeSlot": "weekend",
+   "target": "lower_elementary",
+   "quarter": "2026-Q3",
+   "searches": 14,
+   "noResult": 3,
+   "widened": 2,
+   "vacancyWaiting": 1,
+   "applyExits": {
+    "conditions": 0,
+    "compare": 0,
+    "eligibility": 0,
+    "documents": 0,
+    "submit": 0,
+    "waitlist": 0
+   },
+   "monthly": [
+    {
+     "month": "2026-07",
+     "searches": 5,
+     "noResult": 1
+    },
+    {
+     "month": "2026-08",
+     "searches": 4,
+     "noResult": 1
+    },
+    {
+     "month": "2026-09",
+     "searches": 5,
+     "noResult": 1
+    }
+   ]
+  }
+ ]
+}
