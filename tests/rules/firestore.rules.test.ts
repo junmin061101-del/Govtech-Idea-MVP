@@ -1,0 +1,123 @@
+import { readFileSync } from "fs";
+import { afterAll, beforeAll, beforeEach, describe, it } from "vitest";
+import { assertFails, assertSucceeds, initializeTestEnvironment, type RulesTestEnvironment } from "@firebase/rules-unit-testing";
+import { collection, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where, addDoc } from "firebase/firestore";
+
+let env: RulesTestEnvironment;
+
+const DONGJAK = "11590";
+const GWANAK = "11620";
+
+const users = {
+  djAdmin: { uid: "dj-admin", claims: { role: "district_admin", sigungu_code: DONGJAK } },
+  djViewer: { uid: "dj-viewer", claims: { role: "district_viewer", sigungu_code: DONGJAK } },
+  gaAdmin: { uid: "ga-admin", claims: { role: "district_admin", sigungu_code: GWANAK } },
+  careos: { uid: "careos", claims: { role: "careos_admin" } },
+  noRole: { uid: "no-role", claims: {} },
+};
+const db = (u: keyof typeof users) => env.authenticatedContext(users[u].uid, users[u].claims).firestore();
+const anon = () => env.unauthenticatedContext().firestore();
+
+const decision = (uid: string, sgg = DONGJAK) => ({
+  sigunguCode: sgg,
+  authorUid: uid,
+  author: "테스트 주무관",
+  memo: "야간 연장반 검토",
+  createdAt: serverTimestamp(),
+  view: { sigunguCode: sgg, timeSlot: "night", target: "infant", dongId: null, alternatives: ["add_staff"], layer: "estimate", equityTransit: false },
+  summary: { dongName: "흑석동", gapBefore: 48, gapAfter: 0 },
+});
+
+beforeAll(async () => {
+  env = await initializeTestEnvironment({
+    projectId: "demo-careos",
+    firestore: { rules: readFileSync("firestore.rules", "utf8"), host: "127.0.0.1", port: 8080 },
+  });
+});
+afterAll(async () => env?.cleanup());
+beforeEach(async () => {
+  await env.clearFirestore();
+  // 규칙을 거치지 않고 시드 데이터 넣기
+  await env.withSecurityRulesDisabled(async (ctx) => {
+    const f = ctx.firestore();
+    await setDoc(doc(f, "decisions/dj1"), { ...decision("dj-admin"), createdAt: new Date() });
+    await setDoc(doc(f, "decisions/ga1"), { ...decision("ga-admin", GWANAK), createdAt: new Date() });
+    await setDoc(doc(f, "unitCosts/11590"), { items: {}, updatedBy: "dj-admin", updatedAt: new Date() });
+    await setDoc(doc(f, "waitlists/11590_202611"), { sigunguCode: DONGJAK, month: "202611", byDong: {}, total: 0, uploadedBy: "dj-admin", uploadedAt: new Date() });
+  });
+});
+
+describe("기본 거부", () => {
+  it("로그인하지 않으면 아무것도 읽고 쓸 수 없다", async () => {
+    await assertFails(getDoc(doc(anon(), "decisions/dj1")));
+    await assertFails(getDoc(doc(anon(), "unitCosts/11590")));
+    await assertFails(setDoc(doc(anon(), "anything/x"), { a: 1 }));
+  });
+  it("역할이 없는 계정은 읽을 수 없다", async () => {
+    await assertFails(getDoc(doc(db("noRole"), "decisions/dj1")));
+  });
+  it("정의하지 않은 컬렉션은 관리자도 거부", async () => {
+    await assertFails(setDoc(doc(db("careos"), "users/x"), { a: 1 }));
+    await assertFails(getDoc(doc(db("careos"), "users/x")));
+  });
+});
+
+describe("판단 이력 — 구별 권한", () => {
+  it("자기 구는 읽고, 다른 구는 못 읽는다", async () => {
+    await assertSucceeds(getDoc(doc(db("djViewer"), "decisions/dj1")));
+    await assertFails(getDoc(doc(db("djViewer"), "decisions/ga1")));
+    await assertFails(getDoc(doc(db("gaAdmin"), "decisions/dj1")));
+  });
+  it("목록 조회는 자기 구 조건을 붙여야 한다", async () => {
+    await assertSucceeds(getDocs(query(collection(db("djViewer"), "decisions"), where("sigunguCode", "==", DONGJAK))));
+    await assertFails(getDocs(collection(db("djViewer"), "decisions")));
+  });
+  it("구 관리자는 자기 구에 저장, 조회자는 저장 불가", async () => {
+    await assertSucceeds(addDoc(collection(db("djAdmin"), "decisions"), decision("dj-admin")));
+    await assertFails(addDoc(collection(db("djViewer"), "decisions"), decision("dj-viewer")));
+  });
+  it("다른 구로 저장하거나, 작성자를 사칭하거나, 시각을 조작할 수 없다", async () => {
+    await assertFails(addDoc(collection(db("djAdmin"), "decisions"), decision("dj-admin", GWANAK)));
+    await assertFails(addDoc(collection(db("djAdmin"), "decisions"), decision("someone-else")));
+    await assertFails(addDoc(collection(db("djAdmin"), "decisions"), { ...decision("dj-admin"), createdAt: new Date("2020-01-01") }));
+    await assertFails(addDoc(collection(db("djAdmin"), "decisions"), { ...decision("dj-admin"), extra: "x" }));
+  });
+  it("저장한 판단은 수정할 수 없고, 구 관리자만 삭제할 수 있다", async () => {
+    await assertFails(updateDoc(doc(db("djAdmin"), "decisions/dj1"), { memo: "바꿈" }));
+    await assertFails(deleteDoc(doc(db("djViewer"), "decisions/dj1")));
+    await assertSucceeds(deleteDoc(doc(db("djAdmin"), "decisions/dj1")));
+  });
+  it("CareOS 관리자는 모든 구를 읽는다", async () => {
+    await assertSucceeds(getDoc(doc(db("careos"), "decisions/ga1")));
+  });
+});
+
+describe("단가 설정", () => {
+  const costs = (uid: string) => ({ items: { parttime_teacher_hourly: { amount: 10320, source: "최저임금", baseYear: 2026 } }, updatedBy: uid, updatedAt: serverTimestamp() });
+  it("구 관리자만 자기 구 단가를 쓴다", async () => {
+    await assertSucceeds(setDoc(doc(db("djAdmin"), "unitCosts/11590"), costs("dj-admin")));
+    await assertFails(setDoc(doc(db("djViewer"), "unitCosts/11590"), costs("dj-viewer")));
+    await assertFails(setDoc(doc(db("gaAdmin"), "unitCosts/11590"), costs("ga-admin")));
+    await assertSucceeds(getDoc(doc(db("djViewer"), "unitCosts/11590")));
+    await assertFails(getDoc(doc(db("gaAdmin"), "unitCosts/11590")));
+  });
+});
+
+describe("입소 대기 집계", () => {
+  const agg = (uid: string, extra: Record<string, unknown> = {}) => ({
+    sigunguCode: DONGJAK, month: "202611", byDong: { "1159060500": [1, 2, 3, 0, 0, 0] }, total: 6, uploadedBy: uid, uploadedAt: serverTimestamp(), ...extra,
+  });
+  it("구 관리자만 올리고, 문서 id는 {구코드}_{연월}이어야 한다", async () => {
+    await assertSucceeds(setDoc(doc(db("djAdmin"), "waitlists/11590_202611"), agg("dj-admin")));
+    await assertFails(setDoc(doc(db("djViewer"), "waitlists/11590_202611"), agg("dj-viewer")));
+    await assertFails(setDoc(doc(db("djAdmin"), "waitlists/11620_202611"), agg("dj-admin")));
+    await assertFails(setDoc(doc(db("djAdmin"), "waitlists/아무거나"), agg("dj-admin")));
+  });
+  it("집계 외 필드(예: 명단)는 받지 않는다", async () => {
+    await assertFails(setDoc(doc(db("djAdmin"), "waitlists/11590_202611"), agg("dj-admin", { names: ["홍길동"] })));
+  });
+  it("다른 구는 읽을 수 없다", async () => {
+    await assertSucceeds(getDoc(doc(db("djViewer"), "waitlists/11590_202611")));
+    await assertFails(getDoc(doc(db("gaAdmin"), "waitlists/11590_202611")));
+  });
+});

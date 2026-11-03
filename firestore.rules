@@ -1,0 +1,83 @@
+rules_version = '2';
+
+// 우리 구 돌봄 공백 지도 — Firestore 보안 규칙
+//
+// 원칙
+//  - 기본 거부. 아래에 명시한 컬렉션만 열린다.
+//  - 공개 데이터(시설·인구·경계·계산 결과)는 Firestore가 아니라 정적 파일로 배포한다 → 여기서 다루지 않는다.
+//  - 역할·구는 Custom Claims(role, sigungu_code)로만 판단한다 (scripts/set-user-role.mjs로 부여).
+//      careos_admin    : 전체 읽기·쓰기
+//      district_admin  : 자기 구 읽기·쓰기
+//      district_viewer : 자기 구 읽기
+//  - 판단 이력은 수정할 수 없다 (인수인계·감사 기록). 잘못 저장하면 삭제 후 다시 저장한다.
+//  - 입소 대기는 집계(행정동 × 연령별 인원)만 저장한다. 정해진 필드 외에는 받지 않는다.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+    function role() {
+      return signedIn() && ('role' in request.auth.token) ? request.auth.token.role : '';
+    }
+    function isCareosAdmin() {
+      return role() == 'careos_admin';
+    }
+    function inDistrict(sgg) {
+      return signedIn() && ('sigungu_code' in request.auth.token) && request.auth.token.sigungu_code == sgg;
+    }
+    function canRead(sgg) {
+      return isCareosAdmin() || (inDistrict(sgg) && role() in ['district_admin', 'district_viewer']);
+    }
+    function canWrite(sgg) {
+      return isCareosAdmin() || (inDistrict(sgg) && role() == 'district_admin');
+    }
+    function isSigungu(v) {
+      return v is string && v.matches('^[0-9]{5}$');
+    }
+
+    // 판단 이력: decisions/{자동 id}
+    match /decisions/{id} {
+      allow read: if canRead(resource.data.sigunguCode);
+      allow create: if canWrite(request.resource.data.sigunguCode)
+        && isSigungu(request.resource.data.sigunguCode)
+        && request.resource.data.keys().hasOnly(['sigunguCode', 'authorUid', 'author', 'memo', 'createdAt', 'view', 'summary'])
+        && request.resource.data.authorUid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.memo is string && request.resource.data.memo.size() <= 2000
+        && request.resource.data.view.sigunguCode == request.resource.data.sigunguCode;
+      allow update: if false;
+      allow delete: if canWrite(resource.data.sigunguCode);
+    }
+
+    // 대안 비용 단가: unitCosts/{sigungu_code}
+    match /unitCosts/{sgg} {
+      allow read: if canRead(sgg);
+      allow write: if canWrite(sgg)
+        && request.resource.data.keys().hasOnly(['items', 'updatedBy', 'updatedAt'])
+        && request.resource.data.updatedBy == request.auth.uid
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.items is map;
+    }
+
+    // 입소 대기 집계: waitlists/{sigungu_code}_{yyyymm}
+    match /waitlists/{docId} {
+      allow read: if canRead(resource.data.sigunguCode);
+      allow create, update: if canWrite(request.resource.data.sigunguCode)
+        && isSigungu(request.resource.data.sigunguCode)
+        && docId.matches('^' + request.resource.data.sigunguCode + '_[0-9]{6}$')
+        && request.resource.data.keys().hasOnly(['sigunguCode', 'month', 'byDong', 'total', 'uploadedBy', 'uploadedAt'])
+        && request.resource.data.byDong is map
+        && request.resource.data.total is int && request.resource.data.total >= 0
+        && request.resource.data.uploadedBy == request.auth.uid
+        && request.resource.data.uploadedAt == request.time;
+      allow delete: if canWrite(resource.data.sigunguCode);
+    }
+
+    // 그 밖의 모든 경로는 거부
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

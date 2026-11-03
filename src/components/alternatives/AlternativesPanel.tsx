@@ -5,12 +5,15 @@ import Link from "next/link";
 import { AlertTriangle, Check, ChevronDown, Save, Settings, Trophy } from "lucide-react";
 import type { CareTargetId, Dong, DongDiagnosis, Facility, TimeSlotId } from "@/types";
 import { buildAlternatives, combineAlternatives, type Alternative, type AlternativeContext, type AlternativeKind } from "@/lib/alternatives";
-import { newId, saveDecision } from "@/lib/history";
+import { newId } from "@/lib/history";
+import { canWriteDistrict, usesServer, useAuth } from "@/lib/firebase/AuthProvider";
+import { decisionStore } from "@/lib/store/decisions";
+import { loadCosts } from "@/lib/store/unitCosts";
 import type { ViewState } from "@/lib/viewState";
 import { sigunguByCode } from "@/lib/constants/regions";
 import { CARE_TARGETS } from "@/lib/constants/targets";
 import { DATA_DATE } from "@/lib/hooks/useSeoulData";
-import { loadUnitCosts, won, DEFAULT_UNIT_COSTS, type UnitCost } from "@/lib/config/unitCosts";
+import { won, DEFAULT_UNIT_COSTS, type UnitCost } from "@/lib/config/unitCosts";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
 import { people } from "@/lib/mapScale";
 
@@ -41,8 +44,18 @@ export default function AlternativesPanel({
   onSelectedChange,
   view,
 }: AlternativesPanelProps) {
+  const auth = useAuth();
   const [unitCosts, setUnitCosts] = useState<UnitCost[]>(DEFAULT_UNIT_COSTS);
-  useEffect(() => setUnitCosts(loadUnitCosts()), []);
+  // 단가: 로그인이면 그 구 단가(Firestore), 아니면 이 브라우저에 저장한 값
+  useEffect(() => {
+    let alive = true;
+    loadCosts(auth, view.sigunguCode)
+      .then((c) => alive && setUnitCosts(c))
+      .catch(() => alive && setUnitCosts(DEFAULT_UNIT_COSTS));
+    return () => {
+      alive = false;
+    };
+  }, [auth.user, auth.role, auth.sigunguCode, view.sigunguCode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const ctx: AlternativeContext | null = dong ? { dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts, dongName } : null;
   const alternatives = useMemo(() => (ctx ? buildAlternatives(ctx) : []), [dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -58,11 +71,11 @@ export default function AlternativesPanel({
   }, [dong?.id, timeSlot, target]);
   useEffect(() => {
     try {
-      setAuthor(window.localStorage.getItem("careos.author") ?? "");
+      setAuthor(window.localStorage.getItem("careos.author") ?? auth.user?.email ?? "");
     } catch {
       /* 저장소를 못 쓰면 빈 값 */
     }
-  }, []);
+  }, [auth.user?.email]);
 
   if (!dong || !ctx) return null;
 
@@ -86,13 +99,15 @@ export default function AlternativesPanel({
   const toggle = (kind: AlternativeKind) =>
     onSelectedChange(selected.has(kind) ? selectedKinds.filter((k) => k !== kind) : [...selectedKinds, kind]);
 
-  const save = () => {
+  const server = usesServer(auth);
+  const canSave = !server || canWriteDistrict(auth, view.sigunguCode);
+  const save = async () => {
     try {
       window.localStorage.setItem("careos.author", author.trim());
     } catch {
       /* 무시 */
     }
-    const ok = saveDecision({
+    const record = {
       id: newId(),
       createdAt: new Date().toISOString(),
       author: author.trim() || "(이름 없음)",
@@ -108,11 +123,14 @@ export default function AlternativesPanel({
         alternativeTitles: chosen.map((c) => c.title),
         dataDate: DATA_DATE,
       },
-    });
-    setSaved(ok ? "판단 이력에 저장했습니다." : "이 브라우저에서는 저장할 수 없습니다.");
-    if (ok) {
+    };
+    try {
+      await decisionStore(auth).save(record);
+      setSaved(server ? "구청 계정의 판단 이력에 저장했습니다." : "판단 이력에 저장했습니다 (이 브라우저).");
       setSaving(false);
       setMemo("");
+    } catch (e) {
+      setSaved(e instanceof Error ? e.message : "저장하지 못했습니다.");
     }
   };
 
@@ -157,7 +175,13 @@ export default function AlternativesPanel({
             <p className="mt-1.5 text-[11px] text-neutral-500">
               {chosen.map((c) => c.title).join(" + ")} · 같은 시설을 함께 바꾸는 효과를 겹치지 않게 다시 계산한 값입니다.
             </p>
-            {!saving ? (
+            {!canSave ? (
+              <p className="mt-2 text-[11px] text-neutral-500">
+                {auth.sigunguCode === view.sigunguCode
+                  ? "조회 권한입니다. 판단 저장은 구 관리자만 할 수 있습니다."
+                  : "다른 구는 시연 모드입니다(공개 데이터만). 판단 저장은 소속 구에서만 할 수 있습니다."}
+              </p>
+            ) : !saving ? (
               <button
                 onClick={() => {
                   setSaving(true);

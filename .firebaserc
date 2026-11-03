@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "demo-careos",
+    "dev": "TODO-careos-dev",
+    "prod": "TODO-careos-prod"
+  }
+}

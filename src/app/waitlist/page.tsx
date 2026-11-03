@@ -9,6 +9,8 @@ import { diagnoseAllDongs } from "@/lib/calculator";
 import { signalOf } from "@/lib/unmet";
 import { ALL_DONGS, DATA_DATE, useFacilities, useUnmetDemand } from "@/lib/hooks/useSeoulData";
 import { people, percent } from "@/lib/mapScale";
+import { canWriteDistrict, usesServer, useAuth } from "@/lib/firebase/AuthProvider";
+import { loadLatestWaitlist, saveWaitlist } from "@/lib/store/waitlists";
 
 /** 입소 대기 대조 — 정규 보육 입소 대기라 주간(09~17) 영유아 기준과 비교한다 */
 const SLOT = "daytime" as const;
@@ -17,6 +19,23 @@ export default function WaitlistPage() {
   const [sgg, setSgg] = useState(DEFAULT_SIGUNGU_CODE);
   const [result, setResult] = useState<WaitlistResult | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [saveMsg, setSaveMsg] = useState<string | null>(null);
+  const [month, setMonth] = useState(DATA_DATE.slice(0, 7).replace("-", ""));
+  const auth = useAuth();
+  const server = usesServer(auth);
+  const canUpload = !server || canWriteDistrict(auth, sgg);
+  // 로그인이면 저장해 둔 최근 집계를 불러온다
+  useEffect(() => {
+    if (auth.loading) return;
+    loadLatestWaitlist(auth, sgg)
+      .then((w) => {
+        if (!w) return;
+        setResult({ ok: true, errors: [], warnings: [], byDong: w.byDong, total: w.total });
+        setFileName(`저장된 집계 (${w.month.slice(0, 4)}-${w.month.slice(4)})`);
+        setMonth(w.month);
+      })
+      .catch(() => undefined);
+  }, [auth.loading, auth.user, auth.role, sgg]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     const q = new URLSearchParams(window.location.search).get("sgg");
     if (q && SIGUNGU.some((s) => s.code === q)) setSgg(q);
@@ -69,8 +88,9 @@ export default function WaitlistPage() {
         <p className="mt-2 flex items-start gap-1.5 rounded-lg bg-emerald-50 p-3 text-xs leading-relaxed text-emerald-800 ring-1 ring-emerald-200">
           <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" />
           <span>
-            구청 관리자 전용 기능입니다. 파일은 이 브라우저 안에서만 읽고 서버로 보내지 않으며, 새로고침하면 사라집니다. 이름·생년월일·연락처·주소·주민등록번호
-            같은 개인 식별 정보가 열이나 값에 있으면 파일 전체를 거부합니다. (로그인·권한 연동 전 임시 운영)
+            구청 관리자 전용 기능입니다. 파일은 이 브라우저 안에서 검사하고, 원본 파일은 어디에도 보내지 않습니다. 이름·생년월일·연락처·주소·주민등록번호
+            같은 개인 식별 정보가 열이나 값에 있으면 파일 전체를 거부합니다.{" "}
+            {server ? "로그인한 구 관리자는 검증된 집계(행정동 × 연령별 인원)만 구청 계정에 저장할 수 있습니다." : "시연 모드: 새로고침하면 사라집니다."}
           </span>
         </p>
 
@@ -93,7 +113,10 @@ export default function WaitlistPage() {
           <button onClick={downloadTemplate} className="flex items-center gap-1 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm">
             <Download className="h-4 w-4" /> 견본 CSV
           </button>
-          <label className="flex cursor-pointer items-center gap-1 rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white">
+          <label
+            className={`flex items-center gap-1 rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white ${canUpload ? "cursor-pointer" : "pointer-events-none opacity-40"}`}
+            title={canUpload ? undefined : "그 구 관리자만 올릴 수 있습니다"}
+          >
             <Upload className="h-4 w-4" /> 집계 CSV 올리기
             <input type="file" accept=".csv,text/csv" className="hidden" onChange={(e) => e.target.files?.[0] && onFile(e.target.files[0])} />
           </label>
@@ -123,6 +146,31 @@ export default function WaitlistPage() {
 
         {result?.ok && (
           <>
+            {server && canUpload && fileName && !fileName.startsWith("저장된") && (
+              <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
+                <label className="text-neutral-600">
+                  기준 연월{" "}
+                  <input
+                    value={month}
+                    onChange={(e) => setMonth(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    className="w-24 rounded border border-neutral-300 px-2 py-1 tabular-nums"
+                    placeholder="202611"
+                  />
+                </label>
+                <button
+                  disabled={!/^\d{6}$/.test(month)}
+                  onClick={() =>
+                    saveWaitlist(auth, sgg, month, result.byDong, result.total)
+                      .then(() => setSaveMsg("구청 계정에 집계를 저장했습니다 (원본 파일은 저장하지 않음)."))
+                      .catch((e) => setSaveMsg(e instanceof Error ? e.message : "저장하지 못했습니다."))
+                  }
+                  className="rounded-md border border-neutral-300 bg-white px-3 py-1 disabled:opacity-40"
+                >
+                  집계 저장
+                </button>
+                {saveMsg && <span className="text-neutral-600">{saveMsg}</span>}
+              </div>
+            )}
             <p className="mt-4 text-sm text-neutral-700">
               대기 인원 합계 <b>{people(result.total)}</b> · 비교 기준: 영유아 평일 주간 09~17시, 추정 수요·자리는 {DATA_DATE} 데이터
               {unmet?.synthetic && " · 검색 신호는 시연용 가상 데이터"}

@@ -3,16 +3,44 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Info } from "lucide-react";
-import { DEFAULT_UNIT_COSTS, isUsable, loadUnitCosts, saveUnitCosts, won, type UnitCost } from "@/lib/config/unitCosts";
+import { DEFAULT_UNIT_COSTS, isUsable, won, type UnitCost } from "@/lib/config/unitCosts";
+import { canWriteDistrict, usesServer, useAuth } from "@/lib/firebase/AuthProvider";
+import { loadCosts, saveCosts } from "@/lib/store/unitCosts";
+import { DEFAULT_SIGUNGU_CODE, sigunguByCode } from "@/lib/constants/regions";
 
 /**
  * 단가 설정 (unit_costs). 출처가 입력된 항목만 대안 카드에 비용이 표시된다.
  * TODO(Firebase 이전): district_admin만 쓰기 가능한 Firestore unit_costs/{id}로 옮기고 변경 이력을 남긴다.
  */
 export default function SettingsPage() {
+  const auth = useAuth();
+  // 로그인이면 소속 구 단가, 아니면 이 브라우저의 단가
+  const sgg = auth.sigunguCode ?? DEFAULT_SIGUNGU_CODE;
+  const server = usesServer(auth);
+  const writeBlocked = server && !canWriteDistrict(auth, sgg);
   const [costs, setCosts] = useState<UnitCost[]>(DEFAULT_UNIT_COSTS);
   const [status, setStatus] = useState<string | null>(null);
-  useEffect(() => setCosts(loadUnitCosts()), []);
+  // 저장된 단가를 다 불러오기 전에는 입력을 막는다 (불러온 값이 먼저 입력한 값을 덮어쓰지 않도록)
+  const [loaded, setLoaded] = useState(false);
+  const readOnly = writeBlocked || !loaded;
+  useEffect(() => {
+    if (auth.loading) return;
+    setLoaded(false);
+    loadCosts(auth, sgg)
+      .then((c) => {
+        setCosts(c);
+        setLoaded(true);
+      })
+      .catch(() => setStatus("단가를 불러오지 못했습니다."));
+  }, [auth.loading, auth.user, auth.role, sgg]); // eslint-disable-line react-hooks/exhaustive-deps
+  const persist = async (next: UnitCost[], okMsg: string) => {
+    try {
+      const where = await saveCosts(auth, sgg, next);
+      setStatus(`${okMsg} (${where === "server" ? `서울 ${sigunguByCode(sgg)?.name} 계정` : "이 브라우저"})`);
+    } catch (e) {
+      setStatus(e instanceof Error ? e.message : "저장하지 못했습니다.");
+    }
+  };
 
   const update = (id: string, patch: Partial<UnitCost>) => {
     setStatus(null);
@@ -29,7 +57,9 @@ export default function SettingsPage() {
         <p className="mt-1 flex items-start gap-1.5 text-sm text-neutral-600">
           <Info className="mt-0.5 h-4 w-4 shrink-0 text-neutral-400" />
           출처가 입력된 단가만 대안 카드에 비용으로 표시됩니다. 금액만 있고 출처가 없으면 ‘단가 출처 입력 필요’로 남습니다.
-          지금은 이 브라우저에만 저장됩니다.
+          {server
+            ? `서울 ${sigunguByCode(sgg)?.name} 계정의 단가입니다${writeBlocked ? " (조회 권한: 수정은 구 관리자만)" : ""}.`
+            : "시연 모드: 이 브라우저에만 저장됩니다."}
         </p>
 
         <ul className="mt-6 space-y-4">
@@ -55,6 +85,7 @@ export default function SettingsPage() {
                   <input
                     type="number"
                     min={0}
+                    disabled={readOnly}
                     value={c.amount ?? ""}
                     onChange={(e) => update(c.id, { amount: e.target.value === "" ? null : Number(e.target.value) })}
                     className="mt-1 w-full rounded-md border border-neutral-300 px-2 py-1.5 text-sm tabular-nums"
@@ -64,6 +95,7 @@ export default function SettingsPage() {
                   출처 (문서명·발행기관·쪽)
                   <input
                     type="text"
+                    disabled={readOnly}
                     value={c.source ?? ""}
                     placeholder="예: 2026 보육사업안내, 보건복지부, 312쪽"
                     onChange={(e) => update(c.id, { source: e.target.value || null })}
@@ -74,6 +106,7 @@ export default function SettingsPage() {
                   기준연도
                   <input
                     type="number"
+                    disabled={readOnly}
                     value={c.baseYear ?? ""}
                     onChange={(e) => update(c.id, { baseYear: e.target.value === "" ? null : Number(e.target.value) })}
                     className="mt-1 w-full rounded-md border border-neutral-300 px-2 py-1.5 text-sm tabular-nums"
@@ -86,16 +119,18 @@ export default function SettingsPage() {
 
         <div className="mt-6 flex items-center gap-3">
           <button
-            onClick={() => setStatus(saveUnitCosts(costs) ? "저장했습니다." : "이 브라우저에서는 저장할 수 없습니다.")}
-            className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700"
+            onClick={() => persist(costs, "저장했습니다")}
+            disabled={readOnly}
+            className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700 disabled:opacity-40"
           >
             저장
           </button>
           <button
             onClick={() => {
               setCosts(DEFAULT_UNIT_COSTS);
-              setStatus(saveUnitCosts(DEFAULT_UNIT_COSTS) ? "기본값으로 되돌렸습니다." : null);
+              persist(DEFAULT_UNIT_COSTS, "기본값으로 되돌렸습니다");
             }}
+            disabled={readOnly}
             className="rounded-md border border-neutral-300 px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100"
           >
             기본값으로

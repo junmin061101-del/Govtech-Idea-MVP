@@ -11,12 +11,16 @@
     "data:fetch": "node scripts/fetch-boundaries.mjs && node scripts/fetch-mois-population.mjs && node --env-file=.env.local scripts/fetch-seoul-childcare.mjs && node --env-file=.env.local scripts/fetch-transit.mjs",
     "data:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-data.mjs",
     "data:mock-unmet": "node scripts/build-mock-unmet.mjs",
-    "data:snapshot": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --import ./scripts/lib/register-alias.mjs scripts/build-snapshot.mjs"
+    "data:snapshot": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --import ./scripts/lib/register-alias.mjs scripts/build-snapshot.mjs",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-careos \"vitest run -c vitest.rules.config.ts\"",
+    "dev:emulators": "firebase emulators:exec --only auth,firestore --project demo-careos \"NEXT_DIST_DIR=.next-e2e NEXT_PUBLIC_FIREBASE_EMULATORS=1 NEXT_PUBLIC_FIREBASE_API_KEY=demo-key NEXT_PUBLIC_FIREBASE_PROJECT_ID=demo-careos NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=localhost next dev\"",
+    "test:e2e": "firebase emulators:exec --only auth,firestore --project demo-careos \"bash tests/e2e/run.sh\""
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "exceljs": "^4.4.0",
+    "firebase": "^13.0.0",
     "lucide-react": "^1.46.0",
     "next": "14.2.35",
     "react": "^18",
@@ -25,11 +29,15 @@
     "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
+    "firebase-admin": "^14.5.0",
+    "firebase-tools": "^15.34.0",
+    "playwright": "^1.49.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",

@@ -3,16 +3,27 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink, FileText, Trash2, Upload } from "lucide-react";
-import { deleteDecision, exportHistory, loadHistory, mergeImported, replaceHistory, type DecisionRecord } from "@/lib/history";
+import { exportHistory, type DecisionRecord } from "@/lib/history";
+import { canWriteDistrict, useAuth } from "@/lib/firebase/AuthProvider";
+import { decisionStore } from "@/lib/store/decisions";
 import { encodeView } from "@/lib/viewState";
 import { DATA_DATE } from "@/lib/hooks/useSeoulData";
 import { people } from "@/lib/mapScale";
 
 export default function HistoryPage() {
+  const auth = useAuth();
+  const store = decisionStore(auth);
   const [records, setRecords] = useState<DecisionRecord[]>([]);
   const [status, setStatus] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
-  useEffect(() => setRecords(loadHistory()), []);
+  const reload = () =>
+    store
+      .list()
+      .then(setRecords)
+      .catch(() => setStatus("판단 이력을 불러오지 못했습니다 (권한을 확인하세요)."));
+  useEffect(() => {
+    if (!auth.loading) reload();
+  }, [auth.loading, auth.user, auth.role]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onExport = () => {
     const blob = new Blob([JSON.stringify(exportHistory(records), null, 1)], { type: "application/json" });
@@ -24,9 +35,9 @@ export default function HistoryPage() {
 
   const onImport = async (file: File) => {
     try {
-      const merged = mergeImported(records, await file.text());
-      setStatus(replaceHistory(merged) ? `가져왔습니다 (${merged.length - records.length}건 추가).` : "저장할 수 없습니다.");
-      setRecords(merged);
+      const n = await store.importJson(await file.text());
+      setStatus(`가져왔습니다 (${n}건).`);
+      await reload();
     } catch (e) {
       setStatus(e instanceof Error ? e.message : "가져오기에 실패했습니다.");
     }
@@ -44,7 +55,11 @@ export default function HistoryPage() {
             <p className="mt-1 text-sm text-neutral-600">
               저장한 대안 조합을 다시 열면 같은 화면이 나옵니다. 담당자가 바뀌면 내보내기 파일로 인수인계하세요.
             </p>
-            <p className="text-xs text-neutral-400">지금은 이 브라우저에만 저장됩니다 (구청 계정 연동 전).</p>
+            <p className="text-xs text-neutral-400">
+              {store.mode === "server"
+                ? "구청 계정에 저장된 기록입니다. 같은 구 담당자가 함께 봅니다."
+                : "시연 모드: 이 브라우저에만 저장됩니다. 로그인하면 구청 계정에 저장됩니다."}
+            </p>
           </div>
           <div className="flex gap-2">
             <button onClick={onExport} disabled={!records.length} className="flex items-center gap-1 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm disabled:opacity-40">
@@ -92,10 +107,11 @@ export default function HistoryPage() {
                         <FileText className="h-3 w-3" /> 리포트
                       </Link>
                       <button
-                        onClick={() => {
+                        disabled={store.mode === "server" && !canWriteDistrict(auth, r.view.sigunguCode)}
+                        onClick={async () => {
                           if (!window.confirm("이 판단 기록을 지울까요?")) return;
-                          deleteDecision(r.id);
-                          setRecords(loadHistory());
+                          await store.remove(r.id).catch(() => setStatus("삭제할 권한이 없습니다."));
+                          await reload();
                         }}
                         className="flex items-center gap-1 rounded-md border border-neutral-300 px-2 py-1 text-xs text-neutral-500"
                         aria-label="삭제"

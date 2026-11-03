@@ -11,6 +11,8 @@ npm install
 cp .env.local.example .env.local   # 아래 2번 참고: 카카오 JavaScript 키 입력
 npm run dev
 npm test                           # 계산 로직 단위 테스트 (vitest)
+npm run test:rules                 # Firestore 보안 규칙 테스트 (에뮬레이터, Java 필요)
+npm run test:e2e                   # 로그인·권한·저장 종단 검증 (에뮬레이터)
 ```
 
 http://localhost:3000 에서 확인합니다.
@@ -23,6 +25,60 @@ http://localhost:3000 에서 확인합니다.
 
 키가 없거나 예시값(`your_kakao_javascript_key_here`)일 경우, 지도 영역에 안내 문구가 표시되고
 나머지 화면(진단 패널/시뮬레이터)은 정상 동작합니다.
+
+## 2-1. Firebase (로그인·구별 권한·저장)
+
+모든 화면은 서버 없이 동작하는 정적 파일(`next build` → `out/`)이라 **Firebase Hosting**에 올린다.
+공개 데이터(시설·인구·경계·계산 결과)는 정적 파일로, 구청 데이터(판단 이력·단가·입소 대기 집계)만 Firestore에 둔다.
+Firebase 설정값이 없으면 **시연 모드**(구청 데이터는 이 브라우저에만 저장)로 동작한다. App Check는 이번 단계에서 적용하지 않았다.
+
+| 역할 (Custom Claims) | 권한 |
+|---|---|
+| `district_admin` + `sigungu_code` | 자기 구 읽기·쓰기 (판단 저장·삭제, 단가 입력, 입소 대기 집계 저장) |
+| `district_viewer` + `sigungu_code` | 자기 구 읽기 |
+| `careos_admin` | 전체 |
+| (없음 / 로그인 안 함) | 공개 데이터만 (시연 모드, `/demo`) |
+
+보안 규칙은 [firestore.rules](firestore.rules) (기본 거부, 판단 이력 수정 불가, 입소 대기는 집계 필드만, 작성자·시각 조작 불가).
+
+### 처음 한 번 설정
+
+1. [Firebase 콘솔](https://console.firebase.google.com)에서 프로젝트 2개를 만든다: 개발용, 운영용 (예: `careos-dev`, `careos-prod`).
+2. 각 프로젝트에서
+   - **Firestore 데이터베이스 만들기** → 위치 `asia-northeast3 (서울)`, 프로덕션 모드
+   - **Authentication → 로그인 방법 → 이메일/비밀번호 → 이메일 링크(비밀번호 없는 로그인)** 사용 설정
+   - **Authentication → 설정 → 승인된 도메인**에 배포 도메인 추가 (`<프로젝트>.web.app`, 사용자 지정 도메인)
+   - **프로젝트 설정 → 내 앱 → 웹 앱 추가** → 나오는 `apiKey`, `authDomain`, `projectId`, `appId`를 `.env.local`의 `NEXT_PUBLIC_FIREBASE_*`에 넣는다
+3. [.firebaserc](.firebaserc)의 `TODO-careos-dev`, `TODO-careos-prod`를 실제 프로젝트 ID로 바꾼다.
+4. 카카오 개발자 콘솔 → 앱 → 플랫폼 → Web에 배포 도메인을 등록한다.
+5. 규칙·인덱스 배포: `npx firebase login` 후 `npx firebase deploy --only firestore:rules,firestore:indexes --project dev`
+
+### 담당자 권한 부여
+
+담당자가 `/login`에서 한 번 로그인하면 계정이 생긴다. 그다음 CareOS 관리자가 서비스 계정 키로 역할을 준다.
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS=~/careos-prod-sa.json FIREBASE_PROJECT_ID=careos-prod
+node scripts/set-user-role.mjs jumin@dongjak.go.kr district_admin 11590
+node scripts/set-user-role.mjs viewer@dongjak.go.kr district_viewer 11590
+node scripts/set-user-role.mjs someone@dongjak.go.kr none          # 권한 회수
+```
+
+### 배포
+
+- 수동: `npm run build && npx firebase deploy --only hosting --project prod`
+- 자동: [.github/workflows/firebase-deploy.yml](.github/workflows/firebase-deploy.yml) — PR은 개발 프로젝트 미리보기 채널, `main` push는 운영 배포 + 규칙·인덱스 배포.
+  GitHub Secrets: `FIREBASE_SERVICE_ACCOUNT_DEV`, `FIREBASE_SERVICE_ACCOUNT_PROD`, `NEXT_PUBLIC_KAKAO_MAP_API_KEY`,
+  `FIREBASE_WEB_CONFIG_DEV`, `FIREBASE_WEB_CONFIG_PROD`(각각 `NEXT_PUBLIC_FIREBASE_*=값` 네 줄)
+- Vercel은 Firebase 운영 배포를 확인한 뒤 새 주소로 리디렉션하고 내린다.
+
+### 로컬 검증 (Firebase 프로젝트 없이)
+
+```bash
+npm run test:rules      # Firestore 보안 규칙 테스트 (에뮬레이터)
+npm run test:e2e        # 에뮬레이터 종단 검증: 이메일 링크 로그인 → 역할 부여 → 판단 저장 → 다른 구·조회 권한 막힘 → 단가 반영
+npm run dev:emulators   # 에뮬레이터에 붙은 개발 서버 (로그인 링크는 에뮬레이터가 출력)
+```
 
 ## 3. 데이터 출처와 신뢰 수준 (투명성 고지)
 

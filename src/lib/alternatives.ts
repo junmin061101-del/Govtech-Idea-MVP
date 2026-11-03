@@ -36,6 +36,11 @@ export interface FacilityChange {
   windows: Record<string, Partial<OperatingWindow>>;
   /** 동에 더하는 연계 자리 (가상 시설) */
   addedSeats: number;
+  /**
+   * 연계로 옆 동에서 빠져나가는 자리. 같은 자리를 두 동이 함께 세지 않도록 옆 동 자리에서 뺀다.
+   * (선택한 동의 부족 계산에는 영향이 없고, 구 전체를 다시 계산할 때 반영된다)
+   */
+  outflows?: { dongId: string; seats: number }[];
 }
 
 export interface Alternative {
@@ -92,7 +97,11 @@ export function mergeChanges(changes: FacilityChange[]): FacilityChange {
         : w;
     }
   }
-  return { windows, addedSeats: changes.reduce((a, c) => a + c.addedSeats, 0) };
+  return {
+    windows,
+    addedSeats: changes.reduce((a, c) => a + c.addedSeats, 0),
+    outflows: changes.flatMap((c) => c.outflows ?? []),
+  };
 }
 
 export function applyChange(
@@ -132,6 +141,27 @@ export function applyChange(
       totalStaff: 0,
       dataSource: "대안 비교 가상 시설",
       operatingWindows: [{ timeSlot, isOpen: true, staffOnDuty: change.addedSeats, staffToChildRatio: 1 }],
+    });
+  }
+  for (const o of change.outflows ?? []) {
+    if (o.seats <= 0) continue;
+    // 옆 동에서 연계해 준 자리만큼 빼는 가상 시설 (음수 자리)
+    out.push({
+      id: `LINK-OUT-${o.dongId}-${dong.id}`,
+      name: "(대안) 인근 연계로 빠져나가는 자리",
+      type: "국공립어린이집",
+      targets: [target],
+      sigunguCode: dong.sigunguCode,
+      emdCode: o.dongId,
+      dongId: o.dongId,
+      address: "",
+      lat: dong.lat,
+      lng: dong.lng,
+      capacity: -o.seats,
+      currentEnrollment: 0,
+      totalStaff: 0,
+      dataSource: "대안 비교 가상 시설",
+      operatingWindows: [{ timeSlot, isOpen: true, staffOnDuty: -o.seats, staffToChildRatio: 1 }],
     });
   }
   return out;
@@ -327,19 +357,19 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
     const byId = new Map(ctx.dongs.map((d) => [d.id, d]));
     const surplus = ctx.diagnoses
       .filter((d) => dong.neighbors.includes(d.dongId) && byId.has(d.dongId))
-      .map((d) => ({ name: byId.get(d.dongId)!.name, seats: Math.max(0, d.totalECC - d.demand) }))
+      .map((d) => ({ dongId: d.dongId, name: byId.get(d.dongId)!.name, seats: Math.max(0, d.totalECC - d.demand) }))
       .filter((x) => x.seats > 0)
       .sort((a, b) => b.seats - a.seats);
     let need = before.careGap;
-    const used: { name: string; seats: number }[] = [];
+    const used: { dongId: string; name: string; seats: number }[] = [];
     for (const s of surplus) {
       if (need <= 0) break;
       const take = Math.min(s.seats, need);
-      used.push({ name: s.name, seats: take });
+      used.push({ dongId: s.dongId, name: s.name, seats: take });
       need -= take;
     }
     const linked = used.reduce((a, x) => a + x.seats, 0);
-    const change: FacilityChange = { windows: {}, addedSeats: linked };
+    const change: FacilityChange = { windows: {}, addedSeats: linked, outflows: used.map((u) => ({ dongId: u.dongId, seats: u.seats })) };
     const current = linked > 0 ? gapAfter(applyChange(own, change, dong, timeSlot, target)) : before.careGap;
     const reduction = before.careGap - current;
     const newSeats = Math.max(0, Math.round(before.bottleneck.space) - linked);
