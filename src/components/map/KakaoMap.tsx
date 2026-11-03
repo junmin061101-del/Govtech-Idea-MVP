@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   CustomOverlayMap,
   Map as KakaoMapView,
@@ -106,16 +106,34 @@ function LoadedMap({
     [diagnoses],
   );
 
-  // 구를 바꾸면 그 구의 모든 행정동이 보이도록 범위를 맞춘다 (화면 밖으로 잘리는 동이 없게)
+  // 구를 바꾸면 그 구의 모든 행정동이 보이도록 범위를 맞춘다 (화면 밖으로 잘리는 동이 없게).
+  // 레이아웃이 자리 잡기 전에 맞추면 작은 크기 기준으로 너무 넓게 잡히므로, 컨테이너 크기가 바뀔 때도 다시 맞춘다.
+  const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!map || dongs.length === 0) return;
-    const bounds = new kakao.maps.LatLngBounds();
-    for (const d of dongs) {
-      bounds.extend(new kakao.maps.LatLng(d.bbox[1], d.bbox[0]));
-      bounds.extend(new kakao.maps.LatLng(d.bbox[3], d.bbox[2]));
-    }
-    map.setBounds(bounds, 24, 24, 24, 24);
-    setLevel(map.getLevel());
+    const fit = () => {
+      map.relayout();
+      const bounds = new kakao.maps.LatLngBounds();
+      for (const d of dongs) {
+        bounds.extend(new kakao.maps.LatLng(d.bbox[1], d.bbox[0]));
+        bounds.extend(new kakao.maps.LatLng(d.bbox[3], d.bbox[2]));
+      }
+      map.setBounds(bounds, 16, 16, 16, 16);
+      setLevel(map.getLevel());
+    };
+    fit();
+    const el = containerRef.current;
+    if (!el) return;
+    let last = `${el.clientWidth}x${el.clientHeight}`;
+    const ro = new ResizeObserver(() => {
+      const now = `${el.clientWidth}x${el.clientHeight}`;
+      if (now !== last) {
+        last = now;
+        fit();
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
   }, [map, sigunguCode, dongs]);
 
   // 목록에서 고른 동이 화면 밖이면 그쪽으로 이동
@@ -146,7 +164,7 @@ function LoadedMap({
   const hoveredDong = hoveredId ? dongs.find((d) => d.id === hoveredId) : null;
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl border border-neutral-200">
+    <div ref={containerRef} className="relative h-full w-full overflow-hidden rounded-xl border border-neutral-200">
       <KakaoMapView
         center={{ lat: 37.5665, lng: 126.978 }}
         level={7}
@@ -165,7 +183,8 @@ function LoadedMap({
               key={`${dong.id}-${i}`}
               path={path}
               fillColor={cls.color}
-              fillOpacity={0.62}
+              // 가까이 볼수록 배경 지도(도로·건물)가 보이도록 옅게
+              fillOpacity={level <= 4 ? 0.35 : level <= 5 ? 0.48 : 0.62}
               strokeColor={emphasized ? "#111827" : "#ffffff"}
               strokeOpacity={1}
               strokeWeight={emphasized ? 3 : 1.5}
@@ -253,7 +272,7 @@ function LoadedMap({
 
 function MapLegend({ timeSlot, dataNote }: { timeSlot: TimeSlotId; dataNote: string }) {
   return (
-    <div className="absolute bottom-3 left-3 z-20 max-w-[240px] rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
+    <div className="absolute bottom-3 right-3 z-20 max-w-[240px] rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
       <p className="mb-1 font-semibold text-neutral-700">부족 비율 (부족 인원 ÷ 추정 수요)</p>
       <ul className="space-y-0.5">
         {GAP_CLASSES.filter((c) => c.id !== "no_demand").map((c) => (
