@@ -16,15 +16,16 @@ interface AlternativesPanelProps {
   diagnoses: DongDiagnosis[];
   timeSlot: TimeSlotId;
   target: CareTargetId;
+  dongName?: (dongId: string) => string | undefined;
 }
 
 const GAP_BAR_COLOR = "#bb3930";
 
-export default function AlternativesPanel({ dong, dongs, facilities, diagnoses, timeSlot, target }: AlternativesPanelProps) {
+export default function AlternativesPanel({ dong, dongs, facilities, diagnoses, timeSlot, target, dongName }: AlternativesPanelProps) {
   const [unitCosts, setUnitCosts] = useState<UnitCost[]>(DEFAULT_UNIT_COSTS);
   useEffect(() => setUnitCosts(loadUnitCosts()), []);
 
-  const ctx: AlternativeContext | null = dong ? { dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts } : null;
+  const ctx: AlternativeContext | null = dong ? { dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts, dongName } : null;
   const alternatives = useMemo(() => (ctx ? buildAlternatives(ctx) : []), [dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [selected, setSelected] = useState<Set<string>>(new Set());

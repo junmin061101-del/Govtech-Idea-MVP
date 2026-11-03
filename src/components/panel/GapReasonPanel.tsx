@@ -9,7 +9,7 @@ import { people } from "@/lib/mapScale";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
 import { CARE_TARGETS } from "@/lib/constants/targets";
 import { DEMAND_METHODOLOGY_NOTE } from "@/lib/calculator";
-import { DEMAND_FACTORS, DEMAND_FACTORS_META, STAFFING_ASSUMPTIONS } from "@/lib/config/assumptions";
+import { CATCHMENT, DEMAND_FACTORS, DEMAND_FACTORS_META, STAFFING_ASSUMPTIONS } from "@/lib/config/assumptions";
 
 /** 이유별 색 (dataviz 검증: 3색 all-pairs 통과, 배경 대비 경고는 막대 아래 글자 표기로 보완) */
 export const REASON_COLOR: Record<BottleneckAxis, string> = {
@@ -32,11 +32,13 @@ function inkOn(hex: string): string {
 
 const SEATS_FORMULA =
   "시설마다 정원과 (그 시간 근무 교사 수 × 교사 1명당 아동 수) 중 작은 값을 더한 것. 그 시간에 운영하지 않는 시설은 0. " +
-  "교사 1명당 아동 수는 영유아보육법 시행규칙 배치기준(0세 1:3 ~ 4세 이상 1:20)을 재원 아동 연령 구성에 맞춰 적용.";
+  "교사 1명당 아동 수는 영유아보육법 시행규칙 배치기준(0세 1:3 ~ 4세 이상 1:20)을 재원 아동 연령 구성에 맞춰 적용. " +
+  `시설 자리는 반경 ${CATCHMENT.radiusM / 1000}km 안의 수요가 나눠 쓴다고 보고(2SFCA), 이 동 수요 비율만큼만 이 동의 자리로 센다(구 경계 포함).`;
 
 const VISIBLE_FACILITIES = 6;
 
 interface GapReasonPanelProps {
+  dongName?: (dongId: string) => string | undefined;
   dong: Dong | null;
   diagnosis: DongDiagnosis | null;
   facilities: Facility[];
@@ -44,7 +46,7 @@ interface GapReasonPanelProps {
   dataNote: string;
 }
 
-export default function GapReasonPanel({ dong, diagnosis, facilities, timeSlot, dataNote }: GapReasonPanelProps) {
+export default function GapReasonPanel({ dong, diagnosis, facilities, timeSlot, dataNote, dongName }: GapReasonPanelProps) {
   const [open, setOpen] = useState<BottleneckAxis | null>(null);
   // 동·시간대를 바꾸면 주된 이유를 펼친 상태로 시작
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function GapReasonPanel({ dong, diagnosis, facilities, timeSlot, 
 
   const slot = timeSlotDef(timeSlot);
   const target = CARE_TARGETS.find((t) => t.id === diagnosis.target)!;
-  const ex = explainGap(diagnosis, facilities, timeSlot, slot.shortLabel);
+  const ex = explainGap(diagnosis, facilities, timeSlot, slot.shortLabel, dongName);
   const surplus = ex.availableSeats - ex.demand;
   const shown = ex.segments.filter((s) => s.people > 0);
 
@@ -197,14 +199,14 @@ function ReasonRow({
         <div className="px-3 pb-3 text-xs text-neutral-600">
           {segment.unattributable ? (
             <p className="leading-relaxed">
-              이 동 모든 시설의 정원 합 {people(totalCapacity)}이 추정 수요 {people(demand)}보다 적습니다. 특정 시설의 문제가 아니라
-              정원 총량이 모자란 몫이라 시설을 특정할 수 없습니다.
+              반경 1km 안 시설들의 정원 중 이 동에 배분되는 몫이 {people(totalCapacity)}으로 추정 수요 {people(demand)}보다
+              적습니다. 특정 시설의 문제가 아니라 정원 총량이 모자란 몫이라 시설을 특정할 수 없습니다.
             </p>
           ) : (
             <>
               <p className="mb-1.5 leading-relaxed text-neutral-500">
-                아래 {segment.facilities.length}곳이 이 시간에 못 받는 자리는 합계 {people(lostTotal)}이고, 그중 실제 부족에 해당하는 몫이{" "}
-                {people(segment.people)}입니다.
+                아래 {segment.facilities.length}곳이 이 시간에 못 받는 자리 중 이 동 몫은 합계 {people(lostTotal)}이고, 그중 실제
+                부족에 해당하는 몫이 {people(segment.people)}입니다.
               </p>
               <ul className="space-y-1">
                 {list.map((f) => (

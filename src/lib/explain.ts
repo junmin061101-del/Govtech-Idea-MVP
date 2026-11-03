@@ -4,17 +4,19 @@
  * 분해 규칙은 calculator.diagnoseDong과 같다.
  *  - 자리가 없어서: 모든 시설이 정원만큼 받아도 남는 부족분. 특정 시설 탓이 아니므로 시설 목록 없음
  *  - 문을 닫아서 / 선생님이 없어서: 나머지 부족분을 두 이유의 "못 받는 자리" 비율로 나눈 몫.
- *    각 시설의 "못 받는 자리"(정원 − 그 시간 이용 가능한 자리)를 목록으로 보여 준다.
+ *    각 시설의 "못 받는 자리"(정원 − 그 시간 이용 가능한 자리) 중 이 동에 배분되는 몫(2SFCA)을 목록으로 보여 준다.
  */
-import { calculateECC } from "@/lib/calculator";
+import { calculateECC, servingFacilities } from "@/lib/calculator";
 import type { BottleneckAxis, DongDiagnosis, Facility, TimeSlotId } from "@/types";
 
 export const AXIS_ORDER: BottleneckAxis[] = ["space", "time", "staff"];
 
 export interface ReasonFacility {
   facility: Facility;
-  /** 정원 − 그 시간 이용 가능한 자리 */
+  /** (정원 − 그 시간 이용 가능한 자리) × 이 동 배분 비율, 정수 반올림 */
   lostSeats: number;
+  /** 이 동에 배분되는 비율 (2SFCA) */
+  weight: number;
   /** 예: "야간 운영 안 함", "교사 1명 근무 → 3명까지" */
   note: string;
   /** 운영 여부·근무 인원이 가정값이면 true */
@@ -37,8 +39,10 @@ export interface GapExplanation {
   demand: number;
   availableSeats: number;
   gap: number;
-  /** 모든 시설 정원 합 */
+  /** 이 동에 배분되는 정원 합 (2SFCA) */
   totalCapacity: number;
+  /** 이 동에 자리를 나눠 주는 시설 수 */
+  servingCount: number;
   segments: ReasonSegment[];
 }
 
@@ -66,25 +70,34 @@ export function explainGap(
   facilities: Facility[],
   timeSlot: TimeSlotId,
   slotShortLabel: string,
+  /** 다른 동 시설이면 이름 옆에 동 이름을 붙인다 */
+  dongName?: (dongId: string) => string | undefined,
 ): GapExplanation {
-  const own = facilities.filter((f) => f.dongId === diagnosis.dongId && f.targets.includes(diagnosis.target));
+  const served = servingFacilities(facilities, diagnosis.dongId, diagnosis.target);
   const time: ReasonFacility[] = [];
   const staff: ReasonFacility[] = [];
+  const where = (f: Facility) => {
+    if (f.dongId === diagnosis.dongId) return "";
+    const n = dongName?.(f.dongId);
+    return n ? `${n} · ` : "인근 동 · ";
+  };
 
-  for (const f of own) {
+  for (const { f, w: weight } of served) {
     const r = calculateECC(f, timeSlot);
-    const lost = f.capacity - r.ecc;
+    const lost = Math.round((f.capacity - r.ecc) * weight);
     if (lost <= 0) continue;
     const w = f.operatingWindows.find((x) => x.timeSlot === timeSlot);
     const estimated = Boolean(w?.estimated);
+    const share = weight < 1 ? ` · 이 동 몫 ${Math.round(weight * 100)}%` : "";
     if (!r.isOpen) {
-      time.push({ facility: f, lostSeats: lost, note: `${slotShortLabel} 운영 안 함`, estimated });
+      time.push({ facility: f, lostSeats: lost, weight, note: `${where(f)}${slotShortLabel} 운영 안 함${share}`, estimated });
     } else {
       const staffOnDuty = Math.round((w?.staffOnDuty ?? 0) * 10) / 10;
       staff.push({
         facility: f,
         lostSeats: lost,
-        note: `교사 ${staffOnDuty}명 근무 → ${r.ecc}명까지 · 정원 ${f.capacity}명`,
+        weight,
+        note: `${where(f)}교사 ${staffOnDuty}명 근무 → ${r.ecc}명까지 · 정원 ${f.capacity}명${share}`,
         estimated,
       });
     }
@@ -103,7 +116,8 @@ export function explainGap(
     demand: diagnosis.demand,
     availableSeats: diagnosis.totalECC,
     gap,
-    totalCapacity: own.reduce((a, f) => a + f.capacity, 0),
+    totalCapacity: Math.round(served.reduce((a, { f, w }) => a + w * f.capacity, 0)),
+    servingCount: served.length,
     segments: AXIS_ORDER.map((axis, i) => ({
       axis,
       people: people[i],

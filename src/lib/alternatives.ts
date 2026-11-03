@@ -6,11 +6,14 @@
  *  3) 인근 연계·정원 확충 : 같은 구의 맞닿은 동에서 남는 자리를 연계하고, 남는 "자리 부족"은 신규 정원으로 안내
  *
  * 효과는 모두 시설 정보를 실제로 바꾼 뒤 diagnoseDong으로 다시 계산한 값이다.
+ * 2SFCA 때문에 한 시설에서 늘린 자리는 반경 안 여러 동이 나눠 쓴다. 이 동 효과는 배분 비율만큼이고,
+ * 나머지는 "인근 동에도 함께 늘어나는 자리"(spillover)로 따로 보여 준다.
  * 여러 대안을 합친 효과도 같은 방식으로(변경을 함께 적용해) 계산하므로 단순 합산보다 작거나 같다.
  */
-import { calculateECC, diagnoseDong } from "@/lib/calculator";
+import { allocationWeight, calculateECC, diagnoseDong, servingFacilities } from "@/lib/calculator";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
 import { isUsable, won, type UnitCost, type UnitCostId } from "@/lib/config/unitCosts";
+import { CATCHMENT } from "@/lib/config/assumptions";
 import type { CareTargetId, Dong, DongDiagnosis, Facility, OperatingWindow, TimeSlotId } from "@/types";
 
 export type AlternativeKind = "extend_hours" | "add_staff" | "link_capacity";
@@ -48,6 +51,8 @@ export interface Alternative {
   needs: string[];
   /** 필요한 교사 수 (효과가 같을 때 적은 쪽을 앞에 둔다) */
   teachers: number;
+  /** 늘린 자리 중 반경 안 다른 동에 배분되는 몫 (2SFCA) */
+  spillover: number;
   /** 남는 공백 안내 (인근 연계 카드) */
   residualNote?: string;
   applicable: boolean;
@@ -66,6 +71,8 @@ export interface AlternativeContext {
   timeSlot: TimeSlotId;
   target: CareTargetId;
   unitCosts: UnitCost[];
+  /** 다른 구 포함 행정동 이름 조회 (다른 동 시설 표시용) */
+  dongName?: (dongId: string) => string | undefined;
 }
 
 const EMPTY_CHANGE: FacilityChange = { windows: {}, addedSeats: 0 };
@@ -151,6 +158,10 @@ export function josa(word: string, withFinal: string, withoutFinal: string): str
   return code % 28 === 0 ? withoutFinal : withFinal;
 }
 
+function spillNote(n: number): string[] {
+  return n > 0 ? [`반경 ${CATCHMENT.radiusM / 1000}km 안 인근 동에도 자리 ${n}명이 함께 늘어납니다`] : [];
+}
+
 function namesOf(list: string[], max = 2): string {
   return list.length <= max ? list.join(", ") : `${list.slice(0, max).join(", ")} 등 ${list.length}곳`;
 }
@@ -161,20 +172,38 @@ function namesOf(list: string[], max = 2): string {
 
 export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
   const { dong, timeSlot, target } = ctx;
-  const own = ctx.facilities.filter((f) => f.dongId === dong.id && f.targets.includes(target));
+  const servedList = servingFacilities(ctx.facilities, dong.id, target);
+  const own = servedList.map((x) => x.f);
+  const weightOf = (f: Facility) => allocationWeight(f, dong.id, target);
   const before = diagnoseDong(dong, own, timeSlot, target);
   if (before.careGap <= 0) return [];
+  const label = (f: Facility) => {
+    if (f.dongId === dong.id) return f.name;
+    return `${f.name}(${ctx.dongName?.(f.dongId) ?? "인근 동"})`;
+  };
+  /** 바꾼 시설들이 늘린 자리 중 다른 동 몫 */
+  const spilloverOf = (change: FacilityChange) => {
+    const changed = applyChange(own, change, dong, timeSlot, target);
+    let s = 0;
+    own.forEach((f, i) => {
+      if (!change.windows[f.id]) return;
+      const delta = calculateECC(changed[i], timeSlot).ecc - calculateECC(f, timeSlot).ecc;
+      s += delta * (1 - weightOf(f));
+    });
+    return Math.round(s);
+  };
   const slot = timeSlotDef(timeSlot);
   const cost = (id: UnitCostId) => ctx.unitCosts.find((c) => c.id === id);
   const gapAfter = (fs: Facility[]) => diagnoseDong(dong, fs, timeSlot, target).careGap;
   // 문 열기·교사 추가로는 정원 총량 부족(자리가 없어서)을 줄일 수 없다
-  const spaceFloor = Math.max(0, before.demand - own.reduce((a, f) => a + f.capacity, 0));
+  const spaceFloor = Math.max(0, Math.round(before.bottleneck.space));
 
   // 1) 운영시간 연장 -------------------------------------------------------
   const extend = (() => {
     const closed = own
       .filter((f) => f.capacity > 0 && !calculateECC(f, timeSlot).isOpen)
-      .sort((a, b) => b.capacity - a.capacity);
+      // 이 동에 돌아오는 자리(정원 × 배분 비율)가 큰 순
+      .sort((a, b) => b.capacity * weightOf(b) - a.capacity * weightOf(a));
     const change: FacilityChange = { windows: {}, addedSeats: 0 };
     let current = before.careGap;
     let teachers = 0;
@@ -182,7 +211,8 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
     for (const f of closed) {
       const need = current - spaceFloor;
       if (need <= 0) break;
-      const seats = Math.min(f.capacity, need);
+      // 이 동에는 배분 비율만큼만 돌아오므로, 필요한 자리 ÷ 비율만큼 연다 (정원 한도)
+      const seats = Math.min(f.capacity, Math.ceil(need / weightOf(f)));
       const staff = Math.ceil(seats / ratioOf(f, timeSlot));
       const trial = { ...change.windows, [f.id]: { isOpen: true, staffOnDuty: staff } };
       const g = gapAfter(applyChange(own, { windows: trial, addedSeats: 0 }, dong, timeSlot, target));
@@ -190,7 +220,7 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
       change.windows = trial;
       current = g;
       teachers += staff;
-      chosen.push(f.name);
+      chosen.push(label(f));
     }
     const reduction = before.careGap - current;
     const ext = cost("extension_class_annual");
@@ -221,8 +251,9 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
           : `${slot.shortLabel}에 문을 닫는 시설이 없어 해당하지 않습니다`,
       reduction,
       remaining: current,
-      needs: chosen.length > 0 ? [`대상 시설: ${namesOf(chosen, 3)}`, `필요 교사: ${teachers}명`] : [],
+      needs: chosen.length > 0 ? [`대상 시설: ${namesOf(chosen, 3)}`, `필요 교사: ${teachers}명`, ...spillNote(spilloverOf(change))] : [],
       teachers,
+      spillover: chosen.length > 0 ? spilloverOf(change) : 0,
       costs: chosen.length > 0 ? costs : [],
       change: chosen.length > 0 ? change : EMPTY_CHANGE,
     };
@@ -233,7 +264,8 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
     const limited = own
       .map((f) => ({ f, r: calculateECC(f, timeSlot) }))
       .filter(({ f, r }) => r.isOpen && r.ecc < f.capacity)
-      .sort((a, b) => ratioOf(b.f, timeSlot) - ratioOf(a.f, timeSlot));
+      // 교사 1명이 이 동에 돌려주는 자리(1인당 아동 수 × 배분 비율)가 큰 순
+      .sort((a, b) => ratioOf(b.f, timeSlot) * weightOf(b.f) - ratioOf(a.f, timeSlot) * weightOf(a.f));
     const change: FacilityChange = { windows: {}, addedSeats: 0 };
     let current = before.careGap;
     let teachers = 0;
@@ -242,7 +274,7 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
       const need = current - spaceFloor;
       if (need <= 0) break;
       const ratio = ratioOf(f, timeSlot);
-      const seats = Math.min(f.capacity - r.ecc, need);
+      const seats = Math.min(f.capacity - r.ecc, Math.ceil(need / weightOf(f)));
       const add = Math.ceil(seats / ratio);
       const w = f.operatingWindows.find((x) => x.timeSlot === timeSlot)!;
       const trial = { ...change.windows, [f.id]: { isOpen: true, staffOnDuty: w.staffOnDuty + add } };
@@ -251,7 +283,7 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
       change.windows = trial;
       current = g;
       teachers += add;
-      placed.push(`${f.name}(${add}명)`);
+      placed.push(`${label(f)} ${add}명`);
     }
     const reduction = before.careGap - current;
     const wage = cost("parttime_teacher_hourly");
@@ -282,8 +314,9 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
           : `교사가 모자란 시설이 없어 해당하지 않습니다`,
       reduction,
       remaining: current,
-      needs: teachers > 0 ? [`배치 시설: ${namesOf(placed, 3)}`, `필요 교사: ${teachers}명`] : [],
+      needs: teachers > 0 ? [`배치 시설: ${namesOf(placed, 3)}`, `필요 교사: ${teachers}명`, ...spillNote(spilloverOf(change))] : [],
       teachers,
+      spillover: teachers > 0 ? spilloverOf(change) : 0,
       costs: teachers > 0 ? costs : [],
       change: teachers > 0 ? change : EMPTY_CHANGE,
     };
@@ -344,6 +377,7 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
       remaining: current,
       needs: linked > 0 ? [`연계 지역: ${names.join(", ")}`] : [],
       teachers: 0,
+      spillover: 0,
       residualNote: newSeats > 0 ? `남는 '자리가 없어서' 부족 ${newSeats}명은 신규 정원이 필요합니다` : undefined,
       costs,
       change,
@@ -358,7 +392,7 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
 
 /** 선택한 대안들을 함께 적용한 결과 */
 export function combineAlternatives(ctx: AlternativeContext, selected: Alternative[]): { before: number; after: number } {
-  const own = ctx.facilities.filter((f) => f.dongId === ctx.dong.id && f.targets.includes(ctx.target));
+  const own = servingFacilities(ctx.facilities, ctx.dong.id, ctx.target).map((x) => x.f);
   const before = diagnoseDong(ctx.dong, own, ctx.timeSlot, ctx.target).careGap;
   if (selected.length === 0) return { before, after: before };
   const merged = mergeChanges(selected.map((a) => a.change));

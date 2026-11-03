@@ -25,6 +25,8 @@ const KakaoMap = dynamic(() => import("@/components/map/KakaoMap"), {
 });
 
 const allDongs = emdsData as Dong[];
+const dongNameById = new Map(allDongs.map((d) => [d.id, d.name]));
+const dongName = (id: string) => dongNameById.get(id);
 
 const DATA_NOTE =
   `어린이집 ${meta.sources.childcare.dataDate} 기준(서울 열린데이터광장) · ` +
@@ -55,8 +57,10 @@ export default function Home() {
 
   const dongs = useMemo(() => allDongs.filter((d) => d.sigunguCode === sigunguCode), [sigunguCode]);
   const rawFacilities = useFacilities(sigunguCode);
-  // 좌표 오류로 행정동에 배정하지 못한 시설은 지도·동별 집계에서 뺀다
+  // 좌표 오류로 행정동에 배정하지 못한 시설은 지도·동별 집계에서 뺀다.
+  // 구별 파일에는 이 구 행정동에 자리를 나눠 주는 다른 구 시설(2SFCA)도 들어 있다 — 집계에는 쓰고 지도에는 이 구 시설만 표시
   const facilities = useMemo(() => (rawFacilities ?? []).filter((f) => f.emdCode !== null), [rawFacilities]);
+  const mapFacilities = useMemo(() => facilities.filter((f) => f.sigunguCode === sigunguCode), [facilities, sigunguCode]);
   const unassigned = useMemo(
     () => meta.locationIssues.filter((x) => x.sigunguCode === sigunguCode),
     [sigunguCode],
@@ -98,7 +102,7 @@ export default function Home() {
             sigunguCode={sigunguCode}
             dongs={dongs}
             diagnoses={diagnoses}
-            facilities={facilities}
+            facilities={mapFacilities}
             timeSlot={timeSlot}
             selectedDongId={effectiveDongId}
             onSelectDong={setSelectedDongId}
@@ -131,6 +135,7 @@ export default function Home() {
               facilities={facilities}
               timeSlot={timeSlot}
               dataNote={DATA_NOTE}
+              dongName={dongName}
             />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">
@@ -141,6 +146,7 @@ export default function Home() {
               diagnoses={diagnoses}
               timeSlot={timeSlot}
               target={target}
+              dongName={dongName}
             />
           </div>
         </div>

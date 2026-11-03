@@ -61,3 +61,17 @@ export const STAFFING_ASSUMPTIONS = {
   status: "assumption" as AssumptionStatus,
   basis: "시간대별 실제 근무 인원 공개 데이터 없음 — 기존 MVP 가정치",
 };
+
+/**
+ * 2SFCA(2단계 유동 집수 구역) 배분 설정 — 시설의 자리를 반경 안 수요가 나눠 쓴다(구 경계 무시).
+ *  1단계: 시설 j의 반경 안 수요 합 P_j. 시설 자리를 각 행정동의 "반경 안 수요 비율"만큼 배분
+ *  2단계: 행정동 i의 이용 가능한 자리 = Σ_j (배분 비율 w_ij × 시설 j의 이용 가능한 자리)
+ * 배분 비율 w_ij는 대상 연령 인구 분포로만 정해지므로(시간대 이용률 계수는 약분됨) 데이터 빌드 때 미리 계산한다.
+ * 행정동 안 인구는 고르게 퍼져 있다고 보고, 약 200m 간격 격자점에 나눠 놓는다(집계구 인구 확보 시 교체).
+ */
+export const CATCHMENT = {
+  radiusM: 1000,
+  demandPointSpacingM: 200,
+  status: "assumption" as AssumptionStatus,
+  basis: "직선 1km(도보 약 15분). 설정값 — 바꾸면 npm run data:build로 다시 계산",
+};

@@ -8,7 +8,8 @@
  *   cache/seoul-childcare-raw.json   서울 어린이집 (fetch-seoul-childcare.mjs)
  * 출력
  *   src/data/seoul/emds.json                 서울 행정동 427개 (코드·이름·라벨 위치·인구·추정 수요)
- *   src/data/seoul/facilities/{sgg}.json     구별 어린이집 (경계 기준으로 행정동 배정)
+ *   src/data/seoul/facilities/{sgg}.json     구별 어린이집 (경계 기준으로 행정동 배정) + 그 구 행정동에 자리를
+ *                                            나눠 주는 다른 구 시설 (2SFCA 배분 비율 serves 포함)
  *   src/data/seoul/meta.json                 데이터 기준일·출처·위치 오류 집계
  *   public/data/seoul-boundaries.geojson     지도용 단순화 경계
  *
@@ -19,6 +20,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { bbox, labelPoint, pointInGeometry, simplifyGeometry } from "../src/lib/geo.ts";
 import {
+  CATCHMENT,
   DEMAND_FACTORS,
   FALLBACK_STAFF_RATIO,
   LEGAL_STAFF_RATIO,
@@ -220,6 +222,80 @@ for (const row of childcare.rows) {
 }
 
 // ---------------------------------------------------------------------------
+// 2-1. 2SFCA 배분 비율 — 시설마다 반경 안 수요를 행정동별로 모아 비율로 나눈다 (구 경계 무시)
+// ---------------------------------------------------------------------------
+const LAT_M = 111320;
+const LNG_M = 111320 * Math.cos((37.55 * Math.PI) / 180);
+const R = CATCHMENT.radiusM;
+const TARGET_AGES = { infant: [0, 6], lower_elementary: [6, 10] };
+const emdByCode = new Map(emds.map((e) => [e.emdCode, e]));
+
+// (1) 수요 지점: 행정동 안 격자점에 대상 연령 인구를 고르게 나눈다
+const demandPoints = [];
+for (const f of boundaries.features) {
+  const e = emdByCode.get(f.properties.adm_cd2);
+  const [x0, y0, x1, y1] = bbox(f.geometry);
+  const dLat = CATCHMENT.demandPointSpacingM / LAT_M;
+  const dLng = CATCHMENT.demandPointSpacingM / LNG_M;
+  const pts = [];
+  for (let y = y0 + dLat / 2; y < y1; y += dLat) {
+    for (let x = x0 + dLng / 2; x < x1; x += dLng) if (pointInGeometry([x, y], f.geometry)) pts.push([x, y]);
+  }
+  if (pts.length === 0) pts.push([e.lng, e.lat]);
+  const pop = Object.fromEntries(
+    Object.entries(TARGET_AGES).map(([t, [a, b]]) => [t, sum(e.populationByAge.slice(a, b)) / pts.length]),
+  );
+  for (const [x, y] of pts) demandPoints.push({ emd: e.emdCode, x, y, pop });
+}
+const CELL_M = R;
+const cellOf = (x, y) => `${Math.floor((x * LNG_M) / CELL_M)},${Math.floor((y * LAT_M) / CELL_M)}`;
+const pointCells = new Map();
+for (const p of demandPoints) {
+  const k = cellOf(p.x, p.y);
+  if (!pointCells.has(k)) pointCells.set(k, []);
+  pointCells.get(k).push(p);
+}
+
+// (2) 시설별 배분 비율
+let crossBorder = 0;
+const allFacilities = [...facilitiesBySgg.values()].flat();
+for (const f of allFacilities) {
+  if (!f.emdCode) continue;
+  const cx = Math.floor((f.lng * LNG_M) / CELL_M);
+  const cy = Math.floor((f.lat * LAT_M) / CELL_M);
+  f.serves = {};
+  for (const target of f.targets) {
+    const byEmd = new Map();
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const p of pointCells.get(`${cx + dx},${cy + dy}`) ?? []) {
+        const d = Math.hypot((p.x - f.lng) * LNG_M, (p.y - f.lat) * LAT_M);
+        if (d <= R) byEmd.set(p.emd, (byEmd.get(p.emd) ?? 0) + p.pop[target]);
+      }
+    }
+    const total = [...byEmd.values()].reduce((a, b) => a + b, 0);
+    let weights = total > 0 ? [...byEmd].map(([emd, v]) => [emd, v / total]) : [[f.emdCode, 1]];
+    // 0.1% 미만은 버리고 합이 1이 되도록 다시 맞춘다
+    weights = weights.filter(([, w]) => w >= 0.001);
+    const wsum = weights.reduce((a, [, w]) => a + w, 0);
+    weights = weights.map(([emd, w]) => [emd, +(w / wsum).toFixed(4)]).sort((a, b) => b[1] - a[1]);
+    const drift = +(1 - weights.reduce((a, [, w]) => a + w, 0)).toFixed(4);
+    weights[0][1] = +(weights[0][1] + drift).toFixed(4);
+    f.serves[target] = weights;
+    if (weights.some(([emd]) => emdByCode.get(emd).sigunguCode !== f.sigunguCode)) crossBorder++;
+  }
+}
+
+const facilityCount = allFacilities.length;
+// (3) 구별 파일에 "그 구 행정동에 자리를 나눠 주는 다른 구 시설"도 함께 넣는다
+for (const [sgg, list] of facilitiesBySgg) {
+  const own = new Set(list.map((f) => f.id));
+  for (const f of allFacilities) {
+    if (own.has(f.id) || !f.serves) continue;
+    if (Object.values(f.serves).some((ws) => ws.some(([emd]) => emdByCode.get(emd).sigunguCode === sgg))) list.push(f);
+  }
+}
+
+// ---------------------------------------------------------------------------
 // 3. 출력
 // ---------------------------------------------------------------------------
 rmSync(join(OUT, "facilities"), { recursive: true, force: true });
@@ -245,10 +321,12 @@ writeFileSync(
       },
       counts: {
         emds: emds.length,
-        facilities: [...facilitiesBySgg.values()].reduce((a, l) => a + l.length, 0),
+        facilities: facilityCount,
         pausedExcluded: skipped.paused,
         locationIssues: locationIssues.length,
+        crossBorderFacilities: crossBorder,
       },
+      catchment: { method: "2SFCA", radiusM: CATCHMENT.radiusM, demandPointSpacingM: CATCHMENT.demandPointSpacingM, demandPoints: demandPoints.length },
       locationIssues,
     },
     null,
@@ -270,7 +348,8 @@ writeFileSync(
 );
 
 console.log(
-  `행정동 ${emds.length}개, 어린이집 ${[...facilitiesBySgg.values()].reduce((a, l) => a + l.length, 0)}곳 ` +
-    `(휴지 제외 ${skipped.paused}곳, 위치 확인 필요 ${locationIssues.length}곳)`
+  `행정동 ${emds.length}개, 어린이집 ${facilityCount}곳 ` +
+    `(휴지 제외 ${skipped.paused}곳, 위치 확인 필요 ${locationIssues.length}곳), ` +
+    `2SFCA 반경 ${R}m · 수요 지점 ${demandPoints.length}개 · 다른 구에도 자리를 나누는 시설 ${crossBorder}곳`
 );
 if (unknownTypes.size) console.warn("알 수 없는 시설 유형(민간으로 처리):", [...unknownTypes]);

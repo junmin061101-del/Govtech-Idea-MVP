@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-03T01:04:25.576Z",
+ "builtAt": "2026-11-03T01:16:13.244Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -20,7 +20,14 @@
   "emds": 427,
   "facilities": 3919,
   "pausedExcluded": 69,
-  "locationIssues": 24
+  "locationIssues": 24,
+  "crossBorderFacilities": 2398
+ },
+ "catchment": {
+  "method": "2SFCA",
+  "radiusM": 1000,
+  "demandPointSpacingM": 200,
+  "demandPoints": 15363
  },
  "locationIssues": [
   {

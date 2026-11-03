@@ -24,7 +24,7 @@ export const DEMAND_METHODOLOGY_NOTE =
  * - 운영여부: 해당 시간대에 문을 여는지 (0 또는 1) — 닫혀 있으면 정원·인력이 있어도 ECC는 0
  * - 결과는 정수(명)로 내림
  */
-export function calculateECC(facility: Facility, timeSlot: TimeSlotId): FacilityECCResult {
+export function calculateECC(facility: Facility, timeSlot: TimeSlotId): Omit<FacilityECCResult, "weight"> {
   const window = facility.operatingWindows.find((w) => w.timeSlot === timeSlot);
 
   const spaceCapacity = facility.capacity;
@@ -41,6 +41,30 @@ export function calculateECC(facility: Facility, timeSlot: TimeSlotId): Facility
     isOpen,
     ecc,
   };
+}
+
+/**
+ * 2SFCA 배분 비율: 시설 f의 자리 중 행정동 dongId에 배분되는 비율 (0~1).
+ * 배분 정보가 없으면(가상 시설 등) 소속 행정동에 전부 배분한다.
+ */
+export function allocationWeight(f: Facility, dongId: string, target: CareTargetId): number {
+  const s = f.serves?.[target];
+  if (s) {
+    for (const [d, w] of s) if (d === dongId) return w;
+    return 0;
+  }
+  return f.dongId === dongId ? 1 : 0;
+}
+
+/** 이 동에 자리를 나눠 주는 시설과 배분 비율 */
+export function servingFacilities(facilities: Facility[], dongId: string, target: CareTargetId): { f: Facility; w: number }[] {
+  const out: { f: Facility; w: number }[] = [];
+  for (const f of facilities) {
+    if (!f.targets.includes(target)) continue;
+    const w = allocationWeight(f, dongId, target);
+    if (w > 0) out.push({ f, w });
+  }
+  return out;
 }
 
 function severityOf(gapRatio: number): DongDiagnosis["severity"] {
@@ -70,7 +94,10 @@ export function axisPolicyText(axis: BottleneckAxis, timeSlot: TimeSlotId, staff
 }
 
 /**
- * 생활권(행정동) 단위 돌봄 공백 진단 + 원인 분해(RCA)
+ * 행정동 단위 돌봄 공백 진단 + 원인 분해(RCA)
+ *
+ * 자리는 2SFCA 배분 비율(allocationWeight)만큼만 이 동의 것으로 센다. 반경 안 다른 동(다른 구 포함)
+ * 수요와 나눠 쓰는 몫을 뺀 값이다. 동 단위 합계는 정수(명)로 반올림한다.
  *
  * 원인 분해는 두 단계로 이뤄진다.
  *  1) 공간 병목: 모든 시설이 "완전 개방 + 완전 인력배치" 상태(idealECC)라도 못 채우는 수요분.
@@ -85,7 +112,7 @@ export function diagnoseDong(
   timeSlot: TimeSlotId,
   target: CareTargetId = "infant",
 ): DongDiagnosis {
-  const dongFacilities = facilities.filter((f) => f.dongId === dong.id && f.targets.includes(target));
+  const served = servingFacilities(facilities, dong.id, target);
   const demand = dong.estimatedDemand[target]?.[timeSlot] ?? 0;
 
   let totalECC = 0;
@@ -96,12 +123,12 @@ export function diagnoseDong(
   let openRatioStaffSum = 0;
   const facilityResults: FacilityECCResult[] = [];
 
-  for (const facility of dongFacilities) {
-    const result = calculateECC(facility, timeSlot);
+  for (const { f: facility, w } of served) {
+    const result = { ...calculateECC(facility, timeSlot), weight: w };
     facilityResults.push(result);
-    totalECC += result.ecc;
+    totalECC += w * result.ecc;
 
-    const potential = facility.capacity;
+    const potential = w * facility.capacity;
     idealECC += potential;
 
     if (result.isOpen) {
@@ -112,7 +139,7 @@ export function diagnoseDong(
       }
     }
 
-    const loss = Math.max(0, potential - result.ecc);
+    const loss = Math.max(0, potential - w * result.ecc);
     if (loss <= 0) continue;
 
     // 손실을 유발한 병목 축 판정: 시간(운영 여부)이 우선 원인이고, 그 다음이 인력이다.
@@ -122,6 +149,8 @@ export function diagnoseDong(
       staffLoss += loss;
     }
   }
+  totalECC = Math.round(totalECC);
+  idealECC = Math.round(idealECC);
   // 병목 해소에 필요한 "교사 수"로 환산하기 위한 가중 평균 1인당 돌봄 비율 (기본값 7)
   const avgStaffRatio = openRatioStaffSum > 0 ? openRatioWeightSum / openRatioStaffSum : 7;
 

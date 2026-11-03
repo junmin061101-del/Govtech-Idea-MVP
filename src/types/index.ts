@@ -64,6 +64,11 @@ export interface Facility {
   ratioEstimated?: boolean;
   /** 교사 수가 원자료에 없어 총 교직원 수로 대신한 경우 */
   teachersEstimated?: boolean;
+  /**
+   * 2SFCA 배분 비율: 대상별 [행정동 코드, 비율] (합 1). 반경 1km 안 수요 비율로 자리를 나눠 준다.
+   * 없으면 소속 행정동에 전부 배분한 것으로 본다.
+   */
+  serves?: Partial<Record<CareTargetId, [string, number][]>>;
   /** 전화번호 (실데이터 보유 시) */
   phone?: string;
   /** 인가일자 (실데이터 보유 시) */
@@ -101,6 +106,8 @@ export type BottleneckAxis = "space" | "time" | "staff";
 
 export interface FacilityECCResult {
   facilityId: string;
+  /** 이 동에 배분되는 비율 (2SFCA) */
+  weight: number;
   spaceCapacity: number;
   staffCapacity: number;
   isOpen: boolean;
