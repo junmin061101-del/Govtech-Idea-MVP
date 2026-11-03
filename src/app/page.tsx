@@ -6,7 +6,7 @@ import TopController from "@/components/TopController";
 import RankingList from "@/components/RankingList";
 import { rankDiagnoses } from "@/lib/ranking";
 import GapReasonPanel from "@/components/panel/GapReasonPanel";
-import PolicySimulator from "@/components/simulator/PolicySimulator";
+import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
 import { diagnoseAllDongs } from "@/lib/calculator";
 import { DEFAULT_SIGUNGU_CODE } from "@/lib/constants/regions";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
@@ -123,7 +123,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* TODO(S5): 시뮬레이터를 "대안 비교"로 교체 */}
         <div className="flex flex-col gap-4 overflow-y-auto">
           <div className="rounded-xl border border-neutral-200 bg-white">
             <GapReasonPanel
@@ -135,7 +134,14 @@ export default function Home() {
             />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">
-            <PolicySimulator dong={selectedDong} facilities={facilities} timeSlot={timeSlot} target={target} />
+            <AlternativesPanel
+              dong={selectedDong}
+              dongs={dongs}
+              facilities={facilities}
+              diagnoses={diagnoses}
+              timeSlot={timeSlot}
+              target={target}
+            />
           </div>
         </div>
       </div>

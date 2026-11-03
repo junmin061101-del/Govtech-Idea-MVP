@@ -70,6 +70,35 @@ const emds = boundaries.features.map((f) => {
 });
 
 // ---------------------------------------------------------------------------
+// 1-1. 인접 행정동 (경계가 맞닿은 동). 꼭짓점을 약 30m 격자에 넣어 같은 칸·이웃 칸을 공유하면 인접으로 본다.
+//      구 경계를 넘는 이웃도 포함한다 (2SFCA·인근 연계용).
+// ---------------------------------------------------------------------------
+const CELL = 0.0003;
+const cellCodes = new Map();
+for (const f of boundaries.features) {
+  const code = f.properties.adm_cd2;
+  const geom = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
+  for (const poly of geom) for (const ring of poly) for (const [x, y] of ring) {
+    const key = `${Math.floor(x / CELL)},${Math.floor(y / CELL)}`;
+    if (!cellCodes.has(key)) cellCodes.set(key, new Set());
+    cellCodes.get(key).add(code);
+  }
+}
+const neighbors = new Map(boundaries.features.map((f) => [f.properties.adm_cd2, new Set()]));
+for (const [key, codes] of cellCodes) {
+  const [cx, cy] = key.split(",").map(Number);
+  const around = new Set(codes);
+  for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+    for (const c of cellCodes.get(`${cx + dx},${cy + dy}`) ?? []) around.add(c);
+  }
+  for (const a of codes) for (const b of around) if (a !== b) {
+    neighbors.get(a).add(b);
+    neighbors.get(b).add(a);
+  }
+}
+for (const e of emds) e.neighbors = [...neighbors.get(e.emdCode)].sort();
+
+// ---------------------------------------------------------------------------
 // 2. 어린이집 → 행정동 배정 (경계 안에 들어가는지로 판정)
 // ---------------------------------------------------------------------------
 const TYPE_MAP = {

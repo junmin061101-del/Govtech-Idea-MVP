@@ -86,6 +86,8 @@ export interface Dong {
   lng: number;
   /** [minLng, minLat, maxLng, maxLat] */
   bbox: number[];
+  /** 경계가 맞닿은 행정동 코드 (다른 구 포함) */
+  neighbors: string[];
   /** 행정안전부 주민등록인구 통계 실측치 */
   totalPopulation: number;
   population0to9: number;
@@ -122,10 +124,4 @@ export interface DongDiagnosis {
   };
   recommendation: string;
   facilityResults: FacilityECCResult[];
-}
-
-export interface SimulatorAdjustment {
-  extendHours: number; // 운영시간 연장 (시간)
-  additionalStaff: number; // 시간제 돌봄인력 추가 배치 인원
-  addedCapacity: number; // 신규 확충/인접 생활권 연계 정원 (명)
 }

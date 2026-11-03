@@ -5,10 +5,9 @@ import type {
   DongDiagnosis,
   Facility,
   FacilityECCResult,
-  SimulatorAdjustment,
   TimeSlotId,
 } from "@/types";
-import { TIME_SLOTS as TIME_SLOTS_ALL, timeSlotDef } from "@/lib/constants/timeSlots";
+import { timeSlotDef } from "@/lib/constants/timeSlots";
 
 export { TIME_SLOTS } from "@/lib/constants/timeSlots";
 
@@ -177,107 +176,4 @@ export function diagnoseAllDongs(
   target: CareTargetId = "infant",
 ): DongDiagnosis[] {
   return dongs.map((dong) => diagnoseDong(dong, facilities, timeSlot, target));
-}
-
-// ---------------------------------------------------------------------------
-// 정책 시뮬레이터
-// ---------------------------------------------------------------------------
-
-// 가상 확충 시설의 1인당 돌봄 비율 (신규/연계 정원 레버 계산용 기본값)
-const NEW_CAPACITY_STAFF_RATIO = 7;
-
-/**
- * 정책 시뮬레이터: 운영시간 연장 / 인력 재배치 / 정원 확충(신규 또는 인접 생활권 연계)
- * 세 레버를 적용했을 때 생활권의 공백 해소율을 계산한다.
- *
- * 3축 진단(diagnoseDong)의 축과 레버가 1:1로 대응한다 — 시간 병목엔 운영시간 연장,
- * 인력 병목엔 인력 재배치, 공간 병목엔 정원 확충 레버가 대응해야 진단과 처방이 이어진다.
- * 금전적 절감액은 신뢰할 수 있는 단가 출처가 없어 산출하지 않는다 (README 참고).
- */
-export function simulatePolicy(
-  dong: Dong,
-  facilities: Facility[],
-  timeSlot: TimeSlotId,
-  adjustment: SimulatorAdjustment,
-  target: CareTargetId = "infant",
-) {
-  const before = diagnoseDong(dong, facilities, timeSlot, target);
-  const dongFacilities = facilities.filter((f) => f.dongId === dong.id);
-
-  const bottleneckedFacilities = dongFacilities.filter((f) => {
-    const r = calculateECC(f, timeSlot);
-    return r.ecc < f.capacity;
-  });
-  const targetCount = Math.max(1, bottleneckedFacilities.length);
-
-  const adjustedFacilities: Facility[] = facilities.map((f) => {
-    if (f.dongId !== dong.id) return f;
-    const isBottlenecked = bottleneckedFacilities.some((b) => b.id === f.id);
-    if (!isBottlenecked) return f;
-
-    const staffShare = adjustment.additionalStaff / targetCount;
-
-    return {
-      ...f,
-      operatingWindows: f.operatingWindows.map((w) => {
-        if (w.timeSlot !== timeSlot) return w;
-        const extendedOpen = w.isOpen || adjustment.extendHours > 0;
-        return {
-          ...w,
-          isOpen: extendedOpen,
-          staffOnDuty: w.staffOnDuty + staffShare,
-        };
-      }),
-    };
-  });
-
-  // 공간 병목 레버: 신규 시설 확충 또는 인접 생활권 여유 정원 연계를 "가상 시설"로 모델링한다.
-  // 완전 개방·완전 인력배치 상태로 추가해, 진단에서 나온 공간 병목을 직접 겨냥한다.
-  if (adjustment.addedCapacity > 0) {
-    adjustedFacilities.push({
-      id: `SIM-${dong.id}`,
-      name: "(시뮬레이션) 신규/연계 확충 정원",
-      type: "다함께돌봄센터",
-      targets: [target],
-      sigunguCode: dong.sigunguCode,
-      emdCode: dong.emdCode,
-      dongId: dong.id,
-      address: "",
-      lat: dong.lat,
-      lng: dong.lng,
-      capacity: adjustment.addedCapacity,
-      currentEnrollment: 0,
-      totalStaff: Math.ceil(adjustment.addedCapacity / NEW_CAPACITY_STAFF_RATIO),
-      operatingWindows: TIME_SLOTS_ALL.map((slot) => ({
-        timeSlot: slot.id,
-        isOpen: slot.id === timeSlot,
-        staffOnDuty: slot.id === timeSlot ? Math.ceil(adjustment.addedCapacity / NEW_CAPACITY_STAFF_RATIO) : 0,
-        staffToChildRatio: NEW_CAPACITY_STAFF_RATIO,
-      })),
-      dataSource: "시뮬레이터 가상 시설 (실제 부지·인허가 확보 전 가정치)",
-    });
-  }
-
-  const after = diagnoseDong(dong, adjustedFacilities, timeSlot, target);
-
-  const gapResolved = Math.max(0, before.careGap - after.careGap);
-  const resolutionRate = before.careGap > 0 ? Math.min(100, Math.round((gapResolved / before.careGap) * 100)) : 100;
-
-  return {
-    before,
-    after,
-    gapResolved,
-    resolutionRate,
-  };
-}
-
-export function severityColor(severity: DongDiagnosis["severity"]): string {
-  switch (severity) {
-    case "critical":
-      return "#ef4444"; // red-500
-    case "moderate":
-      return "#f97316"; // orange-500
-    default:
-      return "#22c55e"; // green-500
-  }
 }

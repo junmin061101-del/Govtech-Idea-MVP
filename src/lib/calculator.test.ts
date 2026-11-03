@@ -10,7 +10,7 @@ const facilities = loadAllFacilities().filter((f) => f.emdCode !== null);
 
 function dong(demand: Partial<Record<TimeSlotId, number>>): Dong {
   return {
-    id: "d1", emdCode: "d1", sigunguCode: "00000", sidoCode: "00", name: "테스트동", lat: 0, lng: 0, bbox: [],
+    id: "d1", emdCode: "d1", sigunguCode: "00000", sidoCode: "00", name: "테스트동", lat: 0, lng: 0, bbox: [], neighbors: [],
     totalPopulation: 0, population0to9: 0, populationByAge: [],
     estimatedDemand: { infant: demand, lower_elementary: { night: 999 } },
   };

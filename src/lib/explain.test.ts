@@ -6,7 +6,7 @@ import { loadAllFacilities, loadEmds } from "@/test/seoulData";
 import type { Dong, Facility, OperatingWindow } from "@/types";
 
 const dong: Dong = {
-  id: "d1", emdCode: "d1", sigunguCode: "00000", sidoCode: "00", name: "테스트동", lat: 0, lng: 0, bbox: [],
+  id: "d1", emdCode: "d1", sigunguCode: "00000", sidoCode: "00", name: "테스트동", lat: 0, lng: 0, bbox: [], neighbors: [],
   totalPopulation: 0, population0to9: 0, populationByAge: [],
   estimatedDemand: { infant: { night: 60 }, lower_elementary: {} },
 };
