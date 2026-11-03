@@ -69,7 +69,8 @@ https://github.com/vuski/admdongkor), CC BY 4.0으로 배포됩니다.
 
 ```bash
 npm run data:fetch   # 원자료 3종 재수집 (.env.local의 SEOUL_OPEN_DATA_API_KEY 필요)
-npm run data:build   # 정규화 데이터 재생성
+npm run data:build   # 정규화 데이터 재생성 (경계·인구·시설, 2SFCA 배분 비율)
+npm run data:snapshot  # 그 달 스냅샷 저장 (시점 비교용, 이미 있는 달은 덮어쓰지 않음)
 npm test             # 15개 동·경계·배정 검증 포함
 ```
 
@@ -122,6 +123,17 @@ npm test             # 15개 동·경계·배정 검증 포함
 **지금 데이터는 시연용 가상 데이터다** (`src/data/seoul/unmet-demand/11590.json`, `npm run data:mock-unmet`로 생성,
 `synthetic: true`). 화면에 "시연용 가상 데이터"를 항상 표시한다. 시민 돌봄지도 출시 후 실제 집계로 교체한다.
 
+### 리포트·판단 이력·시점 비교
+
+| 화면 | 내용 |
+|---|---|
+| `/report` | 월(운영 조정)·분기(돌봄협의체)·연(예산 편성 전) 템플릿. **PDF는 "PDF로 저장(인쇄)" 버튼 → 브라우저 인쇄 대화상자에서 "PDF로 저장"**, 엑셀은 .xlsx 내려받기(exceljs). 지역 순위, 지역별 부족 인원과 이유, 선택한 대안과 효과, 데이터 기준일·출처를 담고, 분기는 시간대별 표·부모 검색 신호, 연은 이유별 합계(예산 항목 근거)·시점 비교를 더한다. 내용은 [src/lib/report.ts](src/lib/report.ts) 한 곳에서 만들어 PDF와 엑셀 숫자가 같다 |
+| 대안 비교 → "이 판단 저장" | 작성자·메모와 함께 대안 조합을 저장. 저장 당시 숫자와 데이터 기준일도 함께 남긴다 |
+| `/history` | 저장한 판단 목록, "다시 열기"(같은 동·시간대·대안 선택 상태로 지도 화면 복원), 리포트, 삭제, **JSON 내보내기·가져오기(인수인계용)**. 지금은 브라우저 저장 — Firebase 이전 후 구별 권한이 있는 서버 저장으로 바꾼다 |
+| `/compare` | 월별 스냅샷(`src/data/seoul/snapshots/`)으로 같은 동의 부족 인원 추이 비교. 과거 달 수치는 만들어 넣지 않으므로 다음 달 갱신부터 전후 비교가 가능하다 |
+
+화면 상태(구·시간대·대상·동·선택한 대안·지도 층)는 주소 쿼리에 담겨(`src/lib/viewState.ts`) 링크로 같은 화면을 공유할 수 있다.
+
 ## 5. 지도 설계
 
 - **단계구분도**: 행정동 경계(`public/data/seoul-boundaries.geojson`)를 카카오맵 `Polygon`으로 칠한다.
@@ -139,7 +151,7 @@ npm test             # 15개 동·경계·배정 검증 포함
 
 ```
 src/
-  app/                    # Next.js App Router 엔트리
+  app/                    # Next.js App Router: / (지도), /report, /history, /compare, /settings
   components/             # 지도, 진단 패널, 시뮬레이터
   data/seoul/             # 빌드 결과: emds.json, facilities/{sigungu_code}.json, meta.json
   lib/

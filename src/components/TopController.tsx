@@ -1,6 +1,7 @@
 "use client";
 
-import { Clock, MapPin, Users } from "lucide-react";
+import Link from "next/link";
+import { BookOpen, Clock, FileText, History, MapPin, Settings, Users } from "lucide-react";
 import { SIGUNGU, sigunguByCode } from "@/lib/constants/regions";
 import { TIME_SLOTS } from "@/lib/constants/timeSlots";
 import { CARE_TARGETS } from "@/lib/constants/targets";
@@ -13,6 +14,8 @@ interface TopControllerProps {
   onTargetChange: (target: CareTargetId) => void;
   timeSlot: TimeSlotId;
   onTimeSlotChange: (slot: TimeSlotId) => void;
+  /** 현재 화면 상태 쿼리 (리포트로 넘긴다) */
+  query: string;
 }
 
 function Segmented<T extends string>({
@@ -75,6 +78,18 @@ export default function TopController(props: TopControllerProps) {
             ))}
           </select>
         </label>
+        <nav className="flex items-center gap-0.5 text-xs" aria-label="메뉴">
+          {[
+            { href: `/report?${props.query}`, label: "리포트", icon: FileText },
+            { href: "/history", label: "판단 이력", icon: History },
+            { href: `/compare?sgg=${props.sigunguCode}`, label: "시점 비교", icon: BookOpen },
+            { href: "/settings", label: "단가 설정", icon: Settings },
+          ].map(({ href, label, icon: Icon }) => (
+            <Link key={label} href={href} className="flex items-center gap-1 rounded-md px-2 py-1 text-neutral-600 hover:bg-neutral-100">
+              <Icon className="h-3.5 w-3.5" /> {label}
+            </Link>
+          ))}
+        </nav>
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <Segmented

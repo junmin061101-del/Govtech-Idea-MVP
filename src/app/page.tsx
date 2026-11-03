@@ -9,15 +9,15 @@ import GapReasonPanel from "@/components/panel/GapReasonPanel";
 import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
 import UnmetDemandPanel from "@/components/panel/UnmetDemandPanel";
 import type { MapLayer } from "@/components/map/KakaoMap";
-import type { UnmetDemandFile } from "@/lib/constants/events";
 import { signalOf, type UnmetSignal } from "@/lib/unmet";
 import { diagnoseAllDongs } from "@/lib/calculator";
 import { DEFAULT_SIGUNGU_CODE } from "@/lib/constants/regions";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
 import { CARE_TARGETS } from "@/lib/constants/targets";
-import type { CareTargetId, Dong, Facility, TimeSlotId } from "@/types";
-import emdsData from "@/data/seoul/emds.json";
-import meta from "@/data/seoul/meta.json";
+import type { CareTargetId, Facility, TimeSlotId } from "@/types";
+import type { AlternativeKind } from "@/lib/alternatives";
+import { decodeView, encodeView, type ViewState } from "@/lib/viewState";
+import { ALL_DONGS as allDongs, DATA_NOTE, dongName, META as meta, useFacilities, useUnmetDemand } from "@/lib/hooks/useSeoulData";
 
 const KakaoMap = dynamic(() => import("@/components/map/KakaoMap"), {
   ssr: false,
@@ -28,45 +28,6 @@ const KakaoMap = dynamic(() => import("@/components/map/KakaoMap"), {
   ),
 });
 
-const allDongs = emdsData as Dong[];
-const dongNameById = new Map(allDongs.map((d) => [d.id, d.name]));
-const dongName = (id: string) => dongNameById.get(id);
-
-const DATA_NOTE =
-  `어린이집 ${meta.sources.childcare.dataDate} 기준(서울 열린데이터광장) · ` +
-  `인구 ${meta.sources.population.baseMonth} 기준(행정안전부) · ` +
-  `행정동 경계 ${meta.sources.boundaries.version.replace("ver", "")}(통계청 SGIS, vuski/admdongkor 가공)`;
-
-/** 구별 시설 파일을 필요할 때만 불러온다 (25개 구 전체를 한 번에 싣지 않음) */
-function useFacilities(sigunguCode: string): Facility[] | null {
-  const [state, setState] = useState<{ code: string; list: Facility[] } | null>(null);
-  useEffect(() => {
-    let alive = true;
-    import(`@/data/seoul/facilities/${sigunguCode}.json`).then((m) => {
-      if (alive) setState({ code: sigunguCode, list: m.default as Facility[] });
-    });
-    return () => {
-      alive = false;
-    };
-  }, [sigunguCode]);
-  return state?.code === sigunguCode ? state.list : null;
-}
-
-/** 시민 돌봄지도 집계(부모 검색 신호). 파일이 없는 구는 null */
-function useUnmetDemand(sigunguCode: string): UnmetDemandFile | null {
-  const [state, setState] = useState<{ code: string; file: UnmetDemandFile | null } | null>(null);
-  useEffect(() => {
-    let alive = true;
-    import(`@/data/seoul/unmet-demand/${sigunguCode}.json`)
-      .then((m) => alive && setState({ code: sigunguCode, file: m.default as UnmetDemandFile }))
-      .catch(() => alive && setState({ code: sigunguCode, file: null }));
-    return () => {
-      alive = false;
-    };
-  }, [sigunguCode]);
-  return state?.code === sigunguCode ? state.file : null;
-}
-
 export default function Home() {
   const [sigunguCode, setSigunguCode] = useState(DEFAULT_SIGUNGU_CODE);
   const [target, setTarget] = useState<CareTargetId>("infant");
@@ -74,6 +35,21 @@ export default function Home() {
   const [selectedDongId, setSelectedDongId] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const [layer, setLayer] = useState<MapLayer>("estimate");
+  // 대안 선택은 (동, 시간대, 대상) 조합에 묶인다 — 조합이 바뀌면 선택이 풀린다
+  const [altSel, setAltSel] = useState<{ key: string; kinds: AlternativeKind[] }>({ key: "", kinds: [] });
+  const [restored, setRestored] = useState(false);
+
+  // 주소(쿼리)에 담긴 화면 상태로 시작한다 — 판단 이력 "다시 열기"와 링크 공유용
+  useEffect(() => {
+    const v = decodeView(window.location.search);
+    setSigunguCode(v.sigunguCode);
+    setTimeSlot(v.timeSlot);
+    setTarget(v.target);
+    setSelectedDongId(v.dongId);
+    setLayer(v.layer);
+    if (v.dongId && v.alternatives.length) setAltSel({ key: `${v.dongId}|${v.timeSlot}|${v.target}`, kinds: v.alternatives });
+    setRestored(true);
+  }, []);
 
   const dongs = useMemo(() => allDongs.filter((d) => d.sigunguCode === sigunguCode), [sigunguCode]);
   const rawFacilities = useFacilities(sigunguCode);
@@ -86,7 +62,7 @@ export default function Home() {
     [sigunguCode],
   );
 
-  const unmetFile = useUnmetDemand(sigunguCode);
+  const unmetFile = useUnmetDemand(sigunguCode) ?? null;
   const signals = useMemo(() => {
     if (!unmetFile) return null;
     const m = new Map<string, UnmetSignal>();
@@ -112,6 +88,22 @@ export default function Home() {
   const selectedDong = dongs.find((d) => d.id === effectiveDongId) ?? null;
   const selectedDiagnosis = diagnoses.find((d) => d.dongId === effectiveDongId) ?? null;
 
+  const altKey = `${effectiveDongId}|${timeSlot}|${target}`;
+  const selectedAlts = altSel.key === altKey ? altSel.kinds : [];
+  const view: ViewState = {
+    sigunguCode,
+    timeSlot,
+    target,
+    dongId: effectiveDongId,
+    alternatives: selectedAlts,
+    layer: effectiveLayer,
+  };
+  const query = encodeView(view);
+  // 현재 화면 상태를 주소에 반영 (복원이 끝난 뒤부터)
+  useEffect(() => {
+    if (restored) window.history.replaceState(null, "", `?${query}`);
+  }, [restored, query]);
+
   const contextLabel = `${CARE_TARGETS.find((t) => t.id === target)!.label} · ${timeSlotDef(timeSlot).label}`;
 
   return (
@@ -127,6 +119,7 @@ export default function Home() {
         onTargetChange={setTarget}
         timeSlot={timeSlot}
         onTimeSlotChange={setTimeSlot}
+        query={query}
       />
 
       <div className="grid flex-1 grid-cols-1 gap-4 overflow-hidden p-4 lg:grid-cols-[1fr_300px_380px]">
@@ -195,6 +188,9 @@ export default function Home() {
               timeSlot={timeSlot}
               target={target}
               dongName={dongName}
+              selected={selectedAlts}
+              onSelectedChange={(kinds) => setAltSel({ key: altKey, kinds })}
+              view={view}
             />
           </div>
         </div>

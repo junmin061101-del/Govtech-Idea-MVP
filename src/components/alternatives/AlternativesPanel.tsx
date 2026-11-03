@@ -2,9 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { AlertTriangle, Check, ChevronDown, Settings, Trophy } from "lucide-react";
+import { AlertTriangle, Check, ChevronDown, Save, Settings, Trophy } from "lucide-react";
 import type { CareTargetId, Dong, DongDiagnosis, Facility, TimeSlotId } from "@/types";
-import { buildAlternatives, combineAlternatives, type Alternative, type AlternativeContext } from "@/lib/alternatives";
+import { buildAlternatives, combineAlternatives, type Alternative, type AlternativeContext, type AlternativeKind } from "@/lib/alternatives";
+import { newId, saveDecision } from "@/lib/history";
+import type { ViewState } from "@/lib/viewState";
+import { sigunguByCode } from "@/lib/constants/regions";
+import { CARE_TARGETS } from "@/lib/constants/targets";
+import { DATA_DATE } from "@/lib/hooks/useSeoulData";
 import { loadUnitCosts, won, DEFAULT_UNIT_COSTS, type UnitCost } from "@/lib/config/unitCosts";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
 import { people } from "@/lib/mapScale";
@@ -17,19 +22,47 @@ interface AlternativesPanelProps {
   timeSlot: TimeSlotId;
   target: CareTargetId;
   dongName?: (dongId: string) => string | undefined;
+  selected: AlternativeKind[];
+  onSelectedChange: (kinds: AlternativeKind[]) => void;
+  view: ViewState;
 }
 
 const GAP_BAR_COLOR = "#bb3930";
 
-export default function AlternativesPanel({ dong, dongs, facilities, diagnoses, timeSlot, target, dongName }: AlternativesPanelProps) {
+export default function AlternativesPanel({
+  dong,
+  dongs,
+  facilities,
+  diagnoses,
+  timeSlot,
+  target,
+  dongName,
+  selected: selectedKinds,
+  onSelectedChange,
+  view,
+}: AlternativesPanelProps) {
   const [unitCosts, setUnitCosts] = useState<UnitCost[]>(DEFAULT_UNIT_COSTS);
   useEffect(() => setUnitCosts(loadUnitCosts()), []);
 
   const ctx: AlternativeContext | null = dong ? { dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts, dongName } : null;
   const alternatives = useMemo(() => (ctx ? buildAlternatives(ctx) : []), [dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const [selected, setSelected] = useState<Set<string>>(new Set());
-  useEffect(() => setSelected(new Set()), [dong?.id, timeSlot, target]);
+  const selected = new Set<string>(selectedKinds);
+  const [saving, setSaving] = useState(false);
+  const [author, setAuthor] = useState("");
+  const [memo, setMemo] = useState("");
+  const [saved, setSaved] = useState<string | null>(null);
+  useEffect(() => {
+    setSaving(false);
+    setSaved(null);
+  }, [dong?.id, timeSlot, target]);
+  useEffect(() => {
+    try {
+      setAuthor(window.localStorage.getItem("careos.author") ?? "");
+    } catch {
+      /* 저장소를 못 쓰면 빈 값 */
+    }
+  }, []);
 
   if (!dong || !ctx) return null;
 
@@ -50,13 +83,38 @@ export default function AlternativesPanel({ dong, dongs, facilities, diagnoses, 
   // 효과가 가장 큰 카드 (같은 값이면 모두 표시)
   const maxReduction = alternatives[0].reduction;
 
-  const toggle = (kind: string) =>
-    setSelected((s) => {
-      const n = new Set(s);
-      if (n.has(kind)) n.delete(kind);
-      else n.add(kind);
-      return n;
+  const toggle = (kind: AlternativeKind) =>
+    onSelectedChange(selected.has(kind) ? selectedKinds.filter((k) => k !== kind) : [...selectedKinds, kind]);
+
+  const save = () => {
+    try {
+      window.localStorage.setItem("careos.author", author.trim());
+    } catch {
+      /* 무시 */
+    }
+    const ok = saveDecision({
+      id: newId(),
+      createdAt: new Date().toISOString(),
+      author: author.trim() || "(이름 없음)",
+      memo: memo.trim(),
+      view,
+      summary: {
+        sigunguName: sigunguByCode(view.sigunguCode)?.name ?? view.sigunguCode,
+        dongName: dong.name,
+        slotLabel: slot.label,
+        targetLabel: CARE_TARGETS.find((t) => t.id === target)!.label,
+        gapBefore: combined.before,
+        gapAfter: combined.after,
+        alternativeTitles: chosen.map((c) => c.title),
+        dataDate: DATA_DATE,
+      },
     });
+    setSaved(ok ? "판단 이력에 저장했습니다." : "이 브라우저에서는 저장할 수 없습니다.");
+    if (ok) {
+      setSaving(false);
+      setMemo("");
+    }
+  };
 
   return (
     <div className="flex flex-col gap-3 break-keep p-5">
@@ -99,6 +157,55 @@ export default function AlternativesPanel({ dong, dongs, facilities, diagnoses, 
             <p className="mt-1.5 text-[11px] text-neutral-500">
               {chosen.map((c) => c.title).join(" + ")} · 같은 시설을 함께 바꾸는 효과를 겹치지 않게 다시 계산한 값입니다.
             </p>
+            {!saving ? (
+              <button
+                onClick={() => {
+                  setSaving(true);
+                  setSaved(null);
+                }}
+                className="mt-2 flex items-center gap-1 rounded-md bg-neutral-900 px-2.5 py-1 text-xs font-medium text-white hover:bg-neutral-700"
+              >
+                <Save className="h-3 w-3" /> 이 판단 저장
+              </button>
+            ) : (
+              <div className="mt-2 space-y-1.5 rounded-md bg-neutral-50 p-2">
+                <label className="block text-[11px] text-neutral-600">
+                  작성자
+                  <input
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                    placeholder="예: 보육정책과 홍길동 주무관"
+                    className="mt-0.5 w-full rounded border border-neutral-300 px-2 py-1 text-xs"
+                  />
+                </label>
+                <label className="block text-[11px] text-neutral-600">
+                  메모
+                  <textarea
+                    value={memo}
+                    onChange={(e) => setMemo(e.target.value)}
+                    rows={2}
+                    placeholder="예: 2027년 1분기 연장반 지정 검토, 현장 확인 후 확정"
+                    className="mt-0.5 w-full rounded border border-neutral-300 px-2 py-1 text-xs"
+                  />
+                </label>
+                <div className="flex gap-1.5">
+                  <button onClick={save} className="rounded-md bg-neutral-900 px-2.5 py-1 text-xs font-medium text-white">
+                    저장
+                  </button>
+                  <button onClick={() => setSaving(false)} className="rounded-md border border-neutral-300 px-2.5 py-1 text-xs text-neutral-600">
+                    취소
+                  </button>
+                </div>
+              </div>
+            )}
+            {saved && (
+              <p className="mt-1 text-[11px] text-neutral-600">
+                {saved}{" "}
+                <Link href="/history" className="underline">
+                  이력 보기
+                </Link>
+              </p>
+            )}
           </>
         )}
       </div>
