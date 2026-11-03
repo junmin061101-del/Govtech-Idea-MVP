@@ -37,6 +37,7 @@ http://localhost:3000 에서 확인합니다.
 | 행정동 경계·코드 | [vuski/admdongkor](https://github.com/vuski/admdongkor) `ver20261001` | 2026-10-01 | 원자료: 통계청 SGIS 행정동 경계 |
 | 행정동별 0~9세 1세 단위 인구 | [행정안전부 주민등록인구 통계](https://jumin.mois.go.kr/ageStatMonth.do) | 2026-10 | 인증키 불필요 |
 | 어린이집 | [서울 열린데이터광장](https://data.seoul.go.kr) `SERVICE=ChildCareInfo` (서울시 어린이집 정보, 25개 구 전체) | 원자료 `DATASTDRDT` | 일반 인증키 필요 |
+| 지하철역·버스정류소 위치 | 서울 열린데이터광장 `subwayStationMaster`(역사 마스터), `busStopLocationXyInfo`(버스정류소 위치) | 수집일 | 형평성 층(대중교통 도보권). 한강선착장 제외 |
 
 행정동은 10자리 행정기관코드(`adm_cd2` = 주민등록인구 CSV의 괄호 안 코드)로 경계·인구를 연결한다.
 두 출처의 서울 행정동 427개 코드가 1:1로 일치한다(테스트로 확인).
@@ -134,6 +135,20 @@ npm test             # 15개 동·경계·배정 검증 포함
 
 화면 상태(구·시간대·대상·동·선택한 대안·지도 층)는 주소 쿼리에 담겨(`src/lib/viewState.ts`) 링크로 같은 화면을 공유할 수 있다.
 
+### 형평성 층·입소 대기 대조
+
+- **대중교통 접근성 (실데이터)**: 행정동 안 수요 지점(200m 격자) 중 지하철역 500m 또는 버스정류소 300m 안에 드는 비율.
+  반경은 **가정값(TODO: 기준 확인)** — [config/assumptions.ts](src/lib/config/assumptions.ts) `TRANSIT`.
+  지도 왼쪽 위 "형평성 · 대중교통"을 켜면 도보권 90% 미만 동에 점선 테두리, 지하철역 표시, 라벨에 도보권 비율이 붙는다.
+  인구를 동 안에 고르게 놓고 계산해 산지·공원이 넓은 동은 낮게 나올 수 있다.
+- **취약가구 비중 (TODO)**: 서울 열린데이터광장의 "국민기초 생활보장 수급자(동별)" 통계는 동 단위이지만 Open API·내려받기 파일이
+  제공되지 않는다. 구청 자료로 확보한 뒤 연결한다(지도 버튼은 비활성).
+- **입소 대기 대조 (`/waitlist`)**: 보육통합정보시스템의 행정동 × 연령별 대기 인원 **집계** CSV를 올리면 주간(09~17) 영유아 기준
+  추정 수요·추정 부족·결과 없음 검색과 나란히 보여 준다. 형식은 `행정동코드,행정동명,연령,대기인원`(긴 형식) 또는
+  `행정동명,0세,…,5세`(넓은 형식), 화면에서 견본 CSV를 받을 수 있다. **개인 식별 정보로 보이는 열(이름·생년월일·연락처·주소 등)이나 값
+  (주민등록번호·휴대전화·이메일 형식)이 있으면 파일 전체를 거부**하고, 같은 동·연령이 여러 행이면 개인 단위 명단일 수 있어 거부한다.
+  파일은 브라우저 안에서만 읽고 서버로 보내지 않는다. 구청 관리자 전용 제한은 로그인 연동 후 적용(TODO).
+
 ## 5. 지도 설계
 
 - **단계구분도**: 행정동 경계(`public/data/seoul-boundaries.geojson`)를 카카오맵 `Polygon`으로 칠한다.
@@ -151,7 +166,7 @@ npm test             # 15개 동·경계·배정 검증 포함
 
 ```
 src/
-  app/                    # Next.js App Router: / (지도), /report, /history, /compare, /settings
+  app/                    # Next.js App Router: / (지도), /report, /history, /compare, /waitlist, /settings
   components/             # 지도, 진단 패널, 시뮬레이터
   data/seoul/             # 빌드 결과: emds.json, facilities/{sigungu_code}.json, meta.json
   lib/

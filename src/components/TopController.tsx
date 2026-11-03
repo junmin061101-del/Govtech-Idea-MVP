@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Clock, FileText, History, MapPin, Settings, Users } from "lucide-react";
+import { BookOpen, ClipboardList, Clock, FileText, History, MapPin, Settings, Users } from "lucide-react";
 import { SIGUNGU, sigunguByCode } from "@/lib/constants/regions";
 import { TIME_SLOTS } from "@/lib/constants/timeSlots";
 import { CARE_TARGETS } from "@/lib/constants/targets";
@@ -39,7 +39,7 @@ function Segmented<T extends string>({
           disabled={item.disabled}
           title={item.title}
           aria-pressed={value === item.id}
-          className={`rounded-md px-2.5 py-1 text-sm font-medium transition-colors ${
+          className={`whitespace-nowrap rounded-md px-2.5 py-1 text-sm font-medium transition-colors ${
             value === item.id
               ? "bg-neutral-900 text-white shadow-sm"
               : item.disabled
@@ -57,9 +57,9 @@ function Segmented<T extends string>({
 export default function TopController(props: TopControllerProps) {
   const sigungu = sigunguByCode(props.sigunguCode);
   return (
-    <div className="flex flex-col gap-3 border-b border-neutral-200 bg-white px-6 py-3 xl:flex-row xl:items-center xl:justify-between">
-      <div className="flex items-center gap-3">
-        <div>
+    <div className="flex flex-col gap-2 border-b border-neutral-200 bg-white px-6 py-2.5">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <div className="whitespace-nowrap">
           <h1 className="text-lg font-bold text-neutral-900">우리 구 돌봄 공백 지도</h1>
           <p className="text-xs text-neutral-500">서울특별시 {sigungu?.name}</p>
         </div>
@@ -78,14 +78,15 @@ export default function TopController(props: TopControllerProps) {
             ))}
           </select>
         </label>
-        <nav className="flex items-center gap-0.5 text-xs" aria-label="메뉴">
+        <nav className="ml-auto flex flex-wrap items-center gap-0.5 text-xs" aria-label="메뉴">
           {[
             { href: `/report?${props.query}`, label: "리포트", icon: FileText },
             { href: "/history", label: "판단 이력", icon: History },
             { href: `/compare?sgg=${props.sigunguCode}`, label: "시점 비교", icon: BookOpen },
+            { href: `/waitlist?sgg=${props.sigunguCode}`, label: "입소 대기 대조", icon: ClipboardList },
             { href: "/settings", label: "단가 설정", icon: Settings },
           ].map(({ href, label, icon: Icon }) => (
-            <Link key={label} href={href} className="flex items-center gap-1 rounded-md px-2 py-1 text-neutral-600 hover:bg-neutral-100">
+            <Link key={label} href={href} className="flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-1 text-neutral-600 hover:bg-neutral-100">
               <Icon className="h-3.5 w-3.5" /> {label}
             </Link>
           ))}

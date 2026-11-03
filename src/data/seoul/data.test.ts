@@ -67,3 +67,19 @@ describe("시설 → 행정동 배정", () => {
     }
   });
 });
+
+describe("형평성 — 대중교통 도보권", () => {
+  it("모든 행정동에 0~1 사이 도보권 비율이 있고, 지하철 도보권 ≤ 전체 도보권", () => {
+    for (const e of emds) {
+      expect(e.transit, e.name).toBeDefined();
+      expect(e.transit!.coverage).toBeGreaterThanOrEqual(0);
+      expect(e.transit!.coverage).toBeLessThanOrEqual(1);
+      expect(e.transit!.subwayCoverage).toBeLessThanOrEqual(e.transit!.coverage + 1e-9);
+    }
+  });
+  it("동작구에 지하철역·버스정류소가 배정된다", () => {
+    const dj = emds.filter((e) => e.sigunguCode === "11590");
+    expect(dj.reduce((a, e) => a + e.transit!.subwayStations, 0)).toBeGreaterThan(5);
+    expect(dj.reduce((a, e) => a + e.transit!.busStops, 0)).toBeGreaterThan(100);
+  });
+});

@@ -28,7 +28,7 @@ const base = {
 
 describe("화면 상태 ↔ 주소", () => {
   it("저장한 상태를 그대로 되살린다", () => {
-    const v: ViewState = { sigunguCode: "11590", timeSlot: "night", target: "infant", dongId: "1159053000", alternatives: ["add_staff", "extend_hours"], layer: "both" };
+    const v: ViewState = { sigunguCode: "11590", timeSlot: "night", target: "infant", dongId: "1159053000", alternatives: ["add_staff", "extend_hours"], layer: "both", equityTransit: true };
     expect(decodeView(`?${encodeView(v)}`)).toEqual(v);
   });
   it("잘못된 값은 기본값으로 (없는 구, 쓸 수 없는 시간대, 다른 구 동, 모르는 대안)", () => {

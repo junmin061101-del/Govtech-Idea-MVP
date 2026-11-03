@@ -17,6 +17,42 @@ import { rankDiagnoses } from "@/lib/ranking";
 import { useBoundaries } from "@/components/map/useBoundaries";
 import { INSUFFICIENT_COLOR, NO_RESULT_CLASSES, noResultColor, type UnmetSignal } from "@/lib/unmet";
 import { percent } from "@/lib/mapScale";
+import { TRANSIT } from "@/lib/config/assumptions";
+
+export const VULNERABLE_TODO =
+  "취약가구 비중: 행정동별 기초생활수급자 통계는 서울 열린데이터광장에서 Open API·파일로 제공되지 않아 확보 필요";
+
+interface Station {
+  name: string;
+  routes: string[];
+  lat: number;
+  lng: number;
+}
+let stationCache: Promise<Station[]> | null = null;
+/** 지하철역 (형평성 겹쳐 보기를 켰을 때만 불러온다). 이 구 범위(+여유) 안의 역만 */
+function useSubwayStations(on: boolean, dongs: Dong[]): Station[] {
+  const [all, setAll] = useState<Station[]>([]);
+  useEffect(() => {
+    if (!on) return;
+    stationCache ??= fetch("/data/seoul-subway.json")
+      .then((r) => r.json())
+      .then((d: { stations: Station[] }) => d.stations);
+    let alive = true;
+    stationCache.then((s) => alive && setAll(s)).catch(() => (stationCache = null));
+    return () => {
+      alive = false;
+    };
+  }, [on]);
+  return useMemo(() => {
+    if (!on || dongs.length === 0) return [];
+    const pad = 0.01;
+    const x0 = Math.min(...dongs.map((d) => d.bbox[0])) - pad;
+    const y0 = Math.min(...dongs.map((d) => d.bbox[1])) - pad;
+    const x1 = Math.max(...dongs.map((d) => d.bbox[2])) + pad;
+    const y1 = Math.max(...dongs.map((d) => d.bbox[3])) + pad;
+    return all.filter((s) => s.lng >= x0 && s.lng <= x1 && s.lat >= y0 && s.lat <= y1);
+  }, [on, all, dongs]);
+}
 
 /** 지도 층: 추정 수요(인구 기반) | 부모 검색 신호(시민 돌봄지도) | 둘 다 */
 export type MapLayer = "estimate" | "signal" | "both";
@@ -43,6 +79,9 @@ interface KakaoMapProps {
   /** 행정동별 부모 검색 신호 (집계가 없는 구면 null) */
   signals: Map<string, UnmetSignal> | null;
   signalSynthetic: boolean;
+  /** 형평성 겹쳐 보기: 대중교통 접근성 */
+  equityTransit: boolean;
+  onEquityTransitChange: (on: boolean) => void;
 }
 
 /** 카카오맵 레벨: 숫자가 클수록 넓게 보인다. 이 레벨 이하에서 모든 동 라벨을 표시 */
@@ -107,7 +146,10 @@ function LoadedMap({
   onLayerChange,
   signals,
   signalSynthetic,
+  equityTransit,
+  onEquityTransitChange,
 }: KakaoMapProps & { apiKey: string }) {
+  const stations = useSubwayStations(equityTransit, dongs);
   // SDK 기본 URL은 프로토콜 상대경로라 http 페이지에서 ORB에 막힌다. https로 고정한다.
   const [loading, error] = useKakaoLoader({
     appkey: apiKey,
@@ -198,6 +240,8 @@ function LoadedMap({
           const cls = diagnosis ? gapClassOf(diagnosis.demand, diagnosis.totalECC) : GAP_CLASSES.at(-1)!;
           const fill = layer === "signal" ? noResultColor(signals?.get(dong.id)?.noResultRate ?? null) : cls.color;
           const emphasized = selectedDongId === dong.id || hoveredId === dong.id;
+          // 형평성 겹쳐 보기: 대중교통 도보권이 낮은 동은 점선 테두리
+          const lowTransit = equityTransit && (dong.transit?.coverage ?? 1) < TRANSIT.lowCoverage;
           return parts.map((path, i) => (
             <Polygon
               key={`${dong.id}-${i}`}
@@ -205,9 +249,10 @@ function LoadedMap({
               fillColor={fill}
               // 가까이 볼수록 배경 지도(도로·건물)가 보이도록 옅게
               fillOpacity={level <= 4 ? 0.35 : level <= 5 ? 0.48 : 0.62}
-              strokeColor={emphasized ? "#111827" : "#ffffff"}
+              strokeColor={emphasized || lowTransit ? "#111827" : "#ffffff"}
               strokeOpacity={1}
-              strokeWeight={emphasized ? 3 : 1.5}
+              strokeWeight={emphasized ? 3 : lowTransit ? 2.5 : 1.5}
+              strokeStyle={lowTransit && !emphasized ? "shortdash" : "solid"}
               zIndex={emphasized ? 5 : 1}
               onClick={() => onSelectDong(dong.id)}
               onMouseover={() => setHoveredId(dong.id)}
@@ -238,6 +283,7 @@ function LoadedMap({
               : "표본 부족"
             : null;
           const lines = layer === "estimate" ? [estimateText] : layer === "signal" ? [signalText] : [estimateText, signalText];
+          if (equityTransit && dong.transit) lines.push(`도보권 ${percent(dong.transit.coverage)}`);
           const flag = layer !== "estimate" && sig?.gapSignal;
           return (
             <CustomOverlayMap key={`label-${dong.id}`} position={{ lat: dong.lat, lng: dong.lng }} zIndex={selected ? 6 : 3}>
@@ -260,6 +306,16 @@ function LoadedMap({
             </CustomOverlayMap>
           );
         })}
+
+        {equityTransit &&
+          stations.map((st) => (
+            <CustomOverlayMap key={`st-${st.name}`} position={{ lat: st.lat, lng: st.lng }} zIndex={2}>
+              <span
+                title={`${st.name}역 (${st.routes.join(", ")})`}
+                className="pointer-events-auto block h-2.5 w-2.5 rounded-[2px] border-2 border-white bg-neutral-800 shadow"
+              />
+            </CustomOverlayMap>
+          ))}
 
         <MarkerClusterer averageCenter minLevel={CLUSTER_MIN_LEVEL} styles={CLUSTER_STYLES} calculator={[10, 30, 60]}>
           {facilities.map((f) => {
@@ -299,6 +355,11 @@ function LoadedMap({
               })()}
             </p>
           )}
+          {equityTransit && hoveredDong.transit && (
+            <p className="text-neutral-600">
+              대중교통 도보권 {percent(hoveredDong.transit.coverage)} (지하철 {percent(hoveredDong.transit.subwayCoverage)})
+            </p>
+          )}
         </div>
       )}
 
@@ -325,6 +386,18 @@ function LoadedMap({
             시연용 가상 데이터
           </span>
         )}
+        <span className="mx-1 h-4 w-px bg-neutral-200" />
+        <span className="px-1 text-[10px] text-neutral-500">형평성</span>
+        <button
+          onClick={() => onEquityTransitChange(!equityTransit)}
+          aria-pressed={equityTransit}
+          className={`rounded-md px-2 py-1 font-medium ${equityTransit ? "bg-neutral-900 text-white" : "text-neutral-600 hover:bg-neutral-100"}`}
+        >
+          대중교통
+        </button>
+        <button disabled title={VULNERABLE_TODO} className="cursor-not-allowed rounded-md px-2 py-1 font-medium text-neutral-300">
+          취약가구
+        </button>
       </div>
 
       {selectedFacility && (
@@ -333,12 +406,12 @@ function LoadedMap({
         </div>
       )}
 
-      <MapLegend timeSlot={timeSlot} dataNote={dataNote} layer={layer} />
+      <MapLegend timeSlot={timeSlot} dataNote={dataNote} layer={layer} equityTransit={equityTransit} />
     </div>
   );
 }
 
-function MapLegend({ timeSlot, dataNote, layer }: { timeSlot: TimeSlotId; dataNote: string; layer: MapLayer }) {
+function MapLegend({ timeSlot, dataNote, layer, equityTransit }: { timeSlot: TimeSlotId; dataNote: string; layer: MapLayer; equityTransit: boolean }) {
   const signalItems = [...NO_RESULT_CLASSES.map((c) => ({ color: c.color, label: c.label })).reverse(), { color: INSUFFICIENT_COLOR, label: "표본 부족" }];
   return (
     <div className="absolute bottom-3 right-3 z-20 max-w-[240px] rounded-lg border border-neutral-200 bg-white/95 px-3 py-2 text-[11px] shadow-md">
@@ -368,6 +441,21 @@ function MapLegend({ timeSlot, dataNote, layer }: { timeSlot: TimeSlotId; dataNo
           </ul>
           {layer === "both" && <p className="mt-1 text-[10px] text-neutral-500">라벨 둘째 줄: 부모 검색 결과 없음 비율 · ⚠ 공백 신호</p>}
         </>
+      )}
+      {equityTransit && (
+        <div className="mt-1.5 space-y-0.5 border-t border-neutral-100 pt-1.5">
+          <p className="flex items-center gap-1.5 text-neutral-600">
+            <span className="inline-block h-0 w-4 border-t-2 border-dashed border-neutral-900" />
+            대중교통 도보권 {percent(TRANSIT.lowCoverage)} 미만
+          </p>
+          <p className="flex items-center gap-1.5 text-neutral-600">
+            <span className="inline-block h-2.5 w-2.5 rounded-[2px] border-2 border-white bg-neutral-800 shadow" />
+            지하철역
+          </p>
+          <p className="text-[10px] text-neutral-400">
+            도보권: 지하철 {TRANSIT.subwayM}m·버스 {TRANSIT.busM}m 안 (가정값)
+          </p>
+        </div>
       )}
       <div className="mt-1.5 space-y-0.5 border-t border-neutral-100 pt-1.5">
         <p className="flex items-center gap-1.5 text-neutral-600">

@@ -99,3 +99,18 @@ export const UNMET_THRESHOLDS = {
 export function minSampleForMargin(margin: number, z = UNMET_THRESHOLDS.confidenceZ): number {
   return Math.ceil((z * z * 0.25) / (margin * margin));
 }
+
+/**
+ * 형평성 층 — 대중교통 접근성. 행정동 안 수요 지점(2SFCA와 같은 200m 격자) 중
+ * 지하철역 반경 subwayM 또는 버스정류소 반경 busM 안에 있는 비율("대중교통 도보권 비율").
+ * TODO: 반경 기준은 근거 확인 필요 (국토교통부 대중교통 서비스 평가 기준 등과 맞출 것).
+ */
+export const TRANSIT = {
+  subwayM: 500,
+  busM: 300,
+  excludeBusTypes: ["한강선착장"],
+  /** 지도에서 점선 테두리로 표시하는 기준 (도보권 비율이 이보다 낮은 동) */
+  lowCoverage: 0.9,
+  status: "todo" as AssumptionStatus,
+  basis: "지하철 500m·버스 300m 도보권 (가정, 기준 확인 필요)",
+};

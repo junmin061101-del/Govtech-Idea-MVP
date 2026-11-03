@@ -98,6 +98,8 @@ export interface Dong {
   population0to9: number;
   /** 0세~9세 1세 단위 인구 */
   populationByAge: number[];
+  /** 형평성: 대중교통 도보권 (수요 지점 중 지하철역·버스정류소 도보권 안 비율) */
+  transit?: { coverage: number; subwayCoverage: number; subwayStations: number; busStops: number };
   /** 대상·시간대별 추정 돌봄 수요 인원. 산정 근거가 없는 시간대는 키가 없다 */
   estimatedDemand: Record<CareTargetId, Partial<Record<TimeSlotId, number>>>;
 }

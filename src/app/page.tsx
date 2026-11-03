@@ -8,6 +8,7 @@ import { rankDiagnoses } from "@/lib/ranking";
 import GapReasonPanel from "@/components/panel/GapReasonPanel";
 import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
 import UnmetDemandPanel from "@/components/panel/UnmetDemandPanel";
+import EquityPanel from "@/components/panel/EquityPanel";
 import type { MapLayer } from "@/components/map/KakaoMap";
 import { signalOf, type UnmetSignal } from "@/lib/unmet";
 import { diagnoseAllDongs } from "@/lib/calculator";
@@ -35,6 +36,7 @@ export default function Home() {
   const [selectedDongId, setSelectedDongId] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const [layer, setLayer] = useState<MapLayer>("estimate");
+  const [equityTransit, setEquityTransit] = useState(false);
   // 대안 선택은 (동, 시간대, 대상) 조합에 묶인다 — 조합이 바뀌면 선택이 풀린다
   const [altSel, setAltSel] = useState<{ key: string; kinds: AlternativeKind[] }>({ key: "", kinds: [] });
   const [restored, setRestored] = useState(false);
@@ -47,6 +49,7 @@ export default function Home() {
     setTarget(v.target);
     setSelectedDongId(v.dongId);
     setLayer(v.layer);
+    setEquityTransit(v.equityTransit);
     if (v.dongId && v.alternatives.length) setAltSel({ key: `${v.dongId}|${v.timeSlot}|${v.target}`, kinds: v.alternatives });
     setRestored(true);
   }, []);
@@ -97,6 +100,7 @@ export default function Home() {
     dongId: effectiveDongId,
     alternatives: selectedAlts,
     layer: effectiveLayer,
+    equityTransit,
   };
   const query = encodeView(view);
   // 현재 화면 상태를 주소에 반영 (복원이 끝난 뒤부터)
@@ -139,6 +143,8 @@ export default function Home() {
             onLayerChange={setLayer}
             signals={signals}
             signalSynthetic={Boolean(unmetFile?.synthetic)}
+            equityTransit={equityTransit}
+            onEquityTransitChange={setEquityTransit}
           />
         </div>
 
@@ -178,6 +184,9 @@ export default function Home() {
               file={unmetFile}
               timeSlot={timeSlot}
             />
+          </div>
+          <div className="rounded-xl border border-neutral-200 bg-white">
+            <EquityPanel dong={selectedDong} />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">
             <AlternativesPanel

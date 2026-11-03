@@ -15,12 +15,13 @@
  *
  * 실행: node scripts/build-data.mjs
  */
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { bbox, labelPoint, pointInGeometry, simplifyGeometry } from "../src/lib/geo.ts";
 import {
   CATCHMENT,
+  TRANSIT,
   DEMAND_FACTORS,
   FALLBACK_STAFF_RATIO,
   LEGAL_STAFF_RATIO,
@@ -285,6 +286,74 @@ for (const f of allFacilities) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// 2-2. 형평성 — 대중교통 도보권 비율 (캐시가 있을 때만)
+// ---------------------------------------------------------------------------
+const TRANSIT_CACHE = join(CACHE, "seoul-transit-raw.json");
+let transitSource = null;
+if (existsSync(TRANSIT_CACHE)) {
+  const transit = JSON.parse(readFileSync(TRANSIT_CACHE, "utf-8"));
+  transitSource = { url: transit.source, fetchedAt: transit.fetchedAt };
+  const subway = transit.subway;
+  const bus = transit.bus.filter((b) => !TRANSIT.excludeBusTypes.includes(b.type));
+  const gridOf = (list, cellM) => {
+    const g = new Map();
+    for (const p of list) {
+      const k = `${Math.floor((p.lng * LNG_M) / cellM)},${Math.floor((p.lat * LAT_M) / cellM)}`;
+      if (!g.has(k)) g.set(k, []);
+      g.get(k).push(p);
+    }
+    return g;
+  };
+  const near = (grid, cellM, x, y, r) => {
+    const cx = Math.floor((x * LNG_M) / cellM);
+    const cy = Math.floor((y * LAT_M) / cellM);
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const p of grid.get(`${cx + dx},${cy + dy}`) ?? []) {
+        if (Math.hypot((p.lng - x) * LNG_M, (p.lat - y) * LAT_M) <= r) return true;
+      }
+    }
+    return false;
+  };
+  const subwayGrid = gridOf(subway, TRANSIT.subwayM);
+  const busGrid = gridOf(bus, TRANSIT.busM);
+  const pointsByEmd = new Map();
+  for (const p of demandPoints) {
+    if (!pointsByEmd.has(p.emd)) pointsByEmd.set(p.emd, []);
+    pointsByEmd.get(p.emd).push(p);
+  }
+  const geomByCode = new Map(boundaries.features.map((f) => [f.properties.adm_cd2, f.geometry]));
+  // 지도용 지하철역 (환승역은 호선을 합쳐 한 점으로)
+  const stations = new Map();
+  for (const st of subway) {
+    const k = st.name;
+    if (!stations.has(k)) stations.set(k, { name: st.name, routes: [], lat: +st.lat.toFixed(6), lng: +st.lng.toFixed(6) });
+    if (!stations.get(k).routes.includes(st.route)) stations.get(k).routes.push(st.route);
+  }
+  mkdirSync(PUBLIC_OUT, { recursive: true });
+  writeFileSync(join(PUBLIC_OUT, "seoul-subway.json"), JSON.stringify({ source: transit.source, fetchedAt: transit.fetchedAt, stations: [...stations.values()] }));
+  const subwayNames = (list) => new Set(list.map((s) => s.name)).size; // 환승역은 호선별 행이 있어 역명 기준으로 센다
+  for (const e of emds) {
+    const pts = pointsByEmd.get(e.emdCode) ?? [];
+    let any = 0;
+    let sub = 0;
+    for (const p of pts) {
+      const s = near(subwayGrid, TRANSIT.subwayM, p.x, p.y, TRANSIT.subwayM);
+      if (s) sub++;
+      if (s || near(busGrid, TRANSIT.busM, p.x, p.y, TRANSIT.busM)) any++;
+    }
+    const g = geomByCode.get(e.emdCode);
+    const [x0, y0, x1, y1] = e.bbox;
+    const inside = (p) => p.lng >= x0 && p.lng <= x1 && p.lat >= y0 && p.lat <= y1 && pointInGeometry([p.lng, p.lat], g);
+    e.transit = {
+      coverage: pts.length ? +(any / pts.length).toFixed(3) : 0,
+      subwayCoverage: pts.length ? +(sub / pts.length).toFixed(3) : 0,
+      subwayStations: subwayNames(subway.filter(inside)),
+      busStops: bus.filter(inside).length,
+    };
+  }
+}
+
 const facilityCount = allFacilities.length;
 // (3) 구별 파일에 "그 구 행정동에 자리를 나눠 주는 다른 구 시설"도 함께 넣는다
 for (const [sgg, list] of facilitiesBySgg) {
@@ -326,6 +395,7 @@ writeFileSync(
         locationIssues: locationIssues.length,
         crossBorderFacilities: crossBorder,
       },
+      transit: transitSource && { ...transitSource, subwayM: TRANSIT.subwayM, busM: TRANSIT.busM },
       catchment: { method: "2SFCA", radiusM: CATCHMENT.radiusM, demandPointSpacingM: CATCHMENT.demandPointSpacingM, demandPoints: demandPoints.length },
       locationIssues,
     },

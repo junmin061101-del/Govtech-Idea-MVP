@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-03T01:16:13.244Z",
+ "builtAt": "2026-11-03T06:55:27.860Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -22,6 +22,12 @@
   "pausedExcluded": 69,
   "locationIssues": 24,
   "crossBorderFacilities": 2398
+ },
+ "transit": {
+  "url": "서울 열린데이터광장 subwayStationMaster(역사 마스터), busStopLocationXyInfo(버스정류소 위치)",
+  "fetchedAt": "2026-11-03T06:54:29.575Z",
+  "subwayM": 500,
+  "busM": 300
  },
  "catchment": {
   "method": "2SFCA",

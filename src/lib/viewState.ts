@@ -16,6 +16,8 @@ export interface ViewState {
   dongId: string | null;
   alternatives: AlternativeKind[];
   layer: MapLayerId;
+  /** 형평성 겹쳐 보기: 대중교통 접근성 */
+  equityTransit: boolean;
 }
 
 export const DEFAULT_VIEW: ViewState = {
@@ -25,6 +27,7 @@ export const DEFAULT_VIEW: ViewState = {
   dongId: null,
   alternatives: [],
   layer: "estimate",
+  equityTransit: false,
 };
 
 const ALT_KINDS: AlternativeKind[] = ["extend_hours", "add_staff", "link_capacity"];
@@ -35,6 +38,7 @@ export function encodeView(v: ViewState): string {
   if (v.dongId) q.set("dong", v.dongId);
   if (v.alternatives.length) q.set("alts", v.alternatives.join(","));
   if (v.layer !== "estimate") q.set("layer", v.layer);
+  if (v.equityTransit) q.set("eq", "transit");
   return q.toString();
 }
 
@@ -54,5 +58,6 @@ export function decodeView(search: string): ViewState {
     dongId: dong && /^\d{10}$/.test(dong) && sgg && dong.startsWith(sgg) ? dong : null,
     alternatives: (q.get("alts") ?? "").split(",").filter((k): k is AlternativeKind => ALT_KINDS.includes(k as AlternativeKind)),
     layer: LAYERS.includes(layer as MapLayerId) ? (layer as MapLayerId) : "estimate",
+    equityTransit: (q.get("eq") ?? "").split(",").includes("transit"),
   };
 }
