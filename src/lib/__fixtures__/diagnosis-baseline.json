@@ -1,0 +1,550 @@
+{
+ "daytime": [
+  {
+   "dongId": "noryangjin1",
+   "demand": 554,
+   "totalECC": 191,
+   "careGap": 363,
+   "space": 324,
+   "time": 0,
+   "staff": 39
+  },
+  {
+   "dongId": "noryangjin2",
+   "demand": 35,
+   "totalECC": 362,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sangdo1",
+   "demand": 654,
+   "totalECC": 1076,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sangdo2",
+   "demand": 660,
+   "totalECC": 329,
+   "careGap": 331,
+   "space": 319,
+   "time": 0,
+   "staff": 12
+  },
+  {
+   "dongId": "sangdo3",
+   "demand": 247,
+   "totalECC": 131,
+   "careGap": 116,
+   "space": 105,
+   "time": 0,
+   "staff": 11
+  },
+  {
+   "dongId": "sangdo4",
+   "demand": 453,
+   "totalECC": 499,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "heukseok",
+   "demand": 794,
+   "totalECC": 885,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sadang1",
+   "demand": 184,
+   "totalECC": 534,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sadang2",
+   "demand": 563,
+   "totalECC": 77,
+   "careGap": 486,
+   "space": 480,
+   "time": 0,
+   "staff": 6
+  },
+  {
+   "dongId": "sadang3",
+   "demand": 563,
+   "totalECC": 595,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sadang4",
+   "demand": 166,
+   "totalECC": 158,
+   "careGap": 8,
+   "space": 0,
+   "time": 0,
+   "staff": 8
+  },
+  {
+   "dongId": "sadang5",
+   "demand": 283,
+   "totalECC": 535,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "daebang",
+   "demand": 496,
+   "totalECC": 960,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sindaebang1",
+   "demand": 425,
+   "totalECC": 765,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sindaebang2",
+   "demand": 442,
+   "totalECC": 194,
+   "careGap": 248,
+   "space": 231,
+   "time": 0,
+   "staff": 17
+  }
+ ],
+ "after_school": [
+  {
+   "dongId": "noryangjin1",
+   "demand": 411,
+   "totalECC": 135.63636363636363,
+   "careGap": 275.3636363636364,
+   "space": 181,
+   "time": 0,
+   "staff": 94.36363636363637
+  },
+  {
+   "dongId": "noryangjin2",
+   "demand": 22,
+   "totalECC": 189.8924408924409,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sangdo1",
+   "demand": 537,
+   "totalECC": 540.2059449322606,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sangdo2",
+   "demand": 574,
+   "totalECC": 186.26666666666665,
+   "careGap": 387.73333333333335,
+   "space": 233,
+   "time": 0,
+   "staff": 154.73333333333335
+  },
+  {
+   "dongId": "sangdo3",
+   "demand": 195,
+   "totalECC": 78.5,
+   "careGap": 116.5,
+   "space": 53,
+   "time": 0,
+   "staff": 63.5
+  },
+  {
+   "dongId": "sangdo4",
+   "demand": 365,
+   "totalECC": 256.41468253968253,
+   "careGap": 108.58531746031747,
+   "space": 0,
+   "time": 0,
+   "staff": 108.58531746031747
+  },
+  {
+   "dongId": "heukseok",
+   "demand": 577,
+   "totalECC": 441.32261904761907,
+   "careGap": 135.67738095238093,
+   "space": 0,
+   "time": 0,
+   "staff": 135.67738095238093
+  },
+  {
+   "dongId": "sadang1",
+   "demand": 154,
+   "totalECC": 275.8279220779221,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sadang2",
+   "demand": 515,
+   "totalECC": 53,
+   "careGap": 462,
+   "space": 432,
+   "time": 0,
+   "staff": 30
+  },
+  {
+   "dongId": "sadang3",
+   "demand": 480,
+   "totalECC": 280.2150456470329,
+   "careGap": 199.78495435296708,
+   "space": 0,
+   "time": 0,
+   "staff": 199.78495435296708
+  },
+  {
+   "dongId": "sadang4",
+   "demand": 146,
+   "totalECC": 86.26373626373626,
+   "careGap": 59.73626373626374,
+   "space": 0,
+   "time": 0,
+   "staff": 59.73626373626374
+  },
+  {
+   "dongId": "sadang5",
+   "demand": 219,
+   "totalECC": 281.1007575757576,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "daebang",
+   "demand": 376,
+   "totalECC": 477.2046091163738,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sindaebang1",
+   "demand": 335,
+   "totalECC": 378.13311965811965,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sindaebang2",
+   "demand": 370,
+   "totalECC": 128.22222222222223,
+   "careGap": 241.77777777777777,
+   "space": 159,
+   "time": 0,
+   "staff": 82.77777777777777
+  }
+ ],
+ "night": [
+  {
+   "dongId": "noryangjin1",
+   "demand": 110,
+   "totalECC": 36,
+   "careGap": 74,
+   "space": 0,
+   "time": 28.22680412371134,
+   "staff": 45.77319587628866
+  },
+  {
+   "dongId": "noryangjin2",
+   "demand": 6,
+   "totalECC": 32.374458874458874,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sangdo1",
+   "demand": 143,
+   "totalECC": 66.61451706188548,
+   "careGap": 76.38548293811452,
+   "space": 0,
+   "time": 20.906271568934777,
+   "staff": 55.47921136917974
+  },
+  {
+   "dongId": "sangdo2",
+   "demand": 153,
+   "totalECC": 34.733333333333334,
+   "careGap": 118.26666666666667,
+   "space": 0,
+   "time": 18.921636917718764,
+   "staff": 99.3450297489479
+  },
+  {
+   "dongId": "sangdo3",
+   "demand": 52,
+   "totalECC": 10,
+   "careGap": 42,
+   "space": 0,
+   "time": 38.5,
+   "staff": 3.5
+  },
+  {
+   "dongId": "sangdo4",
+   "demand": 97,
+   "totalECC": 30.02777777777778,
+   "careGap": 66.97222222222223,
+   "space": 0,
+   "time": 26.35122673194057,
+   "staff": 40.62099549028165
+  },
+  {
+   "dongId": "heukseok",
+   "demand": 154,
+   "totalECC": 75.44404761904761,
+   "careGap": 78.55595238095239,
+   "space": 0,
+   "time": 7.000956278548664,
+   "staff": 71.55499610240373
+  },
+  {
+   "dongId": "sadang1",
+   "demand": 41,
+   "totalECC": 50.641774891774894,
+   "careGap": 0,
+   "space": 0,
+   "time": 0,
+   "staff": 0
+  },
+  {
+   "dongId": "sadang2",
+   "demand": 137,
+   "totalECC": 13,
+   "careGap": 124,
+   "space": 54,
+   "time": 0,
+   "staff": 70
+  },
+  {
+   "dongId": "sadang3",
+   "demand": 128,
+   "totalECC": 51.811288016278944,
+   "careGap": 76.18871198372105,
+   "space": 0,
+   "time": 2.664977190715412,
+   "staff": 73.52373479300564
+  },
+  {
+   "dongId": "sadang4",
+   "demand": 39,
+   "totalECC": 10,
+   "careGap": 29,
+   "space": 0,
+   "time": 26.9937106918239,
+   "staff": 2.0062893081761004
+  },
+  {
+   "dongId": "sadang5",
+   "demand": 58,
+   "totalECC": 44.74166666666667,
+   "careGap": 13.258333333333333,
+   "space": 0,
+   "time": 3.5443134777476684,
+   "staff": 9.714019855585665
+  },
+  {
+   "dongId": "daebang",
+   "demand": 100,
+   "totalECC": 59.68255665902725,
+   "careGap": 40.31744334097275,
+   "space": 0,
+   "time": 13.197454496385047,
+   "staff": 27.119988844587702
+  },
+  {
+   "dongId": "sindaebang1",
+   "demand": 89,
+   "totalECC": 48.72361111111111,
+   "careGap": 40.27638888888889,
+   "space": 0,
+   "time": 15.703459757776628,
+   "staff": 24.572929131112257
+  },
+  {
+   "dongId": "sindaebang2",
+   "demand": 99,
+   "totalECC": 30.555555555555557,
+   "careGap": 68.44444444444444,
+   "space": 0,
+   "time": 28.82758620689655,
+   "staff": 39.61685823754789
+  }
+ ],
+ "weekend": [
+  {
+   "dongId": "noryangjin1",
+   "demand": 175,
+   "totalECC": 23,
+   "careGap": 152,
+   "space": 0,
+   "time": 103.53623188405797,
+   "staff": 48.463768115942024
+  },
+  {
+   "dongId": "noryangjin2",
+   "demand": 11,
+   "totalECC": 7.636363636363637,
+   "careGap": 3.3636363636363633,
+   "space": 0,
+   "time": 2.680754716981132,
+   "staff": 0.6828816466552314
+  },
+  {
+   "dongId": "sangdo1",
+   "demand": 207,
+   "totalECC": 17.242857142857144,
+   "careGap": 189.75714285714287,
+   "space": 0,
+   "time": 132.2742705144828,
+   "staff": 57.48287234266009
+  },
+  {
+   "dongId": "sangdo2",
+   "demand": 209,
+   "totalECC": 0,
+   "careGap": 209,
+   "space": 0,
+   "time": 209,
+   "staff": 0
+  },
+  {
+   "dongId": "sangdo3",
+   "demand": 78,
+   "totalECC": 0,
+   "careGap": 78,
+   "space": 0,
+   "time": 78,
+   "staff": 0
+  },
+  {
+   "dongId": "sangdo4",
+   "demand": 143,
+   "totalECC": 5.027777777777778,
+   "careGap": 137.97222222222223,
+   "space": 0,
+   "time": 90.64163101749067,
+   "staff": 47.33059120473157
+  },
+  {
+   "dongId": "heukseok",
+   "demand": 251,
+   "totalECC": 24.916666666666668,
+   "careGap": 226.08333333333334,
+   "space": 0,
+   "time": 194.383092013078,
+   "staff": 31.70024132025533
+  },
+  {
+   "dongId": "sadang1",
+   "demand": 58,
+   "totalECC": 4.785714285714286,
+   "careGap": 53.214285714285715,
+   "space": 0,
+   "time": 47.063039150630395,
+   "staff": 6.151246563655323
+  },
+  {
+   "dongId": "sadang2",
+   "demand": 178,
+   "totalECC": 3,
+   "careGap": 175,
+   "space": 95,
+   "time": 26,
+   "staff": 54
+  },
+  {
+   "dongId": "sadang3",
+   "demand": 178,
+   "totalECC": 5.875,
+   "careGap": 172.125,
+   "space": 0,
+   "time": 160.10948440483767,
+   "staff": 12.015515595162318
+  },
+  {
+   "dongId": "sadang4",
+   "demand": 52,
+   "totalECC": 0,
+   "careGap": 52,
+   "space": 0,
+   "time": 52,
+   "staff": 0
+  },
+  {
+   "dongId": "sadang5",
+   "demand": 89,
+   "totalECC": 33.44848484848485,
+   "careGap": 55.55151515151515,
+   "space": 0,
+   "time": 37.500277873029766,
+   "staff": 18.05123727848539
+  },
+  {
+   "dongId": "daebang",
+   "demand": 157,
+   "totalECC": 7.454545454545454,
+   "careGap": 149.54545454545453,
+   "space": 0,
+   "time": 137.92752250118426,
+   "staff": 11.617932044270272
+  },
+  {
+   "dongId": "sindaebang1",
+   "demand": 134,
+   "totalECC": 20.25,
+   "careGap": 113.75,
+   "space": 0,
+   "time": 80.4988360492185,
+   "staff": 33.25116395078151
+  },
+  {
+   "dongId": "sindaebang2",
+   "demand": 139,
+   "totalECC": 20,
+   "careGap": 119,
+   "space": 0,
+   "time": 114.63874345549739,
+   "staff": 4.361256544502617
+  }
+ ]
+}

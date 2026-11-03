@@ -181,7 +181,7 @@ function markerIcon(selected: boolean): string {
 }
 
 function FacilityDetailCard({ facility, onClose }: { facility: Facility; onClose: () => void }) {
-  const eveningWindow = facility.operatingWindows.find((w) => w.timeSlot === "evening");
+  const eveningWindow = facility.operatingWindows.find((w) => w.timeSlot === "night");
   const weekendWindow = facility.operatingWindows.find((w) => w.timeSlot === "weekend");
 
   const rows: { label: string; value: string }[] = [

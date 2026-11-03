@@ -7,17 +7,13 @@ import type {
   SimulatorAdjustment,
   TimeSlotId,
 } from "@/types";
+import { TIME_SLOTS as TIME_SLOTS_ALL, timeSlotDef } from "@/lib/constants/timeSlots";
 
-export const TIME_SLOTS: { id: TimeSlotId; label: string; shortLabel: string; startHour: number; endHour: number }[] = [
-  { id: "weekday_day", label: "평일 주간 09~17시", shortLabel: "주간", startHour: 9, endHour: 17 },
-  { id: "afterschool", label: "하원/방과후 17~19시", shortLabel: "방과후", startHour: 17, endHour: 19 },
-  { id: "evening", label: "야간 연장 19~22시", shortLabel: "야간연장", startHour: 19, endHour: 22 },
-  { id: "weekend", label: "주말/방학", shortLabel: "주말", startHour: 9, endHour: 18 },
-];
+export { TIME_SLOTS } from "@/lib/constants/timeSlots";
 
 /** 화면에 항상 노출하는 수요 산정 기준 한 줄 설명 (진단 신뢰성 검증용) */
 export const DEMAND_METHODOLOGY_NOTE =
-  "수요 산정 기준: 행정안전부 주민등록인구 0~9세 실측치 × 시간대별 이용률 계수(전국 평균 근사치, 동작구 자체 실측 아님)";
+  "수요 산정 기준: 행정안전부 주민등록인구 0~9세 실측치 × 시간대별 이용률 계수(전국 평균 근사치, 자치구 자체 실측 아님)";
 
 /**
  * 유효 돌봄 수용력(ECC) 계산
@@ -57,13 +53,19 @@ const AXIS_LABEL: Record<BottleneckAxis, string> = {
   staff: "인력(교사 배치)",
 };
 
-// 축별 정책 제언 문구. staff는 "인력을 투입하면 해소된다"는 단정 대신, 실제 인력 확보가
+// 축별 정책 제언 문구. 시간 축은 시간대마다 처방이 달라야 하므로(주말→주말 운영, 야간→야간 연장)
+// 반드시 timeSlotDef(timeSlot).extendAction으로 만든다. staff는 "인력을 투입하면 해소된다"는 단정 대신, 실제 인력 확보가
 // 전제조건임을 명시해 "사람만 넣으면 해결"이라는 인상을 주지 않도록 조건부로 표현한다.
-const AXIS_POLICY: Record<BottleneckAxis, string> = {
-  space: "신규 시설 확충 또는 인근 생활권 거점 시설과의 연계 배치가 필요합니다",
-  time: "운영시간 연장 지원 및 저녁 돌봄(야간반) 개설 시 공백의 상당 부분이 해소될 것으로 추정됩니다",
-  staff: "돌봄교사(시간제 포함) 인력 ○명이 실제로 확보된다면 공백 해소가 가능합니다 (확보 가능성은 현장 확인 필요)",
-};
+export function axisPolicyText(axis: BottleneckAxis, timeSlot: TimeSlotId, staffNeeded = 1): string {
+  switch (axis) {
+    case "space":
+      return "신규 정원 확충 또는 인근 행정동 시설과의 연계가 필요합니다";
+    case "time":
+      return `${timeSlotDef(timeSlot).extendAction} 지원 시 공백의 상당 부분이 해소될 것으로 추정됩니다`;
+    case "staff":
+      return `돌봄교사(시간제 포함) 약 ${staffNeeded}명이 실제로 확보된다면 공백 해소가 가능합니다 (확보 가능성은 현장 확인 필요)`;
+  }
+}
 
 /**
  * 생활권(행정동) 단위 돌봄 공백 진단 + 원인 분해(RCA)
@@ -77,7 +79,7 @@ const AXIS_POLICY: Record<BottleneckAxis, string> = {
  */
 export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeSlotId): DongDiagnosis {
   const dongFacilities = facilities.filter((f) => f.dongId === dong.id);
-  const demand = dong.estimatedDemand[timeSlot];
+  const demand = dong.estimatedDemand[timeSlot] ?? 0;
 
   let totalECC = 0;
   let idealECC = 0; // 완전 개방 + 완전 인력배치 가정 시의 총 수용력
@@ -137,12 +139,9 @@ export function diagnoseDong(dong: Dong, facilities: Facility[], timeSlot: TimeS
 
   const dominantShare = totalLoss > 0 ? Math.round((axisValue[dominant] / totalLoss) * 100) : 0;
 
-  const timeSlotLabel = TIME_SLOTS.find((t) => t.id === timeSlot)?.label ?? timeSlot;
+  const timeSlotLabel = timeSlotDef(timeSlot).label;
 
-  const policyText =
-    dominant === "staff"
-      ? AXIS_POLICY.staff.replace("○명", `약 ${Math.max(1, Math.ceil(axisValue.staff / avgStaffRatio))}명`)
-      : AXIS_POLICY[dominant];
+  const policyText = axisPolicyText(dominant, timeSlot, Math.max(1, Math.ceil(axisValue.staff / avgStaffRatio)));
 
   const recommendation = careGap > 0
     ? `${dong.name}은(는) ${timeSlotLabel} 기준 ${AXIS_LABEL[dominant]} 병목이 공백의 ${dominantShare}%를 차지하는 주원인입니다. ${policyText}.`
@@ -231,7 +230,7 @@ export function simulatePolicy(
       capacity: adjustment.addedCapacity,
       currentEnrollment: 0,
       totalStaff: Math.ceil(adjustment.addedCapacity / NEW_CAPACITY_STAFF_RATIO),
-      operatingWindows: TIME_SLOTS.map((slot) => ({
+      operatingWindows: TIME_SLOTS_ALL.map((slot) => ({
         timeSlot: slot.id,
         isOpen: slot.id === timeSlot,
         staffOnDuty: slot.id === timeSlot ? Math.ceil(adjustment.addedCapacity / NEW_CAPACITY_STAFF_RATIO) : 0,

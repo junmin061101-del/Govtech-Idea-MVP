@@ -1,19 +1,9 @@
 // CareOS 도메인 타입 정의
 
-/** 대시보드에서 다루는 4가지 시간대 프리셋 */
-export type TimeSlotId =
-  | "weekday_day" // 평일 주간 09~17
-  | "afterschool" // 하원/방과후 17~19
-  | "evening" // 야간 연장 19~22
-  | "weekend"; // 주말/방학
+import type { TimeSlotId } from "@/lib/constants/timeSlots";
 
-export interface TimeSlot {
-  id: TimeSlotId;
-  label: string;
-  shortLabel: string;
-  startHour: number;
-  endHour: number;
-}
+export type { TimeSlotId } from "@/lib/constants/timeSlots";
+export type { TimeSlotDef as TimeSlot } from "@/lib/constants/timeSlots";
 
 /** 서울시 열린데이터광장 보육시설 표준데이터(OA-20320) 스키마를 준용한 시설 유형 */
 export type FacilityType =
@@ -60,12 +50,10 @@ export interface Facility {
   homepageUrl?: string;
 }
 
-/** 생활권 단위 (행정동 기준) */
+/** 행정동 */
 export interface Dong {
   id: string;
   name: string;
-  /** 상위 생활권 (도보 생활권 그룹) */
-  lifeZone: string;
   lat: number;
   lng: number;
   /** 폴리곤 근사를 위한 반경(m). 실제 행정경계 폴리곤 데이터 확보 전 임시 근사치 */
@@ -76,8 +64,8 @@ export interface Dong {
   population0to9: number;
   /** 동별 실측 통계 없음 - 주택 유형 기반 상대적 추정치 */
   dualIncomeHouseholdRate: number;
-  /** 시간대별 추정 돌봄 수요 인원 */
-  estimatedDemand: Record<TimeSlotId, number>;
+  /** 시간대별 추정 돌봄 수요 인원. 산정 근거가 없는 시간대(이른 아침·방학 등)는 키가 없다 */
+  estimatedDemand: Partial<Record<TimeSlotId, number>>;
 }
 
 export type BottleneckAxis = "space" | "time" | "staff";

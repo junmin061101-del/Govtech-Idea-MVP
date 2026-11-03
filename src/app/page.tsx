@@ -23,7 +23,7 @@ const dongs = dongsData as import("@/types").Dong[];
 const facilities = facilitiesData as Facility[];
 
 export default function Home() {
-  const [timeSlot, setTimeSlot] = useState<TimeSlotId>("weekday_day");
+  const [timeSlot, setTimeSlot] = useState<TimeSlotId>("daytime");
   const [selectedDongId, setSelectedDongId] = useState<string | null>(dongs[0]?.id ?? null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
 

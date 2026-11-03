@@ -40,7 +40,7 @@ export default function SidePanel({ dong, diagnosis }: SidePanelProps) {
   return (
     <div className="flex h-full flex-col gap-5 overflow-y-auto p-5">
       <div>
-        <p className="text-xs font-medium text-neutral-400">{dong.lifeZone} 생활권</p>
+        <p className="text-xs font-medium text-neutral-400">행정동</p>
         <h2 className="text-xl font-bold text-neutral-900">{dong.name}</h2>
         <p className="mt-0.5 text-xs text-neutral-500">{timeSlotLabel} 기준</p>
       </div>

@@ -29,21 +29,21 @@ const OUT_DIR = join(__dirname, "..", "src", "data");
 
 // 좌표는 실제 위치 기준 근사치(정밀 GIS 폴리곤 아님). 인구는 아래에서 실데이터로 채운다.
 const DONGS = [
-  { id: "noryangjin1", name: "노량진1동", lifeZone: "노량진", lat: 37.5145, lng: 126.9435, dual: 0.47 },
-  { id: "noryangjin2", name: "노량진2동", lifeZone: "노량진", lat: 37.5098, lng: 126.9377, dual: 0.40 },
-  { id: "sangdo1", name: "상도1동", lifeZone: "상도", lat: 37.5027, lng: 126.9445, dual: 0.52 },
-  { id: "sangdo2", name: "상도2동", lifeZone: "상도", lat: 37.4972, lng: 126.9498, dual: 0.55 },
-  { id: "sangdo3", name: "상도3동", lifeZone: "상도", lat: 37.4998, lng: 126.9530, dual: 0.50 },
-  { id: "sangdo4", name: "상도4동", lifeZone: "상도", lat: 37.5057, lng: 126.9515, dual: 0.51 },
-  { id: "heukseok", name: "흑석동", lifeZone: "흑석", lat: 37.5065, lng: 126.9615, dual: 0.46 },
-  { id: "sadang1", name: "사당1동", lifeZone: "사당", lat: 37.4875, lng: 126.9775, dual: 0.53 },
-  { id: "sadang2", name: "사당2동", lifeZone: "사당", lat: 37.4845, lng: 126.9820, dual: 0.58 },
-  { id: "sadang3", name: "사당3동", lifeZone: "사당", lat: 37.4825, lng: 126.9735, dual: 0.54 },
-  { id: "sadang4", name: "사당4동", lifeZone: "사당", lat: 37.4795, lng: 126.9775, dual: 0.56 },
-  { id: "sadang5", name: "사당5동", lifeZone: "사당", lat: 37.4885, lng: 126.9705, dual: 0.49 },
-  { id: "daebang", name: "대방동", lifeZone: "대방", lat: 37.5033, lng: 126.9268, dual: 0.48 },
-  { id: "sindaebang1", name: "신대방1동", lifeZone: "신대방", lat: 37.4945, lng: 126.9165, dual: 0.50 },
-  { id: "sindaebang2", name: "신대방2동", lifeZone: "신대방", lat: 37.4975, lng: 126.9105, dual: 0.53 },
+  { id: "noryangjin1", name: "노량진1동", lat: 37.5145, lng: 126.9435, dual: 0.47 },
+  { id: "noryangjin2", name: "노량진2동", lat: 37.5098, lng: 126.9377, dual: 0.40 },
+  { id: "sangdo1", name: "상도1동", lat: 37.5027, lng: 126.9445, dual: 0.52 },
+  { id: "sangdo2", name: "상도2동", lat: 37.4972, lng: 126.9498, dual: 0.55 },
+  { id: "sangdo3", name: "상도3동", lat: 37.4998, lng: 126.9530, dual: 0.50 },
+  { id: "sangdo4", name: "상도4동", lat: 37.5057, lng: 126.9515, dual: 0.51 },
+  { id: "heukseok", name: "흑석동", lat: 37.5065, lng: 126.9615, dual: 0.46 },
+  { id: "sadang1", name: "사당1동", lat: 37.4875, lng: 126.9775, dual: 0.53 },
+  { id: "sadang2", name: "사당2동", lat: 37.4845, lng: 126.9820, dual: 0.58 },
+  { id: "sadang3", name: "사당3동", lat: 37.4825, lng: 126.9735, dual: 0.54 },
+  { id: "sadang4", name: "사당4동", lat: 37.4795, lng: 126.9775, dual: 0.56 },
+  { id: "sadang5", name: "사당5동", lat: 37.4885, lng: 126.9705, dual: 0.49 },
+  { id: "daebang", name: "대방동", lat: 37.5033, lng: 126.9268, dual: 0.48 },
+  { id: "sindaebang1", name: "신대방1동", lat: 37.4945, lng: 126.9165, dual: 0.50 },
+  { id: "sindaebang2", name: "신대방2동", lat: 37.4975, lng: 126.9105, dual: 0.53 },
 ];
 
 const POPULATION_CACHE_PATH = join(__dirname, "cache", "dongjak-population-raw.json");
@@ -60,24 +60,24 @@ try {
 const populationByName = new Map(populationRaw.rows.map((r) => [r.name, r]));
 
 // 시간대별 수요 계수 (0~9세 인구 대비 실제 돌봄 필요 인원 비율)
-// weekday_day 계수(0.38)는 "0~9세 인구 중 미취학(0~5세) 비중 약 55% x 어린이집 등
+// daytime 계수(0.38)는 "0~9세 인구 중 미취학(0~5세) 비중 약 55% x 어린이집 등
 // 형태로 실제 돌봄을 이용하는 비율 약 70%"를 근사한 값이다 (전국 보육통계 평균 수준 참고).
-// afterschool/evening 계수는 맞벌이 비율로 추가 보정하고, 6~9세(학령기) 방과후 수요를
+// after_school/night 계수는 맞벌이 비율로 추가 보정하고, 6~9세(학령기) 방과후 수요를
 // 반영해 weekday_day보다 낮은 절대 계수를 쓰되 다함께돌봄센터/키움센터가 받는 몫으로 간주한다.
 // ※ 이 계수들은 검증된 전국 평균 근사치이며, 동작구 자체의 실측 이용률 조사가 아니다.
 const DEMAND_FACTOR = {
-  weekday_day: 0.38,
-  afterschool: 0.30,
-  evening: 0.08,
+  daytime: 0.38,
+  after_school: 0.30,
+  night: 0.08,
   weekend: 0.12,
 };
 
 function buildDemand(pop0to9, dualIncomeRate) {
   const dualBoost = dualIncomeRate / 0.5; // 맞벌이 비율 50%를 기준값으로 보정
   return {
-    weekday_day: Math.round(pop0to9 * DEMAND_FACTOR.weekday_day),
-    afterschool: Math.round(pop0to9 * DEMAND_FACTOR.afterschool * dualBoost),
-    evening: Math.round(pop0to9 * DEMAND_FACTOR.evening * dualBoost),
+    daytime: Math.round(pop0to9 * DEMAND_FACTOR.daytime),
+    after_school: Math.round(pop0to9 * DEMAND_FACTOR.after_school * dualBoost),
+    night: Math.round(pop0to9 * DEMAND_FACTOR.night * dualBoost),
     weekend: Math.round(pop0to9 * DEMAND_FACTOR.weekend),
   };
 }
@@ -88,7 +88,6 @@ const dongRecords = DONGS.map((d) => {
   return {
     id: d.id,
     name: d.name,
-    lifeZone: d.lifeZone,
     lat: d.lat,
     lng: d.lng,
     approxRadiusM: 650,
@@ -120,7 +119,7 @@ function jitter(lat, lng, meters) {
   return { lat: +(lat + dLat).toFixed(6), lng: +(lng + dLng).toFixed(6) };
 }
 
-const TIME_SLOTS = ["weekday_day", "afterschool", "evening", "weekend"];
+const TIME_SLOTS = ["daytime", "after_school", "night", "weekend"];
 
 const KIWOOM_ASSIGNMENT = [
   { branch: 1, dongId: "noryangjin2", verified: true, note: "2019.06 동작구 1호점 개소 (공개 보도자료 확인)" },
@@ -146,13 +145,13 @@ function nextId() {
 
 function makeOperatingWindows({ dayStaff, afterStaff, eveningStaff, weekendStaff, ratio, closesAfterschool = false, closesEvening = true, weekendOpen = false }) {
   return TIME_SLOTS.map((slot) => {
-    if (slot === "weekday_day") {
+    if (slot === "daytime") {
       return { timeSlot: slot, isOpen: true, staffOnDuty: dayStaff, staffToChildRatio: ratio };
     }
-    if (slot === "afterschool") {
+    if (slot === "after_school") {
       return { timeSlot: slot, isOpen: !closesAfterschool, staffOnDuty: closesAfterschool ? 0 : afterStaff, staffToChildRatio: ratio };
     }
-    if (slot === "evening") {
+    if (slot === "night") {
       return { timeSlot: slot, isOpen: !closesEvening, staffOnDuty: closesEvening ? 0 : eveningStaff, staffToChildRatio: ratio };
     }
     // weekend
@@ -240,14 +239,14 @@ for (const row of activeChildcare) {
     approvalDate: row.CRCNFMDT || undefined,
     homepageUrl,
     operatingWindows: [
-      { timeSlot: "weekday_day", isOpen: true, staffOnDuty: dayStaff, staffToChildRatio: ratio },
+      { timeSlot: "daytime", isOpen: true, staffOnDuty: dayStaff, staffToChildRatio: ratio },
       // 2020년 보육정책 개편 이후 전체 어린이집은 오후 4~7시30분 기본연장보육을 제공해야 하므로
       // 방과후 시간대는 원칙적으로 개방 상태이나, 실제로는 연장 전담교사 1~2인만 근무하는 경우가
       // 많아 배치 인력을 주간 대비 축소해 반영한다.
-      { timeSlot: "afterschool", isOpen: true, staffOnDuty: Math.max(1, Math.round(dayStaff * 0.45)), staffToChildRatio: ratio },
+      { timeSlot: "after_school", isOpen: true, staffOnDuty: Math.max(1, Math.round(dayStaff * 0.45)), staffToChildRatio: ratio },
       // 야간연장형(CRSPEC) 등록 여부는 실제 데이터이지만, 등록만 하고 실제 이용은 저조해
       // 전담 인력이 1명 수준에 그치는 경우가 많다는 점을 반영해 소수 인력만 배치한다.
-      { timeSlot: "evening", isOpen: isNightExtended, staffOnDuty: isNightExtended ? 1 : 0, staffToChildRatio: ratio },
+      { timeSlot: "night", isOpen: isNightExtended, staffOnDuty: isNightExtended ? 1 : 0, staffToChildRatio: ratio },
       { timeSlot: "weekend", isOpen: isHolidayCare, staffOnDuty: isHolidayCare ? 1 : 0, staffToChildRatio: ratio },
     ],
     dataSource: `서울 열린데이터광장 실데이터 (ChildCareInfoDJ, 기준일 ${row.DATASTDRDT ?? childcareRaw.fetchedAt?.slice(0, 10)})`,

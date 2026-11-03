@@ -15,19 +15,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000475",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3.3333333333333335
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3.3333333333333335
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.3333333333333335
@@ -57,19 +57,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000471",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 5.333333333333333
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 5.333333333333333
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.333333333333333
@@ -99,19 +99,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000469",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -141,19 +141,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000467",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 5
@@ -183,19 +183,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000465",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 5.866666666666666
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 5.866666666666666
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.866666666666666
@@ -225,19 +225,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000464",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 4.071428571428571
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 4.071428571428571
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.071428571428571
@@ -267,19 +267,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000462",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3.4615384615384617
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3.4615384615384617
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.4615384615384617
@@ -309,19 +309,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000461",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -351,19 +351,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000447",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 3.4
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3.4
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.4
@@ -393,19 +393,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000445",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 17,
         "staffToChildRatio": 3.823529411764706
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3.823529411764706
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.823529411764706
@@ -435,19 +435,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000446",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -477,19 +477,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000444",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -519,19 +519,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000443",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -561,19 +561,19 @@
     "homepageUrl": "http://구립아름어린이집.com",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -603,19 +603,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000441",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 18,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -645,19 +645,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000439",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -687,19 +687,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000440",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 5.181818181818182
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 5.181818181818182
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 5.181818181818182
@@ -729,19 +729,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000438",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -771,19 +771,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000437",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3.769230769230769
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3.769230769230769
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.769230769230769
@@ -813,19 +813,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000436",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 4.214285714285714
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 4.214285714285714
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.214285714285714
@@ -855,19 +855,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000435",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -897,19 +897,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000434",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 5
@@ -939,19 +939,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000432",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -981,19 +981,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000428",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 5.75
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 5.75
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.75
@@ -1023,19 +1023,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000431",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1065,19 +1065,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000430",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 3.5833333333333335
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3.5833333333333335
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.5833333333333335
@@ -1107,19 +1107,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000429",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 24,
         "staffToChildRatio": 3.9583333333333335
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 3.9583333333333335
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.9583333333333335
@@ -1149,19 +1149,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000426",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1191,19 +1191,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000424",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1233,19 +1233,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000425",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1275,19 +1275,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000423",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1317,19 +1317,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000422",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1359,19 +1359,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000420",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1401,19 +1401,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000421",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1443,19 +1443,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000419",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1485,19 +1485,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000417",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1527,19 +1527,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000418",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 6.7272727272727275
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 6.7272727272727275
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 6.7272727272727275
@@ -1569,19 +1569,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/sisulInfo/intro.do?stCode=11590000416",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1611,19 +1611,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000415",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1653,19 +1653,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000413",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1695,19 +1695,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000414",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 6.583333333333333
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 6.583333333333333
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 6.583333333333333
@@ -1737,19 +1737,19 @@
     "homepageUrl": "http://child.cau.ac.kr/",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3.4285714285714284
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3.4285714285714284
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.4285714285714284
@@ -1779,19 +1779,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000408",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 4.333333333333333
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 4.333333333333333
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.333333333333333
@@ -1821,19 +1821,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000407",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -1863,19 +1863,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000405",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 5.6
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 5.6
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 5.6
@@ -1905,19 +1905,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000404",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 4.3125
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 4.3125
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.3125
@@ -1947,19 +1947,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000403",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 6.9
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 6.9
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 6.9
@@ -1989,19 +1989,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000402",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 20,
         "staffToChildRatio": 3.75
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3.75
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.75
@@ -2031,19 +2031,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000401",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 4.875
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 4.875
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.875
@@ -2073,19 +2073,19 @@
     "homepageUrl": "seoul.seoul.go.kr",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 3.5
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3.5
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.5
@@ -2115,19 +2115,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000398",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -2157,19 +2157,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000395",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 17,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2199,19 +2199,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000397",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 4.083333333333333
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 4.083333333333333
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4.083333333333333
@@ -2241,19 +2241,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000396",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 19,
         "staffToChildRatio": 3.8947368421052633
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3.8947368421052633
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.8947368421052633
@@ -2283,19 +2283,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000394",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 4.0625
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 4.0625
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4.0625
@@ -2325,19 +2325,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000389",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 4.428571428571429
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 4.428571428571429
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4.428571428571429
@@ -2367,19 +2367,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000388",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 4.166666666666667
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 4.166666666666667
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4.166666666666667
@@ -2409,19 +2409,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000387",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2451,19 +2451,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000386",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2493,19 +2493,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000380",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2535,19 +2535,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000377",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -2577,19 +2577,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000376",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 18,
         "staffToChildRatio": 3.7777777777777777
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3.7777777777777777
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.7777777777777777
@@ -2619,19 +2619,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000374",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -2661,19 +2661,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000372",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 3.7857142857142856
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3.7857142857142856
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.7857142857142856
@@ -2703,19 +2703,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000371",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2745,19 +2745,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000369",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2787,19 +2787,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000366",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2829,19 +2829,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000360",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -2871,19 +2871,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000356",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -2913,19 +2913,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000354",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -2955,19 +2955,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000351",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 3.8333333333333335
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3.8333333333333335
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.8333333333333335
@@ -2997,19 +2997,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000350",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3039,19 +3039,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000349",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3081,19 +3081,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000346",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3123,19 +3123,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000342",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 5
@@ -3165,19 +3165,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000341",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 3.2666666666666666
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3.2666666666666666
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.2666666666666666
@@ -3207,19 +3207,19 @@
     "homepageUrl": "http://www.childcare.go.kr",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3249,19 +3249,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000339",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3291,19 +3291,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000337",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -3333,19 +3333,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000332",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3375,19 +3375,19 @@
     "homepageUrl": "다음",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3.2
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 3.2
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.2
@@ -3417,19 +3417,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000255",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 19,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3459,19 +3459,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000254",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 4.666666666666667
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 4.666666666666667
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.666666666666667
@@ -3501,19 +3501,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000253",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 3.1
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3.1
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.1
@@ -3543,19 +3543,19 @@
     "homepageUrl": "http://club.cyworld.com/humansia0907",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3.2
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 3.2
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.2
@@ -3585,19 +3585,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000226",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -3627,19 +3627,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000223",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 19,
         "staffToChildRatio": 4
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 4
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4
@@ -3669,19 +3669,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000221",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 4.375
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 4.375
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4.375
@@ -3711,19 +3711,19 @@
     "homepageUrl": "www.e-haedal.org",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 3.5
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3.5
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.5
@@ -3753,19 +3753,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000211",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 4.5
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 4.5
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4.5
@@ -3795,19 +3795,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000137",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -3837,19 +3837,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000040",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 8.727272727272727
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 8.727272727272727
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 8.727272727272727
@@ -3879,19 +3879,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000065",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -3921,19 +3921,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000167",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 18,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -3963,19 +3963,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000198",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4005,19 +4005,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000146",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4047,19 +4047,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000158",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -4089,19 +4089,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000189",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 13
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 13
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 13
@@ -4131,19 +4131,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000030",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 4
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 4
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 4
@@ -4173,19 +4173,19 @@
     "homepageUrl": "sunny kidsor.kr",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 6.714285714285714
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 6.714285714285714
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 6.714285714285714
@@ -4215,19 +4215,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000168",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -4257,19 +4257,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000130",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4299,19 +4299,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000084",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 3.25
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3.25
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3.25
@@ -4341,19 +4341,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000152",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4383,19 +4383,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000169",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4425,19 +4425,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000117",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 5.454545454545454
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 5.454545454545454
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 5.454545454545454
@@ -4467,19 +4467,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000148",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4509,19 +4509,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000106",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4551,19 +4551,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000046",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4593,19 +4593,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000086",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -4635,19 +4635,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000101",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 6.615384615384615
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 6.615384615384615
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 6.615384615384615
@@ -4677,19 +4677,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000077",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -4719,19 +4719,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000017",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": false,
         "staffOnDuty": 0,
         "staffToChildRatio": 3
@@ -4761,19 +4761,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000010",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 20,
         "staffToChildRatio": 4.4
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 4.4
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.4
@@ -4803,19 +4803,19 @@
     "homepageUrl": "http://band.us/@dasomkid",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -4845,19 +4845,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000022",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 29,
         "staffToChildRatio": 5.379310344827586
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 5.379310344827586
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.379310344827586
@@ -4887,19 +4887,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000041",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 4.636363636363637
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 4.636363636363637
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.636363636363637
@@ -4929,19 +4929,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000006",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 6.583333333333333
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 6.583333333333333
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 6.583333333333333
@@ -4971,19 +4971,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000119",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 12
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 12
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 12
@@ -5013,19 +5013,19 @@
     "homepageUrl": "www.cafe.naver.com/cheong2012",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -5055,19 +5055,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000024",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 5.266666666666667
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 5.266666666666667
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.266666666666667
@@ -5097,19 +5097,19 @@
     "homepageUrl": "iseoul.seoul.go.kr/homepage/main.do?stCode=11590000055",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 5.466666666666667
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 5.466666666666667
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.466666666666667
@@ -5139,19 +5139,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000100",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 4.636363636363637
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 4.636363636363637
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.636363636363637
@@ -5181,19 +5181,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000007",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 36,
         "staffToChildRatio": 5.027777777777778
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 5.027777777777778
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.027777777777778
@@ -5223,19 +5223,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000058",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 6.583333333333333
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 6.583333333333333
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 6.583333333333333
@@ -5265,19 +5265,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000009",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 5.875
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 5.875
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.875
@@ -5307,19 +5307,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000003",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 6.166666666666667
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 6.166666666666667
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 6.166666666666667
@@ -5349,19 +5349,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000070",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -5391,19 +5391,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000033",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 4.933333333333334
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 4.933333333333334
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.933333333333334
@@ -5433,19 +5433,19 @@
     "homepageUrl": "jys8380@hanmail.net",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 7.555555555555555
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 7.555555555555555
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 7.555555555555555
@@ -5475,19 +5475,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000126",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 10,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -5517,19 +5517,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000005",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 14,
         "staffToChildRatio": 4.785714285714286
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 4.785714285714286
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.785714285714286
@@ -5559,19 +5559,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000021",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 5.875
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 5.875
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.875
@@ -5601,19 +5601,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000035",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 5.076923076923077
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 5.076923076923077
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.076923076923077
@@ -5643,19 +5643,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000001",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 19,
         "staffToChildRatio": 4.578947368421052
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 4.578947368421052
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.578947368421052
@@ -5685,19 +5685,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000028",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 35,
         "staffToChildRatio": 5.3428571428571425
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 5.3428571428571425
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.3428571428571425
@@ -5727,19 +5727,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000060",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 13,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 6,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -5769,19 +5769,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000202",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 3
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3
@@ -5811,19 +5811,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000047",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 7.454545454545454
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 7.454545454545454
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 7.454545454545454
@@ -5853,19 +5853,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000079",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 20,
         "staffToChildRatio": 3.45
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 9,
         "staffToChildRatio": 3.45
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 3.45
@@ -5895,19 +5895,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000036",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 24,
         "staffToChildRatio": 4.916666666666667
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 4.916666666666667
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.916666666666667
@@ -5937,19 +5937,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000050",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 17,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 5
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5
@@ -5979,19 +5979,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000061",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 17,
         "staffToChildRatio": 5.823529411764706
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 8,
         "staffToChildRatio": 5.823529411764706
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.823529411764706
@@ -6021,19 +6021,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/sisulInfo/hrConerList.do?stCode=11590000029",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 6.6
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 6.6
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 6.6
@@ -6063,19 +6063,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000063",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 11,
         "staffToChildRatio": 8.272727272727273
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 8.272727272727273
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 8.272727272727273
@@ -6105,19 +6105,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000039",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 16,
         "staffToChildRatio": 4.875
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 4.875
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 4.875
@@ -6147,19 +6147,19 @@
     "homepageUrl": "https://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000034",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 12,
         "staffToChildRatio": 7
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 5,
         "staffToChildRatio": 7
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 7
@@ -6189,19 +6189,19 @@
     "homepageUrl": "http://iseoul.seoul.go.kr/homepage/main.do?stCode=11590000004",
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 15,
         "staffToChildRatio": 5.266666666666667
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 7,
         "staffToChildRatio": 5.266666666666667
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 5.266666666666667
@@ -6228,19 +6228,19 @@
     "totalStaff": 2,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6267,19 +6267,19 @@
     "totalStaff": 2,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6306,19 +6306,19 @@
     "totalStaff": 2,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6345,19 +6345,19 @@
     "totalStaff": 2,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6384,19 +6384,19 @@
     "totalStaff": 2,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6423,19 +6423,19 @@
     "totalStaff": 2,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6462,19 +6462,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6501,19 +6501,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6540,19 +6540,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6579,19 +6579,19 @@
     "totalStaff": 5,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 4,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
@@ -6618,19 +6618,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6657,19 +6657,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6696,19 +6696,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6735,19 +6735,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6774,19 +6774,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6813,19 +6813,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10
@@ -6852,19 +6852,19 @@
     "totalStaff": 3,
     "operatingWindows": [
       {
-        "timeSlot": "weekday_day",
+        "timeSlot": "daytime",
         "isOpen": true,
         "staffOnDuty": 2,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "afterschool",
+        "timeSlot": "after_school",
         "isOpen": true,
         "staffOnDuty": 3,
         "staffToChildRatio": 10
       },
       {
-        "timeSlot": "evening",
+        "timeSlot": "night",
         "isOpen": true,
         "staffOnDuty": 1,
         "staffToChildRatio": 10

@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock } from "lucide-react";
-import { TIME_SLOTS } from "@/lib/calculator";
+import { TIME_SLOTS } from "@/lib/constants/timeSlots";
 import type { TimeSlotId } from "@/types";
 
 interface TopControllerProps {
@@ -22,10 +22,14 @@ export default function TopController({ value, onChange }: TopControllerProps) {
           <button
             key={slot.id}
             onClick={() => onChange(slot.id)}
+            disabled={!slot.dataAvailable}
+            title={slot.dataAvailable ? slot.label : `${slot.label} · 데이터 준비 중`}
             className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
               value === slot.id
                 ? "bg-neutral-900 text-white shadow-sm"
-                : "text-neutral-600 hover:bg-neutral-200"
+                : slot.dataAvailable
+                  ? "text-neutral-600 hover:bg-neutral-200"
+                  : "cursor-not-allowed text-neutral-300"
             }`}
           >
             {slot.shortLabel}

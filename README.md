@@ -10,6 +10,7 @@
 npm install
 cp .env.local.example .env.local   # 아래 2번 참고: 카카오 JavaScript 키 입력
 npm run dev
+npm test                           # 계산 로직 단위 테스트 (vitest)
 ```
 
 http://localhost:3000 에서 확인합니다.
