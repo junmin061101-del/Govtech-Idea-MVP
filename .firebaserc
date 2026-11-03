@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "demo-careos",
-    "dev": "TODO-careos-dev",
+    "dev": "careos-dev-1103174",
     "prod": "TODO-careos-prod"
   }
 }
