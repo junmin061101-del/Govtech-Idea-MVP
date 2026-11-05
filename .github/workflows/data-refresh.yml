@@ -42,14 +42,39 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      # 비밀값이 아직 등록되지 않았으면 실패 대신 건너뛴다 (등록하는 즉시 다음 예약부터 동작)
+      - name: 비밀값 확인
+        id: ready
+        env:
+          K1: ${{ secrets.SEOUL_OPEN_DATA_API_KEY }}
+          K2: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+          K3: ${{ secrets.FIREBASE_WEB_CONFIG_DEV }}
+          K4: ${{ secrets.NEXT_PUBLIC_KAKAO_MAP_API_KEY }}
+        run: |
+          missing=""
+          [ -z "$K1" ] && missing="$missing SEOUL_OPEN_DATA_API_KEY"
+          [ -z "$K2" ] && missing="$missing FIREBASE_SERVICE_ACCOUNT_DEV"
+          [ -z "$K3" ] && missing="$missing FIREBASE_WEB_CONFIG_DEV"
+          [ -z "$K4" ] && missing="$missing NEXT_PUBLIC_KAKAO_MAP_API_KEY"
+          if [ -n "$missing" ]; then
+            echo "::notice::자동 갱신 대기 중 — GitHub Secrets 미등록:$missing"
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.ready.outputs.ok == 'true'
       - uses: actions/setup-node@v4
+        if: steps.ready.outputs.ok == 'true'
         with:
           node-version: 24
           cache: npm
       - run: npm ci
+        if: steps.ready.outputs.ok == 'true'
 
       - name: 갱신 종류 정하기
+        if: steps.ready.outputs.ok == 'true'
         id: mode
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -66,6 +91,7 @@ jobs:
           echo "갱신 종류: $m"
 
       - name: 공공데이터 수집·검증·빌드
+        if: steps.ready.outputs.ok == 'true'
         id: refresh
         env:
           SEOUL_OPEN_DATA_API_KEY: ${{ secrets.SEOUL_OPEN_DATA_API_KEY }}

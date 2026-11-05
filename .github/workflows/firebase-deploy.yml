@@ -39,14 +39,23 @@ jobs:
           java-version: 21
       - run: npm ci
       - run: npm test
+      # 배포용 비밀값이 없으면 테스트까지만 하고 배포는 건너뛴다
+      - name: 배포 비밀값 확인
+        id: ready
+        env:
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+        run: |
+          if [ -z "$SA" ]; then echo "::notice::배포 건너뜀 — FIREBASE_SERVICE_ACCOUNT_DEV 미등록"; echo "ok=false" >> "$GITHUB_OUTPUT"; else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
       - run: npm run test:rules
       - name: 웹 설정 주입
+        if: steps.ready.outputs.ok == 'true'
         run: |
           echo "NEXT_PUBLIC_KAKAO_MAP_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_API_KEY }}" >> .env.production.local
           echo "${{ secrets.FIREBASE_WEB_CONFIG_DEV }}" >> .env.production.local
       - run: npm run build
+        if: steps.ready.outputs.ok == 'true'
       - name: 미리보기 배포 (PR → dev)
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && steps.ready.outputs.ok == 'true'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -54,7 +63,7 @@ jobs:
           projectId: dev
           target: dashboard
       - name: 배포 (main → dev 대시보드 사이트)
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && steps.ready.outputs.ok == 'true'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -63,7 +72,7 @@ jobs:
           target: dashboard
           channelId: live
       - name: Firestore 규칙·인덱스 배포 (main → dev)
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && steps.ready.outputs.ok == 'true'
         env:
           SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
         run: |
