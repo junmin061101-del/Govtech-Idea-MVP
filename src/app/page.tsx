@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import TopController from "@/components/TopController";
 import RankingList from "@/components/RankingList";
@@ -8,6 +8,7 @@ import { rankDiagnoses } from "@/lib/ranking";
 import GapReasonPanel from "@/components/panel/GapReasonPanel";
 import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
 import UnmetDemandPanel from "@/components/panel/UnmetDemandPanel";
+import Notice from "@/components/Notice";
 import type { MapLayer } from "@/components/map/KakaoMap";
 import { signalOf, type UnmetSignal } from "@/lib/unmet";
 import { diagnoseAllDongs } from "@/lib/calculator";
@@ -35,7 +36,12 @@ export default function Home() {
   const [selectedDongId, setSelectedDongId] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const [layer, setLayer] = useState<MapLayer>("estimate");
-  const [equityTransit, setEquityTransit] = useState(false);
+  // 형평성 겹쳐 보기는 화면에서 뺐다 (주소에 eq=transit이 있어도 켜지 않음)
+  const [, setEquityTransit] = useState(false);
+  const equityTransit = false;
+  const [notice, setNotice] = useState<{ text: string; id: number } | null>(null);
+  const showNotice = useCallback((text: string) => setNotice({ text, id: Date.now() }), []);
+  const closeNotice = useCallback(() => setNotice(null), []);
   // 대안 선택은 (동, 시간대, 대상) 조합에 묶인다 — 조합이 바뀌면 선택이 풀린다
   const [altSel, setAltSel] = useState<{ key: string; kinds: AlternativeKind[] }>({ key: "", kinds: [] });
   const [restored, setRestored] = useState(false);
@@ -123,7 +129,9 @@ export default function Home() {
         timeSlot={timeSlot}
         onTimeSlotChange={setTimeSlot}
         query={query}
+        onUnavailable={showNotice}
       />
+      <Notice message={notice} onClose={closeNotice} />
 
       <div className="grid flex-1 grid-cols-1 gap-4 overflow-hidden p-4 lg:grid-cols-[1fr_300px_380px]">
         <div className="min-h-[420px] overflow-hidden">
@@ -144,6 +152,7 @@ export default function Home() {
             signalSynthetic={Boolean(unmetFile?.synthetic)}
             equityTransit={equityTransit}
             onEquityTransitChange={setEquityTransit}
+            onUnavailable={showNotice}
           />
         </div>
 

@@ -18,6 +18,7 @@ import { useBoundaries } from "@/components/map/useBoundaries";
 import { INSUFFICIENT_COLOR, NO_RESULT_CLASSES, noResultColor, type UnmetSignal } from "@/lib/unmet";
 import { percent } from "@/lib/mapScale";
 import { TRANSIT } from "@/lib/config/assumptions";
+import { UNAVAILABLE_TEXT } from "@/components/Notice";
 
 export const VULNERABLE_TODO =
   "취약가구 비중: 행정동별 기초생활수급자 통계는 서울 열린데이터광장에서 Open API·파일로 제공되지 않아 확보 필요";
@@ -82,6 +83,8 @@ interface KakaoMapProps {
   /** 형평성 겹쳐 보기: 대중교통 접근성 */
   equityTransit: boolean;
   onEquityTransitChange: (on: boolean) => void;
+  /** 볼 수 없는 층을 눌렀을 때 이유 안내 */
+  onUnavailable: (text: string) => void;
 }
 
 /** 카카오맵 레벨: 숫자가 클수록 넓게 보인다. 이 레벨 이하에서 모든 동 라벨을 표시 */
@@ -147,7 +150,7 @@ function LoadedMap({
   signals,
   signalSynthetic,
   equityTransit,
-  onEquityTransitChange,
+  onUnavailable,
 }: KakaoMapProps & { apiKey: string }) {
   const stations = useSubwayStations(equityTransit, dongs);
   // SDK 기본 URL은 프로토콜 상대경로라 http 페이지에서 ORB에 막힌다. https로 고정한다.
@@ -369,12 +372,12 @@ function LoadedMap({
           return (
             <button
               key={l.id}
-              onClick={() => onLayerChange(l.id)}
-              disabled={disabled}
+              onClick={() => (disabled ? onUnavailable(UNAVAILABLE_TEXT.signal) : onLayerChange(l.id))}
+              aria-description={disabled ? "정보 없음 — 누르면 이유를 알려 줍니다" : undefined}
               aria-pressed={layer === l.id}
-              title={disabled ? "이 구에는 시민 돌봄지도 집계가 없습니다" : undefined}
+              title={disabled ? UNAVAILABLE_TEXT.signal : undefined}
               className={`rounded-md px-2 py-1 font-medium ${
-                layer === l.id ? "bg-neutral-900 text-white" : disabled ? "cursor-not-allowed text-neutral-300" : "text-neutral-600 hover:bg-neutral-100"
+                layer === l.id ? "bg-neutral-900 text-white" : disabled ? "text-neutral-400 hover:text-neutral-500" : "text-neutral-600 hover:bg-neutral-100"
               }`}
             >
               {l.label}
@@ -386,18 +389,7 @@ function LoadedMap({
             시연용 가상 데이터
           </span>
         )}
-        <span className="mx-1 h-4 w-px bg-neutral-200" />
-        <span className="px-1 text-[10px] text-neutral-500">형평성</span>
-        <button
-          onClick={() => onEquityTransitChange(!equityTransit)}
-          aria-pressed={equityTransit}
-          className={`rounded-md px-2 py-1 font-medium ${equityTransit ? "bg-neutral-900 text-white" : "text-neutral-600 hover:bg-neutral-100"}`}
-        >
-          대중교통
-        </button>
-        <button disabled title={VULNERABLE_TODO} className="cursor-not-allowed rounded-md px-2 py-1 font-medium text-neutral-300">
-          취약가구
-        </button>
+
       </div>
 
       {selectedFacility && (

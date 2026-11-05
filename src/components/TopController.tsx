@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { CalendarRange, ChevronDown, FileDown, History, LogIn, Settings, Upload, UserRound } from "lucide-react";
 import { ROLE_LABEL, useAuth } from "@/lib/firebase/AuthProvider";
+import { UNAVAILABLE_TEXT } from "@/components/Notice";
 import { SIGUNGU } from "@/lib/constants/regions";
 import { TIME_SLOTS } from "@/lib/constants/timeSlots";
 import { CARE_TARGETS } from "@/lib/constants/targets";
@@ -18,6 +19,8 @@ interface TopControllerProps {
   onTimeSlotChange: (slot: TimeSlotId) => void;
   /** 현재 화면 상태 쿼리 (리포트로 넘긴다) */
   query: string;
+  /** 아직 볼 수 없는 항목을 눌렀을 때 이유 안내 */
+  onUnavailable: (text: string) => void;
 }
 
 /** 이름표 + 버튼 묶음. 모든 버튼은 같은 높이(28px)·같은 글자 크기(13px) */
@@ -26,12 +29,15 @@ function Segmented<T extends string>({
   items,
   value,
   onChange,
+  onUnavailable,
   hideSubBelow1500 = false,
 }: {
   label: string;
   /** 좁은 화면(1500px 미만)에서는 보조 글자(시각)를 숨기고 툴팁으로만 보여 준다 */
   hideSubBelow1500?: boolean;
   items: { id: T; label: string; sub?: string; disabled?: boolean; title?: string }[];
+  /** 볼 수 없는 항목을 눌렀을 때 (눌리지 않는 버튼 대신 이유를 알려 준다) */
+  onUnavailable: (title: string) => void;
   value: T;
   onChange: (v: T) => void;
 }) {
@@ -44,15 +50,15 @@ function Segmented<T extends string>({
           return (
             <button
               key={item.id}
-              onClick={() => onChange(item.id)}
-              disabled={item.disabled}
+              onClick={() => (item.disabled ? onUnavailable(item.title ?? "아직 볼 수 없습니다.") : onChange(item.id))}
+              aria-description={item.disabled ? "정보 없음 — 누르면 이유를 알려 줍니다" : undefined}
               title={item.title}
               aria-pressed={active}
               className={`flex h-7 items-center gap-1 whitespace-nowrap rounded-md px-2.5 text-[13px] font-medium transition-colors ${
                 active
                   ? "bg-white text-neutral-900 shadow-sm ring-1 ring-black/5"
                   : item.disabled
-                    ? "cursor-not-allowed text-neutral-300"
+                    ? "text-neutral-400 hover:text-neutral-500"
                     : "text-neutral-600 hover:text-neutral-900"
               }`}
             >
@@ -131,24 +137,26 @@ export default function TopController(props: TopControllerProps) {
           label="대상"
           value={props.target}
           onChange={props.onTargetChange}
+          onUnavailable={props.onUnavailable}
           items={CARE_TARGETS.map((t) => ({
             id: t.id,
             label: t.id === "infant" ? "영유아" : "초등 저학년",
             sub: `${t.minAge}~${t.maxAge}세`,
             disabled: !t.dataAvailable,
-            title: t.dataAvailable ? t.label : t.unavailableReason,
+            title: t.dataAvailable ? t.label : UNAVAILABLE_TEXT.lower_elementary,
           }))}
         />
         <Segmented
           label="시간대"
           value={props.timeSlot}
           onChange={props.onTimeSlotChange}
+          onUnavailable={props.onUnavailable}
           items={TIME_SLOTS.map((t) => ({
             id: t.id,
             label: t.shortLabel,
             sub: t.hours ? `${two(t.hours.start)}–${two(t.hours.end)}` : undefined,
             disabled: !t.dataAvailable,
-            title: t.dataAvailable ? t.label : `${t.label} · 데이터 준비 중`,
+            title: t.dataAvailable ? t.label : UNAVAILABLE_TEXT[t.id as "early_morning" | "vacation"],
           }))}
         />
       </div>
