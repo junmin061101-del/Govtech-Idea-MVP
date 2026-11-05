@@ -42,7 +42,6 @@ beforeEach(async () => {
     const f = ctx.firestore();
     await setDoc(doc(f, "decisions/dj1"), { ...decision("dj-admin"), createdAt: new Date() });
     await setDoc(doc(f, "decisions/ga1"), { ...decision("ga-admin", GWANAK), createdAt: new Date() });
-    await setDoc(doc(f, "unitCosts/11590"), { items: {}, updatedBy: "dj-admin", updatedAt: new Date() });
     await setDoc(doc(f, "waitlists/11590_202611"), { sigunguCode: DONGJAK, month: "202611", byDong: {}, total: 0, uploadedBy: "dj-admin", uploadedAt: new Date() });
   });
 });
@@ -50,7 +49,6 @@ beforeEach(async () => {
 describe("기본 거부", () => {
   it("로그인하지 않으면 아무것도 읽고 쓸 수 없다", async () => {
     await assertFails(getDoc(doc(anon(), "decisions/dj1")));
-    await assertFails(getDoc(doc(anon(), "unitCosts/11590")));
     await assertFails(setDoc(doc(anon(), "anything/x"), { a: 1 }));
   });
   it("역할이 없는 계정은 읽을 수 없다", async () => {
@@ -92,14 +90,10 @@ describe("판단 이력 — 구별 권한", () => {
   });
 });
 
-describe("단가 설정", () => {
-  const costs = (uid: string) => ({ items: { parttime_teacher_hourly: { amount: 10320, source: "최저임금", baseYear: 2026 } }, updatedBy: uid, updatedAt: serverTimestamp() });
-  it("구 관리자만 자기 구 단가를 쓴다", async () => {
-    await assertSucceeds(setDoc(doc(db("djAdmin"), "unitCosts/11590"), costs("dj-admin")));
-    await assertFails(setDoc(doc(db("djViewer"), "unitCosts/11590"), costs("dj-viewer")));
-    await assertFails(setDoc(doc(db("gaAdmin"), "unitCosts/11590"), costs("ga-admin")));
-    await assertSucceeds(getDoc(doc(db("djViewer"), "unitCosts/11590")));
-    await assertFails(getDoc(doc(db("gaAdmin"), "unitCosts/11590")));
+describe("쓰지 않는 컬렉션", () => {
+  it("단가(unitCosts)는 저장 경로를 닫았다 — 관리자도 쓸 수 없다", async () => {
+    await assertFails(setDoc(doc(db("djAdmin"), "unitCosts/11590"), { items: {} }));
+    await assertFails(setDoc(doc(db("careos"), "unitCosts/11590"), { items: {} }));
   });
 });
 

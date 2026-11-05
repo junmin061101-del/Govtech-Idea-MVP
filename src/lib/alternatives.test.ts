@@ -80,30 +80,31 @@ describe("대안 카드", () => {
   });
 });
 
-describe("비용은 출처가 있는 단가로만 계산한다", () => {
-  it("기본값: 연장 단가는 출처가 없어 '단가 출처 입력 필요', 교사 인건비는 최저임금 하한으로 계산", () => {
+describe("비용은 출처가 있는 단가로만 계산하고, 계산할 수 없는 줄은 내지 않는다", () => {
+  it("기본값: 연장 단가는 출처가 없어 비용 줄이 없고, 교사 인건비는 최저임금 하한으로 계산", () => {
     const alts = buildAlternatives(scenario("night"));
-    const ext = alts.find((a) => a.kind === "extend_hours")!.costs[0];
-    expect(ext.amount).toBeNull();
-    expect(ext.missing).toBe("단가 출처 입력 필요");
+    expect(alts.find((a) => a.kind === "extend_hours")!.costs).toHaveLength(0);
     const staff = alts.find((a) => a.kind === "add_staff")!.costs[0];
     expect(staff.amount).toBe(3 * 3 * 10320); // 교사 3명 × 19~22시 3시간 × 시급
     expect(staff.source).toContain("최저임금");
   });
-  it("금액만 있고 출처가 없으면 표시하지 않는다", () => {
+  it("금액만 있고 출처가 없으면 비용 줄을 내지 않는다", () => {
     const costs = DEFAULT_UNIT_COSTS.map((c) => (c.id === "extension_class_annual" ? { ...c, amount: 30_000_000, source: "" } : c));
-    const ext = buildAlternatives(scenario("night", costs)).find((a) => a.kind === "extend_hours")!.costs[0];
-    expect(ext.amount).toBeNull();
+    expect(buildAlternatives(scenario("night", costs)).find((a) => a.kind === "extend_hours")!.costs).toHaveLength(0);
   });
-  it("출처를 입력하면 시설 수 × 단가로 계산한다", () => {
+  it("출처가 있는 단가로 바꾸면(설정 파일) 시설 수 × 단가로 계산한다", () => {
     const costs = DEFAULT_UNIT_COSTS.map((c) => (c.id === "extension_class_annual" ? { ...c, amount: 30_000_000, source: "○○구 예산서", baseYear: 2026 } : c));
     const ext = buildAlternatives(scenario("night", costs)).find((a) => a.kind === "extend_hours")!.costs[0];
     expect(ext.amount).toBe(30_000_000);
     expect(ext.source).toContain("○○구 예산서");
   });
-  it("주말은 근무 시간 기준이 없어 인건비를 계산하지 않는다", () => {
-    const staff = buildAlternatives(scenario("weekend")).find((a) => a.kind === "add_staff")!.costs[0];
-    expect(staff.amount).toBeNull();
+  it("주말은 근무 시간 기준이 없어 인건비 줄을 내지 않는다", () => {
+    expect(buildAlternatives(scenario("weekend")).find((a) => a.kind === "add_staff")!.costs).toHaveLength(0);
+  });
+  it("모든 비용 줄에는 금액과 출처가 있다", () => {
+    for (const slot of ["night", "daytime", "weekend"] as const) {
+      for (const a of buildAlternatives(scenario(slot))) for (const c of a.costs) expect(c.amount != null && Boolean(c.source)).toBe(true);
+    }
   });
 });
 

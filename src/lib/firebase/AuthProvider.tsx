@@ -3,7 +3,7 @@
 /**
  * 로그인 상태와 역할(Custom Claims). 역할·구는 scripts/set-user-role.mjs로 관리자가 부여한다.
  *   careos_admin    : 전체
- *   district_admin  : 자기 구 읽기·쓰기 (판단 저장, 단가 입력, 입소 대기 저장)
+ *   district_admin  : 자기 구 읽기·쓰기 (판단 저장, 입소 대기 저장)
  *   district_viewer : 자기 구 읽기
  */
 import { createContext, useContext, useEffect, useState } from "react";

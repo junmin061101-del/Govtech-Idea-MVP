@@ -29,12 +29,12 @@ http://localhost:3000 에서 확인합니다.
 ## 2-1. Firebase (로그인·구별 권한·저장)
 
 모든 화면은 서버 없이 동작하는 정적 파일(`next build` → `out/`)이라 **Firebase Hosting**에 올린다.
-공개 데이터(시설·인구·경계·계산 결과)는 정적 파일로, 구청 데이터(판단 이력·단가·입소 대기 집계)만 Firestore에 둔다.
+공개 데이터(시설·인구·경계·계산 결과)는 정적 파일로, 구청 데이터(판단 이력·입소 대기 집계)만 Firestore에 둔다.
 Firebase 설정값이 없으면 **시연 모드**(구청 데이터는 이 브라우저에만 저장)로 동작한다. App Check는 이번 단계에서 적용하지 않았다.
 
 | 역할 (Custom Claims) | 권한 |
 |---|---|
-| `district_admin` + `sigungu_code` | 자기 구 읽기·쓰기 (판단 저장·삭제, 단가 입력, 입소 대기 집계 저장) |
+| `district_admin` + `sigungu_code` | 자기 구 읽기·쓰기 (판단 저장·삭제, 입소 대기 집계 저장) |
 | `district_viewer` + `sigungu_code` | 자기 구 읽기 |
 | `careos_admin` | 전체 |
 | (없음 / 로그인 안 함) | 공개 데이터만 (시연 모드, `/demo`) |
@@ -76,7 +76,7 @@ node scripts/set-user-role.mjs someone@dongjak.go.kr none          # 권한 회�
 
 ```bash
 npm run test:rules      # Firestore 보안 규칙 테스트 (에뮬레이터)
-npm run test:e2e        # 에뮬레이터 종단 검증: 이메일 링크 로그인 → 역할 부여 → 판단 저장 → 다른 구·조회 권한 막힘 → 단가 반영
+npm run test:e2e        # 에뮬레이터 종단 검증: 이메일 링크 로그인 → 역할 부여 → 판단 저장 → 다른 구·조회 권한 막힘
 npm run dev:emulators   # 에뮬레이터에 붙은 개발 서버 (로그인 링크는 에뮬레이터가 출력)
 ```
 
@@ -143,7 +143,7 @@ npm test             # 15개 동·경계·배정 검증 포함
 | 부족 인원 | `calculator.diagnoseDong` | `max(0, 추정 수요 − Σ(배분 비율 × 시설별 이용 가능한 자리))`, 동 합계는 정수로 반올림 |
 | 부족한 이유 | `calculator.diagnoseDong`, `explain.explainGap` | 자리가 없어서 = 모든 시설이 정원만큼 받아도 남는 부족. 나머지를 문을 닫아서 / 선생님이 없어서로 "못 받는 자리" 비율만큼 나눔. 칸별 인원은 합이 부족 인원과 같도록 정수화 |
 | 대안 비교 | `alternatives.buildAlternatives` | 운영시간 연장(닫은 시설 열기), 시간제 교사 배치, 인근 연계·정원 확충. 효과는 시설 정보를 바꾼 뒤 다시 계산한 값이고, 여러 대안을 합친 효과도 함께 적용해 다시 계산한다 |
-| 대안 비용 | `config/unitCosts.ts`, `/settings` | **출처가 입력된 단가만** 금액 표시. 기본값은 최저임금(시간제 교사 인건비 하한)만 출처가 있고, 연장반·신규 정원 단가는 "단가 출처 입력 필요" |
+| 대안 비용 | `config/unitCosts.ts` | **출처가 있는 단가로 계산되는 비용만** 표시. 지금은 시간제 교사 인건비 하한(2026 최저임금)만 해당. 연장반·신규 정원 단가는 출처가 없어 계산·표시하지 않으며, 출처를 확보하면 이 파일에 값·출처·기준연도를 넣는다 |
 
 처방 문구는 시간대마다 `timeSlots.extendAction`(주말 → 주말 운영, 방학 → 방학 프로그램 운영, 야간 → 야간 연장 운영)으로
 만들고, 6개 시간대 모두에서 다른 시간대 표현이 섞이지 않는지 테스트한다.
@@ -222,7 +222,7 @@ npm test             # 15개 동·경계·배정 검증 포함
 
 ```
 src/
-  app/                    # Next.js App Router: / (지도), /report, /history, /compare, /waitlist, /settings
+  app/                    # Next.js App Router: / (지도), /report, /history, /compare, /waitlist, /login, /demo
   components/             # 지도, 진단 패널, 시뮬레이터
   data/seoul/             # 빌드 결과: emds.json, facilities/{sigungu_code}.json, meta.json
   lib/

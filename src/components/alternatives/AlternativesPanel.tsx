@@ -2,18 +2,17 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { AlertTriangle, Check, ChevronDown, Save, Settings } from "lucide-react";
+import { AlertTriangle, Check, ChevronDown, Save } from "lucide-react";
 import type { CareTargetId, Dong, DongDiagnosis, Facility, TimeSlotId } from "@/types";
 import { buildAlternatives, combineAlternatives, type Alternative, type AlternativeContext, type AlternativeKind } from "@/lib/alternatives";
 import { newId } from "@/lib/history";
 import { canWriteDistrict, usesServer, useAuth } from "@/lib/firebase/AuthProvider";
 import { decisionStore } from "@/lib/store/decisions";
-import { loadCosts } from "@/lib/store/unitCosts";
 import type { ViewState } from "@/lib/viewState";
 import { sigunguByCode } from "@/lib/constants/regions";
 import { CARE_TARGETS } from "@/lib/constants/targets";
 import { DATA_DATE } from "@/lib/hooks/useSeoulData";
-import { won, DEFAULT_UNIT_COSTS, type UnitCost } from "@/lib/config/unitCosts";
+import { won, DEFAULT_UNIT_COSTS } from "@/lib/config/unitCosts";
 import { timeSlotDef } from "@/lib/constants/timeSlots";
 import { people } from "@/lib/mapScale";
 
@@ -45,17 +44,8 @@ export default function AlternativesPanel({
   view,
 }: AlternativesPanelProps) {
   const auth = useAuth();
-  const [unitCosts, setUnitCosts] = useState<UnitCost[]>(DEFAULT_UNIT_COSTS);
-  // 단가: 로그인이면 그 구 단가(Firestore), 아니면 이 브라우저에 저장한 값
-  useEffect(() => {
-    let alive = true;
-    loadCosts(auth, view.sigunguCode)
-      .then((c) => alive && setUnitCosts(c))
-      .catch(() => alive && setUnitCosts(DEFAULT_UNIT_COSTS));
-    return () => {
-      alive = false;
-    };
-  }, [auth.user, auth.role, auth.sigunguCode, view.sigunguCode]); // eslint-disable-line react-hooks/exhaustive-deps
+  // 비용은 출처가 확인된 기본 단가(2026 최저임금 등)로만 계산한다 (단가 입력 화면은 두지 않음)
+  const unitCosts = DEFAULT_UNIT_COSTS;
 
   const ctx: AlternativeContext | null = dong ? { dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts, dongName } : null;
   const alternatives = useMemo(() => (ctx ? buildAlternatives(ctx) : []), [dong, dongs, facilities, diagnoses, timeSlot, target, unitCosts]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -141,9 +131,6 @@ export default function AlternativesPanel({
           <p className="text-sm font-bold text-neutral-900">대안 비교</p>
           <p className="text-[11px] text-neutral-500">카드를 고르면 합친 효과를 보여 줍니다</p>
         </div>
-        <Link href="/settings" className="flex shrink-0 items-center gap-1 text-[11px] text-neutral-500 hover:text-neutral-800">
-          <Settings className="h-3 w-3" /> 단가 설정
-        </Link>
       </div>
 
       <ul className="flex flex-col gap-2">

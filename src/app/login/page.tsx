@@ -77,7 +77,7 @@ export default function LoginPage() {
 
         {!auth.enabled ? (
           <p className="mt-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">
-            Firebase가 아직 연결되지 않아 시연 모드로 동작 중입니다. 판단 이력·단가는 이 브라우저에만 저장됩니다.
+            Firebase가 아직 연결되지 않아 시연 모드로 동작 중입니다. 판단 이력은 이 브라우저에만 저장됩니다.
           </p>
         ) : auth.user ? (
           <div className="mt-4 rounded-xl border border-neutral-200 bg-white p-4 text-sm">
@@ -123,7 +123,7 @@ export default function LoginPage() {
         )}
         {status && <p className="mt-3 text-sm text-neutral-700" role="status">{status}</p>}
         <p className="mt-8 text-xs leading-relaxed text-neutral-500">
-          로그인하지 않아도 공개 데이터로 모든 구의 지도를 볼 수 있습니다(시연 모드). 로그인하면 자기 구의 판단 이력·단가·입소 대기 집계를 구청 계정으로
+          로그인하지 않아도 공개 데이터로 모든 구의 지도를 볼 수 있습니다(시연 모드). 로그인하면 자기 구의 판단 이력·입소 대기 집계를 구청 계정으로
           저장하고 함께 볼 수 있습니다.
         </p>
       </div>

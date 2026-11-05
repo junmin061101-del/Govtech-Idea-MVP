@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CalendarRange, ChevronDown, FileDown, History, LogIn, Settings, Upload, UserRound } from "lucide-react";
+import { CalendarRange, ChevronDown, FileDown, History, LogIn, Upload, UserRound } from "lucide-react";
 import { ROLE_LABEL, useAuth } from "@/lib/firebase/AuthProvider";
 import { UNAVAILABLE_TEXT } from "@/components/Notice";
 import { SIGUNGU } from "@/lib/constants/regions";
@@ -87,7 +87,6 @@ export default function TopController(props: TopControllerProps) {
     { href: "/history", label: "판단 이력", icon: History, desc: "저장한 대안 조합을 다시 열거나 인수인계 파일로 내보냅니다" },
     { href: `/compare?sgg=${props.sigunguCode}`, label: "시점 비교", icon: CalendarRange, desc: "월별로 같은 동의 부족 인원이 어떻게 바뀌었는지 봅니다" },
     { href: `/waitlist?sgg=${props.sigunguCode}`, label: "입소 대기 대조", sub: "CSV 업로드", icon: Upload, desc: "구청 입소 대기 집계 CSV를 올려 추정 수요와 비교합니다" },
-    { href: "/settings", label: "비용 단가", icon: Settings, desc: "대안 비용 계산에 쓸 단가와 출처를 입력합니다" },
   ];
 
   return (
@@ -170,7 +169,7 @@ function AccountChip() {
   const base = "flex h-8 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border px-2.5 text-[12px]";
   if (!auth.enabled) {
     return (
-      <span className={`${base} border-amber-200 bg-amber-50 text-amber-800`} title="Firebase 미연결 — 판단 이력·단가는 이 브라우저에만 저장됩니다">
+      <span className={`${base} border-amber-200 bg-amber-50 text-amber-800`} title="Firebase 미연결 — 판단 이력은 이 브라우저에만 저장됩니다">
         시연 모드
       </span>
     );

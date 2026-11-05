@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 import { execFileSync } from "child_process";
 /**
  * 에뮬레이터 종단 검증 (npm run test:e2e)
- * 이메일 링크 로그인 → 역할 부여 → 판단 저장(Firestore) → 이력 → 다른 구 저장 막힘 → 단가 저장·카드 반영 → 조회 권한 막힘
+ * 이메일 링크 로그인 → 역할 부여 → 판단 저장(Firestore) → 이력 → 다른 구 저장 막힘 → 비용 줄 확인 → 조회 권한 막힘
  */
 import { mkdirSync } from "fs";
 import { tmpdir } from "os";
@@ -68,26 +68,11 @@ await firstUsable.click();
 await page.getByText("다른 구는 시연 모드입니다").waitFor();
 ok("다른 구: 저장 막힘 안내");
 
-// 6) 단가 설정 (Firestore) → 동작구 카드에 비용 표시
-await page.goto(`${BASE}/settings/`, { waitUntil: "load", timeout: 120000 });
-await page.getByText("서울 동작구 계정의 단가").waitFor({ timeout: 20000 });
-const ext = page.locator("li", { hasText: "운영시간 연장(연장반 지정·운영)" });
-await ext.getByLabel(/단가/).fill("30000000");
-await ext.getByLabel(/출처/).fill("검증용 가상 출처");
-await ext.getByLabel("기준연도").fill("2026");
-await page.getByRole("button", { name: "저장", exact: true }).click();
-await page.getByText("저장했습니다 (서울 동작구 계정)").waitFor();
+// 6) 대안 카드의 비용 줄은 출처 있는 단가(최저임금)로 계산된 것만
 await page.goto(`${BASE}/?sgg=11590&slot=night&target=infant`, { waitUntil: "load", timeout: 120000 });
 await page.waitForTimeout(3500);
-const stored = await (await fetch("http://127.0.0.1:8080/v1/projects/demo-careos/databases/(default)/documents/unitCosts/11590", { headers: { Authorization: "Bearer owner" } })).json();
-console.log("   Firestore unitCosts/11590:", JSON.stringify(stored.fields?.items?.mapValue?.fields?.extension_class_annual ?? stored).slice(0, 300));
-const texts = await page.getByText(/운영시간 연장 비용\(연\):/).allInnerTexts();
-console.log("   카드 비용 줄:", JSON.stringify(texts));
-const card = page.locator("li", { hasText: "운영시간 연장 비용(연)" }).first();
-const facilitiesN = Number((await card.innerText()).match(/시설이? (\d+)곳/)?.[1] ?? (await card.innerText()).match(/(\d+)곳/)[1]);
-const amountMan = Number(texts[0].match(/([\d,]+)만 원/)[1].replace(/,/g, ""));
-if (amountMan !== facilitiesN * 3000) throw new Error(`비용 불일치: ${amountMan}만 원 ≠ ${facilitiesN}곳 × 3,000만`);
-ok(`단가 반영: ${texts[0]} = 대상 시설 ${facilitiesN}곳 × 3,000만 원`);
+if (await page.getByText("단가 출처 입력 필요").count()) throw new Error("계산할 수 없는 비용 안내가 남아 있음");
+ok("비용 줄: 계산 가능한 것만 표시");
 
 // 7) 조회 권한으로 바꾸면 저장 불가
 role("district_viewer", "11590");

@@ -1,9 +1,7 @@
 /**
- * 대안 비용 단가 (unit_costs). 출처(source)가 입력된 항목만 카드에 비용을 표시한다.
- * 출처가 없는 값은 화면에 금액을 내지 않고 "단가 출처 입력 필요"로 둔다.
- *
- * 기본값은 여기서 정하고, 담당자는 /settings 화면에서 단가·출처·기준연도를 입력해 덮어쓴다
- * (현재는 브라우저 저장. Firebase 이전 후 Firestore unit_costs/{id}로 옮긴다).
+ * 대안 비용 단가. 출처(source)가 있는 항목만 카드·리포트에 비용으로 계산한다.
+ * 출처가 없는 항목은 계산하지 않고 화면에도 내지 않는다.
+ * 단가를 바꿀 때는 이 파일의 값과 출처·기준연도를 함께 고친다 (담당자 입력 화면은 두지 않음).
  */
 
 export type UnitCostId = "parttime_teacher_hourly" | "extension_class_annual" | "new_capacity_per_seat";
@@ -52,30 +50,6 @@ export const DEFAULT_UNIT_COSTS: UnitCost[] = [
     reference: "사업계획서 참고값: 돌봄시설 신설 1곳 8억~15억 원 (출처 미기재, 정원당 단가 아님)",
   },
 ];
-
-const STORAGE_KEY = "careos.unitCosts.v1";
-
-/** 브라우저에 저장된 담당자 입력값으로 기본값을 덮어쓴다 (저장소를 못 쓰면 기본값) */
-export function loadUnitCosts(): UnitCost[] {
-  try {
-    const raw = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
-    if (!raw) return DEFAULT_UNIT_COSTS;
-    const saved = JSON.parse(raw) as Partial<Record<UnitCostId, Pick<UnitCost, "amount" | "source" | "baseYear">>>;
-    return DEFAULT_UNIT_COSTS.map((c) => ({ ...c, ...(saved[c.id] ?? {}) }));
-  } catch {
-    return DEFAULT_UNIT_COSTS;
-  }
-}
-
-export function saveUnitCosts(costs: UnitCost[]): boolean {
-  try {
-    const out = Object.fromEntries(costs.map((c) => [c.id, { amount: c.amount, source: c.source, baseYear: c.baseYear }]));
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(out));
-    return true;
-  } catch {
-    return false;
-  }
-}
 
 /** 금액을 표시해도 되는 단가인가 (금액과 출처가 모두 있어야 함) */
 export function isUsable(c: UnitCost | undefined): c is UnitCost & { amount: number; source: string } {

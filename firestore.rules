@@ -51,16 +51,6 @@ service cloud.firestore {
       allow delete: if canWrite(resource.data.sigunguCode);
     }
 
-    // 대안 비용 단가: unitCosts/{sigungu_code}
-    match /unitCosts/{sgg} {
-      allow read: if canRead(sgg);
-      allow write: if canWrite(sgg)
-        && request.resource.data.keys().hasOnly(['items', 'updatedBy', 'updatedAt'])
-        && request.resource.data.updatedBy == request.auth.uid
-        && request.resource.data.updatedAt == request.time
-        && request.resource.data.items is map;
-    }
-
     // 입소 대기 집계: waitlists/{sigungu_code}_{yyyymm}
     match /waitlists/{docId} {
       allow read: if canRead(resource.data.sigunguCode);

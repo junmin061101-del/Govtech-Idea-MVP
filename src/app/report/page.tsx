@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, FileSpreadsheet, Printer } from "lucide-react";
 import { buildReport, REPORT_TEMPLATES, type ReportModel, type ReportTemplate } from "@/lib/report";
 import { decodeView, encodeView, type ViewState } from "@/lib/viewState";
-import { loadUnitCosts, won, DEFAULT_UNIT_COSTS, type UnitCost } from "@/lib/config/unitCosts";
+import { won, DEFAULT_UNIT_COSTS } from "@/lib/config/unitCosts";
 import { ALL_DONGS, DATA_DATE, DATA_SOURCES, dongName, useFacilities, useSnapshots, useUnmetDemand } from "@/lib/hooks/useSeoulData";
 import { people, percent } from "@/lib/mapScale";
 
@@ -15,7 +15,7 @@ const TEMPLATE_LABEL: Record<ReportTemplate, string> = { monthly: "월 (운영 �
 export default function ReportPage() {
   const [view, setView] = useState<ViewState | null>(null);
   const [template, setTemplate] = useState<ReportTemplate>("monthly");
-  const [unitCosts, setUnitCosts] = useState<UnitCost[]>(DEFAULT_UNIT_COSTS);
+  const unitCosts = DEFAULT_UNIT_COSTS;
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -23,7 +23,6 @@ export default function ReportPage() {
     setView(decodeView(window.location.search));
     const t = q.get("template");
     if (TEMPLATES.includes(t as ReportTemplate)) setTemplate(t as ReportTemplate);
-    setUnitCosts(loadUnitCosts());
   }, []);
 
   const sgg = view?.sigunguCode ?? "11590";

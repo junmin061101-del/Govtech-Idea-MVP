@@ -414,6 +414,9 @@ export function buildAlternatives(ctx: AlternativeContext): Alternative[] {
     };
   })();
 
+  // 비용은 출처가 확인된 단가로 계산된 줄만 남긴다 (단가 입력 화면이 없으므로 "입력 필요" 안내는 두지 않음)
+  for (const alt of [extend, staff, link]) alt.costs = alt.costs.filter((c) => c.amount != null);
+
   // 줄어드는 인원 큰 순 → 같으면 필요한 교사가 적은 순
   return [extend, staff, link].sort(
     (a, b) => b.reduction - a.reduction || Number(b.applicable) - Number(a.applicable) || a.teachers - b.teachers,
