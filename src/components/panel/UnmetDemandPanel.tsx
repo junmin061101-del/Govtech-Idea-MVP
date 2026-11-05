@@ -33,7 +33,7 @@ export default function UnmetDemandPanel({ dong, diagnosis, signal, file, timeSl
     <div className="flex flex-col gap-3 break-keep p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="flex items-center gap-1.5 text-sm font-bold text-neutral-900">
-          <Search className="h-4 w-4 text-neutral-400" /> 부모가 찾다 못 찾은 수요
+          <Search className="h-4 w-4 text-neutral-400" /> 부모의 미충족 수요
         </p>
         {file?.synthetic && <SyntheticBadge />}
       </div>

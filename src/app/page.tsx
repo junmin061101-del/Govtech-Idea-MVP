@@ -8,7 +8,6 @@ import { rankDiagnoses } from "@/lib/ranking";
 import GapReasonPanel from "@/components/panel/GapReasonPanel";
 import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
 import UnmetDemandPanel from "@/components/panel/UnmetDemandPanel";
-import EquityPanel from "@/components/panel/EquityPanel";
 import type { MapLayer } from "@/components/map/KakaoMap";
 import { signalOf, type UnmetSignal } from "@/lib/unmet";
 import { diagnoseAllDongs } from "@/lib/calculator";
@@ -184,9 +183,6 @@ export default function Home() {
               file={unmetFile}
               timeSlot={timeSlot}
             />
-          </div>
-          <div className="rounded-xl border border-neutral-200 bg-white">
-            <EquityPanel dong={selectedDong} />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">
             <AlternativesPanel
