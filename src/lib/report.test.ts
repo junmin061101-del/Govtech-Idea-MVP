@@ -74,13 +74,27 @@ describe("리포트", () => {
     const mo = buildReport({ ...base, template: "monthly" });
     const q = buildReport({ ...base, template: "quarterly" });
     const y = buildReport({ ...base, template: "annual" });
-    expect([mo.slotMatrix, mo.unmet, mo.reasonTotals, mo.comparison]).toEqual([undefined, undefined, undefined, undefined]);
+    expect(mo.slotMatrix).toHaveLength(15);
+    expect([mo.unmet, mo.reasonTotals, mo.comparison]).toEqual([undefined, undefined, undefined]);
     expect(q.slotMatrix).toHaveLength(15);
     expect(q.unmet?.synthetic).toBe(true);
     expect(q.reasonTotals).toBeUndefined();
     expect(y.reasonTotals).toHaveLength(3);
     expect(y.comparison?.months).toEqual(snapIndex.months);
     expect(mo.reasonDetails.length).toBeLessThanOrEqual(5);
+  });
+  it("핵심 요약·이유별 인원·자동 권고·시설 목록이 들어간다", () => {
+    const m = buildReport({ ...base, template: "monthly" });
+    expect(m.keyFindings.length).toBeGreaterThanOrEqual(3);
+    expect(m.keyFindings[0]).toContain(`${m.totals.gap.toLocaleString()}명`);
+    for (const r of m.ranking) expect(r.space + r.time + r.staff).toBe(r.gap);
+    expect(m.reasonTotalsCurrent.reduce((a, x) => a + x.people, 0)).toBe(m.totals.gap);
+    expect(m.recommendations.length).toBeLessThanOrEqual(5);
+    for (const r of m.recommendations) {
+      expect(r.allCombinedAfter).toBeLessThanOrEqual(r.gap);
+      if (r.best) expect(r.best.remaining).toBe(r.gap - r.best.reduction);
+    }
+    expect(m.facilityTable.length).toBe(facilities.filter((f) => f.sigunguCode === "11590").length);
   });
   it("선택한 대안과 합친 효과가 들어간다", () => {
     const top = buildReport({ ...base, template: "monthly" }).ranking[0];
@@ -100,12 +114,20 @@ describe("리포트", () => {
     const m = buildReport({ ...base, template: "annual", view: { ...view, dongId: top.emdCode, alternatives: ["add_staff"] } });
     const wb = await buildWorkbook(m);
     expect(wb.worksheets.map((w) => w.name)).toEqual([
-      "요약", "지역 순위", "부족한 이유", "시간대별 부족", "이유별 합계", "부모 검색 신호", "선택한 대안", "시점 비교", "데이터 출처",
+      "요약", "지역 순위", "권고 대안", "부족 원인 시설", "시간대별 부족", "이유별 합계", "부모 검색 신호", "선택한 대안", "시설 목록", "시점 비교", "산정 방법·출처",
     ]);
     const ranking = wb.getWorksheet("지역 순위")!;
-    expect(ranking.rowCount).toBe(16);
-    expect(ranking.getRow(2).getCell(2).value).toBe(m.ranking[0].name);
-    expect(ranking.getRow(2).getCell(6).value).toBe(m.ranking[0].gap);
+    // 1행 제목, 3행 머리글, 4행부터 데이터
+    expect(ranking.getRow(3).getCell(2).value).toBe("행정동");
+    expect(ranking.rowCount).toBe(3 + 15);
+    expect(ranking.getRow(4).getCell(2).value).toBe(m.ranking[0].name);
+    expect(ranking.getRow(4).getCell(5).value).toBe(m.ranking[0].gap);
+    const first = m.ranking[0];
+    expect((ranking.getRow(4).getCell(7).value as number) + (ranking.getRow(4).getCell(8).value as number) + (ranking.getRow(4).getCell(9).value as number)).toBe(first.gap);
+    expect(wb.getWorksheet("시설 목록")!.rowCount).toBe(3 + m.facilityTable.length);
+    const summary = wb.getWorksheet("요약")!;
+    const text = summary.getSheetValues().flat().filter((v) => typeof v === "string").join(" ");
+    expect(text).toContain(m.keyFindings[0]);
   });
 });
 

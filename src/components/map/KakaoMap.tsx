@@ -382,7 +382,7 @@ function LoadedMap({
           );
         })}
         {signals && signalSynthetic && layer !== "estimate" && (
-          <span className="ml-1 rounded bg-fuchsia-50 px-1.5 py-0.5 text-[10px] font-semibold text-fuchsia-700 ring-1 ring-fuchsia-200">
+          <span className="ml-1 rounded border border-neutral-300 px-1.5 py-0.5 text-[10px] font-medium text-neutral-600">
             시연용 가상 데이터
           </span>
         )}

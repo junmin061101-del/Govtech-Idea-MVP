@@ -108,7 +108,7 @@ export default function RankingList({ dongs, diagnoses, selectedDongId, onSelect
           <div className="mt-2">
             <button
               onClick={() => setShowUnassigned((v) => !v)}
-              className="flex items-center gap-1 text-amber-700"
+              className="flex items-center gap-1 font-medium text-neutral-700"
               aria-expanded={showUnassigned}
             >
               <AlertCircle className="h-3 w-3" />

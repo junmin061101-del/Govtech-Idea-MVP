@@ -6,7 +6,7 @@
  *  - quarterly 분기 돌봄협의체: + 시간대별 부족 인원 표, 부모 검색 신호
  *  - annual    연간 예산 편성 전: + 구 전체 이유별 합계(정원 확충·운영시간·인력 예산 근거), 시점 비교
  */
-import { diagnoseAllDongs } from "@/lib/calculator";
+import { calculateECC, diagnoseAllDongs } from "@/lib/calculator";
 import { explainGap } from "@/lib/explain";
 import { rankDiagnoses } from "@/lib/ranking";
 import { buildAlternatives, combineAlternatives, type Alternative } from "@/lib/alternatives";
@@ -58,6 +58,31 @@ export interface RankingRow {
   gap: number;
   ratio: number;
   reason: string;
+  /** 이유별 부족 인원 (자리가 없어서·문을 닫아서·선생님이 없어서) */
+  space: number;
+  time: number;
+  staff: number;
+}
+
+export interface Recommendation {
+  name: string;
+  gap: number;
+  best: { title: string; sentence: string; reduction: number; remaining: number; needs: string[] } | null;
+  /** 쓸 수 있는 대안을 모두 합쳤을 때 남는 부족 인원 */
+  allCombinedAfter: number;
+}
+
+export interface FacilityRow {
+  name: string;
+  type: string;
+  dong: string;
+  capacity: number;
+  enrollment: number;
+  teachers: number;
+  /** 시간대별 이용 가능한 자리 (운영 안 하면 0) */
+  seats: Record<string, number>;
+  open: Record<string, boolean>;
+  spec: string;
 }
 
 export interface ReportModel {
@@ -70,7 +95,16 @@ export interface ReportModel {
   generatedAt: string;
   dataDate: string;
   dataSources: { label: string; value: string }[];
-  totals: { dongs: number; shortDongs: number; gap: number };
+  totals: { dongs: number; shortDongs: number; gap: number; demand: number; seats: number };
+  /** 한눈에 보는 핵심 요약 문장 */
+  keyFindings: string[];
+  /** 선택한 시간대의 구 전체 이유별 합계 */
+  reasonTotalsCurrent: { label: string; people: number; share: number }[];
+  /** 부족 상위 동의 자동 권고 대안 (현장 확인 전 참고) */
+  recommendations: Recommendation[];
+  /** 그 구 시설 목록 (엑셀용) */
+  facilityTable: FacilityRow[];
+  methodology: string[];
   ranking: RankingRow[];
   reasonDetails: { name: string; gap: number; segments: { label: string; people: number; estimated: boolean }[]; facilities: string[] }[];
   slotMatrix?: { name: string; gaps: Record<string, number> }[];
@@ -108,7 +142,14 @@ export function buildReport(input: ReportInput): ReportModel {
   const diagnoses = diagnoseAllDongs(dongs, facilities, view.timeSlot, view.target);
   const ranked = rankDiagnoses(diagnoses);
 
+  const exByDong = new Map(
+    ranked.filter((d) => d.careGap > 0).map((d) => [d.dongId, explainGap(d, facilities, view.timeSlot, slot.shortLabel, input.dongName)]),
+  );
+  const seg = (id: string, axis: BottleneckAxis) => exByDong.get(id)?.segments.find((x) => x.axis === axis)?.people ?? 0;
   const ranking: RankingRow[] = ranked.map((d, i) => ({
+    space: seg(d.dongId, "space"),
+    time: seg(d.dongId, "time"),
+    staff: seg(d.dongId, "staff"),
     rank: i + 1,
     emdCode: d.dongId,
     name: nameOf.get(d.dongId)!,
@@ -123,7 +164,7 @@ export function buildReport(input: ReportInput): ReportModel {
     .filter((d) => d.careGap > 0)
     .slice(0, tpl.topReasons)
     .map((d) => {
-      const ex = explainGap(d, facilities, view.timeSlot, slot.shortLabel, input.dongName);
+      const ex = exByDong.get(d.dongId)!;
       return {
         name: nameOf.get(d.dongId)!,
         gap: d.careGap,
@@ -148,9 +189,21 @@ export function buildReport(input: ReportInput): ReportModel {
       dongs: dongs.length,
       shortDongs: ranked.filter((d) => d.careGap > 0).length,
       gap: ranked.reduce((a, d) => a + d.careGap, 0),
+      demand: ranked.reduce((a, d) => a + d.demand, 0),
+      seats: ranked.reduce((a, d) => a + d.totalECC, 0),
     },
     ranking,
     reasonDetails,
+    keyFindings: [],
+    reasonTotalsCurrent: [],
+    recommendations: [],
+    facilityTable: [],
+    methodology: [
+      "이용 가능한 자리(시설) = min(인가 정원, 그 시간 근무 교사 수 × 교사 1인당 아동 수) × 운영 여부. 교사 1인당 아동 수는 영유아보육법 시행규칙 배치기준을 재원 아동 연령 구성에 맞춰 가중 적용.",
+      "이용 가능한 자리(행정동) = Σ(시설 자리 × 배분 비율). 배분 비율은 시설 반경 1km 안 수요 중 그 동 수요의 비율(2SFCA, 구 경계 포함).",
+      "부족 인원 = max(0, 추정 수요 − 이용 가능한 자리). 자리가 없어서 = 모든 시설이 정원만큼 받아도 남는 부족, 나머지는 운영 중단·교사 부족 손실 비율로 나눔.",
+      "대안 효과는 시설 정보를 바꾼 뒤 같은 계산을 다시 돌린 값이며, 여러 대안을 함께 적용한 효과도 다시 계산한다.",
+    ],
     notes: [
       "수요는 행정안전부 주민등록인구 × 시간대별 이용률 계수(전국 평균 근사치)로 산정한 추정치입니다.",
       "이용 가능한 자리는 반경 1km 안 수요가 나눠 쓴다고 보고(2SFCA) 동별로 배분한 값입니다.",
@@ -159,8 +212,57 @@ export function buildReport(input: ReportInput): ReportModel {
     ],
   };
 
-  // 시간대별 표 (분기·연)
-  if (template !== "monthly") {
+  // 구 전체 이유별 합계 (선택한 시간대)
+  {
+    const tot: Record<BottleneckAxis, number> = { space: 0, time: 0, staff: 0 };
+    for (const r of ranking) {
+      tot.space += r.space;
+      tot.time += r.time;
+      tot.staff += r.staff;
+    }
+    const all = tot.space + tot.time + tot.staff;
+    model.reasonTotalsCurrent = (Object.keys(tot) as BottleneckAxis[])
+      .map((axis) => ({ label: REASONS[axis].label, people: tot[axis], share: all > 0 ? tot[axis] / all : 0 }))
+      .sort((a, b) => b.people - a.people);
+  }
+
+  // 부족 상위 동 자동 권고 (각 동에서 효과가 가장 큰 대안 + 모두 합친 효과)
+  const recCount = template === "monthly" ? 5 : template === "quarterly" ? 10 : 99;
+  model.recommendations = ranked
+    .filter((d) => d.careGap > 0)
+    .slice(0, recCount)
+    .map((d) => {
+      const dong = dongs.find((x) => x.id === d.dongId)!;
+      const ctx = { dong, dongs, facilities, diagnoses, timeSlot: view.timeSlot, target: view.target, unitCosts: input.unitCosts, dongName: input.dongName };
+      const usable = buildAlternatives(ctx).filter((a) => a.applicable && a.reduction > 0);
+      const b = usable[0];
+      return {
+        name: dong.name,
+        gap: d.careGap,
+        best: b ? { title: b.title, sentence: b.sentence, reduction: b.reduction, remaining: b.remaining, needs: b.needs } : null,
+        allCombinedAfter: usable.length ? combineAlternatives(ctx, usable).after : d.careGap,
+      };
+    });
+
+  // 시설 목록 (그 구 시설)
+  const slotsAvail = TIME_SLOTS.filter((t) => t.dataAvailable);
+  model.facilityTable = facilities
+    .filter((f) => f.sigunguCode === view.sigunguCode && f.targets.includes(view.target))
+    .map((f) => ({
+      name: f.name,
+      type: f.type,
+      dong: nameOf.get(f.dongId) ?? "",
+      capacity: f.capacity,
+      enrollment: f.currentEnrollment,
+      teachers: f.totalStaff,
+      seats: Object.fromEntries(slotsAvail.map((t) => [t.id, calculateECC(f, t.id).ecc])),
+      open: Object.fromEntries(slotsAvail.map((t) => [t.id, calculateECC(f, t.id).isOpen])),
+      spec: (f.spec ?? []).join(", "),
+    }))
+    .sort((a, b) => a.dong.localeCompare(b.dong) || a.name.localeCompare(b.name));
+
+  // 시간대별 표 (모든 템플릿)
+  {
     const slots = TIME_SLOTS.filter((t) => t.dataAvailable);
     const bySlot = new Map(slots.map((s) => [s.id, new Map(diagnoseAllDongs(dongs, facilities, s.id, view.target).map((d) => [d.dongId, d]))]));
     model.slotColumns = slots.map((s) => ({ id: s.id, label: s.label }));
@@ -228,6 +330,25 @@ export function buildReport(input: ReportInput): ReportModel {
       })),
     };
   }
+
+  // 핵심 요약
+  const top = ranking.filter((r) => r.gap > 0).slice(0, 3);
+  const mainReason = model.reasonTotalsCurrent[0];
+  const recTotal = model.recommendations.reduce((a, r) => a + (r.gap - r.allCombinedAfter), 0);
+  const recGap = model.recommendations.reduce((a, r) => a + r.gap, 0);
+  model.keyFindings = [
+    `${model.contextLabel} 기준 ${model.totals.dongs}개 동 중 ${model.totals.shortDongs}개 동에서 합계 ${model.totals.gap.toLocaleString()}명이 부족합니다 (추정 수요 ${model.totals.demand.toLocaleString()}명, 이용 가능한 자리 ${model.totals.seats.toLocaleString()}명).`,
+    ...(top.length ? [`부족이 큰 동: ${top.map((r) => `${r.name} ${r.gap}명(${Math.round(r.ratio * 100)}%)`).join(", ")}.`] : []),
+    ...(mainReason && mainReason.people > 0
+      ? [`구 전체 부족의 ${Math.round(mainReason.share * 100)}%는 '${mainReason.label}' 때문입니다 (${model.reasonTotalsCurrent.filter((x) => x.people > 0).map((x) => `${x.label} ${x.people}명`).join(", ")}).`]
+      : []),
+    ...(model.recommendations.length && recGap > 0
+      ? [`부족 상위 ${model.recommendations.length}개 동에 쓸 수 있는 대안을 모두 적용하면 ${recGap.toLocaleString()}명 중 ${recTotal.toLocaleString()}명을 줄일 수 있습니다 (현장 확인 전 추정).`]
+      : []),
+    ...(model.unmet && model.unmet.rows.some((r) => r.gapSignal)
+      ? [`부모 검색 공백 신호(결과 없음 30% 이상 2개월 연속): ${model.unmet.rows.filter((r) => r.gapSignal).map((r) => r.name).join(", ")}${model.unmet.synthetic ? " (시연용 가상 데이터)" : ""}.`]
+      : []),
+  ];
 
   return model;
 }

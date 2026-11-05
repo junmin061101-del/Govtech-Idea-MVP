@@ -80,13 +80,17 @@ export default function ReportPage() {
             </button>
           ))}
         </div>
+        <p className="hidden text-xs text-neutral-500 xl:block">
+          지금 보던 구·시간대 기준 보고서입니다. 용도를 고른 뒤 PDF 또는 엑셀로 내려받으세요.
+        </p>
         <div className="ml-auto flex gap-2">
           <button
             onClick={() => window.print()}
             disabled={!model}
             className="flex items-center gap-1 rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white disabled:opacity-40"
           >
-            <Printer className="h-4 w-4" /> PDF로 저장(인쇄)
+            <Printer className="h-4 w-4" /> PDF로 저장
+            <span className="text-[11px] font-normal text-neutral-300">인쇄 창에서 “PDF로 저장”</span>
           </button>
           <button
             onClick={download}
@@ -94,6 +98,11 @@ export default function ReportPage() {
             className="flex items-center gap-1 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm text-neutral-700 disabled:opacity-40"
           >
             <FileSpreadsheet className="h-4 w-4" /> {busy ? "만드는 중..." : "엑셀 내려받기"}
+            {model && (
+              <span className="text-[11px] text-neutral-400">
+                시트 {7 + [model.reasonTotals, model.unmet, model.decision, model.comparison].filter(Boolean).length}개
+              </span>
+            )}
           </button>
         </div>
       </div>
@@ -134,16 +143,34 @@ function ReportDocument({ m }: { m: ReportModel }) {
         <p className="text-[11px] text-neutral-500">
           데이터 기준일 {m.dataDate} · 작성 {new Date(m.generatedAt).toLocaleString("ko-KR")}
         </p>
-        <p className="mt-3 rounded bg-neutral-100 px-3 py-2 text-sm">
-          {m.totals.dongs}개 동 중 <b>{m.totals.shortDongs}개 동</b>에서 합계 <b>{people(m.totals.gap)} 부족</b>
-        </p>
+        <div className="mt-4 grid grid-cols-4 border border-neutral-300">
+          {[
+            ["추정 수요", people(m.totals.demand)],
+            ["이용 가능한 자리", people(m.totals.seats)],
+            ["부족 인원", people(m.totals.gap)],
+            ["부족한 동", `${m.totals.shortDongs} / ${m.totals.dongs}개`],
+          ].map(([k, v], i) => (
+            <div key={k} className={`px-3 py-2 ${i ? "border-l border-neutral-300" : ""} ${k === "부족 인원" ? "bg-neutral-900 text-white" : ""}`}>
+              <p className={`text-[10px] ${k === "부족 인원" ? "text-neutral-300" : "text-neutral-500"}`}>{k}</p>
+              <p className="text-lg font-bold tabular-nums">{v}</p>
+            </div>
+          ))}
+        </div>
       </header>
+
+      <Section title="핵심 요약">
+        <ol className="list-decimal space-y-1 pl-5 text-[12.5px] text-neutral-900">
+          {m.keyFindings.map((f) => (
+            <li key={f}>{f}</li>
+          ))}
+        </ol>
+      </Section>
 
       <Section title="지역 순위 (부족 인원 순)">
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              {["순위", "행정동", "추정 수요", "이용 가능한 자리", "부족 인원", "부족 비율", "주된 이유"].map((h) => (
+              {["순위", "행정동", "추정 수요", "이용 가능", "부족", "비율", "자리 없음", "문 닫음", "교사 부족", "부족 규모"].map((h) => (
                 <th key={h} className={th}>
                   {h}
                 </th>
@@ -159,11 +186,59 @@ function ReportDocument({ m }: { m: ReportModel }) {
                 <td className={tdNum}>{r.seats.toLocaleString()}</td>
                 <td className={`${tdNum} font-semibold`}>{r.gap.toLocaleString()}</td>
                 <td className={tdNum}>{r.gap > 0 ? percent(r.ratio) : "-"}</td>
-                <td className={td}>{r.reason}</td>
+                <td className={tdNum}>{r.space || ""}</td>
+                <td className={tdNum}>{r.time || ""}</td>
+                <td className={tdNum}>{r.staff || ""}</td>
+                <td className={`${td} w-[22%]`}>
+                  {r.gap > 0 ? (
+                    <div className="h-2.5 rounded-sm bg-neutral-800" style={{ width: `${(r.gap / Math.max(1, m.ranking[0].gap)) * 100}%` }} />
+                  ) : (
+                    <span className="text-[10px] text-neutral-500">{r.reason}</span>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </Section>
+
+      <Section title="부족 상위 동 권고 대안 (자동 산출 · 현장 확인 전 참고)">
+        {m.recommendations.length === 0 ? (
+          <p>부족한 동이 없습니다.</p>
+        ) : (
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                {["행정동", "현재 부족", "효과가 가장 큰 대안", "줄어듦", "남는 부족", "모든 대안 적용 시"].map((h) => (
+                  <th key={h} className={th}>
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {m.recommendations.map((r) => (
+                <tr key={r.name} className="break-inside-avoid">
+                  <td className={`${td} font-semibold`}>{r.name}</td>
+                  <td className={tdNum}>{r.gap}</td>
+                  <td className={td}>
+                    {r.best ? (
+                      <>
+                        <b>{r.best.title}</b>
+                        <span className="block text-[10.5px] text-neutral-600">{r.best.needs.join(" · ")}</span>
+                      </>
+                    ) : (
+                      "해당 대안 없음 (신규 정원 검토)"
+                    )}
+                  </td>
+                  <td className={tdNum}>{r.best ? `−${r.best.reduction}` : "-"}</td>
+                  <td className={tdNum}>{r.best ? r.best.remaining : r.gap}</td>
+                  <td className={`${tdNum} font-semibold`}>{r.allCombinedAfter}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </Section>
 
       <Section title="지역별 부족 인원과 이유">
@@ -338,6 +413,14 @@ function ReportDocument({ m }: { m: ReportModel }) {
           </table>
         </Section>
       )}
+
+      <Section title="산정 방법">
+        <ul className="list-disc pl-4 text-[11px] text-neutral-700">
+          {m.methodology.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+      </Section>
 
       <Section title="데이터 기준일·출처와 유의 사항">
         <ul className="list-disc pl-4 text-[11px] text-neutral-600">
