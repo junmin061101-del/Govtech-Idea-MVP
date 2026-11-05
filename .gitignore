@@ -42,3 +42,4 @@ firestore-debug.log
 ui-debug.log
 *-debug.log
 /.next-e2e/
+scripts/cache/*.bak

@@ -11,6 +11,7 @@ import { loadAllFacilities, loadEmds, loadSigunguFile } from "@/test/seoulData";
 import type { UnmetDemandFile } from "@/lib/constants/events";
 import unmet from "@/data/seoul/unmet-demand/11590.json";
 import snapIndex from "@/data/seoul/snapshots/index.json";
+import meta from "@/data/seoul/meta.json";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -132,9 +133,16 @@ describe("리포트", () => {
 });
 
 describe("스냅샷·시점 비교", () => {
-  it("스냅샷은 같은 데이터의 현재 계산과 같다", () => {
+  it("스냅샷: 부족 = max(0, 수요 − 자리), 427개 동 × 시간대 4개가 모두 있다", () => {
+    for (const snap of snapshots) {
+      expect(snap.rows.length).toBe(427 * 4);
+      for (const [, , , demand, seats, gap] of snap.rows) expect(gap).toBe(Math.max(0, demand - seats));
+    }
+  });
+  it("스냅샷이 지금 데이터와 같은 기준일이면, 현재 계산과 같다", () => {
+    const latest = snapshots.at(-1)! as SnapshotFile & { sources?: { childcare?: { dataDate?: string } } };
+    if (latest.sources?.childcare?.dataDate !== meta.sources.childcare.dataDate) return; // 데이터가 갱신된 뒤에는 과거 기록이므로 비교하지 않는다
     const all = loadAllFacilities().filter((f) => f.emdCode);
-    const latest = snapshots.at(-1)!;
     const now = new Map(diagnoseAllDongs(loadEmds(), all, "night").map((d) => [d.dongId, d.careGap]));
     for (const [emd, slot, , , , gap] of latest.rows) if (slot === "night") expect(gap).toBe(now.get(emd));
   });

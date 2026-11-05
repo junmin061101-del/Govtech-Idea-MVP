@@ -122,7 +122,27 @@ https://github.com/vuski/admdongkor), CC BY 4.0으로 배포됩니다.
 - **이른 아침(07~09)·방학**: 시설별 개원 시각·방학 운영 데이터가 없어 비활성.
 - 휴지 시설(69곳)은 공급에서 제외한다.
 
-### 데이터 갱신
+### 자동 갱신 주기
+
+[.github/workflows/data-refresh.yml](.github/workflows/data-refresh.yml)이 [scripts/refresh.mjs](scripts/refresh.mjs)를 주기별로 실행해
+수집 → 검증 → 데이터 빌드 → 테스트 → 정적 빌드 → Firebase 배포까지 사람 손 없이 진행한다.
+
+| 구분 | 주기 (한국 시간) | 하는 일 |
+|---|---|---|
+| 시설 정보 매일 | 매일 03:00 | 어린이집 정보 수집 → 데이터 빌드 → 배포 (데이터 기준일 갱신) |
+| 시설 변경 시 즉시 반영 | 매시간 :05 | 어린이집 정보 변경 감지(기준일 제외 내용 비교) → 바뀐 경우만 빌드·배포, 1시간 안에 반영 |
+| 공백 지도 매주 | 매주 월 04:00 | 어린이집·행정동 인구·대중교통 재수집 → 2SFCA 배분 비율 재계산 → 배포 |
+| 시점 비교 | 매월 1일 05:00 | 월별 스냅샷 저장 |
+
+- **안전장치:** 받아 온 데이터가 이상하면(시설 수가 직전보다 10% 넘게 감소, 행정동 수 ≠ 427, 역·정류소 10% 넘게 감소, API 오류) 직전 데이터를 그대로 두고 실패로 끝나 배포하지 않는다.
+- **기록:** 데이터가 바뀌면 저장소에 `[skip ci]` 커밋으로 남기고(다음 비교 기준), 실행 기록은 `src/data/seoul/refresh-log.json`과 GitHub Actions 실행 목록에 남는다.
+- **화면 표시:** 상단에 "데이터 기준 YYYY-MM-DD · 매일 갱신"을 표시하고, 기준일이 2일 넘게 지나면 "갱신 지연 N일"을 띄운다.
+- **행정동 경계**는 행정동 개편 때만 바뀌므로 자동 갱신에 넣지 않는다(`scripts/fetch-boundaries.mjs`의 `VERSION`을 올리고 수동 실행).
+- GitHub 예약 실행은 붐비는 시간에 몇 분~수십 분 늦게 시작될 수 있다.
+- 필요한 GitHub Secrets: `SEOUL_OPEN_DATA_API_KEY`, `NEXT_PUBLIC_KAKAO_MAP_API_KEY`, `FIREBASE_WEB_CONFIG_DEV`, `FIREBASE_SERVICE_ACCOUNT_DEV`.
+- 수동 실행: GitHub → Actions → data-refresh → Run workflow (hourly / daily / weekly / monthly), 로컬은 `npm run data:refresh -- --mode=daily`.
+
+### 데이터 갱신 (수동)
 
 ```bash
 npm run data:fetch   # 원자료 3종 재수집 (.env.local의 SEOUL_OPEN_DATA_API_KEY 필요)

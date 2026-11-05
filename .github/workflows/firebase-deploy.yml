@@ -1,6 +1,8 @@
 # 테스트 → 정적 빌드 → Firebase Hosting 배포
-#  - main에 push: 운영(prod) 프로젝트에 배포 + Firestore 규칙·인덱스 배포
+#  - main에 push: 개발(dev) 프로젝트 대시보드 사이트에 배포 + Firestore 규칙·인덱스 배포
+#    (운영 프로젝트를 만들면 prod로 바꾼다)
 #  - PR: 개발(dev) 프로젝트의 미리보기 채널에 배포
+#  - 데이터 자동 갱신 커밋("[skip ci]")에는 돌지 않는다 (배포는 data-refresh.yml이 함)
 # 필요한 GitHub Secrets
 #  FIREBASE_SERVICE_ACCOUNT_DEV / FIREBASE_SERVICE_ACCOUNT_PROD : 서비스 계정 JSON
 #  NEXT_PUBLIC_KAKAO_MAP_API_KEY
@@ -24,7 +26,7 @@ jobs:
       checks: write
       pull-requests: write
     env:
-      TARGET: ${{ github.event_name == 'push' && 'prod' || 'dev' }}
+      TARGET: dev
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -41,7 +43,7 @@ jobs:
       - name: 웹 설정 주입
         run: |
           echo "NEXT_PUBLIC_KAKAO_MAP_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_API_KEY }}" >> .env.production.local
-          if [ "$TARGET" = "prod" ]; then echo "${{ secrets.FIREBASE_WEB_CONFIG_PROD }}" >> .env.production.local; else echo "${{ secrets.FIREBASE_WEB_CONFIG_DEV }}" >> .env.production.local; fi
+          echo "${{ secrets.FIREBASE_WEB_CONFIG_DEV }}" >> .env.production.local
       - run: npm run build
       - name: 미리보기 배포 (PR → dev)
         if: github.event_name == 'pull_request'
@@ -50,16 +52,20 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
           projectId: dev
-      - name: 운영 배포 (main → prod)
+          target: dashboard
+      - name: 배포 (main → dev 대시보드 사이트)
         if: github.event_name == 'push'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
-          projectId: prod
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+          projectId: dev
+          target: dashboard
           channelId: live
-      - name: Firestore 규칙·인덱스 배포 (main → prod)
+      - name: Firestore 규칙·인덱스 배포 (main → dev)
         if: github.event_name == 'push'
+        env:
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
         run: |
-          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}' > "$RUNNER_TEMP/sa.json"
-          GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/sa.json" npx firebase deploy --only firestore:rules,firestore:indexes --project prod --non-interactive
+          printf '%s' "$SA" > "$RUNNER_TEMP/sa.json"
+          GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/sa.json" npx firebase deploy --only firestore:rules,firestore:indexes --project dev --non-interactive

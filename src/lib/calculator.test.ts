@@ -4,6 +4,7 @@ import { TIME_SLOTS, type TimeSlotId } from "@/lib/constants/timeSlots";
 import type { Dong, Facility, OperatingWindow } from "@/types";
 import { loadAllFacilities, loadEmds } from "@/test/seoulData";
 import baseline from "@/lib/__fixtures__/diagnosis-baseline.json";
+import frozenInput from "@/lib/__fixtures__/dongjak-input.json";
 
 const dongs = loadEmds();
 const facilities = loadAllFacilities().filter((f) => f.emdCode !== null);
@@ -86,14 +87,19 @@ describe("diagnoseDong (부족 인원과 이유 분해)", () => {
     },
   );
 
-  it("동작구 계산 결과가 고정 기준값과 같다 (의도적으로 바꿀 때만 기준값 갱신)", () => {
-    const dongjak = dongs.filter((d) => d.sigunguCode === "11590");
+  it("동작구 계산 결과가 고정 기준값과 같다 (고정 입력 데이터 · 계산 로직을 바꿀 때만 기준값 갱신)", () => {
+    const { emds: dongjak, facilities: frozen } = frozenInput as unknown as { emds: Dong[]; facilities: Facility[] };
     for (const [slot, rows] of Object.entries(baseline)) {
-      const got = diagnoseAllDongs(dongjak, facilities, slot as TimeSlotId);
-      expect(got.map((d) => ({
-        dongId: d.dongId, demand: d.demand, totalECC: d.totalECC, careGap: d.careGap,
-        space: d.bottleneck.space, time: d.bottleneck.time, staff: d.bottleneck.staff,
-      }))).toEqual(rows);
+      const got = diagnoseAllDongs(dongjak, frozen, slot as TimeSlotId);
+      expect(got).toHaveLength(rows.length);
+      got.forEach((d, i) => {
+        const r = rows[i];
+        // 인원(정수)은 정확히, 이유별 몫(실수)은 합산 순서에 따른 끝자리 오차만 허용
+        expect([d.dongId, d.demand, d.totalECC, d.careGap]).toEqual([r.dongId, r.demand, r.totalECC, r.careGap]);
+        expect(d.bottleneck.space).toBeCloseTo(r.space, 9);
+        expect(d.bottleneck.time).toBeCloseTo(r.time, 9);
+        expect(d.bottleneck.staff).toBeCloseTo(r.staff, 9);
+      });
     }
   });
 });

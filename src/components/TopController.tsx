@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { CalendarRange, ChevronDown, FileDown, History, LogIn, Upload, UserRound } from "lucide-react";
 import { ROLE_LABEL, useAuth } from "@/lib/firebase/AuthProvider";
@@ -95,7 +97,7 @@ export default function TopController(props: TopControllerProps) {
       <div className="flex h-12 items-center gap-4 overflow-x-auto px-5">
         <div className="flex shrink-0 items-baseline gap-2">
           <h1 className="whitespace-nowrap text-base font-bold text-neutral-900">우리 구 돌봄 공백 지도</h1>
-          <span className="whitespace-nowrap text-xs text-neutral-500">데이터 기준 {DATA_DATE}</span>
+          <DataFreshness />
         </div>
         <label className="relative flex h-8 shrink-0 items-center">
           <span className="sr-only">자치구 선택</span>
@@ -160,6 +162,28 @@ export default function TopController(props: TopControllerProps) {
         />
       </div>
     </header>
+  );
+}
+
+/**
+ * 데이터 기준일 + 갱신 주기. 시설 정보는 매일 자동 갱신되므로(.github/workflows/data-refresh.yml),
+ * 기준일이 2일 넘게 지나면 "갱신 지연"을 표시한다.
+ */
+function DataFreshness() {
+  const [lagDays, setLagDays] = useState<number | null>(null);
+  useEffect(() => {
+    const ms = Date.now() - new Date(`${DATA_DATE}T00:00:00+09:00`).getTime();
+    setLagDays(Math.floor(ms / 86_400_000));
+  }, []);
+  const stale = lagDays != null && lagDays > 2;
+  return (
+    <span
+      className="flex items-center gap-1.5 whitespace-nowrap text-xs text-neutral-500"
+      title="시설 정보 매일 03:00 · 시설 변경은 매시간 확인 · 공백 지도(인구·대중교통·배분) 매주 월요일 재계산"
+    >
+      데이터 기준 {DATA_DATE} · 매일 갱신
+      {stale && <span className="rounded border border-neutral-400 px-1 text-[10px] font-semibold text-neutral-700">갱신 지연 {lagDays}일</span>}
+    </span>
   );
 }
 

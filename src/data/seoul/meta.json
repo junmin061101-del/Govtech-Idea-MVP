@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-03T06:55:27.860Z",
+ "builtAt": "2026-11-05T06:35:41.885Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -11,21 +11,21 @@
    "url": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)"
   },
   "childcare": {
-   "dataDate": "2026-11-02",
+   "dataDate": "2026-11-05",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-03T00:33:11.564Z"
+   "fetchedAt": "2026-11-05T06:35:29.520Z"
   }
  },
  "counts": {
   "emds": 427,
-  "facilities": 3919,
-  "pausedExcluded": 69,
-  "locationIssues": 24,
+  "facilities": 3918,
+  "pausedExcluded": 70,
+  "locationIssues": 23,
   "crossBorderFacilities": 2398
  },
  "transit": {
   "url": "서울 열린데이터광장 subwayStationMaster(역사 마스터), busStopLocationXyInfo(버스정류소 위치)",
-  "fetchedAt": "2026-11-03T06:54:29.575Z",
+  "fetchedAt": "2026-11-05T06:35:40.755Z",
   "subwayM": 500,
   "busM": 300
  },
@@ -36,15 +36,6 @@
   "demandPoints": 15363
  },
  "locationIssues": [
-  {
-   "id": "11260000501",
-   "name": "유진어린이집",
-   "sigunguCode": "11260",
-   "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
-   "address": "서울특별시 중랑구 중랑천로 332 한국아파트 102동 106호"
-  },
   {
    "id": "11530000658",
    "name": "신나라어린이집",
@@ -82,15 +73,6 @@
    "address": "서울특별시 양천구 신정로13길 20 ."
   },
   {
-   "id": "11560000508",
-   "name": "꼬꼬마어린이집",
-   "sigunguCode": "11560",
-   "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
-   "address": "서울특별시 영등포구 여의대방로 25 104동101호(신길동, 보라매경남아너스빌)"
-  },
-  {
    "id": "11320000563",
    "name": "새샘어린이집",
    "sigunguCode": "11320",
@@ -98,6 +80,15 @@
    "lat": 37.56647,
    "lng": 126.977963,
    "address": "서울특별시 도봉구 도봉로106길 36 (창동)"
+  },
+  {
+   "id": "11560000508",
+   "name": "꼬꼬마어린이집",
+   "sigunguCode": "11560",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 영등포구 여의대방로 25 104동101호(신길동, 보라매경남아너스빌)"
   },
   {
    "id": "11380000698",

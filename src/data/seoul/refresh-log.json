@@ -1,0 +1,74 @@
+{
+ "runs": [
+  {
+   "mode": "hourly",
+   "started": "2026-11-05T06:36:05.322Z",
+   "finished": "2026-11-05T06:36:09.989Z",
+   "ok": true,
+   "changed": false,
+   "notes": [
+    "내용 변경 없음"
+   ]
+  },
+  {
+   "mode": "hourly",
+   "started": "2026-11-05T06:36:04.897Z",
+   "finished": "2026-11-05T06:36:05.270Z",
+   "ok": false,
+   "changed": false,
+   "notes": [
+    "seoul-childcare-raw.json: Command failed: /usr/local/share/nvm/versions/node/v24.22.2/bin/node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --env-file-if-exists=.env.local /workspaces/Govtech-Idea-MVP/scripts/fetch-seoul-childcare.mjs — 직전 데이터를 유지합니다"
+   ]
+  },
+  {
+   "mode": "daily",
+   "started": "2026-11-05T06:35:53.056Z",
+   "finished": "2026-11-05T06:35:53.556Z",
+   "ok": false,
+   "changed": false,
+   "notes": [
+    "seoul-childcare-raw.json: Command failed: /usr/local/share/nvm/versions/node/v24.22.2/bin/node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --env-file-if-exists=.env.local /workspaces/Govtech-Idea-MVP/scripts/fetch-seoul-childcare.mjs — 직전 데이터를 유지합니다"
+   ]
+  },
+  {
+   "mode": "monthly",
+   "started": "2026-11-05T06:35:42.337Z",
+   "finished": "2026-11-05T06:35:43.104Z",
+   "ok": true,
+   "changed": false,
+   "notes": [
+    "이번 달 스냅샷은 이미 있음"
+   ]
+  },
+  {
+   "mode": "weekly",
+   "started": "2026-11-05T06:35:25.101Z",
+   "finished": "2026-11-05T06:35:42.086Z",
+   "ok": true,
+   "changed": true,
+   "notes": [
+    "내용 변경 없음"
+   ]
+  },
+  {
+   "mode": "hourly",
+   "started": "2026-11-05T06:31:35.128Z",
+   "finished": "2026-11-05T06:31:47.775Z",
+   "ok": true,
+   "changed": false,
+   "notes": [
+    "내용 변경 없음"
+   ]
+  },
+  {
+   "mode": "hourly",
+   "started": "2026-11-05T06:31:28.329Z",
+   "finished": "2026-11-05T06:31:35.025Z",
+   "ok": true,
+   "changed": true,
+   "notes": [
+    "내용 변경: seoul-childcare-raw.json"
+   ]
+  }
+ ]
+}
