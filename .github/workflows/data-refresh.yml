@@ -12,7 +12,8 @@
 #   SEOUL_OPEN_DATA_API_KEY          서울 열린데이터광장 일반 인증키
 #   NEXT_PUBLIC_KAKAO_MAP_API_KEY    카카오맵 JavaScript 키
 #   FIREBASE_WEB_CONFIG_DEV          NEXT_PUBLIC_FIREBASE_API_KEY=… 등 네 줄
-#   FIREBASE_SERVICE_ACCOUNT_DEV     배포용 서비스 계정 JSON
+#   FIREBASE_SERVICE_ACCOUNT_DEV     배포용 서비스 계정 JSON (firebase init hosting:github가 만든
+#                                    FIREBASE_SERVICE_ACCOUNT_CAREOS_DEV_1103174도 인식)
 # GitHub의 예약 실행은 붐비는 시간에 몇 분~수십 분 늦게 시작될 수 있다.
 name: data-refresh
 
@@ -47,7 +48,7 @@ jobs:
         id: ready
         env:
           K1: ${{ secrets.SEOUL_OPEN_DATA_API_KEY }}
-          K2: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+          K2: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV || secrets.FIREBASE_SERVICE_ACCOUNT_CAREOS_DEV_1103174 }}
           K3: ${{ secrets.FIREBASE_WEB_CONFIG_DEV }}
           K4: ${{ secrets.NEXT_PUBLIC_KAKAO_MAP_API_KEY }}
         run: |
@@ -111,7 +112,7 @@ jobs:
       - name: Firebase 배포 (대시보드 사이트)
         if: steps.refresh.outputs.changed == 'true'
         env:
-          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV || secrets.FIREBASE_SERVICE_ACCOUNT_CAREOS_DEV_1103174 }}
         run: |
           printf '%s' "$SA" > "$RUNNER_TEMP/sa.json"
           GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/sa.json" npx firebase deploy --only hosting:dashboard --project dev --non-interactive
