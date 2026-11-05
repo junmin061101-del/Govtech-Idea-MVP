@@ -373,7 +373,6 @@ function LoadedMap({
             <button
               key={l.id}
               onClick={() => (disabled ? onUnavailable(UNAVAILABLE_TEXT.signal) : onLayerChange(l.id))}
-              aria-description={disabled ? "정보 없음 — 누르면 이유를 알려 줍니다" : undefined}
               aria-pressed={layer === l.id}
               title={disabled ? UNAVAILABLE_TEXT.signal : undefined}
               className={`rounded-md px-2 py-1 font-medium ${
@@ -381,6 +380,7 @@ function LoadedMap({
               }`}
             >
               {l.label}
+              {disabled && <span className="sr-only"> (정보 없음, 누르면 이유 안내)</span>}
             </button>
           );
         })}

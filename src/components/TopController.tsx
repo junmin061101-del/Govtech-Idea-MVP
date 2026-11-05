@@ -51,7 +51,6 @@ function Segmented<T extends string>({
             <button
               key={item.id}
               onClick={() => (item.disabled ? onUnavailable(item.title ?? "아직 볼 수 없습니다.") : onChange(item.id))}
-              aria-description={item.disabled ? "정보 없음 — 누르면 이유를 알려 줍니다" : undefined}
               title={item.title}
               aria-pressed={active}
               className={`flex h-7 items-center gap-1 whitespace-nowrap rounded-md px-2.5 text-[13px] font-medium transition-colors ${
@@ -63,6 +62,7 @@ function Segmented<T extends string>({
               }`}
             >
               {item.label}
+              {item.disabled && <span className="sr-only"> (정보 없음, 누르면 이유 안내)</span>}
               {item.sub && (
                 <span
                   className={`text-[11px] tabular-nums ${active ? "text-neutral-500" : "text-neutral-400"} ${hideSubBelow1500 ? "hidden min-[1500px]:inline" : ""}`}
