@@ -8,6 +8,7 @@ import { rankDiagnoses } from "@/lib/ranking";
 import GapReasonPanel from "@/components/panel/GapReasonPanel";
 import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
 import UnmetDemandPanel from "@/components/panel/UnmetDemandPanel";
+import AgentLogPanel from "@/components/panel/AgentLogPanel";
 import Notice from "@/components/Notice";
 import type { MapLayer } from "@/components/map/KakaoMap";
 import { signalOf, type UnmetSignal } from "@/lib/unmet";
@@ -192,6 +193,9 @@ export default function Home() {
               file={unmetFile}
               timeSlot={timeSlot}
             />
+          </div>
+          <div className="rounded-xl border border-neutral-200 bg-white">
+            <AgentLogPanel sigunguCode={sigunguCode} dong={selectedDong} timeSlot={timeSlot} target={target} dongName={dongName} />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">
             <AlternativesPanel

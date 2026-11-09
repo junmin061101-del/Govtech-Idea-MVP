@@ -41,6 +41,17 @@ Firebase 설정값이 없으면 **시연 모드**(구청 데이터는 이 브라
 
 보안 규칙은 [firestore.rules](firestore.rules) (기본 거부, 판단 이력 수정 불가, 입소 대기는 집계 필드만, 작성자·시각 조작 불가).
 
+**규칙·인덱스는 시민 앱(Govtech-Consumer-Application-MVP)과 같은 프로젝트를 공유한다.** 두 저장소의 `firestore.rules`·`firestore.indexes.json`은
+같은 내용이어야 하고, 배포는 시민 앱 저장소에서만 한다 (여기서 배포하면 시민 앱 규칙이 사라질 수 있다).
+
+### 사용자 로그 · AI 상담
+
+오른쪽 패널의 "사용자 로그 · AI 상담"은 시민 앱 AI 상담 기록을 보여 준다 (구청 담당자 로그인 필요, 자기 구만).
+
+- `agentSummaries/{sigungu_code}`: 최근 30일 익명 집계(행정동·시간대·대상·주제·시설 못 찾음)와 Gemini 요약. 시민 앱이 매일 05시 갱신. 표본 5건 미만인 동은 요약하지 않는다.
+- `agentLogs/{id}`: 대화 내용 수집에 **동의한 시민** 것만, 개인정보 자동 가림 후 90일 보관 (동의 철회·탈퇴 시 즉시 삭제).
+- 두 컬렉션 모두 시민 앱 서버만 쓰고, 대시보드는 읽기만 한다.
+
 ### 처음 한 번 설정
 
 1. [Firebase 콘솔](https://console.firebase.google.com)에서 프로젝트 2개를 만든다: 개발용, 운영용 (예: `careos-dev`, `careos-prod`).
@@ -51,7 +62,7 @@ Firebase 설정값이 없으면 **시연 모드**(구청 데이터는 이 브라
    - **프로젝트 설정 → 내 앱 → 웹 앱 추가** → 나오는 `apiKey`, `authDomain`, `projectId`, `appId`를 `.env.local`의 `NEXT_PUBLIC_FIREBASE_*`에 넣는다
 3. [.firebaserc](.firebaserc)의 `TODO-careos-dev`, `TODO-careos-prod`를 실제 프로젝트 ID로 바꾼다.
 4. 카카오 개발자 콘솔 → 앱 → 플랫폼 → Web에 배포 도메인을 등록한다.
-5. 규칙·인덱스 배포: `npx firebase login` 후 `npx firebase deploy --only firestore:rules,firestore:indexes --project dev`
+5. 규칙·인덱스 배포: 시민 앱 저장소에서 `npx firebase deploy --only firestore:rules,firestore:indexes --project dev` (위 공유 안내 참고)
 
 ### 담당자 권한 부여
 
