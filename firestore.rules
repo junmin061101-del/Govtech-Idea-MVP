@@ -13,7 +13,7 @@ rules_version = '2';
 //      district_admin  : 자기 구 읽기·쓰기
 //      district_viewer : 자기 구 읽기
 //  - 판단 이력은 수정할 수 없다 (인수인계·감사 기록). 입소 대기는 집계만 저장한다.
-//  - AI 상담 로그·요약은 시민 앱 서버가 쓰고, 대시보드는 자기 구 것만 읽는다 (원문 로그는 수집 동의한 회원 것만 있다).
+//  - AI 상담 기록·로그·요약은 시민 앱 서버가 쓰고, 대시보드는 자기 구 것만 실시간으로 읽는다 (원문 로그는 수집 동의한 회원 것만 있다).
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -109,6 +109,12 @@ service cloud.firestore {
     // 구별 요약: agentSummaries/{sigungu_code} — 익명 집계와 AI 요약문
     match /agentSummaries/{sgg} {
       allow read: if canRead(sgg);
+    }
+
+    // 상담 기록(익명): agentInsights/{자동 id} — 모든 상담 한 건마다 행정동·시간대·대상·주제·결과. 원문·회원 식별 정보 없음.
+    // 대시보드가 자기 구 것을 실시간으로 집계한다.
+    match /agentInsights/{id} {
+      allow read: if canRead(resource.data.sigunguCode);
     }
 
     // 대화 로그: agentLogs/{자동 id} — 수집에 동의한 회원의 대화만, 개인정보 가림 처리 후 저장

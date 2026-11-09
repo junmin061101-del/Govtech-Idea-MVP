@@ -195,7 +195,14 @@ export default function Home() {
             />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">
-            <AgentLogPanel sigunguCode={sigunguCode} dong={selectedDong} timeSlot={timeSlot} target={target} dongName={dongName} />
+            <AgentLogPanel
+              sigunguCode={sigunguCode}
+              dong={selectedDong}
+              timeSlot={timeSlot}
+              target={target}
+              dongName={dongName}
+              onSelectDong={setSelectedDongId}
+            />
           </div>
           <div className="rounded-xl border border-neutral-200 bg-white">
             <AlternativesPanel

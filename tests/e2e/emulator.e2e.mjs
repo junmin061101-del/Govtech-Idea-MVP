@@ -3,7 +3,11 @@ import { execFileSync } from "child_process";
 /**
  * 에뮬레이터 종단 검증 (npm run test:e2e)
  * 이메일 링크 로그인 → 역할 부여 → 판단 저장(Firestore) → 이력 → 다른 구 저장 막힘 → 비용 줄 확인 → 조회 권한 막힘
+ * → AI 상담 실시간 반영(열린 화면에 새 상담이 새로고침 없이 들어오는지) → 역할 부여가 시민 앱 클레임을 지우지 않는지
  */
+import { initializeApp } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
 import { mkdirSync } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
@@ -13,6 +17,10 @@ mkdirSync(S, { recursive: true });
 const BASE = "http://localhost:3100";
 const EMAIL = "jumin@dongjak.go.kr";
 const ok = (s) => console.log("✓", s);
+process.env.FIREBASE_AUTH_EMULATOR_HOST ??= "127.0.0.1:9099";
+process.env.FIRESTORE_EMULATOR_HOST ??= "127.0.0.1:8080";
+initializeApp({ projectId: "demo-careos" });
+const adminDb = getFirestore();
 const role = (r, sgg) =>
   console.log("  ", execFileSync("node", [`${REPO}/scripts/set-user-role.mjs`, EMAIL, r, ...(sgg ? [sgg] : [])], {
     env: { ...process.env, FIREBASE_AUTH_EMULATOR_HOST: "127.0.0.1:9099" }, cwd: REPO,
@@ -36,7 +44,9 @@ await page.goto(`${BASE}/login/?apiKey=demo-key&oobCode=${code}&mode=signIn&lang
 await page.getByText("아직 권한이 없습니다").waitFor({ timeout: 20000 });
 ok("이메일 링크 로그인 → 역할 없음 상태");
 
-// 2) 구 관리자 권한 부여 → 다시 열면 반영
+// 2) 구 관리자 권한 부여 → 다시 열면 반영 (시민 앱이 넣어 둔 클레임이 있는 계정)
+const uid = (await getAuth().getUserByEmail(EMAIL)).uid;
+await getAuth().setCustomUserClaims(uid, { nickname: "e2e닉네임", onboarded: true });
 role("district_admin", "11590");
 await page.reload({ waitUntil: "load", timeout: 120000 });
 await page.getByText("구 관리자 · 서울 동작구").waitFor({ timeout: 20000 });
@@ -85,6 +95,56 @@ ok("조회 권한: 저장 막힘 안내");
 // 8) Firestore에 실제로 저장된 문서
 const docs = await (await fetch("http://127.0.0.1:8080/v1/projects/demo-careos/databases/(default)/documents/decisions", { headers: { Authorization: "Bearer owner" } })).json();
 ok(`Firestore decisions 문서 ${docs.documents?.length ?? 0}건, sigunguCode=${docs.documents?.[0]?.fields?.sigunguCode?.stringValue}`);
+
+// 9) AI 상담 실시간 반영 — 시민 앱 서버가 쓰는 것과 같은 모양으로 기록하고, 열린 화면에 새로고침 없이 들어오는지
+const turn = (emdCode, extra) => ({
+  sigunguCode: "11590",
+  emdCode,
+  timeSlots: ["night"],
+  target: "infant",
+  topics: ["vacancy"],
+  tools: ["search_facilities"],
+  outcome: { facilityMatches: 2, noResult: false, knowledgeHits: 1, noGuide: false, staleDocs: 0 },
+  createdAt: new Date(Date.now() - 3600_000),
+  ...extra,
+});
+const logOf = (t, question) => ({ ...t, question, answer: "근처 어린이집 2곳을 찾았습니다.", pkey: "e2e", expiresAt: new Date(Date.now() + 90 * 86_400_000) });
+const old = turn("1159053000", {});
+await adminDb.collection("agentInsights").add(old);
+await adminDb.collection("agentLogs").add(logOf(old, "상도1동 야간 연장 어린이집 있나요"));
+await adminDb.collection("agentInsights").add({ ...turn("1162052500", {}), sigunguCode: "11620" }); // 다른 구는 안 보여야 함
+
+await page.goto(`${BASE}/?sgg=11590&slot=night&target=infant`, { waitUntil: "load", timeout: 120000 });
+const panel = page.getByTestId("agent-panel");
+await panel.getByTestId("agent-live").getByText(/^실시간/).waitFor({ timeout: 30000 });
+await panel.getByText("상도1동 야간 연장 어린이집 있나요").waitFor({ timeout: 20000 });
+const before = await panel.getByTestId("agent-stats").innerText();
+if (!before.includes("1건")) throw new Error(`첫 집계가 1건이 아님: ${before}`);
+ok("AI 상담 패널: 구 전체 집계 1건 (다른 구 기록 제외) + 기존 대화");
+
+const t0 = Date.now();
+const live = turn("1159052000", { topics: ["vacancy", "facility_search"], outcome: { facilityMatches: 0, noResult: true }, createdAt: new Date() });
+await adminDb.collection("agentInsights").add(live);
+await adminDb.collection("agentLogs").add(logOf(live, "노량진2동인데 밤 10시까지 봐주는 곳 없어요?"));
+await panel.getByText("노량진2동인데 밤 10시까지 봐주는 곳 없어요?").waitFor({ timeout: 15000 });
+await panel.getByText("새 대화", { exact: true }).waitFor();
+await panel.getByTestId("agent-stats").getByText("2건").first().waitFor({ timeout: 15000 });
+await panel.getByText("50%").waitFor();
+ok(`새 상담 실시간 반영 ${Date.now() - t0}ms (새로고침 없음): 대화 '새 대화' 표시 · 집계 2건 · 시설 못 찾음 50%`);
+
+await panel.getByRole("button", { name: /노량진2동 \d+건/ }).click();
+await page.waitForTimeout(800);
+if ((await panel.getByRole("button", { name: /노량진2동 \d+건/ }).getAttribute("aria-current")) !== "true") throw new Error("동 순위 클릭이 지도 선택으로 이어지지 않음");
+await panel.getByRole("button", { name: "시설 못 찾음", exact: true }).click();
+if (await panel.getByText("상도1동 야간 연장 어린이집 있나요").count()) throw new Error("'시설 못 찾음' 거르기가 동작하지 않음");
+ok("동 순위 → 지도에서 동 선택, '시설 못 찾음' 거르기");
+await panel.screenshot({ path: `${S}/e2e-agent-panel.png` });
+
+// 10) 역할을 여러 번 바꿔도 시민 앱 클레임(nickname·onboarded)은 남는다
+const claims = (await getAuth().getUser(uid)).customClaims;
+if (claims.nickname !== "e2e닉네임" || claims.onboarded !== true || claims.role !== "district_viewer") throw new Error(`클레임 병합 실패: ${JSON.stringify(claims)}`);
+ok(`역할 부여 후 클레임: ${JSON.stringify(claims)}`);
+
 await page.screenshot({ path: `${S}/e2e-final.png` });
 console.log(errs.join("\n") || "페이지 오류 없음");
 await browser.close();

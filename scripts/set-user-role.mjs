@@ -32,6 +32,9 @@ if (!projectId) {
 initializeApp(emulator ? { projectId } : { projectId, credential: applicationDefault() });
 
 const user = await getAuth().getUserByEmail(email);
-const claims = role === "none" ? {} : role === "careos_admin" ? { role } : { role, sigungu_code: sgg };
+// 같은 프로젝트의 시민 앱이 쓰는 클레임(nickname, onboarded 등)은 그대로 두고 역할·구만 바꾼다
+// (setCustomUserClaims 는 전체를 덮어쓰므로 기존 값과 합친다)
+const { role: _r, sigungu_code: _s, ...keep } = user.customClaims ?? {};
+const claims = role === "none" ? keep : role === "careos_admin" ? { ...keep, role } : { ...keep, role, sigungu_code: sgg };
 await getAuth().setCustomUserClaims(user.uid, claims);
 console.log(`${email} (${user.uid}) → ${JSON.stringify(claims)}${emulator ? " [에뮬레이터]" : ""}`);
