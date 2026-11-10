@@ -3,6 +3,17 @@
   {
    "mode": "daily",
    "did": "daily",
+   "started": "2026-11-10T22:52:21.746Z",
+   "finished": "2026-11-10T22:52:34.450Z",
+   "ok": true,
+   "changed": true,
+   "notes": [
+    "내용 변경 없음"
+   ]
+  },
+  {
+   "mode": "daily",
+   "did": "daily",
    "started": "2026-11-10T04:29:35.671Z",
    "finished": "2026-11-10T04:29:48.010Z",
    "ok": true,
