@@ -8,6 +8,10 @@
  *   mode=weekly  : 공백 지도 매주. 어린이집 + 행정동 인구 + 대중교통을 다시 받아 2SFCA 배분까지 전체 재계산
  *   mode=monthly : 월별 스냅샷 저장 (시점 비교용)
  *
+ * 따라잡기: GitHub 예약 실행은 붐비면 건너뛰어진다. 그래서 어떤 실행이든 마지막 성공 기록을 보고
+ * 빠진 일을 함께 한다 — 전체 재계산이 7일 넘게 없었으면 weekly로, 데이터 빌드가 26시간 넘게 없었으면 daily로 올린다.
+ * 데이터를 다시 만들 때마다 그 달 스냅샷도 확인한다(이미 있으면 건너뜀).
+ *
  * 안전장치: 받아 온 데이터가 직전보다 지나치게 줄었거나(시설 −10% 초과 등) 형식이 이상하면
  * 직전 캐시로 되돌리고 실패로 끝낸다 → 워크플로는 배포하지 않는다.
  * 결과는 GITHUB_OUTPUT(changed=true|false)과 src/data/seoul/refresh-log.json에 남긴다.
@@ -87,18 +91,33 @@ const VALIDATE = {
 
 const log = existsSync(LOG) ? JSON.parse(readFileSync(LOG, "utf-8")) : { runs: [] };
 const started = new Date().toISOString();
+
+/** 이 종류의 실제 작업이 마지막으로 성공한 시각 (예약 종류가 아니라 실제로 한 일 기준) */
+const lastBuilt = (kinds) => log.runs.find((r) => r.ok && r.changed && kinds.includes(r.did ?? r.mode))?.started ?? null;
+const hoursSince = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 3_600_000 : Infinity);
+let did = mode;
+const catchUp = [];
+if (mode === "hourly" || mode === "daily") {
+  if (hoursSince(lastBuilt(["weekly"])) > 7 * 24 + 6) {
+    did = "weekly";
+    catchUp.push(`전체 재계산이 ${Number.isFinite(hoursSince(lastBuilt(["weekly"]))) ? `${Math.floor(hoursSince(lastBuilt(["weekly"])) / 24)}일` : "기록"} 없어 weekly로 따라잡기`);
+  } else if (mode === "hourly" && hoursSince(lastBuilt(["daily", "weekly"])) > 26) {
+    did = "daily";
+    catchUp.push(`데이터 빌드가 ${Math.floor(hoursSince(lastBuilt(["daily", "weekly"])))}시간 없어 daily로 따라잡기`);
+  }
+}
 let changed = false;
-const notes = [];
+const notes = [...catchUp];
 
 try {
-  if (mode === "monthly") {
+  if (did === "monthly") {
     const before = readFileSync(join(ROOT, "src", "data", "seoul", "snapshots", "index.json"), "utf-8");
     node("build-snapshot.mjs", "--import", "./scripts/lib/register-alias.mjs");
     changed = readFileSync(join(ROOT, "src", "data", "seoul", "snapshots", "index.json"), "utf-8") !== before;
     notes.push(changed ? "새 달 스냅샷 저장" : "이번 달 스냅샷은 이미 있음");
   } else {
     const targets = [["seoul-childcare-raw.json", "fetch-seoul-childcare.mjs", VALIDATE.childcare]];
-    if (mode === "weekly") {
+    if (did === "weekly") {
       targets.push(["seoul-population-raw.json", "fetch-mois-population.mjs", VALIDATE.population]);
       targets.push(["seoul-transit-raw.json", "fetch-transit.mjs", VALIDATE.transit]);
     }
@@ -111,17 +130,19 @@ try {
     notes.push(contentChanged.length ? `내용 변경: ${contentChanged.join(", ")}` : "내용 변경 없음");
 
     // hourly는 내용이 바뀐 경우만, daily·weekly는 항상 다시 만든다 (기준일·배분 비율 갱신)
-    if (mode !== "hourly" || contentChanged.length) {
+    if (did !== "hourly" || contentChanged.length) {
       node("build-data.mjs");
       node("build-mock-unmet.mjs");
+      // 달이 바뀌었는데 월 1일 예약이 빠졌어도 스냅샷이 남도록 (이미 있으면 건너뜀)
+      node("build-snapshot.mjs", "--import", "./scripts/lib/register-alias.mjs");
       changed = true;
     }
   }
-  log.runs = [{ mode, started, finished: new Date().toISOString(), ok: true, changed, notes }, ...log.runs].slice(0, 200);
+  log.runs = [{ mode, did, started, finished: new Date().toISOString(), ok: true, changed, notes }, ...log.runs].slice(0, 200);
   writeFileSync(LOG, JSON.stringify(log, null, 1));
-  console.log(`갱신(${mode}) 완료 · ${notes.join(" · ")} · 배포 필요: ${changed}`);
+  console.log(`갱신(${mode}${did !== mode ? ` → ${did}` : ""}) 완료 · ${notes.join(" · ")} · 배포 필요: ${changed}`);
 } catch (e) {
-  log.runs = [{ mode, started, finished: new Date().toISOString(), ok: false, changed: false, notes: [String(e.message)] }, ...log.runs].slice(0, 200);
+  log.runs = [{ mode, did, started, finished: new Date().toISOString(), ok: false, changed: false, notes: [...catchUp, String(e.message)] }, ...log.runs].slice(0, 200);
   writeFileSync(LOG, JSON.stringify(log, null, 1));
   console.error(`갱신(${mode}) 실패: ${e.message}`);
   process.exitCode = 1;

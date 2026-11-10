@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-05T06:35:41.885Z",
+ "builtAt": "2026-11-10T01:29:19.322Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -11,16 +11,16 @@
    "url": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)"
   },
   "childcare": {
-   "dataDate": "2026-11-05",
+   "dataDate": "2026-11-09",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-05T06:35:29.520Z"
+   "fetchedAt": "2026-11-10T01:29:17.884Z"
   }
  },
  "counts": {
   "emds": 427,
-  "facilities": 3918,
+  "facilities": 3919,
   "pausedExcluded": 70,
-  "locationIssues": 23,
+  "locationIssues": 24,
   "crossBorderFacilities": 2398
  },
  "transit": {
@@ -36,6 +36,15 @@
   "demandPoints": 15363
  },
  "locationIssues": [
+  {
+   "id": "11380000700",
+   "name": "구립 힐스햇빛어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 은평구 역말로 150 1단지"
+  },
   {
    "id": "11530000658",
    "name": "신나라어린이집",
@@ -82,15 +91,6 @@
    "address": "서울특별시 도봉구 도봉로106길 36 (창동)"
   },
   {
-   "id": "11560000508",
-   "name": "꼬꼬마어린이집",
-   "sigunguCode": "11560",
-   "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
-   "address": "서울특별시 영등포구 여의대방로 25 104동101호(신길동, 보라매경남아너스빌)"
-  },
-  {
    "id": "11380000698",
    "name": "대영어린이집",
    "sigunguCode": "11380",
@@ -107,6 +107,15 @@
    "lat": 37.56647,
    "lng": 126.977963,
    "address": "서울특별시 은평구 서오릉로22길 16-1 101호"
+  },
+  {
+   "id": "11560000508",
+   "name": "꼬꼬마어린이집",
+   "sigunguCode": "11560",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 영등포구 여의대방로 25 104동101호(신길동, 보라매경남아너스빌)"
   },
   {
    "id": "11200000412",

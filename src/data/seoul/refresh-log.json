@@ -2,6 +2,18 @@
  "runs": [
   {
    "mode": "hourly",
+   "did": "daily",
+   "started": "2026-11-10T01:29:12.442Z",
+   "finished": "2026-11-10T01:29:21.081Z",
+   "ok": true,
+   "changed": true,
+   "notes": [
+    "데이터 빌드가 114시간 없어 daily로 따라잡기",
+    "내용 변경: seoul-childcare-raw.json"
+   ]
+  },
+  {
+   "mode": "hourly",
    "started": "2026-11-05T06:36:05.322Z",
    "finished": "2026-11-05T06:36:09.989Z",
    "ok": true,
