@@ -7,6 +7,7 @@ const at = (iso: string) => new Date(iso);
 let n = 0;
 const row = (p: Partial<AgentInsight>): AgentInsight => ({
   id: `r${n++}`,
+  sigunguCode: "11590",
   emdCode: "1159051000",
   timeSlots: [],
   target: "infant",
@@ -21,7 +22,7 @@ describe("computeAgentStats — 구 단위 실시간 집계", () => {
     row({ emdCode: "1159051000", topics: ["vacancy", "facility_search"], timeSlots: ["night"], noResult: true, createdAt: at("2026-11-09T00:30:00Z") }),
     row({ emdCode: "1159051000", topics: ["vacancy"], timeSlots: ["night", "night"], createdAt: at("2026-11-08T14:59:00Z") }), // 11-08 23:59 KST
     row({ emdCode: "1159052000", topics: ["cost"], timeSlots: ["early_morning"], target: "lower_elementary", noResult: true, createdAt: at("2026-11-08T15:00:00Z") }), // 11-09 00:00 KST
-    row({ emdCode: null, topics: ["other"], target: null, createdAt: at("2026-11-05T00:00:00Z") }),
+    row({ sigunguCode: "11620", emdCode: null, topics: ["other"], target: null, createdAt: at("2026-11-05T00:00:00Z") }),
     row({ topics: ["vacancy"], createdAt: at("2026-10-01T00:00:00Z") }), // 기간 밖
     row({ topics: ["vacancy"], createdAt: null }), // 시각 없음 → 제외
   ];
@@ -48,9 +49,26 @@ describe("computeAgentStats — 구 단위 실시간 집계", () => {
 
   it("동 순위는 상담 많은 순, 동을 모르는 기록은 구 합계에만 들어간다", () => {
     expect(s.dongs).toEqual([
-      { emdCode: "1159051000", count: 2, noResult: 1 },
-      { emdCode: "1159052000", count: 1, noResult: 1 },
+      { emdCode: "1159051000", count: 2, noResult: 1, topTopic: "빈자리·대기" },
+      { emdCode: "1159052000", count: 1, noResult: 1, topTopic: "비용·지원" },
     ]);
+  });
+
+  it("구별 합계 (서울 전체 보기)", () => {
+    expect(s.sigungus).toEqual([
+      { sigunguCode: "11590", count: 3, noResult: 2 },
+      { sigunguCode: "11620", count: 1, noResult: 0 },
+    ]);
+  });
+
+  it("한국 시간 시각별·날짜별 분포", () => {
+    expect(s.byHour[9]).toBe(2); // 11-09 09:30 KST, 11-05 09:00 KST
+    expect(s.byHour[23]).toBe(1);
+    expect(s.byHour[0]).toBe(1);
+    expect(s.byHour.reduce((a, b) => a + b, 0)).toBe(4);
+    expect(s.byDay.map((d) => d.date)).toEqual(["2026-11-03", "2026-11-04", "2026-11-05", "2026-11-06", "2026-11-07", "2026-11-08", "2026-11-09"]);
+    expect(s.byDay.map((d) => d.count)).toEqual([0, 0, 1, 0, 0, 1, 2]);
+    expect(s.byDay[6].noResult).toBe(2);
   });
 
   it("상담이 없으면 비율은 null", () => {

@@ -79,7 +79,7 @@ export function usesServer(a: AuthState): boolean {
 }
 
 export const ROLE_LABEL: Record<Role, string> = {
-  careos_admin: "CareOS 관리자",
+  careos_admin: "운영자 · 전체 구",
   district_admin: "구 관리자",
   district_viewer: "구 조회",
 };

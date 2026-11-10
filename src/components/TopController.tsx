@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-import { CalendarRange, ChevronDown, FileDown, History, LogIn, Upload, UserRound } from "lucide-react";
+import { CalendarRange, ChevronDown, History, LogIn, Upload, UserRound } from "lucide-react";
 import { ROLE_LABEL, useAuth } from "@/lib/firebase/AuthProvider";
 import { UNAVAILABLE_TEXT } from "@/components/Notice";
 import { SIGUNGU } from "@/lib/constants/regions";
@@ -12,7 +12,15 @@ import { CARE_TARGETS } from "@/lib/constants/targets";
 import { DATA_DATE } from "@/lib/hooks/useSeoulData";
 import type { CareTargetId, TimeSlotId } from "@/types";
 
+export type AppTab = "map" | "ai" | "report";
+
 interface TopControllerProps {
+  /** 지금 열린 탭 */
+  tab: AppTab;
+  /** 대상·시간대 줄을 보일지 (AI 상담 탭은 모든 시간대를 한 번에 보므로 숨긴다) */
+  showFilters?: boolean;
+  /** 서울 전체 보기 (운영자 전용, AI 상담 탭) — 고르면 sigunguCode 대신 "all" */
+  allowAll?: boolean;
   sigunguCode: string;
   onSigunguChange: (code: string) => void;
   target: CareTargetId;
@@ -46,7 +54,7 @@ function Segmented<T extends string>({
   return (
     <div className="flex shrink-0 items-center gap-2" role="group" aria-label={label}>
       <span className="text-xs font-medium text-neutral-500">{label}</span>
-      <div className="flex items-center gap-0.5 rounded-lg bg-neutral-100 p-0.5">
+      <div className="seg">
         {items.map((item) => {
           const active = value === item.id;
           return (
@@ -55,13 +63,7 @@ function Segmented<T extends string>({
               onClick={() => (item.disabled ? onUnavailable(item.title ?? "아직 볼 수 없습니다.") : onChange(item.id))}
               title={item.title}
               aria-pressed={active}
-              className={`flex h-7 items-center gap-1 whitespace-nowrap rounded-md px-2.5 text-[13px] font-medium transition-colors ${
-                active
-                  ? "bg-white text-neutral-900 shadow-sm ring-1 ring-black/5"
-                  : item.disabled
-                    ? "text-neutral-400 hover:text-neutral-500"
-                    : "text-neutral-600 hover:text-neutral-900"
-              }`}
+              className={`seg-item ${item.disabled ? "!text-neutral-400" : ""}`}
             >
               {item.label}
               {item.disabled && <span className="sr-only"> (정보 없음, 누르면 이유 안내)</span>}
@@ -83,20 +85,25 @@ function Segmented<T extends string>({
 const two = (n: number) => String(n).padStart(2, "0");
 
 export default function TopController(props: TopControllerProps) {
-  // 메뉴는 아이콘만 두지 않고 "무엇을 하는 화면인지" 글자로 보여 준다
+  const showFilters = props.showFilters ?? true;
+  const tabs: { id: AppTab; href: string; label: string }[] = [
+    { id: "map", href: `/?${props.query}`, label: "지도" },
+    { id: "ai", href: `/ai/?${props.query}`, label: "AI 상담" },
+    { id: "report", href: `/report/?${props.query}`, label: "리포트" },
+  ];
+  // 탭 밖의 보조 기능 — 아이콘만 두지 않고 글자로
   const menu = [
-    { href: `/report?${props.query}`, label: "리포트 내보내기", sub: "PDF·엑셀", icon: FileDown, desc: "지금 보는 구·시간대 기준으로 월·분기·연 보고서를 PDF와 엑셀로 내려받습니다" },
     { href: "/history", label: "판단 이력", icon: History, desc: "저장한 대안 조합을 다시 열거나 인수인계 파일로 내보냅니다" },
     { href: `/compare?sgg=${props.sigunguCode}`, label: "시점 비교", icon: CalendarRange, desc: "월별로 같은 동의 부족 인원이 어떻게 바뀌었는지 봅니다" },
-    { href: `/waitlist?sgg=${props.sigunguCode}`, label: "입소 대기 대조", sub: "CSV 업로드", icon: Upload, desc: "구청 입소 대기 집계 CSV를 올려 추정 수요와 비교합니다" },
+    { href: `/waitlist?sgg=${props.sigunguCode}`, label: "입소 대기", icon: Upload, desc: "구청 입소 대기 집계 CSV를 올려 추정 수요와 비교합니다" },
   ];
 
   return (
-    <header className="shrink-0 border-b border-neutral-200 bg-white">
-      {/* 1행: 제목·자치구 | 기능 메뉴 | 계정 */}
-      <div className="flex h-12 items-center gap-4 overflow-x-auto px-5">
-        <div className="flex shrink-0 items-baseline gap-2">
-          <h1 className="whitespace-nowrap text-base font-bold text-neutral-900">우리 구 돌봄 공백 지도</h1>
+    <header className="sticky top-0 z-30 shrink-0 border-b border-black/[0.08] bg-white/80 backdrop-blur-xl backdrop-saturate-150">
+      {/* 1행: 제목·자치구 | 탭 | 보조 기능·계정 */}
+      <div className="flex h-14 items-center gap-4 overflow-x-auto px-5">
+        <div className="flex shrink-0 flex-col justify-center leading-tight">
+          <h1 className="whitespace-nowrap text-[15px] font-semibold tracking-tight text-neutral-900">우리 구 돌봄 공백 지도</h1>
           <DataFreshness />
         </div>
         <label className="relative flex h-8 shrink-0 items-center">
@@ -104,8 +111,9 @@ export default function TopController(props: TopControllerProps) {
           <select
             value={props.sigunguCode}
             onChange={(e) => props.onSigunguChange(e.target.value)}
-            className="h-8 appearance-none rounded-lg border border-neutral-300 bg-white pl-3 pr-7 text-sm font-semibold text-neutral-900 hover:border-neutral-400"
+            className="h-8 appearance-none rounded-[10px] bg-black/[0.05] pl-3 pr-7 text-[13px] font-semibold text-neutral-900 outline-none hover:bg-black/[0.08]"
           >
+            {props.allowAll && <option value="all">서울 전체 (25개 구)</option>}
             {SIGUNGU.map((s) => (
               <option key={s.code} value={s.code}>
                 서울 {s.name}
@@ -115,17 +123,24 @@ export default function TopController(props: TopControllerProps) {
           <ChevronDown className="pointer-events-none absolute right-2 h-3.5 w-3.5 text-neutral-500" />
         </label>
 
-        <nav className="ml-auto flex shrink-0 items-center gap-1" aria-label="기능 메뉴">
-          {menu.map(({ href, label, sub, icon: Icon, desc }) => (
+        <nav className="seg mx-auto shrink-0" aria-label="화면">
+          {tabs.map((t) => (
+            <Link key={t.id} href={t.href} aria-current={props.tab === t.id ? "page" : undefined} className="seg-item px-4">
+              {t.label}
+            </Link>
+          ))}
+        </nav>
+
+        <nav className="flex shrink-0 items-center gap-0.5" aria-label="기능 메뉴">
+          {menu.map(({ href, label, icon: Icon, desc }) => (
             <Link
               key={label}
               href={href}
               title={desc}
-              className="flex h-8 items-center gap-1.5 whitespace-nowrap rounded-lg border border-neutral-200 px-2.5 text-[13px] font-medium text-neutral-800 hover:border-neutral-300 hover:bg-neutral-50"
+              className="flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[13px] text-neutral-600 hover:bg-black/[0.05] hover:text-neutral-900"
             >
-              <Icon className="h-4 w-4 text-neutral-500" />
+              <Icon className="h-4 w-4" strokeWidth={1.75} />
               {label}
-              {sub && <span className="text-[11px] font-normal text-neutral-500">{sub}</span>}
             </Link>
           ))}
         </nav>
@@ -133,34 +148,36 @@ export default function TopController(props: TopControllerProps) {
       </div>
 
       {/* 2행: 보는 기준 (대상·시간대) */}
-      <div className="flex h-11 items-center gap-6 overflow-x-auto border-t border-neutral-100 bg-neutral-50/60 px-5">
-        <Segmented
-          label="대상"
-          value={props.target}
-          onChange={props.onTargetChange}
-          onUnavailable={props.onUnavailable}
-          items={CARE_TARGETS.map((t) => ({
-            id: t.id,
-            label: t.id === "infant" ? "영유아" : "초등 저학년",
-            sub: `${t.minAge}~${t.maxAge}세`,
-            disabled: !t.dataAvailable,
-            title: t.dataAvailable ? t.label : UNAVAILABLE_TEXT.lower_elementary,
-          }))}
-        />
-        <Segmented
-          label="시간대"
-          value={props.timeSlot}
-          onChange={props.onTimeSlotChange}
-          onUnavailable={props.onUnavailable}
-          items={TIME_SLOTS.map((t) => ({
-            id: t.id,
-            label: t.shortLabel,
-            sub: t.hours ? `${two(t.hours.start)}–${two(t.hours.end)}` : undefined,
-            disabled: !t.dataAvailable,
-            title: t.dataAvailable ? t.label : UNAVAILABLE_TEXT[t.id as "early_morning" | "vacation"],
-          }))}
-        />
-      </div>
+      {showFilters && (
+        <div className="flex h-11 items-center gap-6 overflow-x-auto border-t border-black/[0.05] px-5">
+          <Segmented
+            label="대상"
+            value={props.target}
+            onChange={props.onTargetChange}
+            onUnavailable={props.onUnavailable}
+            items={CARE_TARGETS.map((t) => ({
+              id: t.id,
+              label: t.id === "infant" ? "영유아" : "초등 저학년",
+              sub: `${t.minAge}~${t.maxAge}세`,
+              disabled: !t.dataAvailable,
+              title: t.dataAvailable ? t.label : UNAVAILABLE_TEXT.lower_elementary,
+            }))}
+          />
+          <Segmented
+            label="시간대"
+            value={props.timeSlot}
+            onChange={props.onTimeSlotChange}
+            onUnavailable={props.onUnavailable}
+            items={TIME_SLOTS.map((t) => ({
+              id: t.id,
+              label: t.shortLabel,
+              sub: t.hours ? `${two(t.hours.start)}–${two(t.hours.end)}` : undefined,
+              disabled: !t.dataAvailable,
+              title: t.dataAvailable ? t.label : UNAVAILABLE_TEXT[t.id as "early_morning" | "vacation"],
+            }))}
+          />
+        </div>
+      )}
     </header>
   );
 }
@@ -178,7 +195,7 @@ function DataFreshness() {
   const stale = lagDays != null && lagDays > 2;
   return (
     <span
-      className="flex items-center gap-1.5 whitespace-nowrap text-xs text-neutral-500"
+      className="flex items-center gap-1.5 whitespace-nowrap text-[11px] text-neutral-500"
       title="시설 정보 매일 03:00 · 시설 변경은 매시간 확인 · 공백 지도(인구·대중교통·배분) 매주 월요일 재계산"
     >
       데이터 기준 {DATA_DATE} · 매일 갱신
@@ -190,25 +207,25 @@ function DataFreshness() {
 /** 로그인 상태: 시연 모드 / 로그인 / 계정(역할·구) */
 function AccountChip() {
   const auth = useAuth();
-  const base = "flex h-8 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border px-2.5 text-[12px]";
+  const base = "flex h-8 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[12px]";
   if (!auth.enabled) {
     return (
-      <span className={`${base} border-amber-200 bg-amber-50 text-amber-800`} title="Firebase 미연결 — 판단 이력은 이 브라우저에만 저장됩니다">
+      <span className={`${base} bg-black/[0.05] text-neutral-600`} title="Firebase 미연결 — 판단 이력은 이 브라우저에만 저장됩니다">
         시연 모드
       </span>
     );
   }
-  if (auth.loading) return <span className={`${base} border-neutral-200 text-neutral-400`}>확인 중</span>;
+  if (auth.loading) return <span className={`${base} text-neutral-400`}>확인 중</span>;
   if (!auth.user) {
     return (
-      <Link href="/login" className={`${base} border-neutral-300 font-medium text-neutral-800 hover:bg-neutral-50`}>
+      <Link href="/login" className={`${base} bg-neutral-900 font-medium text-white hover:bg-neutral-700`}>
         <LogIn className="h-3.5 w-3.5" /> 로그인
       </Link>
     );
   }
   const sgg = auth.sigunguCode ? SIGUNGU.find((s) => s.code === auth.sigunguCode)?.name : null;
   return (
-    <Link href="/login" className={`${base} border-neutral-300 text-neutral-800 hover:bg-neutral-50`} title={auth.user.email ?? undefined}>
+    <Link href="/login" className={`${base} bg-black/[0.05] font-medium text-neutral-800 hover:bg-black/[0.08]`} title={auth.user.email ?? undefined}>
       <UserRound className="h-3.5 w-3.5" />
       {auth.role ? `${sgg ?? ""} ${ROLE_LABEL[auth.role]}`.trim() : "권한 없음"}
     </Link>

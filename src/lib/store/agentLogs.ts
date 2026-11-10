@@ -46,16 +46,10 @@ export interface AgentSummary {
   topicLabels: Record<string, string>;
 }
 
-export interface AgentLog {
-  id: string;
-  emdCode: string | null;
-  timeSlots: TimeSlotId[];
-  target: CareTargetId | null;
-  topics: string[];
-  noResult: boolean;
+/** 수집 동의 대화 — 익명 기록과 같은 항목 + 질문·답변 (개인정보 가림 처리됨) */
+export interface AgentLog extends AgentInsight {
   question: string;
   answer: string;
-  createdAt: Date | null;
 }
 
 const toDate = (v: unknown) => (v && typeof (v as Timestamp).toDate === "function" ? (v as Timestamp).toDate() : null);
@@ -77,6 +71,7 @@ function toSummary(d: DocumentData): AgentSummary {
 function toInsight(id: string, d: DocumentData): AgentInsight {
   return {
     id,
+    sigunguCode: d.sigunguCode ?? "",
     emdCode: d.emdCode ?? null,
     timeSlots: d.timeSlots ?? [],
     target: d.target ?? null,
@@ -100,16 +95,19 @@ export function subscribeAgentSummary(sgg: string, onData: (s: AgentSummary | nu
   return onSnapshot(doc(fb.db, "agentSummaries", sgg), (snap) => onData(snap.exists() ? toSummary(snap.data()) : null), onError);
 }
 
+/** 범위 조건: 구 코드, 또는 null = 서울 전체 (운영자만 규칙상 허용) */
+const scope = (sgg: string | null) => (sgg ? [where("sigunguCode", "==", sgg)] : []);
+
 /** 구 전체 최근 대화 실시간 (수집 동의분). addedIds: 첫 스냅샷 이후 새로 들어온 대화 */
 export function subscribeAgentLogs(
-  sgg: string,
+  sgg: string | null,
   max: number,
   onData: (logs: AgentLog[], addedIds: string[]) => void,
   onError: (e: Error) => void,
 ): Unsub {
   const fb = firebase();
   if (!fb) return noop;
-  const q = query(collection(fb.db, "agentLogs"), where("sigunguCode", "==", sgg), orderBy("createdAt", "desc"), limit(max));
+  const q = query(collection(fb.db, "agentLogs"), ...scope(sgg), orderBy("createdAt", "desc"), limit(max));
   let first = true;
   return onSnapshot(
     q,
@@ -124,7 +122,7 @@ export function subscribeAgentLogs(
 
 /** 구 전체 익명 상담 기록 실시간 (최근 sinceDays일, 최대 max건) — 숫자 집계용 */
 export function subscribeAgentInsights(
-  sgg: string,
+  sgg: string | null,
   sinceDays: number,
   max: number,
   onData: (rows: AgentInsight[]) => void,
@@ -135,7 +133,7 @@ export function subscribeAgentInsights(
   const since = new Date(Date.now() - sinceDays * 86_400_000);
   const q = query(
     collection(fb.db, "agentInsights"),
-    where("sigunguCode", "==", sgg),
+    ...scope(sgg),
     where("createdAt", ">=", since),
     orderBy("createdAt", "desc"),
     limit(max),

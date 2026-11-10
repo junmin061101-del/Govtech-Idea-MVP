@@ -8,7 +8,6 @@ import { rankDiagnoses } from "@/lib/ranking";
 import GapReasonPanel from "@/components/panel/GapReasonPanel";
 import AlternativesPanel from "@/components/alternatives/AlternativesPanel";
 import UnmetDemandPanel from "@/components/panel/UnmetDemandPanel";
-import AgentLogPanel from "@/components/panel/AgentLogPanel";
 import Notice from "@/components/Notice";
 import type { MapLayer } from "@/components/map/KakaoMap";
 import { signalOf, type UnmetSignal } from "@/lib/unmet";
@@ -24,7 +23,7 @@ import { ALL_DONGS as allDongs, DATA_NOTE, dongName, META as meta, useFacilities
 const KakaoMap = dynamic(() => import("@/components/map/KakaoMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full w-full items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-sm text-neutral-400">
+    <div className="flex h-full w-full items-center justify-center card text-sm text-neutral-400">
       지도를 불러오는 중...
     </div>
   ),
@@ -117,8 +116,9 @@ export default function Home() {
   const contextLabel = `${CARE_TARGETS.find((t) => t.id === target)!.label} · ${timeSlotDef(timeSlot).label}`;
 
   return (
-    <div className="flex h-screen flex-col bg-neutral-50">
+    <div className="flex h-screen flex-col">
       <TopController
+        tab="map"
         sigunguCode={sigunguCode}
         onSigunguChange={(code) => {
           setSigunguCode(code);
@@ -157,7 +157,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white">
+        <div className="card overflow-hidden">
           {rawFacilities ? (
             <RankingList
               dongs={dongs}
@@ -175,7 +175,7 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col gap-4 overflow-y-auto">
-          <div className="rounded-xl border border-neutral-200 bg-white">
+          <div className="card">
             <GapReasonPanel
               dong={selectedDong}
               diagnosis={selectedDiagnosis}
@@ -185,7 +185,7 @@ export default function Home() {
               dongName={dongName}
             />
           </div>
-          <div className="rounded-xl border border-neutral-200 bg-white">
+          <div className="card">
             <UnmetDemandPanel
               dong={selectedDong}
               diagnosis={selectedDiagnosis}
@@ -194,17 +194,7 @@ export default function Home() {
               timeSlot={timeSlot}
             />
           </div>
-          <div className="rounded-xl border border-neutral-200 bg-white">
-            <AgentLogPanel
-              sigunguCode={sigunguCode}
-              dong={selectedDong}
-              timeSlot={timeSlot}
-              target={target}
-              dongName={dongName}
-              onSelectDong={setSelectedDongId}
-            />
-          </div>
-          <div className="rounded-xl border border-neutral-200 bg-white">
+          <div className="card">
             <AlternativesPanel
               dong={selectedDong}
               dongs={dongs}

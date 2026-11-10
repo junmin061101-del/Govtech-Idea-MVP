@@ -20,6 +20,7 @@ export const AGENT_TOPICS: Record<string, string> = {
 /** agentInsights 한 건 (대화 원문 없음) */
 export interface AgentInsight {
   id: string;
+  sigunguCode: string;
   emdCode: string | null;
   timeSlots: TimeSlotId[];
   target: CareTargetId | null;
@@ -30,6 +31,14 @@ export interface AgentInsight {
 
 export interface DongCount {
   emdCode: string;
+  count: number;
+  noResult: number;
+  /** 그 동에서 가장 많이 물은 주제 이름 */
+  topTopic: string | null;
+}
+
+export interface SigunguCount {
+  sigunguCode: string;
   count: number;
   noResult: number;
 }
@@ -45,51 +54,83 @@ export interface AgentLiveStats {
   topics: { id: string; label: string; count: number }[];
   /** 상담이 많은 동 (많은 순) */
   dongs: DongCount[];
+  /** 상담이 많은 구 (많은 순, 서울 전체 보기용) */
+  sigungus: SigunguCount[];
+  /** 한국 시간 0~23시별 상담 수 */
+  byHour: number[];
+  /** 날짜별 상담 수 (오래된 날 → 오늘, 길이 = days) */
+  byDay: { date: string; count: number; noResult: number }[];
   bySlot: Partial<Record<TimeSlotId, number>>;
   byTarget: Partial<Record<CareTargetId, number>>;
   lastAt: Date | null;
 }
 
 const KST_OFFSET = 9 * 3600_000;
+const kstDayIndex = (d: Date) => Math.floor((d.getTime() + KST_OFFSET) / 86_400_000);
+const kstDate = (idx: number) => new Date(idx * 86_400_000).toISOString().slice(0, 10);
 /** 한국 시간 기준 같은 날인가 */
 export function sameKstDay(a: Date, b: Date): boolean {
-  return Math.floor((a.getTime() + KST_OFFSET) / 86_400_000) === Math.floor((b.getTime() + KST_OFFSET) / 86_400_000);
+  return kstDayIndex(a) === kstDayIndex(b);
 }
 
 export function computeAgentStats(rows: AgentInsight[], now: Date, days: number): AgentLiveStats {
   const since = now.getTime() - days * 86_400_000;
   const inRange = rows.filter((r) => r.createdAt && r.createdAt.getTime() >= since && r.createdAt.getTime() <= now.getTime());
   const topics = new Map<string, number>();
-  const dongs = new Map<string, DongCount>();
+  const dongs = new Map<string, DongCount & { topicCount: Map<string, number> }>();
+  const sigungus = new Map<string, SigunguCount>();
+  const byHour = Array.from({ length: 24 }, () => 0);
+  const today = kstDayIndex(now);
+  const byDay = Array.from({ length: days }, (_, i) => ({ date: kstDate(today - days + 1 + i), count: 0, noResult: 0 }));
   const bySlot: Partial<Record<TimeSlotId, number>> = {};
   const byTarget: Partial<Record<CareTargetId, number>> = {};
   let noResult = 0;
-  let today = 0;
+  let todayCount = 0;
   let lastAt: Date | null = null;
   for (const r of inRange) {
     if (r.noResult) noResult++;
-    if (sameKstDay(r.createdAt!, now)) today++;
+    const day = kstDayIndex(r.createdAt!);
+    if (day === today) todayCount++;
+    const slot = byDay[day - (today - days + 1)];
+    if (slot) {
+      slot.count++;
+      if (r.noResult) slot.noResult++;
+    }
+    byHour[new Date(r.createdAt!.getTime() + KST_OFFSET).getUTCHours()]++;
+    const g = sigungus.get(r.sigunguCode) ?? { sigunguCode: r.sigunguCode, count: 0, noResult: 0 };
+    g.count++;
+    if (r.noResult) g.noResult++;
+    sigungus.set(r.sigunguCode, g);
     if (!lastAt || r.createdAt! > lastAt) lastAt = r.createdAt;
     for (const t of new Set(r.topics)) topics.set(t, (topics.get(t) ?? 0) + 1);
     for (const s of new Set(r.timeSlots)) bySlot[s] = (bySlot[s] ?? 0) + 1;
     if (r.target) byTarget[r.target] = (byTarget[r.target] ?? 0) + 1;
     if (r.emdCode) {
-      const d = dongs.get(r.emdCode) ?? { emdCode: r.emdCode, count: 0, noResult: 0 };
+      const d = dongs.get(r.emdCode) ?? { emdCode: r.emdCode, count: 0, noResult: 0, topTopic: null, topicCount: new Map() };
       d.count++;
       if (r.noResult) d.noResult++;
+      for (const t of new Set(r.topics)) d.topicCount.set(t, (d.topicCount.get(t) ?? 0) + 1);
       dongs.set(r.emdCode, d);
     }
   }
   return {
     days,
     count: inRange.length,
-    today,
+    today: todayCount,
     noResult,
     noResultRate: inRange.length ? noResult / inRange.length : null,
     topics: [...topics]
       .map(([id, count]) => ({ id, label: AGENT_TOPICS[id] ?? id, count }))
       .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label)),
-    dongs: [...dongs.values()].sort((a, b) => b.count - a.count || b.noResult - a.noResult),
+    dongs: [...dongs.values()]
+      .map(({ topicCount, ...d }) => {
+        const top = [...topicCount].sort((a, b) => b[1] - a[1])[0];
+        return { ...d, topTopic: top ? (AGENT_TOPICS[top[0]] ?? top[0]) : null };
+      })
+      .sort((a, b) => b.count - a.count || b.noResult - a.noResult),
+    sigungus: [...sigungus.values()].sort((a, b) => b.count - a.count || b.noResult - a.noResult),
+    byHour,
+    byDay,
     bySlot,
     byTarget,
     lastAt,

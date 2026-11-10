@@ -147,6 +147,9 @@ describe("AI 상담 기록·로그·요약 — 시민 앱 서버만 쓰고, 대�
       getDocs(query(collection(db("djViewer"), "agentInsights"), where("sigunguCode", "==", DONGJAK), where("createdAt", ">=", since))),
     );
     await assertSucceeds(getDocs(query(collection(db("careos"), "agentInsights"), where("sigunguCode", "==", GWANAK))));
+    // 운영자는 구 조건 없이 서울 전체를 본다
+    await assertSucceeds(getDocs(query(collection(db("careos"), "agentInsights"), where("createdAt", ">=", since))));
+    await assertSucceeds(getDocs(collection(db("careos"), "agentLogs")));
     await assertFails(getDocs(collection(db("djViewer"), "agentInsights")));
     await assertFails(getDocs(query(collection(db("djViewer"), "agentInsights"), where("sigunguCode", "==", GWANAK))));
     await assertFails(getDoc(doc(db("noRole"), "agentInsights/dj1")));

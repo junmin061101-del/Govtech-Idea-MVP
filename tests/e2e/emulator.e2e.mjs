@@ -35,6 +35,7 @@ page.on("response", (r) => r.status() >= 400 && errs.push(`[http ${r.status()}] 
 
 // 1) 이메일 링크 로그인
 await page.goto(`${BASE}/login/`, { waitUntil: "networkidle", timeout: 120000 });
+await page.getByRole("button", { name: "이메일 링크" }).click();
 await page.getByLabel("이메일").fill(EMAIL);
 await page.getByRole("button", { name: "로그인 링크 받기" }).click();
 await page.getByText("로그인 링크를 보냈습니다").waitFor();
@@ -114,36 +115,65 @@ await adminDb.collection("agentInsights").add(old);
 await adminDb.collection("agentLogs").add(logOf(old, "상도1동 야간 연장 어린이집 있나요"));
 await adminDb.collection("agentInsights").add({ ...turn("1162052500", {}), sigunguCode: "11620" }); // 다른 구는 안 보여야 함
 
-await page.goto(`${BASE}/?sgg=11590&slot=night&target=infant`, { waitUntil: "load", timeout: 120000 });
-const panel = page.getByTestId("agent-panel");
-await panel.getByTestId("agent-live").getByText(/^실시간/).waitFor({ timeout: 30000 });
-await panel.getByText("상도1동 야간 연장 어린이집 있나요").waitFor({ timeout: 20000 });
-const before = await panel.getByTestId("agent-stats").innerText();
-if (!before.includes("1건")) throw new Error(`첫 집계가 1건이 아님: ${before}`);
-ok("AI 상담 패널: 구 전체 집계 1건 (다른 구 기록 제외) + 기존 대화");
+// AI 상담 탭: 구 전체 실시간 집계·대화
+await page.goto(`${BASE}/ai/?sgg=11590&slot=night&target=infant`, { waitUntil: "load", timeout: 120000 });
+await page.getByTestId("agent-live").getByText(/^실시간/).waitFor({ timeout: 30000 });
+await page.getByText("상도1동 야간 연장 어린이집 있나요").waitFor({ timeout: 20000 });
+const kpi = () => page.getByTestId("agent-stats").innerText();
+if (!/최근 7일 상담\s*1\s*건/.test(await kpi())) throw new Error(`첫 집계가 1건이 아님: ${await kpi()}`);
+ok("AI 상담 탭: 구 전체 집계 1건 (다른 구 기록 제외) + 기존 대화");
 
 const t0 = Date.now();
 const live = turn("1159052000", { topics: ["vacancy", "facility_search"], outcome: { facilityMatches: 0, noResult: true }, createdAt: new Date() });
 await adminDb.collection("agentInsights").add(live);
 await adminDb.collection("agentLogs").add(logOf(live, "노량진2동인데 밤 10시까지 봐주는 곳 없어요?"));
-await panel.getByText("노량진2동인데 밤 10시까지 봐주는 곳 없어요?").waitFor({ timeout: 15000 });
-await panel.getByText("새 대화", { exact: true }).waitFor();
-await panel.getByTestId("agent-stats").getByText("2건").first().waitFor({ timeout: 15000 });
-await panel.getByText("50%").waitFor();
-ok(`새 상담 실시간 반영 ${Date.now() - t0}ms (새로고침 없음): 대화 '새 대화' 표시 · 집계 2건 · 시설 못 찾음 50%`);
+await page.getByText("노량진2동인데 밤 10시까지 봐주는 곳 없어요?").waitFor({ timeout: 15000 });
+await page.getByText("새 대화", { exact: true }).waitFor();
+await page.waitForFunction(() => /최근 7일 상담\s*2\s*건/.test(document.querySelector("[data-testid=agent-stats]")?.textContent ?? ""), null, { timeout: 15000 });
+await page.getByTestId("agent-stats").getByText("50%").waitFor();
+ok(`새 상담 실시간 반영 ${Date.now() - t0}ms (새로고침 없음): '새 대화' 표시 · 집계 2건 · 시설 못 찾음 50%`);
 
-await panel.getByRole("button", { name: /노량진2동 \d+건/ }).click();
-await page.waitForTimeout(800);
-if ((await panel.getByRole("button", { name: /노량진2동 \d+건/ }).getAttribute("aria-current")) !== "true") throw new Error("동 순위 클릭이 지도 선택으로 이어지지 않음");
-await panel.getByRole("button", { name: "시설 못 찾음", exact: true }).click();
-if (await panel.getByText("상도1동 야간 연장 어린이집 있나요").count()) throw new Error("'시설 못 찾음' 거르기가 동작하지 않음");
-ok("동 순위 → 지도에서 동 선택, '시설 못 찾음' 거르기");
-await panel.screenshot({ path: `${S}/e2e-agent-panel.png` });
+await page.getByRole("button", { name: "시설 못 찾음", exact: true }).click();
+if (await page.getByText("상도1동 야간 연장 어린이집 있나요").count()) throw new Error("'시설 못 찾음' 거르기가 동작하지 않음");
+const mapLink = page.getByRole("link", { name: "노량진2동 지도에서 보기" });
+if (!(await mapLink.getAttribute("href")).includes("dong=1159052000")) throw new Error("동별 표의 지도 링크가 그 동을 열지 않음");
+ok("'시설 못 찾음' 거르기 · 동별 표 → 지도에서 그 동 열기 링크");
+await page.screenshot({ path: `${S}/e2e-ai-tab.png`, fullPage: true });
 
 // 10) 역할을 여러 번 바꿔도 시민 앱 클레임(nickname·onboarded)은 남는다
 const claims = (await getAuth().getUser(uid)).customClaims;
 if (claims.nickname !== "e2e닉네임" || claims.onboarded !== true || claims.role !== "district_viewer") throw new Error(`클레임 병합 실패: ${JSON.stringify(claims)}`);
 ok(`역할 부여 후 클레임: ${JSON.stringify(claims)}`);
+
+// 11) 운영자: 비밀번호 로그인 → 서울 전체 AI 상담 → 리포트 탭 엑셀
+const OPS = "ops@careos.kr";
+const opsUser = await getAuth().createUser({ email: OPS, password: "e2e-pass-1234", emailVerified: true });
+await getAuth().setCustomUserClaims(opsUser.uid, { role: "careos_admin" });
+const ctx2 = await browser.newContext({ viewport: { width: 1600, height: 950 }, acceptDownloads: true });
+const p2 = await ctx2.newPage();
+p2.on("pageerror", (e) => errs.push(`[pageerror] ${e.message}`));
+await p2.goto(`${BASE}/login/`, { waitUntil: "networkidle", timeout: 120000 });
+await p2.getByLabel("이메일").fill(OPS);
+await p2.getByLabel("비밀번호").fill("틀린비밀번호");
+await p2.getByRole("button", { name: "로그인", exact: true }).click();
+await p2.getByText("이메일 또는 비밀번호가 맞지 않습니다").waitFor({ timeout: 15000 });
+await p2.getByLabel("비밀번호").fill("e2e-pass-1234");
+await p2.getByRole("button", { name: "로그인", exact: true }).click();
+await p2.getByText("운영자 · 전체 구").first().waitFor({ timeout: 20000 });
+ok("비밀번호 로그인 (틀린 비밀번호 안내 → 운영자 로그인)");
+
+await p2.goto(`${BASE}/ai/?sgg=11590&scope=all`, { waitUntil: "load", timeout: 120000 });
+await p2.getByText("구별 상담").waitFor({ timeout: 30000 });
+await p2.getByRole("cell", { name: "관악구" }).waitFor({ timeout: 20000 });
+await p2.getByRole("cell", { name: "동작구" }).waitFor();
+ok("운영자 서울 전체 보기: 구별 상담 표에 동작구·관악구");
+
+await p2.goto(`${BASE}/report/?sgg=11590&slot=night&target=infant`, { waitUntil: "load", timeout: 120000 });
+await p2.getByText("부족 인원 상위 동").waitFor({ timeout: 30000 });
+const [dl] = await Promise.all([p2.waitForEvent("download", { timeout: 60000 }), p2.getByRole("button", { name: /엑셀 내려받기 · \d+시트/ }).click()]);
+ok(`리포트 탭: 대시보드 표시 · 엑셀 내려받기 ${dl.suggestedFilename()}`);
+await p2.screenshot({ path: `${S}/e2e-report-tab.png`, fullPage: true });
+await ctx2.close();
 
 await page.screenshot({ path: `${S}/e2e-final.png` });
 console.log(errs.join("\n") || "페이지 오류 없음");

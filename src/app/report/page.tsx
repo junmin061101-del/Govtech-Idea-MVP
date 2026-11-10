@@ -1,22 +1,27 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { ArrowLeft, FileSpreadsheet, Printer } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { FileSpreadsheet, Printer } from "lucide-react";
+import TopController from "@/components/TopController";
+import Notice from "@/components/Notice";
+import { BarList } from "@/components/charts/Bars";
 import { buildReport, REPORT_TEMPLATES, type ReportModel, type ReportTemplate } from "@/lib/report";
-import { decodeView, encodeView, type ViewState } from "@/lib/viewState";
+import { decodeView, encodeView, DEFAULT_VIEW, type ViewState } from "@/lib/viewState";
 import { won, DEFAULT_UNIT_COSTS } from "@/lib/config/unitCosts";
 import { ALL_DONGS, DATA_DATE, DATA_SOURCES, dongName, useFacilities, useSnapshots, useUnmetDemand } from "@/lib/hooks/useSeoulData";
 import { people, percent } from "@/lib/mapScale";
 
 const TEMPLATES = Object.keys(REPORT_TEMPLATES) as ReportTemplate[];
-const TEMPLATE_LABEL: Record<ReportTemplate, string> = { monthly: "월 (운영 조정)", quarterly: "분기 (돌봄협의체)", annual: "연 (예산 편성 전)" };
+const TEMPLATE_LABEL: Record<ReportTemplate, string> = { monthly: "월간", quarterly: "분기", annual: "연간" };
 
 export default function ReportPage() {
   const [view, setView] = useState<ViewState | null>(null);
   const [template, setTemplate] = useState<ReportTemplate>("monthly");
   const unitCosts = DEFAULT_UNIT_COSTS;
   const [busy, setBusy] = useState(false);
+  const [preview, setPreview] = useState(false);
+  const [notice, setNotice] = useState<{ text: string; id: number } | null>(null);
+  const closeNotice = useCallback(() => setNotice(null), []);
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
@@ -61,57 +66,252 @@ export default function ReportPage() {
     }
   };
 
+  const v = view ?? DEFAULT_VIEW;
+  const sheets = model ? excelSheets(model) : [];
+
   return (
-    <div className="min-h-screen bg-neutral-100 print:bg-white">
-      <div className="sticky top-0 z-10 flex flex-wrap items-center gap-2 border-b border-neutral-200 bg-white px-4 py-2 print:hidden">
-        <Link href={view ? `/?${encodeView(view)}` : "/"} className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-800">
-          <ArrowLeft className="h-4 w-4" /> 지도로
-        </Link>
-        <div className="ml-2 flex gap-1 rounded-lg bg-neutral-100 p-1" role="group" aria-label="리포트 템플릿">
-          {TEMPLATES.map((t) => (
-            <button
-              key={t}
-              onClick={() => setTemplate(t)}
-              aria-pressed={template === t}
-              className={`rounded-md px-2.5 py-1 text-sm ${template === t ? "bg-neutral-900 text-white" : "text-neutral-600 hover:bg-neutral-200"}`}
-            >
-              {TEMPLATE_LABEL[t]}
-            </button>
-          ))}
-        </div>
-        <p className="hidden text-xs text-neutral-500 xl:block">
-          지금 보던 구·시간대 기준 보고서입니다. 용도를 고른 뒤 PDF 또는 엑셀로 내려받으세요.
-        </p>
-        <div className="ml-auto flex gap-2">
-          <button
-            onClick={() => window.print()}
-            disabled={!model}
-            className="flex items-center gap-1 rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white disabled:opacity-40"
-          >
-            <Printer className="h-4 w-4" /> PDF로 저장
-            <span className="text-[11px] font-normal text-neutral-300">인쇄 창에서 “PDF로 저장”</span>
-          </button>
-          <button
-            onClick={download}
-            disabled={!model || busy}
-            className="flex items-center gap-1 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm text-neutral-700 disabled:opacity-40"
-          >
-            <FileSpreadsheet className="h-4 w-4" /> {busy ? "만드는 중..." : "엑셀 내려받기"}
-            {model && (
-              <span className="text-[11px] text-neutral-400">
-                시트 {7 + [model.reasonTotals, model.unmet, model.decision, model.comparison].filter(Boolean).length}개
-              </span>
-            )}
-          </button>
-        </div>
+    <div className="min-h-screen pb-16 print:bg-white print:pb-0">
+      <div className="print:hidden">
+        <TopController
+          tab="report"
+          sigunguCode={v.sigunguCode}
+          onSigunguChange={(code) => setView({ ...v, sigunguCode: code, dongId: null, alternatives: [] })}
+          target={v.target}
+          onTargetChange={(target) => setView({ ...v, target })}
+          timeSlot={v.timeSlot}
+          onTimeSlotChange={(timeSlot) => setView({ ...v, timeSlot })}
+          query={encodeView(v)}
+          onUnavailable={(text) => setNotice({ text, id: Date.now() })}
+        />
+        <Notice message={notice} onClose={closeNotice} />
       </div>
 
-      {!model ? (
-        <p className="p-10 text-center text-sm text-neutral-400">리포트를 만드는 중...</p>
-      ) : (
-        <ReportDocument m={model} />
+      <main className="mx-auto flex max-w-[1440px] flex-col gap-5 break-keep px-6 pt-8 print:hidden">
+        {/* 제목 + 내보내기 */}
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-[13px] font-medium text-neutral-500">
+              서울 {model?.sigunguName ?? ""} · {model?.contextLabel ?? ""}
+            </p>
+            <h2 className="text-[28px] font-semibold tracking-tight text-neutral-900">리포트</h2>
+            <p className="mt-1 text-[13px] text-neutral-500">
+              {model ? `${model.title} · ${model.periodLabel} · 데이터 기준일 ${model.dataDate}` : "리포트를 만드는 중..."}
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="seg" role="group" aria-label="리포트 종류">
+              {TEMPLATES.map((t) => (
+                <button key={t} type="button" onClick={() => setTemplate(t)} aria-pressed={template === t} className="seg-item">
+                  {TEMPLATE_LABEL[t]}
+                </button>
+              ))}
+            </div>
+            <button type="button" onClick={() => window.print()} disabled={!model} className="btn-primary">
+              <Printer className="h-4 w-4" /> PDF로 저장
+            </button>
+            <button type="button" onClick={download} disabled={!model || busy} className="btn-secondary">
+              <FileSpreadsheet className="h-4 w-4" /> {busy ? "만드는 중..." : `엑셀 내려받기 · ${sheets.length}시트`}
+            </button>
+          </div>
+        </div>
+
+        {!model ? (
+          <p className="card p-10 text-center text-[13px] text-neutral-400">리포트를 만드는 중...</p>
+        ) : (
+          <>
+            <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+              <Kpi label="추정 수요" value={model.totals.demand.toLocaleString()} unit="명" />
+              <Kpi label="이용 가능한 자리" value={model.totals.seats.toLocaleString()} unit="명" />
+              <Kpi label="부족 인원" value={model.totals.gap.toLocaleString()} unit="명" dark />
+              <Kpi label="부족한 동" value={`${model.totals.shortDongs}`} unit={`/ ${model.totals.dongs}개`} />
+            </section>
+
+            <section className="grid grid-cols-1 gap-4 lg:grid-cols-[1.4fr_1fr]">
+              <Card title="핵심 요약" sub="리포트 첫 장에 그대로 들어갑니다">
+                <ol className="flex flex-col gap-2.5">
+                  {model.keyFindings.map((f, i) => (
+                    <li key={f} className="flex gap-3 text-[14px] leading-relaxed text-neutral-800">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-[11px] font-semibold text-white">{i + 1}</span>
+                      {f}
+                    </li>
+                  ))}
+                </ol>
+              </Card>
+              <Card title="부족한 이유" sub={`${model.contextLabel} · 구 전체`}>
+                {model.reasonTotalsCurrent.some((r) => r.people > 0) ? (
+                  <BarList
+                    data={model.reasonTotalsCurrent.map((r) => ({ key: r.label, label: r.label, value: r.people, sub: percent(r.share) }))}
+                    labelWidth="w-28"
+                  />
+                ) : (
+                  <p className="py-6 text-center text-[13px] text-neutral-400">부족한 동이 없습니다.</p>
+                )}
+              </Card>
+            </section>
+
+            <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <Card title="부족 인원 상위 동" sub="부족 인원 순 · 막대 = 부족 인원">
+                <RankingTable rows={model.ranking.filter((r) => r.gap > 0).slice(0, 10)} />
+              </Card>
+              <Card title="권고 대안" sub="자동 산출 · 현장 확인 전 참고">
+                {model.recommendations.length === 0 ? (
+                  <p className="py-6 text-center text-[13px] text-neutral-400">부족한 동이 없습니다.</p>
+                ) : (
+                  <ul className="flex flex-col divide-y divide-black/[0.06]">
+                    {model.recommendations.map((r) => (
+                      <li key={r.name} className="flex items-start gap-4 py-3">
+                        <div className="w-24 shrink-0">
+                          <p className="text-[14px] font-semibold text-neutral-900">{r.name}</p>
+                          <p className="text-[12px] text-neutral-500">부족 {r.gap}명</p>
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[13px] font-medium text-neutral-900">{r.best ? r.best.title : "해당 대안 없음 (신규 정원 검토)"}</p>
+                          {r.best && <p className="mt-0.5 text-[12px] text-neutral-500">{r.best.needs.join(" · ")}</p>}
+                        </div>
+                        <div className="shrink-0 text-right">
+                          <p className="text-[15px] font-semibold tabular-nums text-neutral-900">{r.best ? `−${r.best.reduction}` : "–"}</p>
+                          <p className="text-[11px] text-neutral-500">모두 적용 시 {r.allCombinedAfter}명</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </Card>
+            </section>
+
+            <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <Card title="PDF에 들어가는 내용" sub="A4 · 인쇄 창에서 ‘PDF로 저장’을 고르세요">
+                <ul className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[13px] text-neutral-700">
+                  {pdfSections(model).map((t) => (
+                    <li key={t} className="flex items-center gap-2">
+                      <span className="h-1 w-1 rounded-full bg-neutral-400" />
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+                <button type="button" onClick={() => setPreview((p) => !p)} className="btn-secondary self-start">
+                  {preview ? "미리보기 닫기" : "PDF 미리보기"}
+                </button>
+              </Card>
+              <Card title="엑셀에 들어가는 시트" sub={`${sheets.length}개 시트 · 머리글 고정·필터 포함`}>
+                <ul className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[13px] text-neutral-700">
+                  {sheets.map((t, i) => (
+                    <li key={t} className="flex items-center gap-2">
+                      <span className="w-4 text-right text-[11px] tabular-nums text-neutral-400">{i + 1}</span>
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+                <button type="button" onClick={download} disabled={busy} className="btn-secondary self-start">
+                  <FileSpreadsheet className="h-4 w-4" /> 엑셀 내려받기
+                </button>
+              </Card>
+            </section>
+          </>
+        )}
+      </main>
+
+      {/* 인쇄(PDF)용 문서 — 화면에서는 미리보기를 열 때만, 인쇄할 때는 항상 */}
+      {model && (
+        <div className={`${preview ? "block" : "hidden"} pt-6 print:block print:pt-0`}>
+          <ReportDocument m={model} />
+        </div>
       )}
     </div>
+  );
+}
+
+/** 엑셀 시트 이름 (reportExcel.ts 와 같은 순서·조건) */
+function excelSheets(x: ReportModel): string[] {
+  return [
+    "요약",
+    "지역 순위",
+    "권고 대안",
+    "부족 원인 시설",
+    ...(x.slotMatrix && x.slotColumns ? ["시간대별 부족"] : []),
+    ...(x.reasonTotals ? ["이유별 합계"] : []),
+    ...(x.unmet ? ["부모 검색 신호"] : []),
+    ...(x.decision ? ["선택한 대안"] : []),
+    "시설 목록",
+    ...(x.comparison ? ["시점 비교"] : []),
+    "산정 방법·출처",
+  ];
+}
+
+function pdfSections(x: ReportModel): string[] {
+  return [
+    "핵심 숫자·핵심 요약",
+    "지역 순위 (이유별)",
+    "부족 상위 동 권고 대안",
+    "지역별 부족 인원과 이유",
+    ...(x.slotMatrix ? ["시간대별 부족 인원"] : []),
+    ...(x.reasonTotals ? ["이유별 합계 (예산 근거)"] : []),
+    ...(x.unmet ? ["부모 검색 신호"] : []),
+    "선택한 대안과 효과",
+    ...(x.comparison ? ["시점 비교"] : []),
+    "산정 방법·출처",
+  ];
+}
+
+function Kpi({ label, value, unit, dark }: { label: string; value: string; unit?: string; dark?: boolean }) {
+  return (
+    <div className={`rounded-2xl p-5 ${dark ? "bg-neutral-900 text-white" : "card"}`}>
+      <p className={`text-[12px] font-medium ${dark ? "text-neutral-400" : "text-neutral-500"}`}>{label}</p>
+      <p className="mt-1 text-[32px] font-semibold tracking-tight tabular-nums">
+        {value}
+        {unit && <span className={`ml-1 text-[15px] font-medium ${dark ? "text-neutral-400" : "text-neutral-500"}`}>{unit}</span>}
+      </p>
+    </div>
+  );
+}
+
+function Card({ title, sub, children }: { title: string; sub?: string; children: React.ReactNode }) {
+  return (
+    <section className="card flex flex-col gap-4 p-6">
+      <div>
+        <h3 className="card-title">{title}</h3>
+        {sub && <p className="card-sub mt-0.5">{sub}</p>}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function RankingTable({ rows }: { rows: ReportModel["ranking"] }) {
+  if (rows.length === 0) return <p className="py-6 text-center text-[13px] text-neutral-400">부족한 동이 없습니다.</p>;
+  const max = Math.max(1, rows[0].gap);
+  return (
+    <table className="w-full text-[13px]">
+      <thead className="text-left text-[11px] text-neutral-500">
+        <tr className="border-b border-black/[0.06]">
+          <th className="w-6 py-2 font-medium">#</th>
+          <th className="py-2 font-medium">행정동</th>
+          <th className="w-[38%] py-2 font-medium">부족 인원</th>
+          <th className="py-2 text-right font-medium">자리 없음</th>
+          <th className="py-2 text-right font-medium">문 닫음</th>
+          <th className="py-2 text-right font-medium">교사 부족</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr key={r.emdCode} className="border-b border-black/[0.04] last:border-0" title={`${r.name}: 수요 ${r.demand} · 자리 ${r.seats} · 부족 ${r.gap}`}>
+            <td className="py-2.5 tabular-nums text-neutral-400">{r.rank}</td>
+            <td className="py-2.5 font-medium text-neutral-900">{r.name}</td>
+            <td className="py-2.5">
+              <span className="flex items-center gap-2">
+                <span className="h-2 flex-1 overflow-hidden rounded-full bg-black/[0.05]">
+                  <span className="block h-full rounded-full bg-neutral-800" style={{ width: `${(r.gap / max) * 100}%` }} />
+                </span>
+                <span className="w-10 text-right font-semibold tabular-nums">{r.gap}</span>
+              </span>
+            </td>
+            <td className="py-2.5 text-right tabular-nums text-neutral-600">{r.space || "–"}</td>
+            <td className="py-2.5 text-right tabular-nums text-neutral-600">{r.time || "–"}</td>
+            <td className="py-2.5 text-right tabular-nums text-neutral-600">{r.staff || "–"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
@@ -130,7 +330,7 @@ const tdNum = `${td} text-right tabular-nums`;
 
 function ReportDocument({ m }: { m: ReportModel }) {
   return (
-    <article className="mx-auto my-6 max-w-[210mm] break-keep bg-white px-[16mm] py-[14mm] text-[12px] leading-relaxed text-neutral-800 shadow print:my-0 print:max-w-none print:px-0 print:py-0 print:shadow-none">
+    <article className="card mx-auto my-6 max-w-[210mm] break-keep bg-white px-[16mm] py-[14mm] text-[12px] leading-relaxed text-neutral-800 print:my-0 print:rounded-none print:max-w-none print:px-0 print:py-0 print:shadow-none">
       <header>
         <p className="text-[11px] text-neutral-500">
           서울특별시 {m.sigunguName} · {m.purpose}
