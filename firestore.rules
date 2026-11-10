@@ -1,16 +1,19 @@
 rules_version = '2';
 
-// 우리 구 돌봄 공백 지도 — Firestore 보안 규칙
+// CareOS 공용 Firestore 보안 규칙 — 시민 앱(Govtech-Consumer-Application-MVP)과 구청 대시보드(Govtech-Idea-MVP)가
+// 같은 Firebase 프로젝트를 쓰므로 이 파일 하나를 두 저장소에 똑같이 둔다. 한쪽만 고치면 다른 쪽 배포가 덮어쓴다.
+// 바꿀 때는 두 저장소의 firestore.rules 를 같이 고치고, 배포는 시민 앱 저장소에서만 한다:
+//   npx firebase deploy --only firestore:rules --project dev
 //
 // 원칙
-//  - 기본 거부. 아래에 명시한 컬렉션만 열린다.
-//  - 공개 데이터(시설·인구·경계·계산 결과)는 Firestore가 아니라 정적 파일로 배포한다 → 여기서 다루지 않는다.
-//  - 역할·구는 Custom Claims(role, sigungu_code)로만 판단한다 (scripts/set-user-role.mjs로 부여).
+//  - 기본 거부. 아래에 명시한 경로만 열린다.
+//  - 시민 앱: 클라이언트가 직접 읽고 쓰는 것은 본인 프로필 읽기와 리뷰뿐. 나머지는 Functions(Admin SDK)만 접근한다.
+//  - 대시보드: 역할·구는 Custom Claims(role, sigungu_code)로만 판단한다 (대시보드 scripts/set-user-role.mjs 로 부여).
 //      careos_admin    : 전체 읽기·쓰기
 //      district_admin  : 자기 구 읽기·쓰기
 //      district_viewer : 자기 구 읽기
-//  - 판단 이력은 수정할 수 없다 (인수인계·감사 기록). 잘못 저장하면 삭제 후 다시 저장한다.
-//  - 입소 대기는 집계(행정동 × 연령별 인원)만 저장한다. 정해진 필드 외에는 받지 않는다.
+//  - 판단 이력은 수정할 수 없다 (인수인계·감사 기록). 입소 대기는 집계만 저장한다.
+//  - AI 상담 기록·로그·요약은 시민 앱 서버가 쓰고, 대시보드는 자기 구 것만 실시간으로 읽는다 (원문 로그는 수집 동의한 회원 것만 있다).
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -36,6 +39,42 @@ service cloud.firestore {
     function isSigungu(v) {
       return v is string && v.matches('^[0-9]{5}$');
     }
+
+    // ---------- 시민 앱 ----------
+
+    // 회원 프로필: 본인만 읽기. 쓰기는 검증을 위해 API(Functions) 로만 한다.
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+    }
+
+    // 리뷰: 로그인한 회원이 읽고, 본인만 시설당 1개를 쓰고 고치고 지운다.
+    match /reviews/{reviewId} {
+      allow read: if signedIn();
+
+      allow create, update: if signedIn()
+        // 문서 ID = 시설ID_uid 이므로 시설당 1인 1리뷰가 강제된다
+        && reviewId == request.resource.data.facilityId + '_' + request.auth.uid
+        && request.resource.data.uid == request.auth.uid
+        // 닉네임은 서버가 발급한 토큰 값과 같아야 한다 (남의 이름으로 쓰기 방지)
+        && request.resource.data.nickname == request.auth.token.nickname
+        && request.resource.data.keys().hasOnly(
+             ['facilityId', 'uid', 'nickname', 'rating', 'text', 'tags', 'updatedAt'])
+        && request.resource.data.facilityId is string
+        && request.resource.data.facilityId.size() > 0
+        && request.resource.data.facilityId.size() <= 64
+        && request.resource.data.rating is int
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && request.resource.data.text is string
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.tags is list
+        && request.resource.data.tags.hasOnly(['kind', 'clean', 'food', 'program', 'flex', 'access'])
+        && request.resource.data.updatedAt == request.time;
+
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    // ---------- 구청 대시보드 ----------
 
     // 판단 이력: decisions/{자동 id}
     match /decisions/{id} {
@@ -63,6 +102,24 @@ service cloud.firestore {
         && request.resource.data.uploadedBy == request.auth.uid
         && request.resource.data.uploadedAt == request.time;
       allow delete: if canWrite(resource.data.sigunguCode);
+    }
+
+    // ---------- AI 상담 → 대시보드 (시민 앱 서버만 쓴다) ----------
+
+    // 구별 요약: agentSummaries/{sigungu_code} — 익명 집계와 AI 요약문
+    match /agentSummaries/{sgg} {
+      allow read: if canRead(sgg);
+    }
+
+    // 상담 기록(익명): agentInsights/{자동 id} — 모든 상담 한 건마다 행정동·시간대·대상·주제·결과. 원문·회원 식별 정보 없음.
+    // 대시보드가 자기 구 것을 실시간으로 집계한다.
+    match /agentInsights/{id} {
+      allow read: if canRead(resource.data.sigunguCode);
+    }
+
+    // 대화 로그: agentLogs/{자동 id} — 수집에 동의한 회원의 대화만, 개인정보 가림 처리 후 저장
+    match /agentLogs/{id} {
+      allow read: if canRead(resource.data.sigunguCode);
     }
 
     // 그 밖의 모든 경로는 거부

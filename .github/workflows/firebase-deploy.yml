@@ -1,6 +1,6 @@
 # 테스트 → 정적 빌드 → Firebase Hosting 배포
 #  - main에 push: 개발(dev) 프로젝트 대시보드 사이트에 배포
-#    (Firestore 규칙·인덱스는 자주 바뀌지 않아 수동 배포: npx firebase deploy --only firestore --project dev)
+#    (Firestore 규칙·인덱스는 시민 앱 저장소와 공유 — 배포는 시민 앱 저장소에서만 한다)
 #    (운영 프로젝트를 만들면 prod로 바꾼다)
 #  - PR: 개발(dev) 프로젝트의 미리보기 채널에 배포
 #  - 데이터 자동 갱신 커밋("[skip ci]")에는 돌지 않는다 (배포는 data-refresh.yml이 함)

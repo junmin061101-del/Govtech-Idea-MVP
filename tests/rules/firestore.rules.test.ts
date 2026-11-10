@@ -115,3 +115,51 @@ describe("입소 대기 집계", () => {
     await assertFails(getDoc(doc(db("gaAdmin"), "waitlists/11590_202611")));
   });
 });
+
+describe("AI 상담 기록·로그·요약 — 시민 앱 서버만 쓰고, 대시보드는 자기 구만 읽는다", () => {
+  beforeEach(async () => {
+    await env.withSecurityRulesDisabled(async (ctx) => {
+      const f = ctx.firestore();
+      await setDoc(doc(f, `agentSummaries/${DONGJAK}`), { sigunguCode: DONGJAK, total: { count: 1 } });
+      await setDoc(doc(f, `agentSummaries/${GWANAK}`), { sigunguCode: GWANAK, total: { count: 1 } });
+      await setDoc(doc(f, "agentLogs/dj1"), { sigunguCode: DONGJAK, emdCode: "1159051000", question: "q", answer: "a", createdAt: new Date() });
+      await setDoc(doc(f, "agentLogs/ga1"), { sigunguCode: GWANAK, emdCode: "1162052500", question: "q", answer: "a", createdAt: new Date() });
+      await setDoc(doc(f, "agentInsights/dj1"), { sigunguCode: DONGJAK, emdCode: "1159051000", topics: ["vacancy"], createdAt: new Date() });
+      await setDoc(doc(f, "agentInsights/ga1"), { sigunguCode: GWANAK, emdCode: "1162052500", topics: ["cost"], createdAt: new Date() });
+    });
+  });
+  it("요약: 자기 구만 읽기, 관리자는 전체", async () => {
+    await assertSucceeds(getDoc(doc(db("djViewer"), `agentSummaries/${DONGJAK}`)));
+    await assertFails(getDoc(doc(db("djViewer"), `agentSummaries/${GWANAK}`)));
+    await assertSucceeds(getDoc(doc(db("careos"), `agentSummaries/${GWANAK}`)));
+    await assertFails(getDoc(doc(db("noRole"), `agentSummaries/${DONGJAK}`)));
+    await assertFails(getDoc(doc(anon(), `agentSummaries/${DONGJAK}`)));
+  });
+  it("대화 로그: 자기 구 조건을 붙인 목록만, 다른 구는 거부", async () => {
+    await assertSucceeds(getDocs(query(collection(db("djViewer"), "agentLogs"), where("sigunguCode", "==", DONGJAK))));
+    await assertFails(getDocs(collection(db("djViewer"), "agentLogs")));
+    await assertFails(getDoc(doc(db("gaAdmin"), "agentLogs/dj1")));
+    await assertFails(getDoc(doc(db("noRole"), "agentLogs/dj1")));
+  });
+  it("익명 상담 기록: 자기 구 조건을 붙인 실시간 집계 쿼리만, 다른 구·무역할·비로그인은 거부", async () => {
+    const since = new Date(Date.now() - 7 * 86_400_000);
+    await assertSucceeds(
+      getDocs(query(collection(db("djViewer"), "agentInsights"), where("sigunguCode", "==", DONGJAK), where("createdAt", ">=", since))),
+    );
+    await assertSucceeds(getDocs(query(collection(db("careos"), "agentInsights"), where("sigunguCode", "==", GWANAK))));
+    // 운영자는 구 조건 없이 서울 전체를 본다
+    await assertSucceeds(getDocs(query(collection(db("careos"), "agentInsights"), where("createdAt", ">=", since))));
+    await assertSucceeds(getDocs(collection(db("careos"), "agentLogs")));
+    await assertFails(getDocs(collection(db("djViewer"), "agentInsights")));
+    await assertFails(getDocs(query(collection(db("djViewer"), "agentInsights"), where("sigunguCode", "==", GWANAK))));
+    await assertFails(getDoc(doc(db("noRole"), "agentInsights/dj1")));
+    await assertFails(getDoc(doc(anon(), "agentInsights/dj1")));
+  });
+  it("대시보드에서는 아무도 쓸 수 없다 (구 관리자·전체 관리자 포함)", async () => {
+    await assertFails(setDoc(doc(db("djAdmin"), "agentInsights/x"), { sigunguCode: DONGJAK }));
+    await assertFails(updateDoc(doc(db("careos"), "agentInsights/dj1"), { topics: [] }));
+    await assertFails(setDoc(doc(db("djAdmin"), `agentSummaries/${DONGJAK}`), { sigunguCode: DONGJAK }));
+    await assertFails(updateDoc(doc(db("careos"), "agentLogs/dj1"), { answer: "x" }));
+    await assertFails(deleteDoc(doc(db("djAdmin"), "agentLogs/dj1")));
+  });
+});
