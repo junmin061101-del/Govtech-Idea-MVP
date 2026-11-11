@@ -2,7 +2,7 @@
  "sigunguCode": "11590",
  "quarter": "2026-Q3",
  "synthetic": true,
- "generatedAt": "2026-11-10T22:52:34.164Z",
+ "generatedAt": "2026-11-11T02:44:24.893Z",
  "source": "시연용 가상 데이터 (scripts/build-mock-unmet.mjs) — 시민 돌봄지도 출시 전, 실제 이용 데이터 아님",
  "cells": [
   {
@@ -3828,8 +3828,8 @@
    "target": "infant",
    "quarter": "2026-Q3",
    "searches": 113,
-   "noResult": 7,
-   "widened": 4,
+   "noResult": 8,
+   "widened": 5,
    "vacancyWaiting": 2,
    "applyExits": {
     "conditions": 1,
@@ -3848,7 +3848,7 @@
     {
      "month": "2026-08",
      "searches": 44,
-     "noResult": 3
+     "noResult": 4
     },
     {
      "month": "2026-09",
