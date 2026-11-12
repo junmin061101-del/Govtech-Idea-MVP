@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-12T00:04:29.360Z",
+ "builtAt": "2026-11-12T01:30:19.040Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -11,9 +11,9 @@
    "url": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)"
   },
   "childcare": {
-   "dataDate": "2026-11-11",
+   "dataDate": "2026-11-12",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-12T00:04:28.608Z"
+   "fetchedAt": "2026-11-12T01:30:18.252Z"
   }
  },
  "counts": {
