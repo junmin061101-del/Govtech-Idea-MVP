@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-12T09:43:58.055Z",
+ "builtAt": "2026-11-12T18:12:06.402Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -13,7 +13,7 @@
   "childcare": {
    "dataDate": "2026-11-12",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-12T09:43:57.389Z"
+   "fetchedAt": "2026-11-12T18:11:51.261Z"
   }
  },
  "counts": {
@@ -25,7 +25,7 @@
  },
  "transit": {
   "url": "서울 열린데이터광장 subwayStationMaster(역사 마스터), busStopLocationXyInfo(버스정류소 위치)",
-  "fetchedAt": "2026-11-05T06:35:40.755Z",
+  "fetchedAt": "2026-11-12T18:12:05.805Z",
   "subwayM": 500,
   "busM": 300
  },

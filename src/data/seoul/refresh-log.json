@@ -2,6 +2,18 @@
  "runs": [
   {
    "mode": "hourly",
+   "did": "weekly",
+   "started": "2026-11-12T18:11:43.669Z",
+   "finished": "2026-11-12T18:12:06.683Z",
+   "ok": true,
+   "changed": true,
+   "notes": [
+    "전체 재계산이 7일 없어 weekly로 따라잡기",
+    "내용 변경 없음"
+   ]
+  },
+  {
+   "mode": "hourly",
    "did": "hourly",
    "started": "2026-11-12T09:43:45.938Z",
    "finished": "2026-11-12T09:43:58.348Z",
