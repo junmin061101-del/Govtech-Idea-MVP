@@ -1,6 +1,17 @@
 {
  "runs": [
   {
+   "mode": "daily",
+   "did": "daily",
+   "started": "2026-11-12T23:14:32.467Z",
+   "finished": "2026-11-12T23:14:45.365Z",
+   "ok": true,
+   "changed": true,
+   "notes": [
+    "내용 변경 없음"
+   ]
+  },
+  {
    "mode": "hourly",
    "did": "weekly",
    "started": "2026-11-12T18:11:43.669Z",
