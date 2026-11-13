@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-12T23:14:45.039Z",
+ "builtAt": "2026-11-13T07:50:27.670Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -11,9 +11,9 @@
    "url": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)"
   },
   "childcare": {
-   "dataDate": "2026-11-12",
+   "dataDate": "2026-11-13",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-12T23:14:44.305Z"
+   "fetchedAt": "2026-11-13T07:50:26.882Z"
   }
  },
  "counts": {
@@ -41,8 +41,8 @@
    "name": "구립 등촌힐스테이트 이안어린이집",
    "sigunguCode": "11500",
    "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
+   "lat": 37.542459931144734,
+   "lng": 126.8748746373492,
    "address": "서울특별시 강서구 등촌로51길 63 (등촌동)"
   },
   {
@@ -109,15 +109,6 @@
    "address": "서울특별시 양천구 신정로13길 20 ."
   },
   {
-   "id": "11380000698",
-   "name": "대영어린이집",
-   "sigunguCode": "11380",
-   "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
-   "address": "서울특별시 은평구 응암로 376"
-  },
-  {
    "id": "11560000508",
    "name": "꼬꼬마어린이집",
    "sigunguCode": "11560",
@@ -125,6 +116,15 @@
    "lat": 37.56647,
    "lng": 126.977963,
    "address": "서울특별시 영등포구 여의대방로 25 104동101호(신길동, 보라매경남아너스빌)"
+  },
+  {
+   "id": "11380000698",
+   "name": "대영어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 은평구 응암로 376"
   },
   {
    "id": "11380000699",
