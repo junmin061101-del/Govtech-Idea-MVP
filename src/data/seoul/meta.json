@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-13T07:50:27.670Z",
+ "builtAt": "2026-11-13T23:15:41.322Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -13,7 +13,7 @@
   "childcare": {
    "dataDate": "2026-11-13",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-13T07:50:26.882Z"
+   "fetchedAt": "2026-11-13T23:15:40.681Z"
   }
  },
  "counts": {
