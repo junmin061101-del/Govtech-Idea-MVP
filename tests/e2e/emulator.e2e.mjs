@@ -143,6 +143,15 @@ for (const f of ["시간 공백", "검색 결과 없음"]) {
 const mapLink = page.getByRole("link", { name: "노량진2동 지도에서 보기" });
 if (!(await mapLink.getAttribute("href")).includes("dong=1159052000")) throw new Error("동별 표의 지도 링크가 그 동을 열지 않음");
 ok("'시간 공백'·'검색 결과 없음' 거르기 · 동별 표 → 지도에서 그 동 열기 링크");
+// 검은 칸: 표본이 적으면 '표본 부족' → 노량진2동 검색 실패가 쌓이면 실시간으로 그 동이 '가장 큰 문제'
+await page.getByRole("button", { name: "전체", exact: true }).click();
+await page.getByTestId("agent-top-issue").getByText("표본 부족").waitFor({ timeout: 10000 });
+for (let i = 0; i < 3; i++) await adminDb.collection("agentInsights").add(turn("1159052000", { outcome: { facilityMatches: 0, noResult: true }, createdAt: new Date() }));
+await page.getByTestId("agent-top-issue").getByText("노량진2동 검색 결과 없음").waitFor({ timeout: 15000 });
+const issue = await page.getByTestId("agent-top-issue").innerText();
+if (!issue.includes("100%") || !issue.includes("검색 4건 중 4건") || !issue.includes("기준 초과")) throw new Error(`가장 큰 문제 칸이 틀림: ${issue}`);
+if (!(await page.getByTestId("agent-top-issue").getByRole("link", { name: /지도에서 보기/ }).getAttribute("href")).includes("dong=1159052000")) throw new Error("가장 큰 문제 → 지도 링크가 그 동이 아님");
+ok("검은 칸: 표본 부족 → 실시간으로 '노량진2동 검색 결과 없음 100% · 검색 4건 중 4건 · 기준 초과' + 지도 링크");
 await page.screenshot({ path: `${S}/e2e-ai-tab.png`, fullPage: true });
 
 // 10) 역할을 여러 번 바꿔도 시민 앱 클레임(nickname·onboarded)은 남는다

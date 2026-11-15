@@ -212,7 +212,7 @@ function LoadedMap({
   if (error) {
     return (
       <div className="flex h-full w-full items-center justify-center rounded-xl border border-red-200 bg-red-50 p-8 text-sm text-red-600">
-        카카오맵 로드에 실패했습니다. API 키 및 등록된 도메인을 확인해주세요.
+        카카오맵을 불러오지 못했습니다. 이 주소({typeof window !== "undefined" ? window.location.origin : ""})가 카카오 개발자 콘솔의 Web 플랫폼 도메인에 등록돼 있는지 확인해 주세요. 운영 주소 careos-dashboard-dev.web.app에서는 정상입니다.
       </div>
     );
   }

@@ -12,7 +12,7 @@ import Notice from "@/components/Notice";
 import { BarList, ColumnChart } from "@/components/charts/Bars";
 import { canReadDistrict, useAuth } from "@/lib/firebase/AuthProvider";
 import { firebase } from "@/lib/firebase/client";
-import { ago, AGENT_TOPICS, computeAgentStats, isOffHours, OFF_HOUR_SLOTS, sameKstDay, type AgentLiveStats } from "@/lib/agentStats";
+import { ago, AGENT_TOPICS, computeAgentStats, isOffHours, ISSUE_THRESHOLD, OFF_HOUR_SLOTS, rankIssues, sameKstDay, type AgentIssue, type AgentLiveStats } from "@/lib/agentStats";
 import { INSIGHT_DAYS, INSIGHT_MAX, LOG_MAX, useAgentLive } from "@/lib/hooks/useAgentLive";
 import { decodeView, encodeView, DEFAULT_VIEW, type ViewState } from "@/lib/viewState";
 import { sigunguByCode } from "@/lib/constants/regions";
@@ -72,6 +72,17 @@ export default function AiPage() {
   }, [live.insights, period, now]);
   const week = useMemo(() => (live.insights && !live.insights.error ? computeAgentStats(live.insights.data, now, INSIGHT_DAYS) : null), [live.insights, now]);
 
+  const issues = useMemo(
+    () =>
+      stats
+        ? rankIssues(stats, {
+            allSeoul: all,
+            placeName: (id) => (all ? sggName(id) : (dongName(id) ?? id)),
+            slotLabel: (id) => timeSlotDef(id).shortLabel,
+          })
+        : null,
+    [stats, all],
+  );
   const place = all ? "서울 전체" : sggName(sgg);
   const periodLabel = period === "today" ? "오늘" : `최근 ${INSIGHT_DAYS}일`;
   const logs = useMemo(() => live.logs?.data ?? [], [live.logs]);
@@ -166,14 +177,20 @@ export default function AiPage() {
             {/* 핵심 숫자 */}
             <section className="grid grid-cols-2 gap-4 lg:grid-cols-4" data-testid="agent-stats">
               <Kpi label={`${periodLabel} 상담`} value={stats ? `${stats.count}` : "–"} unit="건" sub={week && period === "week" ? `오늘 ${week.today}건` : undefined} />
+              <TopIssue
+                issues={issues}
+                mapHref={(id) => `/?${encodeView({ ...view, dongId: id, alternatives: [] })}`}
+                onPickSigungu={(code) => {
+                  setAllSeoul(false);
+                  setView((v) => ({ ...v, sigunguCode: code, dongId: null, alternatives: [] }));
+                }}
+              />
               <Kpi
                 label="시간 공백 문의"
                 value={stats?.offHoursRate == null ? "–" : percent(stats.offHoursRate)}
                 sub={stats && stats.count > 0 ? offHoursSub(stats) : undefined}
-                dark
               />
               <Kpi label="가장 많이 물은 주제" value={stats?.topics[0]?.label ?? "–"} sub={stats?.topics[0] ? `${stats.topics[0].count}건` : undefined} />
-              <Kpi label="수집 동의 대화" value={live.logs ? `${logs.length}` : "–"} unit="건" sub={`최근 ${LOG_MAX}건까지 · 원문 확인 가능`} />
             </section>
             {live.insights?.error && <p className="text-[13px] text-neutral-500">상담 집계를 불러오지 못했습니다: {live.insights.error}</p>}
             {live.insights && !live.insights.error && live.insights.data.length >= INSIGHT_MAX && (
@@ -293,7 +310,9 @@ export default function AiPage() {
                       새 {live.fresh.size}
                     </span>
                   )}
-                  <span className="card-sub">수집에 동의한 시민 대화만 · 개인정보 자동 가림</span>
+                  <span className="card-sub">
+                    수집 동의 대화 {logs.length}건 (최근 {LOG_MAX}건까지) · 개인정보 자동 가림
+                  </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   <div className="seg" role="group" aria-label="결과">
@@ -406,6 +425,61 @@ function Mini({ label, value, unit, sub }: { label: string; value: string; unit?
         {unit && <span className="ml-0.5 text-[13px] font-medium text-neutral-500">{unit}</span>}
       </dd>
       {sub && <dd className="text-[11px] text-neutral-500">{sub}</dd>}
+    </div>
+  );
+}
+
+/** 검은 칸 — 지금 가장 심각한 문제 하나 (기준 30% 대비), 다음 문제 한 줄 */
+function TopIssue({
+  issues,
+  mapHref,
+  onPickSigungu,
+}: {
+  issues: AgentIssue[] | null;
+  mapHref: (emdCode: string) => string;
+  onPickSigungu: (code: string) => void;
+}) {
+  const top = issues?.[0];
+  const next = issues?.[1];
+  const over = top ? top.score >= 1 : false;
+  return (
+    <div className="flex flex-col rounded-2xl bg-neutral-900 p-5 text-white" data-testid="agent-top-issue">
+      <p className="text-[12px] font-medium text-neutral-400">{!issues ? "가장 큰 문제" : top ? (over ? "가장 큰 문제 · 기준 초과" : "가장 높은 지표 · 기준 이하") : "가장 큰 문제"}</p>
+      {!issues ? (
+        <p className="mt-1 text-[32px] font-semibold">–</p>
+      ) : !top ? (
+        <>
+          <p className="mt-1 text-[22px] font-semibold tracking-tight">표본 부족</p>
+          <p className="mt-0.5 text-[12px] text-neutral-400">상담이 더 모이면 판단합니다 (구 5건·동 3건 이상)</p>
+        </>
+      ) : (
+        <>
+          <p className="mt-1 flex items-baseline gap-2">
+            <span className="text-[32px] font-semibold tracking-tight tabular-nums">{percent(top.rate)}</span>
+            <span className="truncate text-[14px] font-medium">{top.title}</span>
+          </p>
+          <p className="mt-0.5 text-[12px] text-neutral-400">
+            {top.basis} · 기준 {percent(ISSUE_THRESHOLD)}
+          </p>
+          <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-[12px]">
+            {top.emdCode && (
+              <Link href={mapHref(top.emdCode)} className="font-medium text-white underline-offset-2 hover:underline">
+                지도에서 보기 →
+              </Link>
+            )}
+            {top.sigunguCode && (
+              <button type="button" onClick={() => onPickSigungu(top.sigunguCode!)} className="font-medium text-white underline-offset-2 hover:underline">
+                이 구 보기 →
+              </button>
+            )}
+            {next && (
+              <span className="truncate text-neutral-400">
+                다음: {next.title} {percent(next.rate)}
+              </span>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
