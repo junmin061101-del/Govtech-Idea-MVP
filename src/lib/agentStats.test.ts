@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ago, computeAgentStats, isOffHours, rankIssues, sameKstDay, type AgentInsight } from "./agentStats";
+import { ago, computeAgentStats, isOffHours, offHourSlotsOf, rankConcerns, sameKstDay, type AgentInsight } from "./agentStats";
 
 // 2026-11-09 10:00 KST
 const NOW = new Date("2026-11-09T01:00:00Z");
@@ -19,15 +19,25 @@ const row = (p: Partial<AgentInsight>): AgentInsight => ({
 });
 const searched = (matches: number) => ({ facilityMatches: matches, noResult: matches === 0 });
 
-describe("isOffHours — 시간 공백 문의", () => {
-  it("주간 밖 시간대를 말했거나 운영 시간을 물으면 해당", () => {
-    expect(isOffHours({ timeSlots: ["night"], topics: [] })).toBe(true);
-    expect(isOffHours({ timeSlots: ["weekend"], topics: [] })).toBe(true);
-    expect(isOffHours({ timeSlots: [], topics: ["hours"] })).toBe(true);
+describe("isOffHours — 저녁·주말 등 시간 외 돌봄 문의", () => {
+  it("야간·주말·방학을 요청하면 해당 (낮을 함께 요청해도)", () => {
+    expect(isOffHours({ timeSlots: ["night"] })).toBe(true);
+    expect(isOffHours({ timeSlots: ["weekend"] })).toBe(true);
+    expect(isOffHours({ timeSlots: ["daytime", "after_school", "night"] })).toBe(true); // 09~19:30
   });
-  it("주간만 말했거나 시간 언급이 없으면 아님", () => {
-    expect(isOffHours({ timeSlots: ["daytime"], topics: ["vacancy"] })).toBe(false);
-    expect(isOffHours({ timeSlots: [], topics: ["documents"] })).toBe(false);
+  it("낮 없이 이른 아침·방과후만 요청하면 해당", () => {
+    expect(isOffHours({ timeSlots: ["after_school"] })).toBe(true); // 17~19
+    expect(isOffHours({ timeSlots: ["early_morning"] })).toBe(true);
+  });
+  it("낮을 포함한 종일 보육(08~18시)은 아님 — 시민 앱이 걸치는 시간대를 모두 기록하기 때문", () => {
+    expect(isOffHours({ timeSlots: ["early_morning", "daytime", "after_school"] })).toBe(false);
+    expect(isOffHours({ timeSlots: ["daytime"] })).toBe(false);
+    expect(isOffHours({ timeSlots: [] })).toBe(false);
+  });
+  it("시간대별 내역은 실제로 시간 외인 부분만", () => {
+    expect(offHourSlotsOf({ timeSlots: ["daytime", "after_school", "night"] })).toEqual(["night"]);
+    expect(offHourSlotsOf({ timeSlots: ["after_school"] })).toEqual(["after_school"]);
+    expect(offHourSlotsOf({ timeSlots: ["early_morning", "daytime", "after_school"] })).toEqual([]);
   });
 });
 
@@ -52,11 +62,10 @@ describe("computeAgentStats — 구 단위 실시간 집계", () => {
     expect(s.lastAt).toEqual(at("2026-11-09T00:30:00Z"));
   });
 
-  it("시간 공백 문의: 분모는 전체 상담, 시간대별 내역과 운영 시간 질문을 나눠 셈", () => {
-    expect(s.offHours).toBe(3);
-    expect(s.offHoursRate).toBe(0.75);
+  it("시간 외 돌봄 문의: 요청 시간대로만 셈 ('운영 시간' 낱말 주제는 세지 않음)", () => {
+    expect(s.offHours).toBe(2);
+    expect(s.offHoursRate).toBe(0.5);
     expect(s.offHoursBySlot).toEqual({ night: 2 });
-    expect(s.hoursQuestions).toBe(1);
   });
 
   it("시설 검색 결과 없음: 검색을 실행한 상담만 분모 (검색 안 한 상담은 빠짐)", () => {
@@ -88,13 +97,13 @@ describe("computeAgentStats — 구 단위 실시간 집계", () => {
   it("동 순위는 상담 많은 순, 동마다 시간 공백·검색·결과 없음", () => {
     expect(s.dongs).toEqual([
       { emdCode: "1159051000", count: 2, offHours: 2, searches: 2, noResult: 1, topTopic: "빈자리·대기" },
-      { emdCode: "1159052000", count: 1, offHours: 1, searches: 0, noResult: 0, topTopic: "운영 시간" },
+      { emdCode: "1159052000", count: 1, offHours: 0, searches: 0, noResult: 0, topTopic: "운영 시간" },
     ]);
   });
 
   it("구별 합계 (서울 전체 보기)", () => {
     expect(s.sigungus).toEqual([
-      { sigunguCode: "11590", count: 3, offHours: 3, searches: 2, noResult: 1 },
+      { sigunguCode: "11590", count: 3, offHours: 2, searches: 2, noResult: 1 },
       { sigunguCode: "11620", count: 1, offHours: 0, searches: 1, noResult: 0 },
     ]);
   });
@@ -105,7 +114,7 @@ describe("computeAgentStats — 구 단위 실시간 집계", () => {
     expect(s.byHour[0]).toBe(1);
     expect(s.byDay.map((d) => d.date)).toEqual(["2026-11-03", "2026-11-04", "2026-11-05", "2026-11-06", "2026-11-07", "2026-11-08", "2026-11-09"]);
     expect(s.byDay.map((d) => d.count)).toEqual([0, 0, 1, 0, 0, 1, 2]);
-    expect(s.byDay.map((d) => d.offHours)).toEqual([0, 0, 0, 0, 0, 1, 2]);
+    expect(s.byDay.map((d) => d.offHours)).toEqual([0, 0, 0, 0, 0, 1, 1]);
   });
 
   it("상담이 없으면 비율은 null", () => {
@@ -116,45 +125,44 @@ describe("computeAgentStats — 구 단위 실시간 집계", () => {
   });
 });
 
-describe("rankIssues — 검은 칸에 띄울 가장 큰 문제", () => {
+describe("rankConcerns — 검은 칸: 같은 동에서 가장 많이 모인 어려움 (건수 기준)", () => {
   const names: Record<string, string> = { "1159051000": "흑석동", "1159052000": "노량진2동", "11590": "동작구", "11620": "관악구" };
-  const opts = { allSeoul: false, placeName: (id: string) => names[id] ?? id, slotLabel: (id: string) => ({ night: "야간", weekend: "주말" })[id] ?? id };
+  const opts = { allSeoul: false, placeName: (id: string) => names[id] ?? id, periodLabel: "최근 7일" };
   const at9 = at("2026-11-09T00:30:00Z");
   const many = (k: number, p: Partial<AgentInsight>) => Array.from({ length: k }, () => row({ createdAt: at9, ...p }));
 
-  it("동 단위 검색 실패율이 가장 높으면 그 동을 지도 링크와 함께 1순위로", () => {
+  it("비율이 아니라 건수로 고른다 — 2건 중 2건(100%)보다 10건 중 4건이 위", () => {
     const rows = [
-      ...many(3, { emdCode: "1159051000", topics: ["facility_search"], ...searched(0) }), // 흑석동 3/3 실패
-      ...many(4, { emdCode: "1159052000", topics: ["facility_search"], ...searched(4) }), // 노량진2동 성공
-      ...many(2, { emdCode: "1159052000", topics: ["documents"] }),
+      ...many(2, { emdCode: "1159051000", timeSlots: ["night"] }), // 흑석동 2/2
+      ...many(4, { emdCode: "1159052000", timeSlots: ["weekend"] }), // 노량진2동 4/10
+      ...many(6, { emdCode: "1159052000", timeSlots: ["daytime"] }),
     ];
-    const issues = rankIssues(computeAgentStats(rows, NOW, 7), opts);
-    expect(issues[0]).toMatchObject({ title: "흑석동 검색 결과 없음", rate: 1, emdCode: "1159051000", basis: "검색 3건 중 3건" });
-    expect(issues[0].score).toBeCloseTo(1 / 0.3, 9);
-    // 구 전체 검색 실패 3/7 이 다음
-    expect(issues[1]).toMatchObject({ key: "search", basis: "검색 7건 중 3건이 조건에 맞는 시설 0곳" });
+    const c = rankConcerns(computeAgentStats(rows, NOW, 7), opts);
+    expect(c[0]).toMatchObject({ placeName: "노량진2동", kind: "offHours", count: 4, of: 10 });
+    expect(c[0].headline).toBe("노량진2동 · 저녁·주말 등 시간 외 돌봄 문의");
+    expect(c[0].sentence).toBe("최근 7일 노량진2동 상담 10건 중 4건이 평일 낮(9~17시)이 아닌 시간에 아이를 맡길 곳이나 운영 시간을 물었습니다.");
+    expect(c[1]).toMatchObject({ placeName: "흑석동", count: 2 });
   });
 
-  it("시간 공백 문의가 가장 심하면 가장 많이 말한 시간대를 제목에", () => {
-    const rows = [...many(4, { timeSlots: ["night"] }), ...many(1, { timeSlots: ["weekend"] }), ...many(1, { topics: ["documents"] })];
-    const top = rankIssues(computeAgentStats(rows, NOW, 7), opts)[0];
-    expect(top).toMatchObject({ key: "offhours", title: "시간 공백 문의 (야간 최다)", basis: "상담 6건 중 5건이 주간 밖 시간·운영 시간 문의" });
+  it("같은 건수면 '맞는 곳 없음'을 먼저", () => {
+    const rows = [...many(3, { emdCode: "1159051000", ...searched(0) }), ...many(3, { emdCode: "1159052000", timeSlots: ["night"] })];
+    const c = rankConcerns(computeAgentStats(rows, NOW, 7), opts);
+    expect(c[0]).toMatchObject({ kind: "notFound", placeName: "흑석동", count: 3, of: 3 });
+    expect(c[0].sentence).toBe("최근 7일 흑석동에서 AI가 어린이집을 찾아 준 상담 3건 중 3건은 조건에 맞는 곳이 한 곳도 없었습니다.");
   });
 
-  it("같은 점수면 구 전체가 동보다 앞", () => {
-    const rows = many(5, { emdCode: "1159051000", timeSlots: ["night"] });
-    const issues = rankIssues(computeAgentStats(rows, NOW, 7), opts);
-    expect(issues.map((i) => i.key)).toEqual(["offhours", "offhours:1159051000"]);
+  it("종일 보육(08~18시) 검색은 시간 외로 세지 않는다", () => {
+    const rows = many(5, { timeSlots: ["early_morning", "daytime", "after_school"], ...searched(4) });
+    expect(rankConcerns(computeAgentStats(rows, NOW, 7), opts)).toEqual([]);
   });
 
-  it("서울 전체 보기에서는 구 단위로", () => {
-    const rows = [...many(3, { sigunguCode: "11620", emdCode: null, ...searched(0) }), ...many(3, { ...searched(5) })];
-    const top = rankIssues(computeAgentStats(rows, NOW, 7), { ...opts, allSeoul: true })[0];
-    expect(top).toMatchObject({ title: "관악구 검색 결과 없음", sigunguCode: "11620" });
+  it("서울 전체 보기에서는 구 단위", () => {
+    const rows = [...many(3, { sigunguCode: "11620", emdCode: null, ...searched(0) })];
+    expect(rankConcerns(computeAgentStats(rows, NOW, 7), { ...opts, allSeoul: true })[0]).toMatchObject({ placeName: "관악구", isDong: false });
   });
 
-  it("표본이 모자라면 후보가 없다 (숫자를 만들지 않음)", () => {
-    expect(rankIssues(computeAgentStats(many(2, { timeSlots: ["night"], ...searched(0) }), NOW, 7), opts)).toEqual([]);
+  it("같은 곳에서 1건뿐이면 띄우지 않는다", () => {
+    expect(rankConcerns(computeAgentStats(many(1, { timeSlots: ["night"], ...searched(0) }), NOW, 7), opts)).toEqual([]);
   });
 });
 

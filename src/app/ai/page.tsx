@@ -12,14 +12,13 @@ import Notice from "@/components/Notice";
 import { BarList, ColumnChart } from "@/components/charts/Bars";
 import { canReadDistrict, useAuth } from "@/lib/firebase/AuthProvider";
 import { firebase } from "@/lib/firebase/client";
-import { ago, AGENT_TOPICS, computeAgentStats, isOffHours, ISSUE_THRESHOLD, OFF_HOUR_SLOTS, rankIssues, sameKstDay, type AgentIssue, type AgentLiveStats } from "@/lib/agentStats";
+import { ago, AGENT_TOPICS, computeAgentStats, CONCERN_MIN, isOffHours, OFF_HOUR_SLOTS, rankConcerns, sameKstDay, type AgentConcern, type AgentLiveStats } from "@/lib/agentStats";
 import { INSIGHT_DAYS, INSIGHT_MAX, LOG_MAX, useAgentLive } from "@/lib/hooks/useAgentLive";
 import { decodeView, encodeView, DEFAULT_VIEW, type ViewState } from "@/lib/viewState";
 import { sigunguByCode } from "@/lib/constants/regions";
 import { TIME_SLOTS, timeSlotDef } from "@/lib/constants/timeSlots";
 import { CARE_TARGETS } from "@/lib/constants/targets";
 import { dongName } from "@/lib/hooks/useSeoulData";
-import { percent } from "@/lib/mapScale";
 import type { CareTargetId } from "@/types";
 
 type Period = "today" | "week";
@@ -72,16 +71,16 @@ export default function AiPage() {
   }, [live.insights, period, now]);
   const week = useMemo(() => (live.insights && !live.insights.error ? computeAgentStats(live.insights.data, now, INSIGHT_DAYS) : null), [live.insights, now]);
 
-  const issues = useMemo(
+  const concerns = useMemo(
     () =>
       stats
-        ? rankIssues(stats, {
+        ? rankConcerns(stats, {
             allSeoul: all,
-            placeName: (id) => (all ? sggName(id) : (dongName(id) ?? id)),
-            slotLabel: (id) => timeSlotDef(id).shortLabel,
+            placeName: (id: string) => (all ? sggName(id) : (dongName(id) ?? id)),
+            periodLabel: period === "today" ? "오늘" : `최근 ${INSIGHT_DAYS}일`,
           })
         : null,
-    [stats, all],
+    [stats, all, period],
   );
   const place = all ? "서울 전체" : sggName(sgg);
   const periodLabel = period === "today" ? "오늘" : `최근 ${INSIGHT_DAYS}일`;
@@ -177,8 +176,8 @@ export default function AiPage() {
             {/* 핵심 숫자 */}
             <section className="grid grid-cols-2 gap-4 lg:grid-cols-4" data-testid="agent-stats">
               <Kpi label={`${periodLabel} 상담`} value={stats ? `${stats.count}` : "–"} unit="건" sub={week && period === "week" ? `오늘 ${week.today}건` : undefined} />
-              <TopIssue
-                issues={issues}
+              <TopConcern
+                concerns={concerns}
                 mapHref={(id) => `/?${encodeView({ ...view, dongId: id, alternatives: [] })}`}
                 onPickSigungu={(code) => {
                   setAllSeoul(false);
@@ -186,8 +185,9 @@ export default function AiPage() {
                 }}
               />
               <Kpi
-                label="시간 공백 문의"
-                value={stats?.offHoursRate == null ? "–" : percent(stats.offHoursRate)}
+                label="저녁·주말 등 시간 외 돌봄 문의"
+                value={stats ? `${stats.offHours}` : "–"}
+                unit="건"
                 sub={stats && stats.count > 0 ? offHoursSub(stats) : undefined}
               />
               <Kpi label="가장 많이 물은 주제" value={stats?.topics[0]?.label ?? "–"} sub={stats?.topics[0] ? `${stats.topics[0].count}건` : undefined} />
@@ -199,7 +199,7 @@ export default function AiPage() {
 
             {/* 언제 */}
             <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-              <Card title="날짜별 상담" sub={`최근 ${INSIGHT_DAYS}일 · 막대에 마우스를 올리면 시간 공백 문의 건수`}>
+              <Card title="날짜별 상담" sub={`최근 ${INSIGHT_DAYS}일 · 막대에 마우스를 올리면 시간 외 돌봄 문의 건수`}>
                 {week && (
                   <ColumnChart
                     label="날짜별 상담 수"
@@ -207,7 +207,7 @@ export default function AiPage() {
                       key: d.date,
                       axis: i === week.byDay.length - 1 ? "오늘" : d.date.slice(5).replace("-", "/"),
                       value: d.count,
-                      tip: `${d.date.slice(5).replace("-", "/")} · ${d.count}건 (시간 공백 ${d.offHours})`,
+                      tip: `${d.date.slice(5).replace("-", "/")} · ${d.count}건 (시간 외 돌봄 ${d.offHours})`,
                       highlight: i === week.byDay.length - 1,
                     }))}
                   />
@@ -263,12 +263,12 @@ export default function AiPage() {
                 )}
               </Card>
               <div className="flex flex-col gap-4">
-                <Card title="시설 검색 결과" sub={`${periodLabel} · AI가 시설 검색을 실행한 상담만`}>
+                <Card title="AI가 어린이집을 찾아 준 결과" sub={`${periodLabel} · AI가 어린이집 검색을 실제로 한 상담만`}>
                   {stats && stats.searches > 0 ? (
                     <dl className="grid grid-cols-3 gap-3" data-testid="agent-search">
-                      <Mini label="시설 검색" value={`${stats.searches}`} unit="건" />
-                      <Mini label="결과 없음" value={percent(stats.noResultRate ?? 0)} sub={`${stats.noResult}건`} />
-                      <Mini label="검색 1건당 찾은 시설" value={(stats.avgMatches ?? 0).toFixed(1)} unit="곳" />
+                      <Mini label="어린이집 검색" value={`${stats.searches}`} unit="건" />
+                      <Mini label="맞는 곳이 없었음" value={`${stats.noResult}`} unit="건" sub={`검색 ${stats.searches}건 중`} />
+                      <Mini label="검색 1번에 찾아 준 곳" value={`평균 ${(stats.avgMatches ?? 0).toFixed(1)}`} unit="곳" />
                     </dl>
                   ) : (
                     <Empty text="기간 안 시설 검색이 없습니다." />
@@ -319,8 +319,8 @@ export default function AiPage() {
                     {(
                       [
                         ["all", "전체"],
-                        ["offHours", "시간 공백"],
-                        ["noResult", "검색 결과 없음"],
+                        ["offHours", "시간 외 돌봄"],
+                        ["noResult", "맞는 곳 없음"],
                       ] as [Filter, string][]
                     ).map(([f, label]) => (
                       <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)} className="seg-item">
@@ -360,8 +360,8 @@ export default function AiPage() {
                               <p className="text-[14px] leading-snug text-neutral-900">{l.question}</p>
                               <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-neutral-500">
                                 {isNew && <span className="rounded-full bg-neutral-900 px-1.5 py-0.5 font-semibold text-white">새 대화</span>}
-                                {isOffHours(l) && <span className="rounded-full bg-neutral-900 px-1.5 py-0.5 font-semibold text-white">시간 공백</span>}
-                                {l.noResult && <span className="rounded-full px-1.5 py-0.5 font-semibold text-neutral-900 ring-1 ring-neutral-900">검색 결과 없음</span>}
+                                {isOffHours(l) && <span className="rounded-full bg-neutral-900 px-1.5 py-0.5 font-semibold text-white">시간 외 돌봄</span>}
+                                {l.noResult && <span className="rounded-full px-1.5 py-0.5 font-semibold text-neutral-900 ring-1 ring-neutral-900">맞는 곳 없음</span>}
                                 {l.topics.map((t) => (
                                   <span key={t} className="rounded-full bg-black/[0.05] px-1.5 py-0.5">
                                     {AGENT_TOPICS[t] ?? t}
@@ -396,8 +396,9 @@ export default function AiPage() {
               </summary>
               <ul className="mt-2 list-disc space-y-0.5 pl-5">
                 <li>숫자 집계: 시민 앱 AI 상담 전체의 익명 기록(행정동·시간대·대상·주제·결과). 상담이 끝나는 즉시 반영. 회원 식별 정보·대화 원문 없음.</li>
-                <li>시간 공백 문의: 시민이 말한 이용 시간이 평일 주간(09~17시) 밖(이른 아침·방과후·야간·주말·방학)이거나 운영 시간을 물어본 상담의 비율입니다. 분모는 전체 상담이며, 지도의 시간대별 부족과 함께 봅니다.</li>
-                <li>시설 검색 결과: AI가 시설 검색을 실제로 실행한 상담만 셉니다. 결과 없음은 조건에 맞는 시설이 0곳이었던 검색의 비율입니다.</li>
+                <li>저녁·주말 등 시간 외 돌봄 문의: AI 어린이집 검색에서 시민이 저녁 7시 이후·주말·방학을 요청했거나, 낮 없이 이른 아침·저녁 시간만 요청한 상담입니다. 08~18시처럼 낮을 포함한 종일 보육 요청은 세지 않습니다.</li>
+                <li>맞는 곳 없음: AI가 어린이집을 찾아 줬는데 조건(동네·시간·나이)에 맞는 곳이 한 곳도 없었던 상담입니다.</li>
+                <li>가장 많이 모인 어려움: 같은 동에서 같은 어려움이 {CONCERN_MIN}건 이상 모인 것 중 건수가 가장 많은 것입니다. 표본이 적어 비율(%)은 쓰지 않습니다.</li>
                 <li>대화: 대화 내용 수집에 동의한 시민 것만. 전화번호·이메일·이름·상세 주소는 자동으로 가렸지만 완전하지 않을 수 있어 외부 공유 금지. 90일 뒤 자동 삭제, 동의 철회·탈퇴 시 즉시 삭제.</li>
                 <li>AI 요약은 매일 05시에 최근 30일을 정리한 참고용입니다. 앱 이용자 중심이라 실제 수요와 다를 수 있습니다.</li>
               </ul>
@@ -409,11 +410,10 @@ export default function AiPage() {
   );
 }
 
-/** 시간 공백 문의 내역 한 줄: "6건 · 야간 3 · 주말 2 · 운영 시간 질문 1" */
+/** 시간 외 돌봄 문의 내역 한 줄: "전체 상담 34건 중 · 야간 3 · 주말 2" */
 function offHoursSub(s: AgentLiveStats): string {
   const parts = OFF_HOUR_SLOTS.filter((id) => s.offHoursBySlot[id]).map((id) => `${timeSlotDef(id).shortLabel} ${s.offHoursBySlot[id]}`);
-  if (s.hoursQuestions) parts.push(`운영 시간 질문 ${s.hoursQuestions}`);
-  return [`${s.offHours}건`, ...parts.slice(0, 3)].join(" · ");
+  return [`전체 상담 ${s.count}건 중`, ...parts.slice(0, 3)].join(" · ");
 }
 
 function Mini({ label, value, unit, sub }: { label: string; value: string; unit?: string; sub?: string }) {
@@ -429,53 +429,46 @@ function Mini({ label, value, unit, sub }: { label: string; value: string; unit?
   );
 }
 
-/** 검은 칸 — 지금 가장 심각한 문제 하나 (기준 30% 대비), 다음 문제 한 줄 */
-function TopIssue({
-  issues,
+/** 검은 칸 — 같은 동에서 가장 많이 모인 어려움 (건수와 쉬운 문장, 퍼센트 없음) */
+function TopConcern({
+  concerns,
   mapHref,
   onPickSigungu,
 }: {
-  issues: AgentIssue[] | null;
+  concerns: AgentConcern[] | null;
   mapHref: (emdCode: string) => string;
   onPickSigungu: (code: string) => void;
 }) {
-  const top = issues?.[0];
-  const next = issues?.[1];
-  const over = top ? top.score >= 1 : false;
+  const top = concerns?.[0];
   return (
     <div className="flex flex-col rounded-2xl bg-neutral-900 p-5 text-white" data-testid="agent-top-issue">
-      <p className="text-[12px] font-medium text-neutral-400">{!issues ? "가장 큰 문제" : top ? (over ? "가장 큰 문제 · 기준 초과" : "가장 높은 지표 · 기준 이하") : "가장 큰 문제"}</p>
-      {!issues ? (
+      <p className="text-[12px] font-medium text-neutral-400">가장 많이 모인 어려움</p>
+      {!concerns ? (
         <p className="mt-1 text-[32px] font-semibold">–</p>
       ) : !top ? (
         <>
-          <p className="mt-1 text-[22px] font-semibold tracking-tight">표본 부족</p>
-          <p className="mt-0.5 text-[12px] text-neutral-400">상담이 더 모이면 판단합니다 (구 5건·동 3건 이상)</p>
+          <p className="mt-1 text-[20px] font-semibold tracking-tight">아직 두드러진 곳이 없습니다</p>
+          <p className="mt-1 text-[12px] leading-relaxed text-neutral-400">같은 동에서 같은 어려움이 {CONCERN_MIN}건 이상 모이면 여기에 보여 드립니다.</p>
         </>
       ) : (
         <>
           <p className="mt-1 flex items-baseline gap-2">
-            <span className="text-[32px] font-semibold tracking-tight tabular-nums">{percent(top.rate)}</span>
-            <span className="truncate text-[14px] font-medium">{top.title}</span>
+            <span className="text-[32px] font-semibold tracking-tight tabular-nums">
+              {top.count}
+              <span className="ml-0.5 text-[15px] font-medium text-neutral-400">건</span>
+            </span>
+            <span className="min-w-0 text-[14px] font-medium leading-snug">{top.headline}</span>
           </p>
-          <p className="mt-0.5 text-[12px] text-neutral-400">
-            {top.basis} · 기준 {percent(ISSUE_THRESHOLD)}
-          </p>
-          <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-[12px]">
-            {top.emdCode && (
-              <Link href={mapHref(top.emdCode)} className="font-medium text-white underline-offset-2 hover:underline">
-                지도에서 보기 →
+          <p className="mt-1 text-[12px] leading-relaxed text-neutral-300">{top.sentence}</p>
+          <div className="mt-auto pt-2 text-[12px]">
+            {top.isDong ? (
+              <Link href={mapHref(top.placeId)} className="font-medium text-white underline-offset-2 hover:underline">
+                {top.placeName} 지도에서 보기 →
               </Link>
-            )}
-            {top.sigunguCode && (
-              <button type="button" onClick={() => onPickSigungu(top.sigunguCode!)} className="font-medium text-white underline-offset-2 hover:underline">
-                이 구 보기 →
+            ) : (
+              <button type="button" onClick={() => onPickSigungu(top.placeId)} className="font-medium text-white underline-offset-2 hover:underline">
+                {top.placeName} 보기 →
               </button>
-            )}
-            {next && (
-              <span className="truncate text-neutral-400">
-                다음: {next.title} {percent(next.rate)}
-              </span>
             )}
           </div>
         </>
@@ -544,7 +537,7 @@ interface PlaceRow {
   topic: string | null;
 }
 
-/** 동(또는 구)별 표 — 상담 수 막대, 시간 공백 문의, 시설 검색 결과 없음 */
+/** 동(또는 구)별 표 — 상담 수 막대, 시간 외 돌봄 문의, 맞는 곳 없음 (모두 건수) */
 function PlaceTable({
   rows,
   showTopic,
@@ -565,9 +558,8 @@ function PlaceTable({
             <th className="w-8 py-2 font-medium">#</th>
             <th className="py-2 font-medium">{mapHref ? "행정동" : "자치구"}</th>
             <th className="w-[34%] py-2 font-medium">상담</th>
-            <th className="py-2 text-right font-medium">시간 공백</th>
-            <th className="py-2 text-right font-medium">비율</th>
-            <th className="py-2 text-right font-medium" title="결과 없음 / 시설 검색">검색 결과 없음</th>
+            <th className="py-2 text-right font-medium">시간 외 돌봄</th>
+            <th className="py-2 text-right font-medium">맞는 곳 없음</th>
             {showTopic && <th className="py-2 pl-4 font-medium">주요 주제</th>}
             {mapHref && <th className="w-8" />}
           </tr>
@@ -589,9 +581,11 @@ function PlaceTable({
                   <span className="w-8 text-right font-semibold tabular-nums">{r.count}</span>
                 </span>
               </td>
-              <td className="py-2.5 text-right tabular-nums text-neutral-700">{r.offHours}</td>
-              <td className="py-2.5 text-right tabular-nums font-medium text-neutral-900">{percent(r.offHours / r.count)}</td>
-              <td className="py-2.5 text-right tabular-nums text-neutral-600">{r.searches ? `${r.noResult} / ${r.searches}` : "–"}</td>
+              <td className="py-2.5 text-right tabular-nums text-neutral-900">{r.offHours ? `${r.offHours}건` : "–"}</td>
+              <td className="py-2.5 text-right tabular-nums text-neutral-900">
+                {r.noResult ? `${r.noResult}건` : "–"}
+                {r.searches > 0 && <span className="ml-1 text-[11px] text-neutral-400">(검색 {r.searches})</span>}
+              </td>
               {showTopic && <td className="py-2.5 pl-4 text-neutral-600">{r.topic ?? "–"}</td>}
               {mapHref && (
                 <td className="py-2.5 text-right">

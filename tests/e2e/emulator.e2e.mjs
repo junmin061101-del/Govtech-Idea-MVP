@@ -130,28 +130,31 @@ await adminDb.collection("agentLogs").add(logOf(live, "노량진2동인데 밤 1
 await page.getByText("노량진2동인데 밤 10시까지 봐주는 곳 없어요?").waitFor({ timeout: 15000 });
 await page.getByText("새 대화", { exact: true }).waitFor();
 await page.waitForFunction(() => /최근 7일 상담\s*2\s*건/.test(document.querySelector("[data-testid=agent-stats]")?.textContent ?? ""), null, { timeout: 15000 });
-await page.getByTestId("agent-stats").getByText("50%").waitFor();
+const kpi2 = await kpi();
+if (!/시간 외 돌봄 문의\s*1\s*건\s*전체 상담 2건 중/.test(kpi2) || kpi2.includes("%")) throw new Error(`시간 외 돌봄 칸이 틀림 (퍼센트 없이 건수여야 함): ${kpi2}`);
 const search = await page.getByTestId("agent-search").innerText();
-if (!/시설 검색\s*2\s*건/.test(search) || !search.includes("50%") || !search.includes("1.0")) throw new Error(`시설 검색 결과 카드가 틀림: ${search}`);
-ok(`새 상담 실시간 반영 ${Date.now() - t0}ms (새로고침 없음): '새 대화' · 집계 2건 · 시간 공백 문의 50% · 검색 2건 중 결과 없음 50%, 평균 1.0곳`);
+if (!/어린이집 검색\s*2\s*건/.test(search) || !/맞는 곳이 없었음\s*1\s*건/.test(search) || !search.includes("평균 1.0")) throw new Error(`검색 결과 카드가 틀림: ${search}`);
+ok(`새 상담 실시간 반영 ${Date.now() - t0}ms (새로고침 없음): '새 대화' · 집계 2건 · 시간 외 돌봄 1건(주간 검색은 제외) · 검색 2건 중 맞는 곳 없음 1건, 평균 1.0곳`);
 
-for (const f of ["시간 공백", "검색 결과 없음"]) {
+for (const f of ["시간 외 돌봄", "맞는 곳 없음"]) {
   await page.getByRole("button", { name: f, exact: true }).click();
   if (await page.getByText("상도1동 야간 연장 어린이집 있나요").count()) throw new Error(`'${f}' 거르기가 동작하지 않음`);
   await page.getByText("노량진2동인데 밤 10시까지 봐주는 곳 없어요?").waitFor();
 }
 const mapLink = page.getByRole("link", { name: "노량진2동 지도에서 보기" });
 if (!(await mapLink.getAttribute("href")).includes("dong=1159052000")) throw new Error("동별 표의 지도 링크가 그 동을 열지 않음");
-ok("'시간 공백'·'검색 결과 없음' 거르기 · 동별 표 → 지도에서 그 동 열기 링크");
+ok("'시간 외 돌봄'·'맞는 곳 없음' 거르기 · 동별 표 → 지도에서 그 동 열기 링크");
 // 검은 칸: 표본이 적으면 '표본 부족' → 노량진2동 검색 실패가 쌓이면 실시간으로 그 동이 '가장 큰 문제'
 await page.getByRole("button", { name: "전체", exact: true }).click();
-await page.getByTestId("agent-top-issue").getByText("표본 부족").waitFor({ timeout: 10000 });
+await page.getByTestId("agent-top-issue").getByText("아직 두드러진 곳이 없습니다").waitFor({ timeout: 10000 });
 for (let i = 0; i < 3; i++) await adminDb.collection("agentInsights").add(turn("1159052000", { outcome: { facilityMatches: 0, noResult: true }, createdAt: new Date() }));
-await page.getByTestId("agent-top-issue").getByText("노량진2동 검색 결과 없음").waitFor({ timeout: 15000 });
+await page.getByTestId("agent-top-issue").getByText("노량진2동 · 맞는 어린이집을 못 찾음").waitFor({ timeout: 15000 });
+// 3건이 한 건씩 들어오므로 마지막 건까지 반영될 때를 기다린다
+await page.waitForFunction(() => (document.querySelector("[data-testid=agent-top-issue]")?.textContent ?? "").includes("4건 중 4건"), null, { timeout: 15000 });
 const issue = await page.getByTestId("agent-top-issue").innerText();
-if (!issue.includes("100%") || !issue.includes("검색 4건 중 4건") || !issue.includes("기준 초과")) throw new Error(`가장 큰 문제 칸이 틀림: ${issue}`);
+if (!/4\s*건/.test(issue) || !issue.includes("AI가 어린이집을 찾아 준 상담 4건 중 4건은 조건에 맞는 곳이 한 곳도 없었습니다") || issue.includes("%")) throw new Error(`검은 칸이 틀림: ${issue}`);
 if (!(await page.getByTestId("agent-top-issue").getByRole("link", { name: /지도에서 보기/ }).getAttribute("href")).includes("dong=1159052000")) throw new Error("가장 큰 문제 → 지도 링크가 그 동이 아님");
-ok("검은 칸: 표본 부족 → 실시간으로 '노량진2동 검색 결과 없음 100% · 검색 4건 중 4건 · 기준 초과' + 지도 링크");
+ok("검은 칸: '아직 두드러진 곳 없음' → 실시간으로 '4건 · 노량진2동 · 맞는 어린이집을 못 찾음' + 쉬운 설명 문장 + 지도 링크 (퍼센트 없음)");
 await page.screenshot({ path: `${S}/e2e-ai-tab.png`, fullPage: true });
 
 // 10) 역할을 여러 번 바꿔도 시민 앱 클레임(nickname·onboarded)은 남는다
