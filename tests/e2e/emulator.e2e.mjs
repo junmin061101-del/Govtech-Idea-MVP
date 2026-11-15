@@ -110,7 +110,7 @@ const turn = (emdCode, extra) => ({
   ...extra,
 });
 const logOf = (t, question) => ({ ...t, question, answer: "근처 어린이집 2곳을 찾았습니다.", pkey: "e2e", expiresAt: new Date(Date.now() + 90 * 86_400_000) });
-const old = turn("1159053000", {});
+const old = turn("1159053000", { timeSlots: ["daytime"] }); // 주간 검색 2곳 → 시간 공백 아님
 await adminDb.collection("agentInsights").add(old);
 await adminDb.collection("agentLogs").add(logOf(old, "상도1동 야간 연장 어린이집 있나요"));
 await adminDb.collection("agentInsights").add({ ...turn("1162052500", {}), sigunguCode: "11620" }); // 다른 구는 안 보여야 함
@@ -131,13 +131,18 @@ await page.getByText("노량진2동인데 밤 10시까지 봐주는 곳 없어�
 await page.getByText("새 대화", { exact: true }).waitFor();
 await page.waitForFunction(() => /최근 7일 상담\s*2\s*건/.test(document.querySelector("[data-testid=agent-stats]")?.textContent ?? ""), null, { timeout: 15000 });
 await page.getByTestId("agent-stats").getByText("50%").waitFor();
-ok(`새 상담 실시간 반영 ${Date.now() - t0}ms (새로고침 없음): '새 대화' 표시 · 집계 2건 · 시설 못 찾음 50%`);
+const search = await page.getByTestId("agent-search").innerText();
+if (!/시설 검색\s*2\s*건/.test(search) || !search.includes("50%") || !search.includes("1.0")) throw new Error(`시설 검색 결과 카드가 틀림: ${search}`);
+ok(`새 상담 실시간 반영 ${Date.now() - t0}ms (새로고침 없음): '새 대화' · 집계 2건 · 시간 공백 문의 50% · 검색 2건 중 결과 없음 50%, 평균 1.0곳`);
 
-await page.getByRole("button", { name: "시설 못 찾음", exact: true }).click();
-if (await page.getByText("상도1동 야간 연장 어린이집 있나요").count()) throw new Error("'시설 못 찾음' 거르기가 동작하지 않음");
+for (const f of ["시간 공백", "검색 결과 없음"]) {
+  await page.getByRole("button", { name: f, exact: true }).click();
+  if (await page.getByText("상도1동 야간 연장 어린이집 있나요").count()) throw new Error(`'${f}' 거르기가 동작하지 않음`);
+  await page.getByText("노량진2동인데 밤 10시까지 봐주는 곳 없어요?").waitFor();
+}
 const mapLink = page.getByRole("link", { name: "노량진2동 지도에서 보기" });
 if (!(await mapLink.getAttribute("href")).includes("dong=1159052000")) throw new Error("동별 표의 지도 링크가 그 동을 열지 않음");
-ok("'시설 못 찾음' 거르기 · 동별 표 → 지도에서 그 동 열기 링크");
+ok("'시간 공백'·'검색 결과 없음' 거르기 · 동별 표 → 지도에서 그 동 열기 링크");
 await page.screenshot({ path: `${S}/e2e-ai-tab.png`, fullPage: true });
 
 // 10) 역할을 여러 번 바꿔도 시민 앱 클레임(nickname·onboarded)은 남는다

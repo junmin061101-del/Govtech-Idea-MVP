@@ -76,7 +76,9 @@ function toInsight(id: string, d: DocumentData): AgentInsight {
     timeSlots: d.timeSlots ?? [],
     target: d.target ?? null,
     topics: d.topics ?? [],
-    noResult: Boolean(d.outcome?.noResult),
+    // 시설 검색을 실행한 상담만 찾은 시설 수가 숫자로 남는다 (검색 안 한 상담은 null)
+    facilityMatches: typeof d.outcome?.facilityMatches === "number" ? d.outcome.facilityMatches : null,
+    noResult: d.outcome?.facilityMatches === 0,
     createdAt: toDate(d.createdAt),
   };
 }
