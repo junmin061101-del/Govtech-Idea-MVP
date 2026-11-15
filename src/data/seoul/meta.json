@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-15T01:47:32.572Z",
+ "builtAt": "2026-11-15T09:13:28.136Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -13,7 +13,7 @@
   "childcare": {
    "dataDate": "2026-11-15",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-15T01:47:32.014Z"
+   "fetchedAt": "2026-11-15T09:13:27.569Z"
   }
  },
  "counts": {
@@ -55,15 +55,6 @@
    "address": "서울특별시 강서구 마곡중앙1로 84 (마곡동, 마곡엠밸리17단지)"
   },
   {
-   "id": "11380000700",
-   "name": "구립 힐스햇빛어린이집",
-   "sigunguCode": "11380",
-   "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
-   "address": "서울특별시 은평구 역말로 150 1단지"
-  },
-  {
    "id": "11380000701",
    "name": "구립 힐스하늘어린이집",
    "sigunguCode": "11380",
@@ -71,6 +62,15 @@
    "lat": 37.56647,
    "lng": 126.977963,
    "address": "서울특별시 은평구 역말로 150 2단지"
+  },
+  {
+   "id": "11380000700",
+   "name": "구립 힐스햇빛어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 은평구 역말로 150 1단지"
   },
   {
    "id": "11530000658",
