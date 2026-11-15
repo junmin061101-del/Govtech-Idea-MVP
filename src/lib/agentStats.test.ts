@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ago, computeAgentStats, isOffHours, sameKstDay, type AgentInsight } from "./agentStats";
+import { ago, computeAgentStats, isOffHours, rankIssues, sameKstDay, type AgentInsight } from "./agentStats";
 
 // 2026-11-09 10:00 KST
 const NOW = new Date("2026-11-09T01:00:00Z");
@@ -113,6 +113,48 @@ describe("computeAgentStats — 구 단위 실시간 집계", () => {
     expect(e.count).toBe(0);
     expect(e.offHoursRate).toBeNull();
     expect(e.lastAt).toBeNull();
+  });
+});
+
+describe("rankIssues — 검은 칸에 띄울 가장 큰 문제", () => {
+  const names: Record<string, string> = { "1159051000": "흑석동", "1159052000": "노량진2동", "11590": "동작구", "11620": "관악구" };
+  const opts = { allSeoul: false, placeName: (id: string) => names[id] ?? id, slotLabel: (id: string) => ({ night: "야간", weekend: "주말" })[id] ?? id };
+  const at9 = at("2026-11-09T00:30:00Z");
+  const many = (k: number, p: Partial<AgentInsight>) => Array.from({ length: k }, () => row({ createdAt: at9, ...p }));
+
+  it("동 단위 검색 실패율이 가장 높으면 그 동을 지도 링크와 함께 1순위로", () => {
+    const rows = [
+      ...many(3, { emdCode: "1159051000", topics: ["facility_search"], ...searched(0) }), // 흑석동 3/3 실패
+      ...many(4, { emdCode: "1159052000", topics: ["facility_search"], ...searched(4) }), // 노량진2동 성공
+      ...many(2, { emdCode: "1159052000", topics: ["documents"] }),
+    ];
+    const issues = rankIssues(computeAgentStats(rows, NOW, 7), opts);
+    expect(issues[0]).toMatchObject({ title: "흑석동 검색 결과 없음", rate: 1, emdCode: "1159051000", basis: "검색 3건 중 3건" });
+    expect(issues[0].score).toBeCloseTo(1 / 0.3, 9);
+    // 구 전체 검색 실패 3/7 이 다음
+    expect(issues[1]).toMatchObject({ key: "search", basis: "검색 7건 중 3건이 조건에 맞는 시설 0곳" });
+  });
+
+  it("시간 공백 문의가 가장 심하면 가장 많이 말한 시간대를 제목에", () => {
+    const rows = [...many(4, { timeSlots: ["night"] }), ...many(1, { timeSlots: ["weekend"] }), ...many(1, { topics: ["documents"] })];
+    const top = rankIssues(computeAgentStats(rows, NOW, 7), opts)[0];
+    expect(top).toMatchObject({ key: "offhours", title: "시간 공백 문의 (야간 최다)", basis: "상담 6건 중 5건이 주간 밖 시간·운영 시간 문의" });
+  });
+
+  it("같은 점수면 구 전체가 동보다 앞", () => {
+    const rows = many(5, { emdCode: "1159051000", timeSlots: ["night"] });
+    const issues = rankIssues(computeAgentStats(rows, NOW, 7), opts);
+    expect(issues.map((i) => i.key)).toEqual(["offhours", "offhours:1159051000"]);
+  });
+
+  it("서울 전체 보기에서는 구 단위로", () => {
+    const rows = [...many(3, { sigunguCode: "11620", emdCode: null, ...searched(0) }), ...many(3, { ...searched(5) })];
+    const top = rankIssues(computeAgentStats(rows, NOW, 7), { ...opts, allSeoul: true })[0];
+    expect(top).toMatchObject({ title: "관악구 검색 결과 없음", sigunguCode: "11620" });
+  });
+
+  it("표본이 모자라면 후보가 없다 (숫자를 만들지 않음)", () => {
+    expect(rankIssues(computeAgentStats(many(2, { timeSlots: ["night"], ...searched(0) }), NOW, 7), opts)).toEqual([]);
   });
 });
 

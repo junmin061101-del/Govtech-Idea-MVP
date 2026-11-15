@@ -203,3 +203,67 @@ export function ago(d: Date | null, now: Date): string {
   const days = Math.floor(h / 24);
   return days === 1 ? "어제" : `${days}일 전`;
 }
+
+// --- 가장 큰 문제 고르기 ---
+
+/** 문제로 보는 기준 비율 — 지도의 '부모 검색 신호' 공백 기준(결과 없음 30%)과 같은 값 */
+export const ISSUE_THRESHOLD = 0.3;
+/** 구(서울 전체) 단위 판단 최소 표본 */
+export const ISSUE_MIN_TOTAL = 5;
+/** 동(구) 단위 판단 최소 표본 */
+export const ISSUE_MIN_PLACE = 3;
+
+export interface AgentIssue {
+  key: string;
+  /** 예: "흑석동 검색 결과 없음" */
+  title: string;
+  rate: number;
+  /** 근거: "검색 6건 중 4건" */
+  basis: string;
+  /** 기준 대비 (1 이상이면 기준 초과) */
+  score: number;
+  /** 동 단위 문제면 그 동 코드 (지도 링크) */
+  emdCode?: string;
+  /** 서울 전체 보기에서 구 단위 문제면 그 구 코드 */
+  sigunguCode?: string;
+}
+
+/**
+ * 지금 가장 심각한 문제부터 정렬해 돌려준다. 비율 ÷ 기준(30%)으로 비교하고, 표본이 모자란 후보는 뺀다.
+ * 같은 점수면 넓은 범위(구 전체) → 표본이 많은 쪽을 앞에 둔다.
+ */
+export function rankIssues(
+  s: AgentLiveStats,
+  opts: { allSeoul: boolean; placeName: (id: string) => string; slotLabel: (id: TimeSlotId) => string },
+): AgentIssue[] {
+  // 정렬 보조값(n: 표본 수, wide: 구 전체 여부)은 별도 배열에 둬 결과 객체에 섞지 않는다
+  const out: { issue: AgentIssue; n: number; wide: number }[] = [];
+  const add = (i: Omit<AgentIssue, "score">, n: number, wide: number) => out.push({ issue: { ...i, score: i.rate / ISSUE_THRESHOLD }, n, wide });
+  const topSlot = OFF_HOUR_SLOTS.filter((id) => s.offHoursBySlot[id]).sort((a, b) => (s.offHoursBySlot[b] ?? 0) - (s.offHoursBySlot[a] ?? 0))[0];
+
+  if (s.searches >= ISSUE_MIN_TOTAL)
+    add({ key: "search", title: "시설 검색 결과 없음", rate: s.noResult / s.searches, basis: `검색 ${s.searches}건 중 ${s.noResult}건이 조건에 맞는 시설 0곳` }, s.searches, 1);
+  if (s.count >= ISSUE_MIN_TOTAL)
+    add(
+      {
+        key: "offhours",
+        title: topSlot ? `시간 공백 문의 (${opts.slotLabel(topSlot)} 최다)` : "시간 공백 문의",
+        rate: s.offHours / s.count,
+        basis: `상담 ${s.count}건 중 ${s.offHours}건이 주간 밖 시간·운영 시간 문의`,
+      },
+      s.count,
+      1,
+    );
+  const places: (PlaceCount & { id: string; emd: boolean })[] = opts.allSeoul
+    ? s.sigungus.map((g) => ({ ...g, id: g.sigunguCode, emd: false }))
+    : s.dongs.map((d) => ({ ...d, id: d.emdCode, emd: true }));
+  for (const p of places) {
+    const where = opts.placeName(p.id);
+    const loc = p.emd ? { emdCode: p.id } : { sigunguCode: p.id };
+    if (p.searches >= ISSUE_MIN_PLACE)
+      add({ key: `search:${p.id}`, title: `${where} 검색 결과 없음`, rate: p.noResult / p.searches, basis: `검색 ${p.searches}건 중 ${p.noResult}건`, ...loc }, p.searches, 0);
+    if (p.offHours >= ISSUE_MIN_PLACE)
+      add({ key: `offhours:${p.id}`, title: `${where} 시간 공백 문의`, rate: p.offHours / p.count, basis: `상담 ${p.count}건 중 ${p.offHours}건`, ...loc }, p.count, 0);
+  }
+  return out.sort((a, b) => b.issue.score - a.issue.score || b.wide - a.wide || b.n - a.n).map((o) => o.issue);
+}
