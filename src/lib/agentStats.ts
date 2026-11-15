@@ -3,8 +3,9 @@
  * 화면과 리포트가 같은 함수를 쓰도록 순수 함수로 둔다.
  *
  * 지표 정의
- *  - 시간 공백 문의: 시민이 말한 이용 시간이 평일 주간(09~17시) 밖이거나(이른 아침·방과후·야간·주말·방학),
- *    운영 시간을 물어본 상담. 분모는 전체 상담. 지도의 시간대별 부족과 바로 대조할 수 있는 실제 부모 수요다.
+ *  - 시간 외 돌봄 문의: AI 시설 검색에 시민이 넣은 시간이 야간(19시 이후)·주말·방학이거나, 평일 낮 없이
+ *    이른 아침·방과후만 요청한 상담. 시민 앱은 요청 시간이 걸치는 시간대를 모두 기록하므로(08~18시 → 이른 아침·주간·방과후)
+ *    낮을 포함한 종일 보육 요청은 세지 않는다. 질문 낱말로 붙는 '운영 시간' 주제는 "몇 시간" 같은 말에도 붙어 쓰지 않는다.
  *  - 시설 검색 결과 없음: AI가 시설 검색을 실제로 실행한 상담(검색 결과 수가 기록된 상담)만 분모로 쓴다.
  *    검색과 무관한 상담(서류·비용 등)을 분모에 넣으면 비율이 0%로 눌려 의미가 없어진다.
  */
@@ -24,8 +25,10 @@ export const AGENT_TOPICS: Record<string, string> = {
   other: "기타",
 };
 
-/** 평일 주간(09~17시) 밖 시간대 — 돌봄 공백이 생기는 시간 */
+/** 평일 주간(09~17시) 밖 시간대 */
 export const OFF_HOUR_SLOTS: TimeSlotId[] = ["early_morning", "after_school", "night", "weekend", "vacation"];
+/** 이 시간대를 요청했으면 낮을 함께 요청했더라도 시간 외 돌봄 */
+const CLEAR_OFF: TimeSlotId[] = ["night", "weekend", "vacation"];
 
 /** agentInsights 한 건 (대화 원문 없음) */
 export interface AgentInsight {
@@ -42,15 +45,24 @@ export interface AgentInsight {
   createdAt: Date | null;
 }
 
-/** 운영 시간 밖을 말했거나 운영 시간을 물은 상담인가 */
-export function isOffHours(r: Pick<AgentInsight, "timeSlots" | "topics">): boolean {
-  return r.timeSlots.some((s) => OFF_HOUR_SLOTS.includes(s)) || r.topics.includes("hours");
+/** 시간 외 돌봄 문의인가 — 야간·주말·방학 요청, 또는 낮 없이 이른 아침·방과후만 요청 */
+export function isOffHours(r: Pick<AgentInsight, "timeSlots">): boolean {
+  const slots = r.timeSlots;
+  if (slots.some((s) => CLEAR_OFF.includes(s))) return true;
+  return slots.length > 0 && !slots.includes("daytime") && slots.some((s) => OFF_HOUR_SLOTS.includes(s));
+}
+
+/** 시간 외 돌봄 문의가 요청한 시간 외 시간대들 (낮과 함께 걸친 이른 아침·방과후는 빼고 셈) */
+export function offHourSlotsOf(r: Pick<AgentInsight, "timeSlots">): TimeSlotId[] {
+  if (!isOffHours(r)) return [];
+  const slots = [...new Set(r.timeSlots)];
+  return slots.includes("daytime") ? slots.filter((s) => CLEAR_OFF.includes(s)) : slots.filter((s) => OFF_HOUR_SLOTS.includes(s));
 }
 
 /** 장소(동·구)별 공통 집계 */
 export interface PlaceCount {
   count: number;
-  /** 시간 공백 문의 */
+  /** 시간 외 돌봄 문의 */
   offHours: number;
   /** 시설 검색을 실행한 상담 */
   searches: number;
@@ -72,12 +84,10 @@ export interface AgentLiveStats extends PlaceCount {
   /** 집계 기간(일) */
   days: number;
   today: number;
-  /** 시간 공백 문의 비율 (상담 0건이면 null) */
+  /** 시간 외 돌봄 문의 비율 (상담 0건이면 null) */
   offHoursRate: number | null;
-  /** 시간 공백 문의를 시간대별로 (같은 상담이 여러 시간대를 말할 수 있음) */
+  /** 시간 외 돌봄 문의를 시간대별로 (같은 상담이 여러 시간대를 요청할 수 있음) */
   offHoursBySlot: Partial<Record<TimeSlotId, number>>;
-  /** 운영 시간 질문(시간대를 특정하지 않은 문의) 수 */
-  hoursQuestions: number;
   /** 시설 검색 중 결과 없음 비율 (검색 0건이면 null) */
   noResultRate: number | null;
   /** 시설 검색 1건당 찾은 시설 수 평균 (검색 0건이면 null) */
@@ -127,7 +137,6 @@ export function computeAgentStats(rows: AgentInsight[], now: Date, days: number)
   const bySlot: Partial<Record<TimeSlotId, number>> = {};
   const byTarget: Partial<Record<CareTargetId, number>> = {};
   const offHoursBySlot: Partial<Record<TimeSlotId, number>> = {};
-  let hoursQuestions = 0;
   let matchSum = 0;
   let todayCount = 0;
   let lastAt: Date | null = null;
@@ -136,11 +145,8 @@ export function computeAgentStats(rows: AgentInsight[], now: Date, days: number)
     addTo(total, r, off);
     if (r.facilityMatches != null) matchSum += r.facilityMatches;
     const slots = new Set(r.timeSlots);
-    for (const s of slots) {
-      bySlot[s] = (bySlot[s] ?? 0) + 1;
-      if (OFF_HOUR_SLOTS.includes(s)) offHoursBySlot[s] = (offHoursBySlot[s] ?? 0) + 1;
-    }
-    if (r.topics.includes("hours") && ![...slots].some((s) => OFF_HOUR_SLOTS.includes(s))) hoursQuestions++;
+    for (const s of slots) bySlot[s] = (bySlot[s] ?? 0) + 1;
+    for (const s of offHourSlotsOf(r)) offHoursBySlot[s] = (offHoursBySlot[s] ?? 0) + 1;
 
     const day = kstDayIndex(r.createdAt!);
     if (day === today) todayCount++;
@@ -171,7 +177,6 @@ export function computeAgentStats(rows: AgentInsight[], now: Date, days: number)
     today: todayCount,
     offHoursRate: total.count ? total.offHours / total.count : null,
     offHoursBySlot,
-    hoursQuestions,
     noResultRate: total.searches ? total.noResult / total.searches : null,
     avgMatches: total.searches ? matchSum / total.searches : null,
     topics: [...topics]
@@ -204,66 +209,75 @@ export function ago(d: Date | null, now: Date): string {
   return days === 1 ? "어제" : `${days}일 전`;
 }
 
-// --- 가장 큰 문제 고르기 ---
 
-/** 문제로 보는 기준 비율 — 지도의 '부모 검색 신호' 공백 기준(결과 없음 30%)과 같은 값 */
-export const ISSUE_THRESHOLD = 0.3;
-/** 구(서울 전체) 단위 판단 최소 표본 */
-export const ISSUE_MIN_TOTAL = 5;
-/** 동(구) 단위 판단 최소 표본 */
-export const ISSUE_MIN_PLACE = 3;
+// --- 검은 칸: 지금 가장 많이 모인 어려움 ---
+//
+// 비율(%)로 고르면 "3건 중 3건 = 100%" 같은 작은 표본이 맨 위로 튄다. 그래서 건수로 고른다:
+// "같은 동에서 같은 어려움이 몇 건 모였나". 화면에는 퍼센트 없이 건수와 쉬운 문장만 쓴다.
 
-export interface AgentIssue {
-  key: string;
-  /** 예: "흑석동 검색 결과 없음" */
-  title: string;
-  rate: number;
-  /** 근거: "검색 6건 중 4건" */
-  basis: string;
-  /** 기준 대비 (1 이상이면 기준 초과) */
-  score: number;
-  /** 동 단위 문제면 그 동 코드 (지도 링크) */
-  emdCode?: string;
-  /** 서울 전체 보기에서 구 단위 문제면 그 구 코드 */
-  sigunguCode?: string;
+/** 같은 동(구)에서 같은 어려움이 이만큼 모여야 검은 칸에 띄운다 */
+export const CONCERN_MIN = 2;
+
+export type ConcernKind = "notFound" | "offHours";
+
+export interface AgentConcern {
+  kind: ConcernKind;
+  /** 동(서울 전체 보기에서는 구) 코드와 이름 */
+  placeId: string;
+  placeName: string;
+  isDong: boolean;
+  /** 이 어려움을 겪은 상담 수 */
+  count: number;
+  /** 비교 대상 수: 시설 못 찾음이면 그 곳의 시설 검색 수, 시간 외 문의면 그 곳의 전체 상담 수 */
+  of: number;
+  /** 한 줄 제목: "흑석동 · 저녁·주말 돌봄 문의" */
+  headline: string;
+  /** 쉬운 설명 문장 */
+  sentence: string;
 }
 
-/**
- * 지금 가장 심각한 문제부터 정렬해 돌려준다. 비율 ÷ 기준(30%)으로 비교하고, 표본이 모자란 후보는 뺀다.
- * 같은 점수면 넓은 범위(구 전체) → 표본이 많은 쪽을 앞에 둔다.
- */
-export function rankIssues(
-  s: AgentLiveStats,
-  opts: { allSeoul: boolean; placeName: (id: string) => string; slotLabel: (id: TimeSlotId) => string },
-): AgentIssue[] {
-  // 정렬 보조값(n: 표본 수, wide: 구 전체 여부)은 별도 배열에 둬 결과 객체에 섞지 않는다
-  const out: { issue: AgentIssue; n: number; wide: number }[] = [];
-  const add = (i: Omit<AgentIssue, "score">, n: number, wide: number) => out.push({ issue: { ...i, score: i.rate / ISSUE_THRESHOLD }, n, wide });
-  const topSlot = OFF_HOUR_SLOTS.filter((id) => s.offHoursBySlot[id]).sort((a, b) => (s.offHoursBySlot[b] ?? 0) - (s.offHoursBySlot[a] ?? 0))[0];
+const KIND_LABEL: Record<ConcernKind, string> = {
+  notFound: "맞는 어린이집을 못 찾음",
+  offHours: "저녁·주말 등 시간 외 돌봄 문의",
+};
 
-  if (s.searches >= ISSUE_MIN_TOTAL)
-    add({ key: "search", title: "시설 검색 결과 없음", rate: s.noResult / s.searches, basis: `검색 ${s.searches}건 중 ${s.noResult}건이 조건에 맞는 시설 0곳` }, s.searches, 1);
-  if (s.count >= ISSUE_MIN_TOTAL)
-    add(
-      {
-        key: "offhours",
-        title: topSlot ? `시간 공백 문의 (${opts.slotLabel(topSlot)} 최다)` : "시간 공백 문의",
-        rate: s.offHours / s.count,
-        basis: `상담 ${s.count}건 중 ${s.offHours}건이 주간 밖 시간·운영 시간 문의`,
-      },
-      s.count,
-      1,
-    );
-  const places: (PlaceCount & { id: string; emd: boolean })[] = opts.allSeoul
-    ? s.sigungus.map((g) => ({ ...g, id: g.sigunguCode, emd: false }))
-    : s.dongs.map((d) => ({ ...d, id: d.emdCode, emd: true }));
+/**
+ * 같은 동(구)에서 가장 많이 모인 어려움을 건수 순으로 돌려준다.
+ * 같은 건수면 '맞는 어린이집을 못 찾음'(부모가 갈 곳이 없었던 경우)을 먼저, 그다음 상담이 많은 곳을 먼저.
+ */
+export function rankConcerns(
+  s: AgentLiveStats,
+  opts: { allSeoul: boolean; placeName: (id: string) => string; periodLabel: string },
+): AgentConcern[] {
+  const places: (PlaceCount & { id: string; isDong: boolean })[] = opts.allSeoul
+    ? s.sigungus.map((g) => ({ ...g, id: g.sigunguCode, isDong: false }))
+    : s.dongs.map((d) => ({ ...d, id: d.emdCode, isDong: true }));
+  const out: AgentConcern[] = [];
   for (const p of places) {
-    const where = opts.placeName(p.id);
-    const loc = p.emd ? { emdCode: p.id } : { sigunguCode: p.id };
-    if (p.searches >= ISSUE_MIN_PLACE)
-      add({ key: `search:${p.id}`, title: `${where} 검색 결과 없음`, rate: p.noResult / p.searches, basis: `검색 ${p.searches}건 중 ${p.noResult}건`, ...loc }, p.searches, 0);
-    if (p.offHours >= ISSUE_MIN_PLACE)
-      add({ key: `offhours:${p.id}`, title: `${where} 시간 공백 문의`, rate: p.offHours / p.count, basis: `상담 ${p.count}건 중 ${p.offHours}건`, ...loc }, p.count, 0);
+    const name = opts.placeName(p.id);
+    if (p.noResult >= CONCERN_MIN)
+      out.push({
+        kind: "notFound",
+        placeId: p.id,
+        placeName: name,
+        isDong: p.isDong,
+        count: p.noResult,
+        of: p.searches,
+        headline: `${name} · ${KIND_LABEL.notFound}`,
+        sentence: `${opts.periodLabel} ${name}에서 AI가 어린이집을 찾아 준 상담 ${p.searches}건 중 ${p.noResult}건은 조건에 맞는 곳이 한 곳도 없었습니다.`,
+      });
+    if (p.offHours >= CONCERN_MIN)
+      out.push({
+        kind: "offHours",
+        placeId: p.id,
+        placeName: name,
+        isDong: p.isDong,
+        count: p.offHours,
+        of: p.count,
+        headline: `${name} · ${KIND_LABEL.offHours}`,
+        sentence: `${opts.periodLabel} ${name} 상담 ${p.count}건 중 ${p.offHours}건이 평일 낮(9~17시)이 아닌 시간에 아이를 맡길 곳이나 운영 시간을 물었습니다.`,
+      });
   }
-  return out.sort((a, b) => b.issue.score - a.issue.score || b.wide - a.wide || b.n - a.n).map((o) => o.issue);
+  const kindOrder: Record<ConcernKind, number> = { notFound: 0, offHours: 1 };
+  return out.sort((a, b) => b.count - a.count || kindOrder[a.kind] - kindOrder[b.kind] || b.of - a.of);
 }
