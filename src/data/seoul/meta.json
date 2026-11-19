@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-18T23:54:51.868Z",
+ "builtAt": "2026-11-19T03:14:27.221Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -11,16 +11,16 @@
    "url": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)"
   },
   "childcare": {
-   "dataDate": "2026-11-18",
+   "dataDate": "2026-11-19",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-18T23:54:51.221Z"
+   "fetchedAt": "2026-11-19T03:14:26.665Z"
   }
  },
  "counts": {
   "emds": 427,
   "facilities": 3922,
   "pausedExcluded": 70,
-  "locationIssues": 26,
+  "locationIssues": 25,
   "crossBorderFacilities": 2399
  },
  "transit": {
@@ -53,15 +53,6 @@
    "lat": 37.542459931144734,
    "lng": 126.8748746373492,
    "address": "서울특별시 강서구 등촌로51길 63 (등촌동)"
-  },
-  {
-   "id": "11380000701",
-   "name": "구립 힐스하늘어린이집",
-   "sigunguCode": "11380",
-   "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
-   "address": "서울특별시 은평구 역말로 150 2단지"
   },
   {
    "id": "11380000700",
@@ -109,6 +100,15 @@
    "address": "서울특별시 양천구 신정로13길 20 ."
   },
   {
+   "id": "11380000699",
+   "name": "꿈동산어린이집",
+   "sigunguCode": "11380",
+   "issue": "outside_sigungu",
+   "lat": 37.56647,
+   "lng": 126.977963,
+   "address": "서울특별시 은평구 서오릉로22길 16-1 101호"
+  },
+  {
    "id": "11560000508",
    "name": "꼬꼬마어린이집",
    "sigunguCode": "11560",
@@ -125,15 +125,6 @@
    "lat": 37.56647,
    "lng": 126.977963,
    "address": "서울특별시 은평구 응암로 376"
-  },
-  {
-   "id": "11380000699",
-   "name": "꿈동산어린이집",
-   "sigunguCode": "11380",
-   "issue": "outside_sigungu",
-   "lat": 37.56647,
-   "lng": 126.977963,
-   "address": "서울특별시 은평구 서오릉로22길 16-1 101호"
   },
   {
    "id": "11200000412",
