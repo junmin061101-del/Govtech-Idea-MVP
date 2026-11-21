@@ -1,6 +1,17 @@
 {
  "runs": [
   {
+   "mode": "hourly",
+   "did": "hourly",
+   "started": "2026-11-21T09:38:29.970Z",
+   "finished": "2026-11-21T09:38:41.375Z",
+   "ok": true,
+   "changed": true,
+   "notes": [
+    "내용 변경: seoul-childcare-raw.json"
+   ]
+  },
+  {
    "mode": "daily",
    "did": "daily",
    "started": "2026-11-20T23:41:46.631Z",
