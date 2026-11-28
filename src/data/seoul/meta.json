@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-11-28T01:06:30.426Z",
+ "builtAt": "2026-11-28T01:54:47.480Z",
  "sources": {
   "boundaries": {
    "version": "ver20261001",
@@ -11,15 +11,15 @@
    "url": "https://jumin.mois.go.kr/ageStatMonth.do (행정안전부 주민등록인구, 행정동별 0~9세 1세 단위)"
   },
   "childcare": {
-   "dataDate": "2026-11-27",
+   "dataDate": "2026-11-28",
    "url": "https://data.seoul.go.kr (SERVICE=ChildCareInfo, 서울시 어린이집 정보)",
-   "fetchedAt": "2026-11-28T01:06:29.879Z"
+   "fetchedAt": "2026-11-28T01:54:46.862Z"
   }
  },
  "counts": {
   "emds": 427,
-  "facilities": 3922,
-  "pausedExcluded": 70,
+  "facilities": 3921,
+  "pausedExcluded": 71,
   "locationIssues": 25,
   "crossBorderFacilities": 2399
  },
@@ -37,15 +37,6 @@
  },
  "locationIssues": [
   {
-   "id": "11500000774",
-   "name": "구립 등촌힐스테이트 이안어린이집",
-   "sigunguCode": "11500",
-   "issue": "outside_sigungu",
-   "lat": 37.542459931144734,
-   "lng": 126.8748746373492,
-   "address": "서울특별시 강서구 등촌로51길 63 (등촌동)"
-  },
-  {
    "id": "11500000773",
    "name": "마곡17 새움어린이집",
    "sigunguCode": "11500",
@@ -53,6 +44,15 @@
    "lat": 37.56647,
    "lng": 126.977963,
    "address": "서울특별시 강서구 마곡중앙1로 84 (마곡동, 마곡엠밸리17단지)"
+  },
+  {
+   "id": "11500000774",
+   "name": "구립 등촌힐스테이트 이안어린이집",
+   "sigunguCode": "11500",
+   "issue": "outside_sigungu",
+   "lat": 37.542459931144734,
+   "lng": 126.8748746373492,
+   "address": "서울특별시 강서구 등촌로51길 63 (등촌동)"
   },
   {
    "id": "11380000700",
